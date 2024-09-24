@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("reporteria-ice-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b9f46941cb34cfad69b51cd1bed8fa827636e0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("reporteria-ice-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("reporteria-ice-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
