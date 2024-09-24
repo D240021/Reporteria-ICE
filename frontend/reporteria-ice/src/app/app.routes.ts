@@ -13,6 +13,9 @@ import { EditarLineaTransmisionComponent } from './paginas/editarLineaTransmisio
 import { ConsultarLineaTransmisionComponent } from './paginas/consultarLineaTransmision/consultar-linea-transmision/consultar-linea-transmision.component';
 import { EditarSupervisorComponent } from './paginas/editarSupervisor/editar-supervisor/editar-supervisor.component';
 import { EditarSubestacionComponent } from './paginas/editarSubestacion/editar-subestacion/editar-subestacion.component';
+import { CrearReporteComponent } from './paginas/crearReporte/crear-reporte/crear-reporte.component';
+import { MenuSupervisorComponent } from './paginas/menuSupervisor/menu-supervisor/menu-supervisor.component';
+import { EditarReporteTLTComponent } from './paginas/editarReporteTLT/editar-reporte-tlt/editar-reporte-tlt.component';
 
 export const routes: Routes = [
     {
@@ -60,5 +63,13 @@ export const routes: Routes = [
     {
         path: 'editar-subestacion', component: EditarSubestacionComponent
     },
-    
+    {
+        path: 'crear-reporte', component: CrearReporteComponent
+    },
+    {
+        path: 'menu-supervisor', component: MenuSupervisorComponent
+    },
+    {
+        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+    },
 ];

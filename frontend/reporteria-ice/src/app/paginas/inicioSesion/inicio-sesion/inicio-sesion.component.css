@@ -36,3 +36,9 @@ form {
     align-items: center; */
     gap: 1.3rem 0;
 }
+
+
+p {
+    color: var(--color-secundario);
+    font-family: var(--fuente-poppins);
+}
