@@ -1,0 +1,25 @@
+<div>
+    <header>
+        <h1>Iniciar Sesión</h1>
+    </header>
+
+    <section>
+        <form>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput type="text" placeholder="Inserte su usuario"
+                    [formControl]='form.controls.nombreUsuario'>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" placeholder="Inserte su contraseña"
+                    [formControl]='form.controls.contrasenia'>
+            </mat-form-field>
+
+            <button mat-stroked-button (click)="redireccionarUsuario()" type="button">Ingresar</button>
+        </form>
+
+    </section>
+    <p>Nota: Usuario "admin" para ver menú de admin, "sprv" para ver el de supervisor, "tpm" para ver el de técnico de protección y
+        medición y "tlt" para ver el de técnico de línea de transmisión</p>
+</div>
