@@ -1,1 +1,65 @@
-<p>Agregar Subestación</p>
+<h2 class="text-center mb-4">Agregar Subestación</h2>
+
+<form [formGroup]="formularioSubestacion" (ngSubmit)="enviarFormulario()">
+  <div class="container">
+
+    <!-- Inputs -->
+    <div class="row">
+      <!-- Identificador -->
+      <div class="row mb-3">
+        <label for="identificador" class="col-md-4 form-label">IDENTIFICADOR:</label>
+        <div class="col-md-8">
+          <input type="text" id="identificador" formControlName="identificador" class="form-control" placeholder="Identificador" />
+        </div>
+      </div>
+
+      <!-- Nombre de Ubicación -->
+      <div class="row mb-3">
+        <label for="nombreUbicacion" class="col-md-4 form-label">NOMBRE DE UBICACIÓN:</label>
+        <div class="col-md-8">
+          <input type="text" id="nombreUbicacion" formControlName="nombreUbicacion" class="form-control" placeholder="Nombre de Ubicación" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista Desplegable de CheckBox - Líneas de Transmisión Asociadas
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label class="form-label">LÍNEAS DE TRANSMISION ASOCIADAS:</label>
+      <div class="form-check" *ngFor="let linea of lineasTransmision">
+        <input class="form-check-input" type="checkbox" [value]="linea" (change)="actualizarSeleccionLinea($event)" />
+        <label class="form-check-label">{{linea}}</label>
+      </div>
+    </div>
+  </div>
+   -->
+    <!-- MultiSelectorChecjbox-->
+    
+    <div class="row mb-3 multiselector-checkbox-cont">
+
+      <label class="col-md-4 form-label">LÍNEAS DE TRANSMISIÓN ASOCIADAS:</label>
+      <div class="col-md-8" >
+          <multiselector-checkbox [lista]="listaCheckbox"
+                              (compartirListaSeleccionada)="compartirListaSeleccionada($event)"
+                              (compartirSeleccionIndividual)="compartirSeleccionIndividual($event)">
+          </multiselector-checkbox>
+
+      </div>        
+    </div>    
+
+
+
+    <!-- Botones -->
+    <div class="row btn-cont">
+      <div class="col-md-4 ">
+        <button type="button" class="btn btn-volver w-75">Volver</button>
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-limpiar w-75" (click)="limpiarFormulario()">Limpiar</button>
+      </div>
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-enviar w-75">Guardar</button>
+      </div>
+    </div>
+  </div>
+</form>

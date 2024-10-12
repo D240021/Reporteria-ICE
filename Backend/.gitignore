@@ -1,3 +1,4 @@
 # Ignorar las carpetas bin y obj en todas las subcarpetas de Backend
 **/bin/
 **/obj/
+.vs/
