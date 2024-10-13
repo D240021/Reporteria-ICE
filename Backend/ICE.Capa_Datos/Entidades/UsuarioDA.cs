@@ -27,11 +27,11 @@ namespace ICE.Capa_Datos.Entidades
         [EmailAddress]
         public string Correo { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         public string Nombre { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(100)]
         public string Apellido { get; set; }
 

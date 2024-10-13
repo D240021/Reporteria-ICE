@@ -12,6 +12,8 @@ namespace reporteria_ice_api.Utilitarios
                 Id = tecnicoDTO.Id ?? 0,
                 NombreUsuario = tecnicoDTO.NombreUsuario,
                 Contrasenia = tecnicoDTO.Contrasenia,
+                Correo = tecnicoDTO.Correo,
+                Identificador = tecnicoDTO.Identificador,  
                 RollId = tecnicoDTO.RolId,
                 SubestacionId = tecnicoDTO.SubestacionId,
             };
@@ -24,6 +26,8 @@ namespace reporteria_ice_api.Utilitarios
                 Id = usuario.Id,
                 NombreUsuario = usuario.NombreUsuario,
                 Contrasenia = usuario.Contrasenia,
+                Correo = usuario.Correo,
+                Identificador = usuario.Identificador,  
                 RolId = usuario.RollId,
                 SubestacionId = usuario.SubestacionId,
             };

@@ -227,7 +227,7 @@
     "Parameters": [
       {
         "Name": "supervisorDTO",
-        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "Type": "SupervisorDTO",
         "IsRequired": true
       }
     ],
@@ -253,7 +253,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.SupervisorDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[SupervisorDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -278,7 +278,7 @@
       },
       {
         "Name": "supervisorDTO",
-        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "Type": "SupervisorDTO",
         "IsRequired": true
       }
     ],
@@ -336,7 +336,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "Type": "SupervisorDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -5,6 +5,8 @@
         public int? Id { get; set; }
         public string NombreUsuario { get; set; }
         public string Contrasenia { get; set; }
+        public string Correo { get; set; }
+        public int Identificador { get; set; } 
         public int RolId { get; set; }
         public int SubestacionId { get; set; }
     }

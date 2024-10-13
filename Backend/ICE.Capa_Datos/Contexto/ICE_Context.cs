@@ -114,8 +114,6 @@ namespace ICE.Capa_Datos.Contexto
                 .HasForeignKey(i => i.TeleproteccionId)
                 .OnDelete(DeleteBehavior.Restrict); // Relación Informe-Teleproteccion
 
-            // Asegurarse de que las relaciones en cascada se manejan correctamente en todo el modelo.
         }
-
     }
 }

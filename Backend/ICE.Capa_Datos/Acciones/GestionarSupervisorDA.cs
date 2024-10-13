@@ -1,6 +1,6 @@
 ﻿using ICE.Capa_Datos.Contexto;
 using ICE.Capa_Dominio.Modelos;
-using ICE.Capa_Datos.Entidades; 
+using ICE.Capa_Datos.Entidades;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,10 +25,11 @@ namespace ICE.Capa_Datos.Acciones
             {
                 NombreUsuario = supervisor.NombreUsuario,
                 Contrasenia = supervisor.Contrasenia,
+                Correo = supervisor.Correo,
                 Nombre = supervisor.Nombre,
                 Apellido = supervisor.Apellido,
                 Identificador = supervisor.Identificador,
-                RollId = supervisor.RollId, 
+                RollId = supervisor.RollId,
                 SubestacionId = supervisor.SubestacionId
             };
 
@@ -44,6 +45,7 @@ namespace ICE.Capa_Datos.Acciones
             {
                 supervisorBD.NombreUsuario = supervisor.NombreUsuario;
                 supervisorBD.Contrasenia = supervisor.Contrasenia;
+                supervisorBD.Correo = supervisor.Correo; 
                 supervisorBD.Nombre = supervisor.Nombre;
                 supervisorBD.Apellido = supervisor.Apellido;
                 supervisorBD.Identificador = supervisor.Identificador;
@@ -81,6 +83,7 @@ namespace ICE.Capa_Datos.Acciones
                 Id = supervisorDA.Id,
                 NombreUsuario = supervisorDA.NombreUsuario,
                 Contrasenia = supervisorDA.Contrasenia,
+                Correo = supervisorDA.Correo,
                 Nombre = supervisorDA.Nombre,
                 Apellido = supervisorDA.Apellido,
                 Identificador = supervisorDA.Identificador,
@@ -98,6 +101,7 @@ namespace ICE.Capa_Datos.Acciones
                 Id = s.Id,
                 NombreUsuario = s.NombreUsuario,
                 Contrasenia = s.Contrasenia,
+                Correo = s.Correo, 
                 Nombre = s.Nombre,
                 Apellido = s.Apellido,
                 Identificador = s.Identificador,

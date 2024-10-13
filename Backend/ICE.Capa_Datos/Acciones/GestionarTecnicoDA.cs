@@ -24,6 +24,10 @@ namespace ICE.Capa_Datos.Acciones
             {
                 NombreUsuario = tecnico.NombreUsuario,
                 Contrasenia = tecnico.Contrasenia,
+                Correo = tecnico.Correo,
+                Nombre = tecnico.Nombre ?? "Técnico", 
+                Apellido = tecnico.Apellido ?? "Sin Apellido",  
+                Identificador = tecnico.Identificador,  
                 RollId = tecnico.RollId,
                 SubestacionId = tecnico.SubestacionId
             };
@@ -40,6 +44,10 @@ namespace ICE.Capa_Datos.Acciones
             {
                 tecnicoBD.NombreUsuario = tecnico.NombreUsuario;
                 tecnicoBD.Contrasenia = tecnico.Contrasenia;
+                tecnicoBD.Correo = tecnico.Correo;
+                tecnicoBD.Nombre = tecnico.Nombre ?? "N/A";
+                tecnicoBD.Apellido = tecnico.Apellido ?? "N/A";
+                tecnicoBD.Identificador = tecnico.Identificador;  
                 tecnicoBD.RollId = tecnico.RollId;
                 tecnicoBD.SubestacionId = tecnico.SubestacionId;
 
@@ -74,6 +82,10 @@ namespace ICE.Capa_Datos.Acciones
                 Id = tecnicoDA.Id,
                 NombreUsuario = tecnicoDA.NombreUsuario,
                 Contrasenia = tecnicoDA.Contrasenia,
+                Correo = tecnicoDA.Correo,
+                Nombre = tecnicoDA.Nombre,
+                Apellido = tecnicoDA.Apellido,
+                Identificador = tecnicoDA.Identificador,  
                 RollId = tecnicoDA.RollId,
                 SubestacionId = tecnicoDA.SubestacionId
             };
@@ -88,6 +100,10 @@ namespace ICE.Capa_Datos.Acciones
                 Id = t.Id,
                 NombreUsuario = t.NombreUsuario,
                 Contrasenia = t.Contrasenia,
+                Correo = t.Correo,
+                Nombre = t.Nombre,
+                Apellido = t.Apellido,
+                Identificador = t.Identificador,  
                 RollId = t.RollId,
                 SubestacionId = t.SubestacionId
             }).ToList();
