@@ -24,8 +24,10 @@ body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     --color-terciario-fondo: #ffde59;
     --color-cuaternario-fondo: #ebecee;
     --color-quintenario-fondo: #cfcfcf;
+    --color-sextario-fondo: #ececec;
     --color-secundario: #6b6969;
-    
+    --color-terciario: #8f8e8e;
+
 
     /* Fuentes */
     --fuente-inicio-sesion-titulo: "Roboto Mono", monospace;
