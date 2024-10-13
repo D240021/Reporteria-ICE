@@ -16,12 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Utilitarios\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Capa_Integracion\ICE.Capa_Integracion.csproj" />
     <ProjectReference Include="..\ICE.Capa_Datos\ICE.Capa_Datos.csproj" />
     <ProjectReference Include="..\ICE.Capa_Logica\ICE.Capa_Negocios.csproj" />

@@ -10,7 +10,6 @@
     <Folder Include="Constantes\" />
     <Folder Include="Enumerados\" />
     <Folder Include="LogicaDeNegocio\" />
-    <Folder Include="ReglasDeNegocio\" />
   </ItemGroup>
 
 </Project>
