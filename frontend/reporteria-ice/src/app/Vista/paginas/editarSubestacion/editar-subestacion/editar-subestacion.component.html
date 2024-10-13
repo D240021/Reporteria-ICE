@@ -1,1 +1,38 @@
-<p>Editar Subestación</p>
+<div>
+
+    <h1>Editar Subestación</h1>
+
+    <buscador [datos]="datosQuemados" (identificadorSeleccionado)="procesarBusqueda($event)"></buscador>
+
+    @if (formularioVisible) {
+    <form>
+
+        <section>
+            <label>NOMBRE DE SUBESTACIÓN</label>
+            <input type="text" placeholder="Inserte un nombre">
+        </section>
+
+        <section>
+            <label>UNIDAD REGIONAL</label>
+            <select>
+                <option value="">Orosí</option>
+                <option value="">Desamparados</option>
+            </select>
+        </section>
+
+        <div class="contenedor-botones">
+
+            <section> 
+                <button mat-stroked-button type="button">LIMPIAR</button>
+                <button mat-stroked-button type="submit" >ACTUALIZAR</button>
+            </section>
+        </div>
+        
+
+    </form>
+
+    }
+
+    <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+
+</div>
