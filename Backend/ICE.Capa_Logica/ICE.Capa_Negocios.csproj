@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CU\" />
-    <Folder Include="Interfaces\Capa_Logica\" />
-    <Folder Include="Interfaces\Capa_Datos\" />
     <Folder Include="Interfaces\Capa_Integracion\" />
   </ItemGroup>
 
