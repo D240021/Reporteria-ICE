@@ -1,1 +1,73 @@
-<p>Consultar Unidad Regional</p>
+<div class="cont-principal">
+
+    <!-- Buscador
+      Aqui podria ir el dashboard si el profe lo pide para despues
+  
+     -->
+    <div></div>
+
+    <div class="cont-consultar-unidad">
+
+        <h2>Consultar Unidad</h2>
+
+        <!-- Buscador -->
+        <div class="cont-buscador">
+
+            <label for="filtro">Filtro:</label>
+            <input type="text" id="filtro">
+            <buscador [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
+
+            <select>
+                <option value="identificador">Identificador</option>
+                <option value="nombre">Nombre de Ubicación</option>
+                <option value="subestacion">Subestación</option>
+            </select>
+
+            <button>Buscar</button>
+
+        </div>
+
+
+
+        <!-- Tablas Unidades -->
+
+        <div class="cont-tabla row">
+
+            <table class="col-md-12" mat-table [dataSource]="unidadesQuemadas">
+
+                <ng-container matColumnDef="IDENTIFICADOR">
+                    <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
+                    <td mat-cell *matCellDef="let unidad">
+                        {{unidad.identificador}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="NOMBRE DE UBICACIÓN">
+                    <th mat-header-cell *matHeaderCellDef> NOMBRE DE UBICACIÓN </th>
+                    <td mat-cell *matCellDef="let unidad">
+                        {{unidad.nombre}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="SUBESTACIONES">
+                    <th mat-header-cell *matHeaderCellDef> SUBESTACIONES </th>
+                    <td mat-cell *matCellDef="let unidad">
+                        {{unidad.subestaciones}}
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="atributosUnidad"></tr>
+                <tr mat-row *matRowDef="let row; columns: atributosUnidad;"></tr>
+            </table>
+
+            <!-- Boton -->
+            <div class="col-md-6">
+                <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

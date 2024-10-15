@@ -29,9 +29,13 @@ export class BuscadorComponent implements OnInit {
 
   @Input()
   datos: any[] = [];
+  @Input()
+  accionInput! : string;
+  @Input()
+  accionPlaceholder! : string;
 
   @Output()
-  identificadorSeleccionado = new EventEmitter<string>;
+  valorBuscado = new EventEmitter<string>;
 
   ngOnInit(): void {
   
@@ -45,7 +49,9 @@ export class BuscadorComponent implements OnInit {
   opcionSeleccionada(event: MatAutocompleteSelectedEvent) : void {
     const valorNombre = event.option.value.nombre;
     const valorIdentificador = event.option.value.identificador;
-    this.control.patchValue(valorIdentificador + ' ' + valorNombre);
+    valorIdentificador ? 
+    this.control.patchValue(valorIdentificador + ' ' + valorNombre):
+    this.control.patchValue(valorNombre)
     return;
   }
 
@@ -60,7 +66,8 @@ export class BuscadorComponent implements OnInit {
 
 
   emitirBusqueda() : void {
-    this.identificadorSeleccionado.emit(this.obtenerIdentificadorValorSeleccionado());
+    
+    this.valorBuscado.emit(this.obtenerIdentificadorValorSeleccionado());
     return;
   }
 } 

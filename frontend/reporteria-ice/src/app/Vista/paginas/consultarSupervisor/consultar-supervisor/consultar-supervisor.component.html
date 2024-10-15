@@ -8,13 +8,14 @@
 
   <div class="cont-consultar-supervisor">
 
-    <h2>Consultar Supervisores</h2>
+    <h2>Consultar Supervisor</h2>
 
     <!-- Buscador -->
     <div class="cont-buscador">
 
       <label for="filtro">Filtro:</label>
       <input type="text" id="filtro">
+      <buscador [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
 
       <select>
         <option value="identificador">Identificador</option>
@@ -63,17 +64,17 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+        <tr mat-header-row *matHeaderRowDef="atributosSupervisor"></tr>
+        <tr mat-row *matRowDef="let row; columns: atributosSupervisor;"></tr>
       </table>
 
       <!-- Boton -->
       <div class="col-md-6">
-        <button class="btn btn-volver">Volver</button>
+        <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
       </div>
 
     </div>
-    
+
 
   </div>
 </div>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
-import { SubestacionEscritura, SubestacionLectura } from '../../../../Modelo/subestacion/subestacion';
+import { Subestacion } from '../../../../Modelo/subestacion';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'editar-subestacion',
@@ -20,7 +20,7 @@ export class EditarSubestacionComponent {
     { nombre: 'Turrialba', identificador: 'S7T92' },
   ];
 
-  subestacionesQuemadas: SubestacionLectura[] = [
+  subestacionesQuemadas: Subestacion[] = [
     {
       identificador: 'S7492',
       unidadRegional: 'Cartago',
@@ -39,12 +39,8 @@ export class EditarSubestacionComponent {
     const subestacionEncontrada = this.subestacionesQuemadas.find((subestacion) =>
       identificadorBuscado == subestacion.identificador);
     subestacionEncontrada ? this.formularioVisible = true : undefined;
-
     return;
   }
 
-  volverMenuPrincipal() : void {
-
-  }
 
 }
