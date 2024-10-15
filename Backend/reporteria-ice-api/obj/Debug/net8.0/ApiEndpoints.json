@@ -1,5 +1,94 @@
 [
   {
+    "ContainingType": "reporteria_ice_api.Controllers.InformeController",
+    "Method": "RegistrarInforme",
+    "RelativePath": "api/Informe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "informeDTO",
+        "Type": "reporteria_ice_api.DTOs.InformeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.InformeController",
+    "Method": "ObtenerInformePorId",
+    "RelativePath": "api/Informe/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.InformeDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.InformeController",
+    "Method": "ActualizarInforme",
+    "RelativePath": "api/Informe/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "informeDTO",
+        "Type": "reporteria_ice_api.DTOs.InformeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.InformeController",
+    "Method": "EliminarInforme",
+    "RelativePath": "api/Informe/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
     "Method": "RegistrarLineaTransmision",
     "RelativePath": "api/LineaTransmision",
@@ -96,6 +185,115 @@
     "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
     "Method": "EliminarLineaTransmision",
     "RelativePath": "api/LineaTransmision/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.ReporteController",
+    "Method": "RegistrarReporte",
+    "RelativePath": "api/Reporte",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reporteDTO",
+        "Type": "reporteria_ice_api.DTOs.ReporteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.ReporteController",
+    "Method": "ObtenerTodosLosReportes",
+    "RelativePath": "api/Reporte",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.ReporteDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.ReporteController",
+    "Method": "ObtenerReporte",
+    "RelativePath": "api/Reporte/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.ReporteDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.ReporteController",
+    "Method": "EditarReporte",
+    "RelativePath": "api/Reporte/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reporteDTO",
+        "Type": "reporteria_ice_api.DTOs.ReporteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.ReporteController",
+    "Method": "EliminarReporte",
+    "RelativePath": "api/Reporte/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

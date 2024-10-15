@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ICE.Capa_Integracion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+690868bb385b2c207c9122909baed794cb882c20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9314689033046a7f74a6988367c989a5be3357a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ICE.Capa_Integracion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ICE.Capa_Integracion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
