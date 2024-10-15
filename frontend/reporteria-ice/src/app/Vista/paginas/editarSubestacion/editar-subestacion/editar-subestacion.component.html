@@ -2,7 +2,8 @@
 
     <h1>Editar Subestación</h1>
 
-    <buscador [datos]="datosQuemados" (identificadorSeleccionado)="procesarBusqueda($event)"></buscador>
+    <buscador [datos]="datosQuemados" [accionInput]="'Identificador'" [accionPlaceholder]="'identificador'"
+    (valorBuscado)="procesarBusqueda($event)"></buscador>
 
     @if (formularioVisible) {
     <form>

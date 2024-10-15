@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Supervisor } from '../../../../Modelo/supervisor';
 import { MatInputModule } from '@angular/material/input';
-
-//Componentes
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -12,13 +11,13 @@ import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscad
 @Component({
   selector: 'consultar-supervisor',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, BuscadorComponent],
+  imports: [MatTableModule, MatInputModule, BuscadorComponent, RouterLink],
   templateUrl: './consultar-supervisor.component.html',
   styleUrl: './consultar-supervisor.component.css'
 })
 export class ConsultarSupervisorComponent {
 
-  supervisoresQuemados : Supervisor[] = [
+  public supervisoresQuemados : Supervisor[] = [
     {
       identificador: 'DFs52',
       nombre: 'Daniel',
@@ -39,6 +38,22 @@ export class ConsultarSupervisorComponent {
     }
   ]
 
-  columnasTabla = ['IDENTIFICADOR', 'NOMBRE', 'APELLIDOS', 'UNIDAD REGIONAL'];
+  public filtros : any[] = [
+    {
+      nombre : 'Identificador'
+    },
+    {
+      nombre : 'Nombre'
+    },
+    {
+      nombre : 'Apellidos'
+    },
+    {
+      nombre : 'Unidad Regional'
+    },
+  ]
+
+
+  public atributosSupervisor = ['IDENTIFICADOR', 'NOMBRE', 'APELLIDOS', 'UNIDAD REGIONAL'];
 
 }
