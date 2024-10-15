@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\reporteria-ice-api.props" />
+</Project>

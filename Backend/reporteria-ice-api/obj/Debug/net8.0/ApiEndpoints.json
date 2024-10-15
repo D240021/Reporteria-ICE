@@ -1,0 +1,587 @@
+[
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
+    "Method": "RegistrarLineaTransmision",
+    "RelativePath": "api/LineaTransmision",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lineaTransmisionDTO",
+        "Type": "reporteria_ice_api.DTOs.LineaTransmisionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
+    "Method": "ObtenerTodasLasLineasTransmision",
+    "RelativePath": "api/LineaTransmision",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.LineaTransmisionDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
+    "Method": "ObtenerLineaTransmision",
+    "RelativePath": "api/LineaTransmision/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.LineaTransmisionDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
+    "Method": "EditarLineaTransmision",
+    "RelativePath": "api/LineaTransmision/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lineaTransmisionDTO",
+        "Type": "reporteria_ice_api.DTOs.LineaTransmisionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.LineaTransmisionController",
+    "Method": "EliminarLineaTransmision",
+    "RelativePath": "api/LineaTransmision/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SubestacionController",
+    "Method": "RegistrarSubestacion",
+    "RelativePath": "api/Subestacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subestacionDTO",
+        "Type": "reporteria_ice_api.DTOs.SubestacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SubestacionController",
+    "Method": "ObtenerTodasLasSubestaciones",
+    "RelativePath": "api/Subestacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.SubestacionDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SubestacionController",
+    "Method": "ObtenerSubestacion",
+    "RelativePath": "api/Subestacion/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.SubestacionDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SubestacionController",
+    "Method": "EditarSubestacion",
+    "RelativePath": "api/Subestacion/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subestacionDTO",
+        "Type": "reporteria_ice_api.DTOs.SubestacionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SubestacionController",
+    "Method": "EliminarSubestacion",
+    "RelativePath": "api/Subestacion/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SupervisorController",
+    "Method": "RegistrarSupervisor",
+    "RelativePath": "api/Supervisor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supervisorDTO",
+        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SupervisorController",
+    "Method": "ObtenerTodosLosSupervisores",
+    "RelativePath": "api/Supervisor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.SupervisorDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SupervisorController",
+    "Method": "ActualizarSupervisor",
+    "RelativePath": "api/Supervisor/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "supervisorDTO",
+        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SupervisorController",
+    "Method": "EliminarSupervisor",
+    "RelativePath": "api/Supervisor/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.SupervisorController",
+    "Method": "ObtenerSupervisor",
+    "RelativePath": "api/Supervisor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.SupervisorDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.TecnicoController",
+    "Method": "RegistrarTecnico",
+    "RelativePath": "api/Tecnico",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tecnicoDTO",
+        "Type": "reporteria_ice_api.DTOs.TecnicoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.TecnicoController",
+    "Method": "ObtenerTodosLosTecnicos",
+    "RelativePath": "api/Tecnico",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.TecnicoDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.TecnicoController",
+    "Method": "ActualizarTecnico",
+    "RelativePath": "api/Tecnico/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tecnicoDTO",
+        "Type": "reporteria_ice_api.DTOs.TecnicoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.TecnicoController",
+    "Method": "EliminarTecnico",
+    "RelativePath": "api/Tecnico/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.TecnicoController",
+    "Method": "ObtenerTecnico",
+    "RelativePath": "api/Tecnico/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.TecnicoDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.UnidadRegionalController",
+    "Method": "RegistrarUnidadRegional",
+    "RelativePath": "api/UnidadRegional",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "unidadRegionalDTO",
+        "Type": "reporteria_ice_api.DTOs.UnidadRegionalDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.UnidadRegionalController",
+    "Method": "ObtenerTodasLasUnidadesRegionales",
+    "RelativePath": "api/UnidadRegional",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[reporteria_ice_api.DTOs.UnidadRegionalDTO, reporteria-ice-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.UnidadRegionalController",
+    "Method": "ObtenerUnidadRegional",
+    "RelativePath": "api/UnidadRegional/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "reporteria_ice_api.DTOs.UnidadRegionalDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.UnidadRegionalController",
+    "Method": "EditarUnidadRegional",
+    "RelativePath": "api/UnidadRegional/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "unidadRegionalDTO",
+        "Type": "reporteria_ice_api.DTOs.UnidadRegionalDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "reporteria_ice_api.Controllers.UnidadRegionalController",
+    "Method": "EliminarUnidadRegional",
+    "RelativePath": "api/UnidadRegional/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

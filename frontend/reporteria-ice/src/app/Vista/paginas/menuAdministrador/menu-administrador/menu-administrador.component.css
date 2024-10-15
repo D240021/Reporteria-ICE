@@ -1,12 +1,14 @@
 
 div {
-    background-color: var(--color-secundario-fondo);
-    font-family: var(--fuente-poppins);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-secundario-fondo);
+  font-family: var(--fuente-poppins);
 }
 
 header {
     text-align: center;
-    height: 10vh;
 }
 
 header h1{
@@ -17,23 +19,25 @@ header p{
     color: var(--color-secundario);
 }
 
-.cards-opciones{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0 1rem;
-    height: 85%;
-    height: 80vh;
+
+.cards-opciones {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: auto;
+  flex-grow: 1
 }
 
-.contenido-cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem 0;
-    
+
+  .contenido-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem 0;
 }
 
 .contenido-cards button{
@@ -41,15 +45,17 @@ header p{
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-
-    gap: 1rem 0;
-    align-items: center;
-    height: 75%;
-    width: 18%;
-    background-color: var(--color-cuaternario-fondo);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  align-items: center;
+  align-self: stretch;
+  width: calc(25% - 1rem);
+  background-color: var(--color-cuaternario-fondo);
+  min-width: 250px;
+  min-height: 300px;
 }
+
 
 .card p{
     font-weight: bold;
@@ -67,11 +73,13 @@ header p{
 }
 
 footer {
-    height: 10vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 2% 0 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 2% 0 2%;
+  background-color: var(--color-secundario-fondo);
+  padding: 1rem 0;
+  align-items: center;
 }
 
 footer button {
