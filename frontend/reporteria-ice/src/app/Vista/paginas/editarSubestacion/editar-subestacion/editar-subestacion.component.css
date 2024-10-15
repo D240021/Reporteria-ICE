@@ -31,6 +31,7 @@ form section {
 form section label {
     width: 40%;
     color: var(--color-secundario);
+    padding: 0.5rem
 }
 
 form section input,
@@ -48,6 +49,7 @@ form section select {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 1.5rem 0
 }
 
 div button {
@@ -61,4 +63,34 @@ div button {
     background-color: var(--color-terciario-fondo);
     color: var(--color-secundario-fondo);
     border-radius: 10px;
+}
+
+
+/* Media query para pantallas con ancho de 410px o menor */
+@media (max-width: 410px) {
+  form section {
+    flex-direction: column;
+  }
+
+    form section label {
+      width: 100%;
+    }
+
+    form section input,
+    form section select {
+      width: 100%;
+    }
+
+  .contenedor-botones{
+   
+    justify-content: center;
+    align-items: center
+  }
+
+    .contenedor-botones section {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items:center
+    }
 }
