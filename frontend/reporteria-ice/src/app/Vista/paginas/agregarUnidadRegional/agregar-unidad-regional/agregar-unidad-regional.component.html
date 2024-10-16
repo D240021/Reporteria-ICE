@@ -1,45 +1,67 @@
-<h1>Agregar Unidad Regional</h1>
-
 <div>
-    <form >
-        <section>
-            <label>IDENTIFICADOR</label>
-            <input type="text" placeholder="Inserte un identificador único">
-        </section>
 
-        <section>
-            <label>NOMBRE</label>
-            <input type="text" placeholder="Inserte un nombre de ubicación">
-        </section>
+  <div class="contenedor-principal">
 
-        <section>
-            <label>SUPERVISOR ASIGNADO</label>
-            <select>
-                <option value="">Saúl</option>
-                <option value="">Álvaro</option>
-                <option value="">Daniel</option>
-            </select>
-        </section>
+    <div></div>
 
-        <section>
-            <label>SUBESTACIONES ASOCIADAS</label>
-            <select>
-                <option value="">Turrialba</option>
-                <option value="">Desamparados</option>
-            </select>
-        </section>
-
-        <div class="contenedor-botones">
-
-            <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
-            
-            <section> 
-                <button mat-stroked-button type="button">LIMPIAR</button>
-                <button mat-stroked-button type="submit" >GUARDAR</button>
+    <div class="contenedor-form">
+      
+      
+        <form>
+            <h2>Agregar Unidad Regional</h2>
+            <section class="row mb-3 align-items-center">
+              <label class="col-md-4">IDENTIFICADOR</label>
+              <div class="col-md-8">
+                <input type="text" placeholder="Inserte un identificador único">
+              </div>
             </section>
-        </div>
 
-    </form>
+            <section class="row mb-3 align-items-center">
+              <label class="col-md-4">NOMBRE</label>
+              <div class="col-md-8">
+                <input type="text" placeholder="Inserte un nombre de ubicación">
+              </div>            
+            </section>
 
+            <section class="row mb-3 align-items-center">
+              <label class="col-md-4">SUPERVISOR ASIGNADO</label>
+
+              <div class="col-md-8">
+                <select >
+                  <option value="">Saúl</option>
+                  <option value="">Álvaro</option>
+                  <option value="">Daniel</option>
+                </select>
+              </div>
+            
+            </section>
+
+            <section class="row mb-3 align-items-center">
+              <label class="col-md-4">SUBESTACIONES ASOCIADAS</label>
+              <div class="col-md-8">
+                  <select class="col-md-8">
+                    <option value="">Turrialba</option>
+                    <option value="">Desamparados</option>
+                  </select>
+              </div>            
+            </section>
+
+          <div class="contenedor-botones row mb-3 align-items-center">
+
+            <div class="col-md-3 col-12">
+              <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+            </div>
+
+            <div class="col-md-9 col-12">
+              <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
+              <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
+            </div>
+          </div>
+
+        </form>
+      
+    </div>
+
+  </div>
 
 </div>
