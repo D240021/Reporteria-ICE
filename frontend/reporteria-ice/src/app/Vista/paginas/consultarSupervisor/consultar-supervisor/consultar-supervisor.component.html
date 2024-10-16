@@ -10,23 +10,24 @@
 
     <h2>Consultar Supervisor</h2>
 
-    <!-- Buscador -->
-    <div class="cont-buscador">
+    <!-- Buscadores y Filtros Lineas -->
+    <section class="cont-buscador row align-items-center">
+      <div class="contenedor-filtro col-md-4">
 
-      <label for="filtro">Filtro:</label>
-      <input type="text" id="filtro">
-      <buscador [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
+        <label for="filtro" class="me-2">Filtro:</label>
+        <input type="text" id="filtro" class="form-control me-3">
 
-      <select>
-        <option value="identificador">Identificador</option>
-        <option value="nombre">Nombre</option>
-        <option value="apellidos">Apellidos</option>
-        <option value="unidadRegional">Unidad Regional</option>
-      </select>
+      </div>
 
-      <button>Buscar</button>
-
-    </div>
+      <buscador class="col-md-4" [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
+      <div class="d-flex col-md-4">
+        <select class="form-select me-2">
+          <option value="identificador">Identificador</option>
+          <option value="nombre">Nombre de Ubicación</option>
+        </select>
+        <button class="btn btn-buscar ">Buscar</button>
+      </div>
+    </section>
 
 
 
