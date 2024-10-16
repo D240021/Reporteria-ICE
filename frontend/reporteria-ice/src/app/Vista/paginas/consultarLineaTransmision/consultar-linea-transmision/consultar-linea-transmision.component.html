@@ -8,57 +8,57 @@
 
     <div class="cont-consultar-linea">
 
-        <h2>Consultar Línea de Transmisión</h2>
+      <h2>Consultar Línea de Transmisión</h2>
 
-        <!-- Buscador -->
-        <div class="cont-buscador">
+      <!-- Buscadores y Filtros Lineas -->
+      <section class="cont-buscador row align-items-center">
+        <div class="contenedor-filtro col-md-4">
 
-            <label for="filtro">Filtro:</label>
-            <input type="text" id="filtro">
-            <buscador [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
-        
-            <select>
-                <option value="identificador">Identificador</option>
-                <option value="nombre">Nombre de Ubicación</option>
-            </select>
-
-            <button>Buscar</button>
+          <label for="filtro" class="me-2">Filtro:</label>
+          <input type="text" id="filtro" class="form-control me-3">
 
         </div>
 
-
-
-        <!-- Tablas Lineas -->
-
-        <div class="cont-tabla row">
-
-            <table class="col-md-12" mat-table [dataSource]="lineasQuemadas">
-
-                <ng-container matColumnDef="IDENTIFICADOR">
-                    <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
-                    <td mat-cell *matCellDef="let linea">
-                        {{linea.identificador}}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="NOMBRE DE UBICACIÓN">
-                    <th mat-header-cell *matHeaderCellDef> NOMBRE DE UBICACIÓN </th>
-                    <td mat-cell *matCellDef="let linea">
-                        {{linea.nombre}}
-                    </td>
-                </ng-container>
-
-
-                <tr mat-header-row *matHeaderRowDef="atributosLinea"></tr>
-                <tr mat-row *matRowDef="let row; columns: atributosLinea;"></tr>
-            </table>
-
-            <!-- Boton -->
-            <div class="col-md-6">
-                <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
-            </div>
-
+        <buscador class="col-md-4" [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
+        <div class="d-flex col-md-4">
+          <select class="form-select me-2">
+            <option value="identificador">Identificador</option>
+            <option value="nombre">Nombre de Ubicación</option>
+          </select>
+          <button class="btn btn-buscar ">Buscar</button>
         </div>
+      </section>
+      <!-- Tablas Lineas -->
+
+      <div class="cont-tabla row">
+
+        <table class="col-md-12" mat-table [dataSource]="lineasQuemadas">
+
+          <ng-container matColumnDef="IDENTIFICADOR">
+            <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
+            <td mat-cell *matCellDef="let linea">
+              {{linea.identificador}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="NOMBRE DE UBICACIÓN">
+            <th mat-header-cell *matHeaderCellDef> NOMBRE DE UBICACIÓN </th>
+            <td mat-cell *matCellDef="let linea">
+              {{linea.nombre}}
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="atributosLinea"></tr>
+          <tr mat-row *matRowDef="let row; columns: atributosLinea;"></tr>
+        </table>
+
+        <!-- Boton -->
+        <div class="col-md-6">
+          <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
+        </div>
+
+      </div>
 
 
     </div>

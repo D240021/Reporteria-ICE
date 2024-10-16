@@ -3,13 +3,28 @@
 }
 
 .cont-consultar-supervisor {
-    width: 100%;
-    padding:2.5rem
+  width: 100%;
+  padding: 2.5rem;
+  font-family: var(--fuente-poppins);
+  color: var(--color-principal);
 }
 
 h2 {
   color: #949393
 }
+
+.cont-buscador {
+  display: flex;
+  justify-content: space-between;
+}
+
+  .cont-buscador div {
+    margin: 50px 0;
+  }
+
+  .cont-buscador .btn-buscar {
+    background: var(--color-terciario-fondo)
+  }
 
 .cont-tabla table{
     width: 100%;
