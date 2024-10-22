@@ -26,10 +26,14 @@ h2 {
     background: var(--color-terciario-fondo)
   }
 
-.cont-tabla table{
-    width: 100%;
-    overflow-block:hidden
+.cont-tabla {
+  width: 100%;
+  overflow-x: auto;
 }
+
+  .cont-tabla table {
+    width: 100%;
+  }
   
   .cont-tabla table th {
     background: #FFFFFF;
@@ -49,7 +53,7 @@ h2 {
   
 
 .btn-volver {
-  width: 25%;
+  width: 35%;
   padding: 0.5rem;
   background-color: #545454;
   color: white;
