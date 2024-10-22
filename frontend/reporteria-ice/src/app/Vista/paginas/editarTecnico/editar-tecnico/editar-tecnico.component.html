@@ -1,1 +1,48 @@
-<p>Editar técnico</p>
+<div>
+
+    <h1>Editar Técnico</h1>
+
+    <buscador [datos]="datosQuemados" [accionInput]="'Nombre de usuario'" [accionPlaceholder]="'el usuario'"
+        (valorBuscado)="procesarBusqueda($event)"></buscador>
+
+    @if (formularioVisible) {
+    <form>
+
+        <section class="row mb-3 align-items-center">
+            <label class="col-md-4">NOMBRE DE USUARIO</label>
+            <div class="col-md-8">
+                <input type="text" placeholder="Inserte un nombre de usuario único">
+            </div>
+        </section>
+
+        <section class="row mb-3 align-items-center">
+            <label class="col-md-4">CONTRASEÑA</label>
+            <div class="col-md-8">
+                <input type="text" placeholder="Inserte una contraseña">
+            </div>
+        </section>
+
+        <section class="row mb-3 align-items-center">
+            <label class="col-md-4">UNIDAD REGIONAL ASIGNADA</label>
+            <select >
+                <option value="TPM">Desamparados</option>
+                <option value="TLT">Orosi</option>
+            </select>
+        </section>
+        
+        <div class="contenedor-botones">
+
+            <section>
+                <button mat-stroked-button type="button">LIMPIAR</button>
+                <button mat-stroked-button type="submit">ACTUALIZAR</button>
+            </section>
+        </div>
+
+
+    </form>
+
+    }
+
+    <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+
+</div>
