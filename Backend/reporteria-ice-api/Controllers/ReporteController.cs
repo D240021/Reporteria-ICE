@@ -23,7 +23,7 @@ namespace reporteria_ice_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> RegistrarReporte([FromBody] ReporteDTO reporteDTO, [FromQuery] List<int> subestacionIds, int lineaTransmisionId)
+        public async Task<ActionResult<bool>> RegistrarReporte([FromBody] ReporteDTO reporteDTO, [FromQuery] List<int> subestacionIds, [FromQuery] int lineaTransmisionId)
         {
             try
             {
