@@ -4,3 +4,4 @@ export interface Supervisor {
     apellidos: string,
     unidadRegional: string
 }
+
