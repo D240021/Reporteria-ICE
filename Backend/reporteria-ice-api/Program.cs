@@ -65,6 +65,10 @@ builder.Services.AddTransient<IGestionarDatosGeneralesDA, GestionarDatosGenerale
 builder.Services.AddTransient<IGestionarReporteCN, GestionarReporteCN>();
 builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
 
+// Inyección de dependencias para el servicio de dominio de Reporte con Informes
+builder.Services.AddTransient<IGestionarReporteConInformesService, GestionarReporteConInformesService>();
+
+
 // Conexión a BD
 builder.Services.AddDbContext<ICE_Context>(options =>
 {

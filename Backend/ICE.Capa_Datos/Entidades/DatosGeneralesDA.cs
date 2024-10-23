@@ -14,26 +14,20 @@ namespace ICE.Capa_Datos.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [Required]
+        
         [StringLength(100)]
         public string Evento { get; set; }
 
-        [Required]
         public DateTime Fecha { get; set; }
 
-        [Required]
         public TimeSpan Hora { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Subestacion { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string LT { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Equipo { get; set; }
     }

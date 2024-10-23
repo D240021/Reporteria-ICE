@@ -15,27 +15,21 @@ namespace ICE.Capa_Datos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string RealIR { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string RealIS { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string RealIT { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string AcumuladaR { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string AcumuladaS { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string AcumuladaT { get; set; }
     }

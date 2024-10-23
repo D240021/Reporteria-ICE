@@ -14,28 +14,22 @@ namespace ICE.Capa_Datos.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [Required]
+        
         [StringLength(100)]
         public string OT { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Aviso { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string SAP { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Distancia { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Funcion { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Zona { get; set; }
     }

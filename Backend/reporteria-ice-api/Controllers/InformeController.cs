@@ -19,28 +19,7 @@ namespace reporteria_ice_api.Controllers
         {
             _gestionarInformeCN = gestionarInformeCN;
         }
-
-        // Método para registrar un informe completo con todas las entidades relacionadas
-        [HttpPost]
-        public async Task<ActionResult<bool>> RegistrarInforme(InformeDTO informeDTO)
-        {
-            try
-            {
-                var informe = InformeDTOMapper.ConvertirDTOAInforme(informeDTO);
-
-                var resultado = await _gestionarInformeCN.RegistrarInformeCompleto(informe);
-                if (!resultado)
-                {
-                    return BadRequest("Error al registrar el informe.");
-                }
-                return Ok(resultado);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
+        
         // Método para obtener un informe por id
         [HttpGet("{id}")]
         public async Task<ActionResult<InformeDTO>> ObtenerInformePorId(int id)

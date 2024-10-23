@@ -14,16 +14,13 @@ namespace ICE.Capa_Datos.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [Required]
+        
         [StringLength(100)]
         public string TX_TEL { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string RX_TEL { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string TiempoMPLS { get; set; }
     }

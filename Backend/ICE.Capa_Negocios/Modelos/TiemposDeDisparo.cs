@@ -9,9 +9,9 @@ namespace ICE.Capa_Dominio.Modelos
     public class TiemposDeDisparo
     {
         public int Id { get; set; }
-        public string R { get; set; }
-        public string S { get; set; }
-        public string T { get; set; }
-        public string Reserva { get; set; }
+        public string? R { get; set; }
+        public string? S { get; set; }
+        public string? T { get; set; }
+        public string? Reserva { get; set; }
     }
 }
