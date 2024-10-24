@@ -1,39 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\",
+  "WorkspaceRootPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8D0CB677-6CBF-44CF-A351-664F267EC166}|..\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\ice.capa_negocios\\modelos\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\utilitarios\\tecnicodtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\utilitarios\\tecnicodtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:utilitarios\\tecnicodtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\utilitarios\\supervisordtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\utilitarios\\supervisordtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:utilitarios\\supervisordtomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\controllers\\supervisorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\controllers\\supervisorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:controllers\\supervisorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:controllers\\tecnicocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\dtos\\tecnicodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\users\\daniel\\desktop\\proyectos\\reporteria-ice\\backend\\reporteria-ice-api\\dtos\\tecnicodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:dtos\\tecnicodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8D0CB677-6CBF-44CF-A351-664F267EC166}|..\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_negocios\\reglasdenegocio\\reglasusuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40EE5CEA-3ED1-48FD-95F9-ECBE622E89A8}|..\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_logica\\cu\\gestionarsupervisorcn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40EE5CEA-3ED1-48FD-95F9-ECBE622E89A8}|..\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_logica\\cu\\gestionartecnicocn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -52,119 +55,124 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "RelativeDocumentMoniker": "..\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "RelativeToolTip": "..\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T23:38:58.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Program.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAABPAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-13T06:31:14.608Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TecnicoDTOMapper.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\TecnicoDTOMapper.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\TecnicoDTOMapper.cs",
               "RelativeDocumentMoniker": "Utilitarios\\TecnicoDTOMapper.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\TecnicoDTOMapper.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\TecnicoDTOMapper.cs",
               "RelativeToolTip": "Utilitarios\\TecnicoDTOMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:28:48.752Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SupervisorDTOMapper.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\SupervisorDTOMapper.cs",
-              "RelativeDocumentMoniker": "Utilitarios\\SupervisorDTOMapper.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\SupervisorDTOMapper.cs",
-              "RelativeToolTip": "Utilitarios\\SupervisorDTOMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:29:40.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TecnicoDTO.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\TecnicoDTO.cs",
-              "RelativeDocumentMoniker": "DTOs\\TecnicoDTO.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\TecnicoDTO.cs",
-              "RelativeToolTip": "DTOs\\TecnicoDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:29:37.355Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T06:28:48.752Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SupervisorController.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\SupervisorController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SupervisorController.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\SupervisorController.cs",
-              "RelativeToolTip": "Controllers\\SupervisorController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAnwDwAAAA0AAAAAAAAAA==",
+              "Title": "SupervisorDTOMapper.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\SupervisorDTOMapper.cs",
+              "RelativeDocumentMoniker": "Utilitarios\\SupervisorDTOMapper.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Utilitarios\\SupervisorDTOMapper.cs",
+              "RelativeToolTip": "Utilitarios\\SupervisorDTOMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:29:10.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TecnicoController.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\TecnicoController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TecnicoController.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\TecnicoController.cs",
-              "RelativeToolTip": "Controllers\\TecnicoController.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAnwEQAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:28:25.909Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T06:29:40.3Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "ReglasUsuario.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
-              "RelativeDocumentMoniker": "..\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
-              "RelativeToolTip": "..\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAYwC8AAAAAAAAAAAAAAA==",
+              "Title": "TecnicoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\TecnicoDTO.cs",
+              "RelativeDocumentMoniker": "DTOs\\TecnicoDTO.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\TecnicoDTO.cs",
+              "RelativeToolTip": "DTOs\\TecnicoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:26:09.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T06:29:37.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SupervisorController.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\SupervisorController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SupervisorController.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\SupervisorController.cs",
+              "RelativeToolTip": "Controllers\\SupervisorController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAnwDwAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T06:29:10.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TecnicoController.cs",
+              "DocumentMoniker": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\TecnicoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TecnicoController.cs",
+              "ToolTip": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\TecnicoController.cs",
+              "RelativeToolTip": "Controllers\\TecnicoController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAnwEQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T06:28:25.909Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "GestionarSupervisorCN.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
-              "RelativeDocumentMoniker": "..\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
-              "RelativeToolTip": "..\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAYwCgAAAAJAAAAAAAAAA==",
+              "Title": "ReglasUsuario.cs",
+              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
+              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ReglasDeNegocio\\ReglasUsuario.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAYwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:24:45.712Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T06:26:09.352Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "GestionarSupervisorCN.cs",
+              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
+              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarSupervisorCN.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T06:24:45.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "GestionarTecnicoCN.cs",
               "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
-              "RelativeDocumentMoniker": "..\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
               "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
-              "RelativeToolTip": "..\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarTecnicoCN.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAYwCIAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T06:24:15.844Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-13T06:24:15.844Z"
             }
           ]
         }
