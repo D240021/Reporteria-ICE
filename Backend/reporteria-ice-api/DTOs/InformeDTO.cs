@@ -4,11 +4,9 @@
     {
         public int Id { get; set; }
         public int Tipo { get; set; }
-        public int SubestacionId { get; set; }
-        public SubestacionDTO Subestacion { get; set; } 
+        public int SubestacionId { get; set; }        
 
-        public int LineaTransmisionId { get; set; }
-        public LineaTransmisionDTO LineaTransmision { get; set; } 
+        public int LineaTransmisionId { get; set; }        
 
         public int DatosDeLineaId { get; set; }
         public DatosDeLineaDTO DatosDeLinea { get; set; } 
