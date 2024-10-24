@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
         }
 
-        public async Task<bool> RegistrarTeleproteccion(Teleproteccion teleproteccion)
+        public async Task<int> RegistrarTeleproteccion(Teleproteccion teleproteccion)
         {
             return await _gestionarTeleproteccionDA.RegistrarTeleproteccion(teleproteccion);
         }

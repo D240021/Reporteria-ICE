@@ -70,13 +70,13 @@ namespace ICE.Capa_Negocios.CU
                     var corrientesDeFalla1 = new CorrientesDeFalla();
 
 
-                    //cada nuevo grupo de datos se guarda en la BD
-                    await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(datosDeLinea1);
-                    await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(datosGenerales1);
-                    await _gestionarTeleproteccionDA.RegistrarTeleproteccion(teleproteccion1);
-                    await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(distanciaDeFalla1);
-                    await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(tiemposDeDisparo1);
-                    await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(corrientesDeFalla1);
+                    //cada nuevo grupo de datos se guarda en la BD                    
+                    datosDeLinea1.Id = await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(datosDeLinea1);
+                    datosGenerales1.Id = await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(datosGenerales1);
+                    teleproteccion1.Id = await _gestionarTeleproteccionDA.RegistrarTeleproteccion(teleproteccion1);
+                    distanciaDeFalla1.Id = await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(distanciaDeFalla1);
+                    tiemposDeDisparo1.Id = await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(tiemposDeDisparo1);
+                    corrientesDeFalla1.Id = await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(corrientesDeFalla1);
 
 
                     var informeTipo1 = new Informe
@@ -93,6 +93,7 @@ namespace ICE.Capa_Negocios.CU
                         Estado = 0
                     };
 
+                    Console.WriteLine("ID Autogenerado: " + corrientesDeFalla1.Id);
                     informes.Add(informeTipo1);
 
                     //datos del informe diferencial (tipo 2)
@@ -104,12 +105,12 @@ namespace ICE.Capa_Negocios.CU
                     var corrientesDeFalla2 = new CorrientesDeFalla();
 
                     // Guardar los datos para Informe Tipo 2 en la BD
-                    await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(datosDeLinea2);
-                    await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(datosGenerales2);
-                    await _gestionarTeleproteccionDA.RegistrarTeleproteccion(teleproteccion2);
-                    await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(distanciaDeFalla2);
-                    await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(tiemposDeDisparo2);
-                    await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(corrientesDeFalla2);
+                    datosDeLinea2.Id = await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(datosDeLinea1);
+                    datosGenerales2.Id = await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(datosGenerales1);
+                    teleproteccion2.Id = await _gestionarTeleproteccionDA.RegistrarTeleproteccion(teleproteccion1);
+                    distanciaDeFalla2.Id = await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(distanciaDeFalla1);
+                    tiemposDeDisparo2.Id = await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(tiemposDeDisparo1);
+                    corrientesDeFalla2.Id = await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(corrientesDeFalla1);
 
 
                     var informeTipo2 = new Informe

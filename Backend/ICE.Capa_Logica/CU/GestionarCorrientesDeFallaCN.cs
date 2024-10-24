@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarCorrientesDeFallaDA = gestionarCorrientesDeFallaDA;
         }
 
-        public async Task<bool> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla)
+        public async Task<int> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla)
         {
             return await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(corrientesDeFalla);
         }

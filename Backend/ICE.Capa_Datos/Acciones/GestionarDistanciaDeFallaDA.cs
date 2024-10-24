@@ -17,7 +17,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla)
+        public async Task<int> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla)
         {
             var distanciaDeFallaDA = new DistanciaDeFallaDA
             {
@@ -30,8 +30,11 @@ namespace ICE.Capa_Datos.Acciones
             };
 
             _context.DistanciasDeFalla.Add(distanciaDeFallaDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+            
+            await _context.SaveChangesAsync();
+            return distanciaDeFallaDA.Id;
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarDistanciaDeFalla(int id, DistanciaDeFalla distanciaDeFalla)

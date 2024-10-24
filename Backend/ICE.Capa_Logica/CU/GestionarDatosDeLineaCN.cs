@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarDatosDeLineaDA = gestionarDatosDeLineaDA;
         }
 
-        public async Task<bool> RegistrarDatosDeLinea(DatosDeLinea datosDeLinea)
+        public async Task<int> RegistrarDatosDeLinea(DatosDeLinea datosDeLinea)
         {
             return await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(datosDeLinea);
         }

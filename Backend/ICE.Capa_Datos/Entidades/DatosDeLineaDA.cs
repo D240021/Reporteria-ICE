@@ -16,21 +16,21 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
         
         [StringLength(100)]
-        public string OT { get; set; }
+        public string? OT { get; set; }
 
         [StringLength(100)]
-        public string Aviso { get; set; }
+        public string? Aviso { get; set; }
 
         [StringLength(100)]
-        public string SAP { get; set; }
+        public string? SAP { get; set; }
 
         [StringLength(100)]
-        public string Distancia { get; set; }
+        public string? Distancia { get; set; }
 
         [StringLength(100)]
-        public string Funcion { get; set; }
+        public string? Funcion { get; set; }
 
         [StringLength(100)]
-        public string Zona { get; set; }
+        public string? Zona { get; set; }
     }
 }

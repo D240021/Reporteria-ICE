@@ -15,11 +15,10 @@ namespace ICE.Capa_Datos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public byte[] MapaDeDescargas { get; set; }
+        public byte[]? MapaDeDescargas { get; set; }
 
-        [Required]
         [StringLength(500)]
-        public string Observaciones { get; set; }
+        public string? Observaciones { get; set; }
 
         // Relaciones con Informes
         [ForeignKey("InformeV1Id")]

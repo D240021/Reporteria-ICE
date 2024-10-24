@@ -16,7 +16,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarDatosGenerales(DatosGenerales datosGenerales)
+        public async Task<int> RegistrarDatosGenerales(DatosGenerales datosGenerales)
         {
             var datosGeneralesDA = new DatosGeneralesDA
             {
@@ -28,9 +28,15 @@ namespace ICE.Capa_Datos.Acciones
                 Equipo = datosGenerales.Equipo
             };
 
+
             _context.DatosGenerales.Add(datosGeneralesDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+
+            await _context.SaveChangesAsync();
+            return datosGeneralesDA.Id;
+
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;            
+
         }
 
         public async Task<bool> ActualizarDatosGenerales(int id, DatosGenerales datosGenerales)

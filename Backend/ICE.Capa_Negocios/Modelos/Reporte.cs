@@ -9,8 +9,8 @@ namespace ICE.Capa_Dominio.Modelos
     public class Reporte
     {
         public int Id { get; set; }
-        public byte[] MapaDeDescargas { get; set; }
-        public string Observaciones { get; set; }
+        public byte[]? MapaDeDescargas { get; set; }
+        public string? Observaciones { get; set; }
 
         // Relaciones con Informes
         public int InformeV1Id { get; set; }        

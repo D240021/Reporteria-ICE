@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarDatosGeneralesDA = gestionarDatosGeneralesDA;
         }
 
-        public async Task<bool> RegistrarDatosGenerales(DatosGenerales datosGenerales)
+        public async Task<int> RegistrarDatosGenerales(DatosGenerales datosGenerales)
         {
             return await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(datosGenerales);
         }

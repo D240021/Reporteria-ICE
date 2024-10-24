@@ -16,12 +16,12 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
         
         [StringLength(100)]
-        public string TX_TEL { get; set; }
+        public string? TX_TEL { get; set; }
 
         [StringLength(100)]
-        public string RX_TEL { get; set; }
+        public string? RX_TEL { get; set; }
 
         [StringLength(100)]
-        public string TiempoMPLS { get; set; }
+        public string? TiempoMPLS { get; set; }
     }
 }

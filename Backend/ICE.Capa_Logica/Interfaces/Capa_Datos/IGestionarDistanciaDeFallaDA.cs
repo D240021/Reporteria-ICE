@@ -5,7 +5,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
 {
     public interface IGestionarDistanciaDeFallaDA
     {
-        Task<bool> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla);
+        Task<int> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla);
         Task<bool> ActualizarDistanciaDeFalla(int id, DistanciaDeFalla distanciaDeFalla);
         Task<bool> EliminarDistanciaDeFalla(int id);
         Task<DistanciaDeFalla> ObtenerDistanciaDeFallaPorId(int id);

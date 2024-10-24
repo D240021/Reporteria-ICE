@@ -16,21 +16,21 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
         
         [StringLength(100)]
-        public string DistanciaKM { get; set; }
+        public string? DistanciaKM { get; set; }
 
         [StringLength(100)]
-        public string DistanciaPorcentaje { get; set; }
+        public string? DistanciaPorcentaje { get; set; }
 
         [StringLength(100)]
-        public string DistanciaReportada { get; set; }
+        public string? DistanciaReportada { get; set; }
 
         [StringLength(100)]
-        public string DistanciaDobleTemporal { get; set; }
+        public string? DistanciaDobleTemporal { get; set; }
 
         [StringLength(100)]
-        public string Error { get; set; }
+        public string? Error { get; set; }
 
         [StringLength(100)]
-        public string Error_Doble { get; set; }
+        public string? Error_Doble { get; set; }
     }
 }

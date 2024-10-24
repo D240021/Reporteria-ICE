@@ -16,21 +16,21 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
 
         [StringLength(100)]
-        public string RealIR { get; set; }
+        public string? RealIR { get; set; }
 
         [StringLength(100)]
-        public string RealIS { get; set; }
+        public string? RealIS { get; set; }
 
         [StringLength(100)]
-        public string RealIT { get; set; }
+        public string? RealIT { get; set; }
 
         [StringLength(100)]
-        public string AcumuladaR { get; set; }
+        public string? AcumuladaR { get; set; }
 
         [StringLength(100)]
-        public string AcumuladaS { get; set; }
+        public string? AcumuladaS { get; set; }
 
         [StringLength(100)]
-        public string AcumuladaT { get; set; }
+        public string? AcumuladaT { get; set; }
     }
 }

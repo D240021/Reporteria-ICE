@@ -16,19 +16,19 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
         
         [StringLength(100)]
-        public string Evento { get; set; }
+        public string? Evento { get; set; }
 
         public DateTime? Fecha { get; set; }
 
         public TimeSpan? Hora { get; set; }
 
         [StringLength(100)]
-        public string Subestacion { get; set; }
+        public string? Subestacion { get; set; }
 
         [StringLength(100)]
-        public string LT { get; set; }
+        public string? LT { get; set; }
 
         [StringLength(100)]
-        public string Equipo { get; set; }
+        public string? Equipo { get; set; }
     }
 }

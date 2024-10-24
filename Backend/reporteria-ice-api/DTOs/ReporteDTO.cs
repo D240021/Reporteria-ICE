@@ -3,8 +3,8 @@
     public class ReporteDTO
     {
         public int? Id { get; set; }
-        public byte[] MapaDeDescargas { get; set; }
-        public string Observaciones { get; set; }
+        public byte[]? MapaDeDescargas { get; set; }
+        public string? Observaciones { get; set; }
 
         public int InformeV1Id { get; set; }
         public int InformeV2Id { get; set; }
