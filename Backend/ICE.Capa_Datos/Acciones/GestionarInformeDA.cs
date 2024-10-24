@@ -16,7 +16,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarInforme(Informe informe)
+        public async Task<int> RegistrarInforme(Informe informe)
         {
             var informeDA = new InformeDA
             {
@@ -33,8 +33,11 @@ namespace ICE.Capa_Datos.Acciones
             };
 
             _context.Informes.Add(informeDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+            await _context.SaveChangesAsync();
+            return informeDA.Id;
+
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarInforme(int id, Informe informe)

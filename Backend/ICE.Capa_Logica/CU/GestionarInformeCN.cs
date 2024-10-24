@@ -36,7 +36,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarDatosGeneralesDA = gestionarDatosGeneralesDA;
         }
 
-        public async Task<bool> RegistrarInformeCompleto(Informe informe)
+        public async Task<int> RegistrarInformeCompleto(Informe informe)
         {
             //Los datos de "informe" se han generado en la GestionarReporteConInformeService                        
             return await _gestionarInformeDA.RegistrarInforme(informe);

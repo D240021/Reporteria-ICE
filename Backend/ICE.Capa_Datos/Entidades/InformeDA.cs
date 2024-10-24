@@ -21,10 +21,12 @@ namespace ICE.Capa_Datos.Entidades
         // Relación con Subestacion
         [ForeignKey("SubestacionId")]
         public int SubestacionId { get; set; }
+        public SubestacionDA Subestacion { get; set; }
 
         // Relación con LineaTransmision
         [ForeignKey("LineaTransmisionId")]
-        public int LineaTransmisionId { get; set; }        
+        public int LineaTransmisionId { get; set; }
+        public LineaTransmisionDA LineaTransmision { get; set; }
 
         // Relación con DatosDeLinea
         [ForeignKey("DatosDeLinea")]

@@ -29,7 +29,7 @@ namespace reporteria_ice_api.Controllers
             {
                 Reporte reporte = ReporteDTOMapper.ConvertirDTOAReporte(reporteDTO);
                 
-                var respuesta = await _gestionarReporteConInformesService.RegistrarReporteConInformes(reporte, subestacionIds, lineaTransmisionId);
+                var respuesta = await _gestionarReporteConInformesServiceCN.RegistrarReporteConInformes(reporte, subestacionIds, lineaTransmisionId);
 
                 if (!respuesta)
                 {

@@ -18,9 +18,9 @@ namespace ICE.Capa_Datos.Entidades
         [StringLength(100)]
         public string Evento { get; set; }
 
-        public DateTime Fecha { get; set; }
+        public DateTime? Fecha { get; set; }
 
-        public TimeSpan Hora { get; set; }
+        public TimeSpan? Hora { get; set; }
 
         [StringLength(100)]
         public string Subestacion { get; set; }
