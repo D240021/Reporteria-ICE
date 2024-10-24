@@ -6,48 +6,54 @@
 
         <div class="contenedor-form">
 
-            <form>
+            <form [formGroup]="contenedorFormulario">
                 <h2>Agregar Supervisor</h2>
 
-                <section class="row mb-3 align-items-center">
+                <section class="row mb-3 align-items-center" appearance="outline">
                     <label class="col-md-4">IDENTIFICADOR</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte un identificador único">
+                        <input matInput type="text" placeholder="Inserte un identificador único"
+                            [formControl]="contenedorFormulario.controls.identificador">
                     </div>
                 </section>
 
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">NOMBRE DE USUARIO</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte un nombre de usuario único">
+                        <input type="text" placeholder="Inserte un nombre de usuario único"
+                            [formControl]="contenedorFormulario.controls.nombreUsuario">
                     </div>
                 </section>
 
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">CONTRASEÑA</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte una contraseña">
+                        <input type="password" placeholder="Inserte una contraseña"
+                            [formControl]="contenedorFormulario.controls.contrasenia">
                     </div>
                 </section>
 
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">NOMBRE</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte el nombre">
+                        <input type="text" placeholder="Inserte el nombre"
+                            [formControl]="contenedorFormulario.controls.nombre">
                     </div>
                 </section>
 
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">APELLIDOS</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte los apellidos">
+                        <input type="text" placeholder="Inserte los apellidos"
+                            [formControl]="contenedorFormulario.controls.apellidos">
                     </div>
                 </section>
 
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">CORREO ELECTRÓNICO</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte el correo">
+                        <input type="email" placeholder="Inserte el correo"
+                            [formControl]="contenedorFormulario.controls.correo">
                     </div>
                 </section>
 
@@ -60,20 +66,17 @@
                     </div>
 
                     <div class="col-md-9 col-12">
-                        <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
-                        <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
+                        <button class="btn btn-limpiar" mat-stroked-button type="button"
+                        (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+                        <button class="btn btn-agregar" mat-stroked-button type="submit"
+                            [disabled]="contenedorFormulario.invalid">GUARDAR</button>
                     </div>
                 </div>
 
             </form>
-
-
-
 
         </div>
 
     </div>
 
 </div>
-
-

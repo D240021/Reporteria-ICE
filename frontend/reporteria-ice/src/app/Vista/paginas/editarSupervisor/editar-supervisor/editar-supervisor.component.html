@@ -6,23 +6,25 @@
         (valorBuscado)="procesarBusqueda($event)"></buscador>
 
     @if (formularioVisible) {
-    <form>
+    <form [formGroup]="contenedorFormulario">
 
         <section>
             <label>NOMBRE DE USUARIO</label>
             
-            <input type="text" placeholder="Inserte un nombre de usuario único">            
+            <input type="text" placeholder="Inserte un nombre de usuario único"
+            [formControl]="contenedorFormulario.controls.nombreUsuario">            
         </section>
 
         <section>
             <label>CONTRASEÑA</label>
             
-            <input type="text" placeholder="Inserte una contraseña">            
+            <input type="text" placeholder="Inserte una contraseña"
+            [formControl]="contenedorFormulario.controls.contrasenia">            
         </section>
 
         <section>
             <label>UNIDAD REGIONAL ASIGNADA</label>
-            <select >
+            <select [formControl]="contenedorFormulario.controls.unidadRegional">
                 <option value="TPM">Desamparados</option>
                 <option value="TLT">Orosi</option>
             </select>
@@ -31,8 +33,10 @@
         <div class="contenedor-botones">
 
             <section>
-                <button mat-stroked-button type="button">LIMPIAR</button>
-                <button mat-stroked-button type="submit">ACTUALIZAR</button>
+                <button mat-stroked-button type="button"
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+                <button mat-stroked-button type="submit"
+                [disabled]="contenedorFormulario.invalid">ACTUALIZAR</button>
             </section>
         </div>
 

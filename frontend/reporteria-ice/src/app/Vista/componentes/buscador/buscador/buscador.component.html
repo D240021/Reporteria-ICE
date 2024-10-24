@@ -10,7 +10,7 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button mat-fab type="submit">
+        <button mat-fab type="submit" [disabled]="control.invalid">
             <mat-icon>search</mat-icon>
         </button>
     </form>

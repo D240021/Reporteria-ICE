@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
 import { MatInputModule } from '@angular/material/input';
 import { Supervisor } from '../../../../Modelo/supervisor';
 import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 
 @Component({
   selector: 'editar-supervisor',
   standalone: true,
-  imports: [BuscadorComponent, RouterLink],
+  imports: [BuscadorComponent, RouterLink, ReactiveFormsModule],
   templateUrl: './editar-supervisor.component.html',
   styleUrl: './editar-supervisor.component.css'
 })
@@ -39,6 +41,15 @@ export class EditarSupervisorComponent {
       
     }
   ]
+
+  private formBuilder = inject(FormBuilder);
+  public accionesFormulario = inject(FormulariosService);
+
+  public contenedorFormulario = this.formBuilder.group({
+    nombreUsuario: ['', {validators: [Validators.required]}],
+    contrasenia: ['', {validators: [Validators.required]}],
+    unidadRegional: ['', {validators: [Validators.required]}],
+  });
 
 
   procesarBusqueda(identificadorBuscado: string): void {
