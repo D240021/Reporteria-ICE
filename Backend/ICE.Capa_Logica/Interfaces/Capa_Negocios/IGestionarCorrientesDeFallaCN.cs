@@ -5,7 +5,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Negocios
 {
     public interface IGestionarCorrientesDeFallaCN
     {
-        Task<bool> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla);
+        Task<int> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla);
         Task<CorrientesDeFalla> ObtenerCorrientesDeFallaPorId(int id);
         Task<bool> ActualizarCorrientesDeFalla(int id, CorrientesDeFalla corrientesDeFalla);
         Task<bool> EliminarCorrientesDeFalla(int id);

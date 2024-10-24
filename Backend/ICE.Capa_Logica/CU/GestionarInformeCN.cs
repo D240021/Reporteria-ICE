@@ -36,15 +36,9 @@ namespace ICE.Capa_Negocios.CU
             _gestionarDatosGeneralesDA = gestionarDatosGeneralesDA;
         }
 
-        public async Task<bool> RegistrarInformeCompleto(Informe informe)
+        public async Task<int> RegistrarInformeCompleto(Informe informe)
         {
-            await _gestionarTeleproteccionDA.RegistrarTeleproteccion(informe.Teleproteccion);
-            await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(informe.DistanciaDeFalla);
-            await _gestionarCorrientesDeFallaDA.RegistrarCorrientesDeFalla(informe.CorrientesDeFalla);
-            await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(informe.TiemposDeDisparo);
-            await _gestionarDatosDeLineaDA.RegistrarDatosDeLinea(informe.DatosDeLinea);
-            await _gestionarDatosGeneralesDA.RegistrarDatosGenerales(informe.DatosGenerales);
-
+            //Los datos de "informe" se han generado en la GestionarReporteConInformeService                        
             return await _gestionarInformeDA.RegistrarInforme(informe);
         }
 

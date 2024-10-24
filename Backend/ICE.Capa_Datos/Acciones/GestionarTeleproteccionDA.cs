@@ -17,7 +17,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarTeleproteccion(Teleproteccion teleproteccion)
+        public async Task<int> RegistrarTeleproteccion(Teleproteccion teleproteccion)
         {
             var teleproteccionDA = new TeleproteccionDA
             {
@@ -26,9 +26,12 @@ namespace ICE.Capa_Datos.Acciones
                 TiempoMPLS = teleproteccion.TiempoMPLS
             };
 
-            _context.Teleprotecciones.Add(teleproteccionDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+            _context.Teleprotecciones.Add(teleproteccionDA);            
+
+            await _context.SaveChangesAsync();
+            return teleproteccionDA.Id;
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarTeleproteccion(int id, Teleproteccion teleproteccion)

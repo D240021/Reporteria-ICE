@@ -16,7 +16,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarDatosDeLinea(DatosDeLinea datosDeLinea)
+        public async Task<int> RegistrarDatosDeLinea(DatosDeLinea datosDeLinea)
         {
             var datosDeLineaDA = new DatosDeLineaDA
             {
@@ -29,8 +29,13 @@ namespace ICE.Capa_Datos.Acciones
             };
 
             _context.DatosDeLinea.Add(datosDeLineaDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+
+            await _context.SaveChangesAsync();
+            return datosDeLineaDA.Id;
+
+            
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarDatosDeLinea(int id, DatosDeLinea datosDeLinea)

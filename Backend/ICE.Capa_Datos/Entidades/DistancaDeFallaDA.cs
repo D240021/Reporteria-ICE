@@ -14,29 +14,23 @@ namespace ICE.Capa_Datos.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [Required]
+        
         [StringLength(100)]
-        public string DistanciaKM { get; set; }
+        public string? DistanciaKM { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string DistanciaPorcentaje { get; set; }
+        public string? DistanciaPorcentaje { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string DistanciaReportada { get; set; }
+        public string? DistanciaReportada { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string DistanciaDobleTemporal { get; set; }
+        public string? DistanciaDobleTemporal { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Error { get; set; }
+        public string? Error { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Error_Doble { get; set; }
+        public string? Error_Doble { get; set; }
     }
 }

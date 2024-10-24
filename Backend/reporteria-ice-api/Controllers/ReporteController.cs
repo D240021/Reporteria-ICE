@@ -14,22 +14,26 @@ namespace reporteria_ice_api.Controllers
     {
         private readonly IGestionarReporteCN _gestionarReporteCN;
 
-        public ReporteController(IGestionarReporteCN gestionarReporteCN)
+        private readonly IGestionarReporteConInformesService _gestionarReporteConInformesServiceCN;
+
+        public ReporteController(IGestionarReporteCN gestionarReporteCN, IGestionarReporteConInformesService gestionarReporteConInformesServiceCN)
         {
             _gestionarReporteCN = gestionarReporteCN;
+            _gestionarReporteConInformesServiceCN = gestionarReporteConInformesServiceCN;
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> RegistrarReporte(ReporteDTO reporteDTO)
+        public async Task<ActionResult<bool>> RegistrarReporte([FromBody] ReporteDTO reporteDTO, [FromQuery] List<int> subestacionIds, [FromQuery] int lineaTransmisionId)
         {
             try
             {
                 Reporte reporte = ReporteDTOMapper.ConvertirDTOAReporte(reporteDTO);
+                
+                var respuesta = await _gestionarReporteConInformesServiceCN.RegistrarReporteConInformes(reporte, subestacionIds, lineaTransmisionId);
 
-                var respuesta = await _gestionarReporteCN.RegistrarReporte(reporte);
                 if (!respuesta)
                 {
-                    return BadRequest("Error al registrar el reporte.");
+                    return BadRequest("Error al registrar el reporte y sus informes asociados");
                 }
                 return Ok(respuesta);
             }

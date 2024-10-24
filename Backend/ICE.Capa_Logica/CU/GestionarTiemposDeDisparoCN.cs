@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarTiemposDeDisparoDA = gestionarTiemposDeDisparoDA;
         }
 
-        public async Task<bool> RegistrarTiemposDeDisparo(TiemposDeDisparo tiemposDeDisparo)
+        public async Task<int> RegistrarTiemposDeDisparo(TiemposDeDisparo tiemposDeDisparo)
         {
             return await _gestionarTiemposDeDisparoDA.RegistrarTiemposDeDisparo(tiemposDeDisparo);
         }

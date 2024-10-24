@@ -17,7 +17,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla)
+        public async Task<int> RegistrarCorrientesDeFalla(CorrientesDeFalla corrientesDeFalla)
         {
             var corrientesDeFallaDA = new CorrientesDeFallaDA
             {
@@ -30,8 +30,13 @@ namespace ICE.Capa_Datos.Acciones
             };
 
             _context.CorrientesDeFalla.Add(corrientesDeFallaDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+
+            await _context.SaveChangesAsync();
+            return corrientesDeFallaDA.Id;
+
+
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarCorrientesDeFalla(int id, CorrientesDeFalla corrientesDeFalla)

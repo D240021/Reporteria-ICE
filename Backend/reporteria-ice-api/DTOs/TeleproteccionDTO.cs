@@ -3,8 +3,8 @@
     public class TeleproteccionDTO
     {
         public int Id { get; set; }
-        public string TX_TEL { get; set; }
-        public string RX_TEL { get; set; }
-        public string TiempoMPLS { get; set; }
+        public string? TX_TEL { get; set; }
+        public string? RX_TEL { get; set; }
+        public string? TiempoMPLS { get; set; }
     }
 }

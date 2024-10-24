@@ -17,7 +17,7 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        public async Task<bool> RegistrarTiemposDeDisparo(TiemposDeDisparo tiemposDeDisparo)
+        public async Task<int> RegistrarTiemposDeDisparo(TiemposDeDisparo tiemposDeDisparo)
         {
             var tiemposDeDisparoDA = new TiemposDeDisparoDA
             {
@@ -27,9 +27,13 @@ namespace ICE.Capa_Datos.Acciones
                 Reserva = tiemposDeDisparo.Reserva
             };
 
-            _context.TiemposDeDisparo.Add(tiemposDeDisparoDA);
-            var resultado = await _context.SaveChangesAsync();
-            return resultado > 0;
+            _context.TiemposDeDisparo.Add(tiemposDeDisparoDA);            
+
+            await _context.SaveChangesAsync();
+            return tiemposDeDisparoDA.Id;
+
+            //var resultado = await _context.SaveChangesAsync();
+            //return resultado > 0;
         }
 
         public async Task<bool> ActualizarTiemposDeDisparo(int id, TiemposDeDisparo tiemposDeDisparo)

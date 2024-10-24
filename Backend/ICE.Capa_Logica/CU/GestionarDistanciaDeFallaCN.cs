@@ -14,7 +14,7 @@ namespace ICE.Capa_Negocios.CU
             _gestionarDistanciaDeFallaDA = gestionarDistanciaDeFallaDA;
         }
 
-        public async Task<bool> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla)
+        public async Task<int> RegistrarDistanciaDeFalla(DistanciaDeFalla distanciaDeFalla)
         {
             return await _gestionarDistanciaDeFallaDA.RegistrarDistanciaDeFalla(distanciaDeFalla);
         }
