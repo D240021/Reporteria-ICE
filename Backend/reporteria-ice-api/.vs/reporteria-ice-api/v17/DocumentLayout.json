@@ -3,18 +3,13 @@
   "WorkspaceRootPath": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\dtos\\informedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:dtos\\informedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AB1AFB1-BD23-4D82-87E2-D102880FB1CC}|..\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_datos\\acciones\\gestionarusuarioda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\reporteria-ice-api\\controllers\\informecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0716DD2D-9491-47AA-9C33-AF0EE9789D7B}|reporteria-ice-api.csproj|solutionrelative:controllers\\informecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AB1AFB1-BD23-4D82-87E2-D102880FB1CC}|..\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_datos\\entidades\\usuarioda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40EE5CEA-3ED1-48FD-95F9-ECBE622E89A8}|..\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_logica\\cu\\gestionarinformecn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AB1AFB1-BD23-4D82-87E2-D102880FB1CC}|..\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_datos\\acciones\\gestionarinformeda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D0CB677-6CBF-44CF-A351-664F267EC166}|..\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj|c:\\ucr\\2024 - ciclo ii\\an\u00E1lisis y dise\u00F1o de software\\proyecto\\proyecto_programado\\reporteria-ice\\backend\\ice.capa_negocios\\modelos\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,53 +28,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "InformeDTO.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\InformeDTO.cs",
-              "RelativeDocumentMoniker": "DTOs\\InformeDTO.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\DTOs\\InformeDTO.cs",
-              "RelativeToolTip": "DTOs\\InformeDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA+AAAAAAAAAA==",
+              "Title": "GestionarUsuarioDA.cs",
+              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Acciones\\GestionarUsuarioDA.cs",
+              "RelativeDocumentMoniker": "..\\ICE.Capa_Datos\\Acciones\\GestionarUsuarioDA.cs",
+              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Acciones\\GestionarUsuarioDA.cs",
+              "RelativeToolTip": "..\\ICE.Capa_Datos\\Acciones\\GestionarUsuarioDA.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAGUAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T19:32:18.322Z",
+              "WhenOpened": "2024-10-25T18:12:48.322Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InformeController.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\InformeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\InformeController.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\reporteria-ice-api\\Controllers\\InformeController.cs",
-              "RelativeToolTip": "Controllers\\InformeController.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAiwE0AAAAlAAAAAAAAAA==",
+              "Title": "UsuarioDA.cs",
+              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Entidades\\UsuarioDA.cs",
+              "RelativeDocumentMoniker": "..\\ICE.Capa_Datos\\Entidades\\UsuarioDA.cs",
+              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Entidades\\UsuarioDA.cs",
+              "RelativeToolTip": "..\\ICE.Capa_Datos\\Entidades\\UsuarioDA.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T19:29:52.925Z",
+              "WhenOpened": "2024-10-25T18:04:51.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GestionarInformeCN.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarInformeCN.cs",
-              "RelativeDocumentMoniker": "..\\ICE.Capa_Logica\\CU\\GestionarInformeCN.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\CU\\GestionarInformeCN.cs",
-              "RelativeToolTip": "..\\ICE.Capa_Logica\\CU\\GestionarInformeCN.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "RelativeDocumentMoniker": "..\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "RelativeToolTip": "..\\ICE.Capa_Negocios\\Modelos\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T19:28:46.893Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GestionarInformeDA.cs",
-              "DocumentMoniker": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Acciones\\GestionarInformeDA.cs",
-              "RelativeDocumentMoniker": "..\\ICE.Capa_Datos\\Acciones\\GestionarInformeDA.cs",
-              "ToolTip": "C:\\UCR\\2024 - CICLO II\\An\u00E1lisis y Dise\u00F1o de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\Acciones\\GestionarInformeDA.cs",
-              "RelativeToolTip": "..\\ICE.Capa_Datos\\Acciones\\GestionarInformeDA.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T19:28:10.315Z",
+              "WhenOpened": "2024-10-25T15:18:18.736Z",
               "EditorCaption": ""
             }
           ]
