@@ -18,6 +18,7 @@ namespace ICE.Capa_Dominio.Modelos
 
         // Relación con el rol y subestación
         public int RollId { get; set; }
-        public int SubestacionId { get; set; }
+        public int? SubestacionId { get; set; }
+        public int? UnidadRegionalId { get; set; }
     }
 }

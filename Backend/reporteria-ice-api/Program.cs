@@ -17,6 +17,10 @@ builder.Services.AddHttpClient();
 builder.Services.AddTransient<IGestionarUnidadRegionalCN, GestionarUnidadRegionalCN>();
 builder.Services.AddTransient<IGestionarUnidadRegionalDA, GestionarUnidadRegionalDA>();
 
+// Inyección de dependencias para Usuario
+builder.Services.AddTransient<IGestionarUsuarioCN, GestionarUsuarioCN>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
+
 // Inyección de dependencias para Subestaciones
 builder.Services.AddTransient<IGestionarSubestacionCN, GestionarSubestacionCN>();
 builder.Services.AddTransient<IGestionarSubestacionDA, GestionarSubestacionDA>();
@@ -24,14 +28,6 @@ builder.Services.AddTransient<IGestionarSubestacionDA, GestionarSubestacionDA>()
 // Inyección de dependencias para Líneas de Transmisión
 builder.Services.AddTransient<IGestionarLineasTransmisionCN, GestionarLineasTransmisionCN>();
 builder.Services.AddTransient<IGestionarLineasTransmisionDA, GestionarLineasTransmisionDA>();
-
-// Inyección de dependencias para Técnicos
-builder.Services.AddTransient<IGestionarTecnicoCN, GestionarTecnicoCN>();
-builder.Services.AddTransient<IGestionarTecnicoDA, GestionarTecnicoDA>();
-
-// Inyección de dependencias para Supervisores
-builder.Services.AddTransient<IGestionarSupervisorCN, GestionarSupervisorCN>();
-builder.Services.AddTransient<IGestionarSupervisorDA, GestionarSupervisorDA>();
 
 // Inyección de dependencias para Informes
 builder.Services.AddTransient<IGestionarInformeCN, GestionarInformeCN>();
