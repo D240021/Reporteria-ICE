@@ -1,0 +1,80 @@
+<div class="cont-principal">
+
+  <!-- Buscador
+    Aqui podria ir el dashboard si el profe lo pide para despues
+
+   -->
+  <div></div>
+
+  <div class="cont-consultar-supervisor">
+
+    <h2>Consultar Supervisor</h2>
+
+    <!-- Buscador -->
+    <div class="cont-buscador">
+
+      <label for="filtro">Filtro:</label>
+      <input type="text" id="filtro">
+      <buscador [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
+
+      <select>
+        <option value="identificador">Identificador</option>
+        <option value="nombre">Nombre</option>
+        <option value="apellidos">Apellidos</option>
+        <option value="unidadRegional">Unidad Regional</option>
+      </select>
+
+      <button>Buscar</button>
+
+    </div>
+
+
+
+    <!-- Tablas Supervisores -->
+
+    <div class="cont-tabla row">
+
+      <table class="col-md-12" mat-table [dataSource]="supervisoresQuemados">
+
+        <ng-container matColumnDef="IDENTIFICADOR">
+          <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
+          <td mat-cell *matCellDef="let supervisor">
+            {{supervisor.identificador}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NOMBRE">
+          <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+          <td mat-cell *matCellDef="let supervisor">
+            {{supervisor.nombre}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="APELLIDOS">
+          <th mat-header-cell *matHeaderCellDef> APELLIDOS </th>
+          <td mat-cell *matCellDef="let supervisor">
+            {{supervisor.apellidos}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="UNIDAD REGIONAL">
+          <th mat-header-cell *matHeaderCellDef> UNIDAD REGIONAL </th>
+          <td mat-cell *matCellDef="let supervisor">
+            {{supervisor.unidadRegional}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="atributosSupervisor"></tr>
+        <tr mat-row *matRowDef="let row; columns: atributosSupervisor;"></tr>
+      </table>
+
+      <!-- Boton -->
+      <div class="col-md-6">
+        <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
