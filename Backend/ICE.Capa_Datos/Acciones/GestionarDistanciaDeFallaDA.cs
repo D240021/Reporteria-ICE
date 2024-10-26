@@ -49,8 +49,9 @@ namespace ICE.Capa_Datos.Acciones
                 distanciaDeFallaBD.Error = distanciaDeFalla.Error;
                 distanciaDeFallaBD.Error_Doble = distanciaDeFalla.Error_Doble;
 
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
+                //var resultado = await _context.SaveChangesAsync();
+                //return resultado > 0;
+                return true;
             }
             return false;
         }

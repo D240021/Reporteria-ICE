@@ -10,10 +10,30 @@ namespace ICE.Capa_Datos.Acciones
     public class GestionarInformeDA : IGestionarInformeDA
     {
         private readonly ICE_Context _context;
+        //Llamar a las interfaces de las instancias de Informe para actualizar
+        private readonly IGestionarTeleproteccionDA _gestionarTeleproteccionDA;
+        private readonly IGestionarDistanciaDeFallaDA _gestionarDistanciaDeFallaDA;
+        private readonly IGestionarCorrientesDeFallaDA _gestionarCorrientesDeFallaDA;
+        private readonly IGestionarTiemposDeDisparoDA _gestionarTiemposDeDisparoDA;        
+        private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
+        private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
 
-        public GestionarInformeDA(ICE_Context context)
+        public GestionarInformeDA(
+            ICE_Context context,
+            IGestionarTeleproteccionDA gestionarTeleproteccionDA,
+            IGestionarDistanciaDeFallaDA gestionarDistanciaDeFallaDA,
+            IGestionarCorrientesDeFallaDA gestionarCorrientesDeFallaDA,
+            IGestionarTiemposDeDisparoDA gestionarTiemposDeDisparoDA,
+            IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
+            IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)            
         {
             _context = context;
+            _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
+            _gestionarDistanciaDeFallaDA = gestionarDistanciaDeFallaDA;
+            _gestionarCorrientesDeFallaDA = gestionarCorrientesDeFallaDA;
+            _gestionarTiemposDeDisparoDA = gestionarTiemposDeDisparoDA;
+            _gestionarDatosDeLineaDA = gestionarDatosDeLineaDA;
+            _gestionarDatosGeneralesDA = gestionarDatosGeneralesDA;
         }
 
         public async Task<int> RegistrarInforme(Informe informe)
@@ -40,6 +60,9 @@ namespace ICE.Capa_Datos.Acciones
             //return resultado > 0;
         }
 
+
+
+        /*
         public async Task<bool> ActualizarInforme(int id, Informe informe)
         {
             var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
@@ -61,6 +84,54 @@ namespace ICE.Capa_Datos.Acciones
             }
             return false;
         }
+        */
+
+
+        public async Task<bool> ActualizarInforme(int id, Informe informe)
+        {
+            using (var transaction = await _context.Database.BeginTransactionAsync()) // Iniciar una transacción manual
+            {
+                try
+                {
+                    // Cargar el informe con sus relaciones
+                    var informeBD = await _context.Informes
+                        .Include(i => i.DatosDeLinea)
+                        .Include(i => i.DatosGenerales)
+                        .Include(i => i.Teleproteccion)
+                        .Include(i => i.DistanciaDeFalla)
+                        .Include(i => i.TiemposDeDisparo)
+                        .Include(i => i.CorrientesDeFalla)
+                        .FirstOrDefaultAsync(i => i.Id == id);
+
+
+                    //se actualizan los campos simples del informe
+                    informeBD.Tipo = informe.Tipo;
+                    informeBD.SubestacionId = informe.SubestacionId;
+                    informeBD.LineaTransmisionId = informe.LineaTransmisionId;
+                    informeBD.Estado = informe.Estado;
+
+                    //se actualizan usando sus propios servicios las entidades relacionadas a informe
+                    await _gestionarDistanciaDeFallaDA.ActualizarDistanciaDeFalla(informeBD.DistanciaDeFallaId, informe.DistanciaDeFalla);
+                    await _gestionarTeleproteccionDA.ActualizarTeleproteccion(informeBD.TeleproteccionId, informe.Teleproteccion);
+                    await _gestionarCorrientesDeFallaDA.ActualizarCorrientesDeFalla(informeBD.CorrientesDeFallaId, informe.CorrientesDeFalla);
+                    await _gestionarTiemposDeDisparoDA.ActualizarTiemposDeDisparo(informeBD.TiemposDeDisparoId, informe.TiemposDeDisparo);
+                    await _gestionarDatosDeLineaDA.ActualizarDatosDeLinea(informeBD.DatosDeLineaId, informe.DatosDeLinea);
+                    await _gestionarDatosGeneralesDA.ActualizarDatosGenerales(informeBD.DatosGeneralesId, informe.DatosGenerales);
+
+                    // Guardar los cambios en el contexto
+                    await _context.SaveChangesAsync();
+
+                    // Confirmar la transacción si todo sale bien
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
 
         public async Task<bool> EliminarInforme(int id)
         {
@@ -76,7 +147,18 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<Informe> ObtenerInformePorId(int id)
         {
-            var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
+            //var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
+
+            //Incluir las relaciones de Informe (Corriente de Falla, Teleproteccion, etc)
+            var informeBD = await _context.Informes
+               .Include(i => i.DatosDeLinea)
+               .Include(i => i.DatosGenerales)
+               .Include(i => i.Teleproteccion)
+               .Include(i => i.DistanciaDeFalla)
+               .Include(i => i.TiemposDeDisparo)
+               .Include(i => i.CorrientesDeFalla)
+               .FirstOrDefaultAsync(i => i.Id == id);
+
             if (informeBD == null)
             {
                 return null;
