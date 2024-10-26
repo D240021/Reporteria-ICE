@@ -74,20 +74,24 @@ header p{
 
 footer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap-reverse;
   justify-content: space-between;
   margin: 0 2% 0 2%;
   background-color: var(--color-secundario-fondo);
   padding: 1rem 0;
   align-items: center;
+  text-align: center
 }
 
-footer button {
+  footer button {
     background-color: var(--color-terciario-fondo);
     color: var(--color-secundario-fondo);
     border-radius: 10px;
-}
-footer p {
+    margin: 2% 0;
+  }
+  footer p {
     padding-top: 1%;
     color: var(--color-secundario);
-}
+    text-align: center;
+    margin: 2% 0;
+  }

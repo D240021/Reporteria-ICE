@@ -1,1 +1,55 @@
-<p>Editar Supervisor</p>
+<div>
+
+  <h1>Editar Supervisor</h1>
+
+  <buscador [datos]="datosQuemados" [accionInput]="'Identificador'" [accionPlaceholder]="'identificador'"
+            (valorBuscado)="procesarBusqueda($event)"></buscador>
+
+  @if (formularioVisible) {
+  <form [formGroup]="contenedorFormulario">
+
+    <section>
+      <label>NOMBRE DE USUARIO</label>
+
+      <input type="text" placeholder="Inserte un nombre de usuario único"
+             [formControl]="contenedorFormulario.controls.nombreUsuario">
+    </section>
+
+    <section>
+      <label>CONTRASEÑA</label>
+
+      <input type="text" placeholder="Inserte una contraseña"
+             [formControl]="contenedorFormulario.controls.contrasenia">
+    </section>
+
+    <section>
+      <label>UNIDAD REGIONAL ASIGNADA</label>
+      <select [formControl]="contenedorFormulario.controls.unidadRegional">
+        <option value="TPM">Desamparados</option>
+        <option value="TLT">Orosi</option>
+      </select>
+    </section>
+
+    <div class="contenedor-botones">
+
+      <section>
+        <button type="button"
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+          LIMPIAR
+        </button>
+        <button type="submit"
+                [disabled]="contenedorFormulario.invalid">
+          ACTUALIZAR
+        </button>
+      </section>
+    </div>
+
+
+  </form>
+
+  }
+  
+  <button class="btn-volver" type="button" routerLink="/menu-administrador">VOLVER</button>
+
+</div>
+

@@ -1,37 +1,66 @@
-<h1>Agregar Subestación</h1>
-
-
 <div>
-    <form>
-        <section>
-            <label>IDENTIFICADOR</label>
+
+  <div class="contenedor-principal">
+
+    <div></div>
+
+    <div class="contenedor-form">
+
+      <form>
+        <h2>Agregar Subestación</h2>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">IDENTIFICADOR</label>
+          <div class="col-md-8">
+
             <input type="text" placeholder="Inserte un identificador único">
+
+          </div>          
         </section>
 
-        <section>
-            <label>NOMBRE</label>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">NOMBRE</label>
+          <div class="col-md-8">
+
             <input type="text" placeholder="Inserte un nombre de ubicación">
+
+          </div>          
         </section>
 
-        <section>
-            <label>LÍNEAS DE TRANSMISIÓN ASIGNADAS</label>
-            <select>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4" >LÍNEAS DE TRANSMISIÓN ASIGNADAS</label>
+          <div class="col-md-8">
+
+              <select>
                 <option value="">Orosí</option>
                 <option value="">Desamparados</option>
-            </select>
+              </select>
+
+          </div>
+            
         </section>
 
-        <div class="contenedor-botones">
+        <div class="contenedor-botones row mb-3 align-items-center">
 
-            <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+          <div class="col-md-3 col-12">
+            <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+          </div>
 
-            <section>
-                <button mat-stroked-button type="button">LIMPIAR</button>
-                <button mat-stroked-button type="submit">GUARDAR</button>
-            </section>
+          <div class="col-md-9 col-12">
+            <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
+            <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
+          </div>
         </div>
 
-    </form>
+      </form>
+
+
+    </div>
+
+
+
+  </div>
+
 
 
 </div>
+

@@ -1,29 +1,51 @@
-<h1>Agregar Línea de Transmisión</h1>
-
 <div>
-    <form>
-        <section>
-            <label>IDENTIFICADOR</label>
-            <input type="text" placeholder="Inserte un identificador único">
+
+  <div class="contenedor-principal">
+    
+    <div></div>
+    
+    <div class="contenedor-form">
+      
+      <form [formGroup]="contenedorFormulario">
+        <h2>Agregar Línea de Transmisión</h2>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">IDENTIFICADOR</label>
+          <div class="col-md-8">
+            <input type="text" placeholder="Inserte un identificador único"
+            [formControl]="contenedorFormulario.controls.identificador">
+          </div>
         </section>
 
-        <section>
-            <label>NOMBRE</label>
-            <input type="text" placeholder="Inserte un nombre de ubicación">
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">NOMBRE</label>
+          <div class="col-md-8">
+            <input type="text" placeholder="Inserte un nombre de ubicación"
+            [formControl]="contenedorFormulario.controls.nombreUbicacion">
+          </div>
         </section>
 
 
-        <div class="contenedor-botones">
+        <div class="contenedor-botones row mb-3 align-items-center">
 
-            <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+          <div class="col-md-3 col-12">
+            <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+          </div>          
 
-            <section>
-                <button mat-stroked-button type="button">LIMPIAR</button>
-                <button mat-stroked-button type="submit">GUARDAR</button>
-            </section>
+          <div class="col-md-9 col-12">
+            <button class="btn btn-limpiar" mat-stroked-button type="button"
+            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+            <button class="btn btn-agregar" mat-stroked-button type="submit"
+            [disabled]="contenedorFormulario.invalid">GUARDAR</button>
+          </div>
         </div>
 
-    </form>
+      </form>
 
 
+
+
+    </div>
+
+  </div>
+  
 </div>

@@ -1,1 +1,34 @@
-<p>Editar Línea de Transmisión</p>
+<div>
+
+    <h1>Editar Línea de Transmisión</h1>
+
+    <buscador [datos]="datosQuemados" [accionInput]="'Identificador'" [accionPlaceholder]="'identificador'"
+        (valorBuscado)="procesarBusqueda($event)"></buscador>
+
+    @if (formularioVisible) {
+    <form [formGroup]="contenedorFormulario">
+
+        <section>
+            <label>NOMBRE DE LÍNEA DE TRANSMISIÓN</label>
+            <input type="text" placeholder="Inserte un nombre"
+            [formControl]="contenedorFormulario.controls.nombreUbicacion">
+        </section>
+
+        <div class="contenedor-botones">
+
+            <section>
+                <button mat-stroked-button type="button"
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+                <button mat-stroked-button type="submit"
+                [disabled]="contenedorFormulario.invalid">ACTUALIZAR</button>
+            </section>
+        </div>
+
+
+    </form>
+
+    }
+
+    <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+
+</div>

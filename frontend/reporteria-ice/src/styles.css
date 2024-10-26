@@ -32,6 +32,10 @@ html, body {
     --fuente-poppins: "Poppins", sans-serif;
 }
 
+a, button {
+    text-decoration: none;
+}
+
 
 
 
