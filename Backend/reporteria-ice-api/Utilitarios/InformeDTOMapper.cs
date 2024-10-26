@@ -5,50 +5,54 @@ namespace reporteria_ice_api.Utilitarios
 {
     public static class InformeDTOMapper
     {
+        //lo que viene desde el cliente GUI
+        //no pueden venir nulos, se mantiene asi
         public static Informe ConvertirDTOAInforme(InformeDTO informeDTO)
         {
             return new Informe
-            {
+            {                
                 Id = informeDTO.Id,
                 Tipo = informeDTO.Tipo,
                 SubestacionId = informeDTO.SubestacionId,
                 LineaTransmisionId = informeDTO.LineaTransmisionId,
                 DatosDeLineaId = informeDTO.DatosDeLineaId,
-                DatosDeLinea = DatosDeLineaDTOMapper.ConvertirDTOADatosDeLinea(informeDTO.DatosDeLinea),
+                DatosDeLinea = informeDTO.DatosDeLinea != null ? DatosDeLineaDTOMapper.ConvertirDTOADatosDeLinea(informeDTO.DatosDeLinea) : null,
                 DatosGeneralesId = informeDTO.DatosGeneralesId,
-                DatosGenerales = DatosGeneralesDTOMapper.ConvertirDTOADatosGenerales(informeDTO.DatosGenerales),
+                DatosGenerales = informeDTO.DatosGenerales != null ? DatosGeneralesDTOMapper.ConvertirDTOADatosGenerales(informeDTO.DatosGenerales) : null,
                 TeleproteccionId = informeDTO.TeleproteccionId,
-                Teleproteccion = TeleproteccionDTOMapper.ConvertirDTOATeleproteccion(informeDTO.Teleproteccion),
+                Teleproteccion = informeDTO.Teleproteccion != null ? TeleproteccionDTOMapper.ConvertirDTOATeleproteccion(informeDTO.Teleproteccion) : null,
                 DistanciaDeFallaId = informeDTO.DistanciaDeFallaId,
-                DistanciaDeFalla = DistanciaDeFallaDTOMapper.ConvertirDTOADistanciaDeFalla(informeDTO.DistanciaDeFalla),
+                DistanciaDeFalla = informeDTO.DistanciaDeFalla != null ? DistanciaDeFallaDTOMapper.ConvertirDTOADistanciaDeFalla(informeDTO.DistanciaDeFalla) : null,
                 TiemposDeDisparoId = informeDTO.TiemposDeDisparoId,
-                TiemposDeDisparo = TiemposDeDisparoDTOMapper.ConvertirDTOATiemposDeDisparo(informeDTO.TiemposDeDisparo),
+                TiemposDeDisparo = informeDTO.TiemposDeDisparo != null ? TiemposDeDisparoDTOMapper.ConvertirDTOATiemposDeDisparo(informeDTO.TiemposDeDisparo) : null,
                 CorrientesDeFallaId = informeDTO.CorrientesDeFallaId,
-                CorrientesDeFalla = CorrientesDeFallaDTOMapper.ConvertirDTOACorrientesDeFalla(informeDTO.CorrientesDeFalla),
+                CorrientesDeFalla = informeDTO.CorrientesDeFalla != null ? CorrientesDeFallaDTOMapper.ConvertirDTOACorrientesDeFalla(informeDTO.CorrientesDeFalla) : null,
                 Estado = informeDTO.Estado
             };
         }
 
+        //lo que se manda al GUI
+        //si se pueden enviar nulos (cuando los informes se crean por primera vez)
         public static InformeDTO ConvertirInformeADTO(Informe informe)
         {
             return new InformeDTO
-            {
+            {                
                 Id = informe.Id,
                 Tipo = informe.Tipo,
                 SubestacionId = informe.SubestacionId,
                 LineaTransmisionId = informe.LineaTransmisionId,
                 DatosDeLineaId = informe.DatosDeLineaId,
-                DatosDeLinea = DatosDeLineaDTOMapper.ConvertirDatosDeLineaADTO(informe.DatosDeLinea),
+                DatosDeLinea = informe.DatosDeLinea != null ? DatosDeLineaDTOMapper.ConvertirDatosDeLineaADTO(informe.DatosDeLinea) : null,
                 DatosGeneralesId = informe.DatosGeneralesId,
-                DatosGenerales = DatosGeneralesDTOMapper.ConvertirDatosGeneralesADTO(informe.DatosGenerales),
+                DatosGenerales = informe.DatosGenerales != null ? DatosGeneralesDTOMapper.ConvertirDatosGeneralesADTO(informe.DatosGenerales) : null,
                 TeleproteccionId = informe.TeleproteccionId,
-                Teleproteccion = TeleproteccionDTOMapper.ConvertirTeleproteccionADTO(informe.Teleproteccion),
+                Teleproteccion = informe.Teleproteccion != null ? TeleproteccionDTOMapper.ConvertirTeleproteccionADTO(informe.Teleproteccion) : null,
                 DistanciaDeFallaId = informe.DistanciaDeFallaId,
-                DistanciaDeFalla = DistanciaDeFallaDTOMapper.ConvertirDistanciaDeFallaADTO(informe.DistanciaDeFalla),
+                DistanciaDeFalla = informe.DistanciaDeFalla != null ? DistanciaDeFallaDTOMapper.ConvertirDistanciaDeFallaADTO(informe.DistanciaDeFalla) : null,
                 TiemposDeDisparoId = informe.TiemposDeDisparoId,
-                TiemposDeDisparo = TiemposDeDisparoDTOMapper.ConvertirTiemposDeDisparoADTO(informe.TiemposDeDisparo),
+                TiemposDeDisparo = informe.TiemposDeDisparo != null ? TiemposDeDisparoDTOMapper.ConvertirTiemposDeDisparoADTO(informe.TiemposDeDisparo) : null,
                 CorrientesDeFallaId = informe.CorrientesDeFallaId,
-                CorrientesDeFalla = CorrientesDeFallaDTOMapper.ConvertirCorrientesDeFallaADTO(informe.CorrientesDeFalla),
+                CorrientesDeFalla = informe.CorrientesDeFalla != null ? CorrientesDeFallaDTOMapper.ConvertirCorrientesDeFallaADTO(informe.CorrientesDeFalla) : null,
                 Estado = informe.Estado
             };
         }

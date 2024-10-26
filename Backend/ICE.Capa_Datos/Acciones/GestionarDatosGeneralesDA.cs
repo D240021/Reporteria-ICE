@@ -51,8 +51,9 @@ namespace ICE.Capa_Datos.Acciones
                 datosGeneralesBD.LT = datosGenerales.LT;
                 datosGeneralesBD.Equipo = datosGenerales.Equipo;
 
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
+                //var resultado = await _context.SaveChangesAsync();
+                //return resultado > 0;
+                return true;
             }
             return false;
         }

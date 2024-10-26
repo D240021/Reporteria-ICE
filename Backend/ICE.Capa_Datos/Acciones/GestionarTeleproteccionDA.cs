@@ -43,8 +43,9 @@ namespace ICE.Capa_Datos.Acciones
                 teleproteccionBD.RX_TEL = teleproteccion.RX_TEL;
                 teleproteccionBD.TiempoMPLS = teleproteccion.TiempoMPLS;
 
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
+                //var resultado = await _context.SaveChangesAsync();
+                //return resultado > 0;
+                return true;
             }
             return false;
         }
