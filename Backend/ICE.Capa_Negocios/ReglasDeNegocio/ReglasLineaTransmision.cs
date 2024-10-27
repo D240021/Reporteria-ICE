@@ -24,7 +24,7 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "El identificador de la línea de transmisión debe ser mayor que cero.");
             }
 
-            return (true, string.Empty); // Retorna válido si todo es correcto
+            return (true, string.Empty); 
         }
 
         // Validación específica del ID

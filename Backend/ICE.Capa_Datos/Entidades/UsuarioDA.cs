@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ICE.Capa_Datos.Entidades
 {
@@ -27,11 +22,9 @@ namespace ICE.Capa_Datos.Entidades
         [EmailAddress]
         public string Correo { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Nombre { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Apellido { get; set; }
 
@@ -43,9 +36,14 @@ namespace ICE.Capa_Datos.Entidades
         public int RollId { get; set; }
         public RolDA Rol { get; set; }
 
-        // Relación con Subestacion
+        // Relación opcional con Subestacion
         [ForeignKey("Subestacion")]
-        public int SubestacionId { get; set; }
-        public SubestacionDA Subestacion { get; set; }
+        public int? SubestacionId { get; set; }
+        public SubestacionDA? Subestacion { get; set; }
+
+        // Relación opcional con Unidad Regional
+        [ForeignKey("UnidadRegional")]
+        public int? UnidadRegionalId { get; set; }
+        public UnidadRegionalDA? UnidadRegional { get; set; }
     }
 }

@@ -13,11 +13,9 @@ namespace ICE.Capa_Dominio.Modelos
 
         // Relación con Subestacion
         public int SubestacionId { get; set; }
-        public Subestacion Subestacion { get; set; }
 
         // Relación con LineaTransmision
         public int LineaTransmisionId { get; set; }
-        public LineaTransmision LineaTransmision { get; set; }
 
         // Relación con DatosDeLinea
         public int DatosDeLineaId { get; set; }

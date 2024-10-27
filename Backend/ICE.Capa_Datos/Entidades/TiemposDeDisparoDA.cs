@@ -15,20 +15,16 @@ namespace ICE.Capa_Datos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string R { get; set; }
+        public string? R { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string S { get; set; }
+        public string? S { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string T { get; set; }
+        public string? T { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Reserva { get; set; }
+        public string? Reserva { get; set; }
     }
 }

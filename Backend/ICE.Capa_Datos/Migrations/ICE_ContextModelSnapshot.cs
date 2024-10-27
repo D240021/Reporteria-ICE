@@ -78,32 +78,26 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AcumuladaR")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("AcumuladaS")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("AcumuladaT")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RealIR")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RealIS")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("RealIT")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -121,32 +115,26 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Aviso")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Distancia")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Funcion")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("OT")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("SAP")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Zona")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -164,28 +152,24 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Equipo")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Evento")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("Fecha")
+                    b.Property<DateTime?>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("Hora")
+                    b.Property<TimeSpan?>("Hora")
                         .HasColumnType("time");
 
                     b.Property<string>("LT")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Subestacion")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -203,32 +187,26 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DistanciaDobleTemporal")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DistanciaKM")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DistanciaPorcentaje")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DistanciaReportada")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Error")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Error_Doble")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -393,11 +371,9 @@ namespace ICE.Capa_Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("MapaDeDescargas")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Observaciones")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -498,17 +474,14 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("RX_TEL")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TX_TEL")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TiempoMPLS")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -526,22 +499,18 @@ namespace ICE.Capa_Datos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("R")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Reserva")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("S")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("T")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -609,7 +578,10 @@ namespace ICE.Capa_Datos.Migrations
                     b.Property<int>("RollId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubestacionId")
+                    b.Property<int?>("SubestacionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UnidadRegionalId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -617,6 +589,8 @@ namespace ICE.Capa_Datos.Migrations
                     b.HasIndex("RollId");
 
                     b.HasIndex("SubestacionId");
+
+                    b.HasIndex("UnidadRegionalId");
 
                     b.ToTable("Usuario");
                 });
@@ -788,12 +762,17 @@ namespace ICE.Capa_Datos.Migrations
                     b.HasOne("ICE.Capa_Datos.Entidades.SubestacionDA", "Subestacion")
                         .WithMany()
                         .HasForeignKey("SubestacionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("ICE.Capa_Datos.Entidades.UnidadRegionalDA", "UnidadRegional")
+                        .WithMany()
+                        .HasForeignKey("UnidadRegionalId");
 
                     b.Navigation("Rol");
 
                     b.Navigation("Subestacion");
+
+                    b.Navigation("UnidadRegional");
                 });
 #pragma warning restore 612, 618
         }

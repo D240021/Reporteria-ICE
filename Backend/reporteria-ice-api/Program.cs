@@ -17,6 +17,10 @@ builder.Services.AddHttpClient();
 builder.Services.AddTransient<IGestionarUnidadRegionalCN, GestionarUnidadRegionalCN>();
 builder.Services.AddTransient<IGestionarUnidadRegionalDA, GestionarUnidadRegionalDA>();
 
+// Inyección de dependencias para Usuario
+builder.Services.AddTransient<IGestionarUsuarioCN, GestionarUsuarioCN>();
+builder.Services.AddTransient<IGestionarUsuarioDA, GestionarUsuarioDA>();
+
 // Inyección de dependencias para Subestaciones
 builder.Services.AddTransient<IGestionarSubestacionCN, GestionarSubestacionCN>();
 builder.Services.AddTransient<IGestionarSubestacionDA, GestionarSubestacionDA>();
@@ -25,13 +29,45 @@ builder.Services.AddTransient<IGestionarSubestacionDA, GestionarSubestacionDA>()
 builder.Services.AddTransient<IGestionarLineasTransmisionCN, GestionarLineasTransmisionCN>();
 builder.Services.AddTransient<IGestionarLineasTransmisionDA, GestionarLineasTransmisionDA>();
 
-// Inyección de dependencias para Técnicos
-builder.Services.AddTransient<IGestionarTecnicoCN, GestionarTecnicoCN>();
-builder.Services.AddTransient<IGestionarTecnicoDA, GestionarTecnicoDA>();
+// Inyección de dependencias para Informes
+builder.Services.AddTransient<IGestionarInformeCN, GestionarInformeCN>();
+builder.Services.AddTransient<IGestionarInformeDA, GestionarInformeDA>();
 
-// Inyección de dependencias para Supervisores
-builder.Services.AddTransient<IGestionarSupervisorCN, GestionarSupervisorCN>();
-builder.Services.AddTransient<IGestionarSupervisorDA, GestionarSupervisorDA>();
+// Inyección de dependencias para Teleprotección
+builder.Services.AddTransient<IGestionarTeleproteccionCN, GestionarTeleproteccionCN>();
+builder.Services.AddTransient<IGestionarTeleproteccionDA, GestionarTeleproteccionDA>();
+
+// Inyección de dependencias para Distancia de Falla
+builder.Services.AddTransient<IGestionarDistanciaDeFallaCN, GestionarDistanciaDeFallaCN>();
+builder.Services.AddTransient<IGestionarDistanciaDeFallaDA, GestionarDistanciaDeFallaDA>();
+
+// Inyección de dependencias para Corrientes de Falla
+builder.Services.AddTransient<IGestionarCorrientesDeFallaCN, GestionarCorrientesDeFallaCN>();
+builder.Services.AddTransient<IGestionarCorrientesDeFallaDA, GestionarCorrientesDeFallaDA>();
+
+// Inyección de dependencias para Tiempos de Disparo
+builder.Services.AddTransient<IGestionarTiemposDeDisparoCN, GestionarTiemposDeDisparoCN>();
+builder.Services.AddTransient<IGestionarTiemposDeDisparoDA, GestionarTiemposDeDisparoDA>();
+
+// Inyección de dependencias para Datos de Línea
+builder.Services.AddTransient<IGestionarDatosDeLineaCN, GestionarDatosDeLineaCN>();
+builder.Services.AddTransient<IGestionarDatosDeLineaDA, GestionarDatosDeLineaDA>();
+
+// Inyección de dependencias para Datos Generales
+builder.Services.AddTransient<IGestionarDatosGeneralesCN, GestionarDatosGeneralesCN>();
+builder.Services.AddTransient<IGestionarDatosGeneralesDA, GestionarDatosGeneralesDA>();
+
+// Inyección de dependencias para Reportes
+builder.Services.AddTransient<IGestionarReporteCN, GestionarReporteCN>();
+builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
+
+// Inyección de dependencias para el servicio de dominio de Reporte con Informes
+builder.Services.AddTransient<IGestionarReporteConInformesService, GestionarReporteConInformesService>();
+
+// Inyección de dependencias para Roles
+builder.Services.AddTransient<IGestionarRolCN, GestionarRolCN>();
+builder.Services.AddTransient<IGestionarRolDA, GestionarRolDA>();
+
 
 // Conexión a BD
 builder.Services.AddDbContext<ICE_Context>(options =>

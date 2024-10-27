@@ -15,40 +15,36 @@ namespace ICE.Capa_Datos.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public byte[] MapaDeDescargas { get; set; }
+        public byte[]? MapaDeDescargas { get; set; }
 
-        [Required]
         [StringLength(500)]
-        public string Observaciones { get; set; }
+        public string? Observaciones { get; set; }
 
         // Relaciones con Informes
-        public int InformeV1Id { get; set; }
         [ForeignKey("InformeV1Id")]
+        public int InformeV1Id { get; set; }
         public InformeDA InformeV1 { get; set; }
-
-        public int InformeV2Id { get; set; }
         [ForeignKey("InformeV2Id")]
+        public int InformeV2Id { get; set; }
         public InformeDA InformeV2 { get; set; }
-
-        public int InformeV3Id { get; set; }
         [ForeignKey("InformeV3Id")]
+        public int InformeV3Id { get; set; }
         public InformeDA InformeV3 { get; set; }
-
-        public int InformeV4Id { get; set; }
         [ForeignKey("InformeV4Id")]
+        public int InformeV4Id { get; set; }
         public InformeDA InformeV4 { get; set; }
 
         [Required]
         public int Estado { get; set; }
 
         // Relación con Usuario Supervisor
-        public int UsuarioSupervisorId { get; set; }
         [ForeignKey("UsuarioSupervisorId")]
+        public int UsuarioSupervisorId { get; set; }
         public UsuarioDA UsuarioSupervisor { get; set; }
 
         // Relación con Técnico de Línea
-        public int TecnicoLineaId { get; set; }
         [ForeignKey("TecnicoLineaId")]
+        public int TecnicoLineaId { get; set; }
         public UsuarioDA TecnicoLinea { get; set; }
     }
 }
