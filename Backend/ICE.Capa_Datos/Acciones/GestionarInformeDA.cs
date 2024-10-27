@@ -14,7 +14,7 @@ namespace ICE.Capa_Datos.Acciones
         private readonly IGestionarTeleproteccionDA _gestionarTeleproteccionDA;
         private readonly IGestionarDistanciaDeFallaDA _gestionarDistanciaDeFallaDA;
         private readonly IGestionarCorrientesDeFallaDA _gestionarCorrientesDeFallaDA;
-        private readonly IGestionarTiemposDeDisparoDA _gestionarTiemposDeDisparoDA;        
+        private readonly IGestionarTiemposDeDisparoDA _gestionarTiemposDeDisparoDA;
         private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
         private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
 
@@ -25,7 +25,7 @@ namespace ICE.Capa_Datos.Acciones
             IGestionarCorrientesDeFallaDA gestionarCorrientesDeFallaDA,
             IGestionarTiemposDeDisparoDA gestionarTiemposDeDisparoDA,
             IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
-            IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)            
+            IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)
         {
             _context = context;
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
@@ -164,18 +164,84 @@ namespace ICE.Capa_Datos.Acciones
                 return null;
             }
 
+            //return informeBD;
+
+
+            // Mapear los datos desde InformeDA a Informe
             return new Informe
             {
                 Id = informeBD.Id,
                 Tipo = informeBD.Tipo,
                 SubestacionId = informeBD.SubestacionId,
                 LineaTransmisionId = informeBD.LineaTransmisionId,
+
                 DatosDeLineaId = informeBD.DatosDeLineaId,
+                DatosDeLinea = informeBD.DatosDeLinea != null ? new DatosDeLinea
+                {
+                    Id = informeBD.DatosDeLinea.Id,
+                    OT = informeBD.DatosDeLinea.OT,
+                    Aviso = informeBD.DatosDeLinea.Aviso,
+                    SAP = informeBD.DatosDeLinea.SAP,
+                    Distancia = informeBD.DatosDeLinea.Distancia,
+                    Funcion = informeBD.DatosDeLinea.Funcion,
+                    Zona = informeBD.DatosDeLinea.Zona
+                } : null,
+
                 DatosGeneralesId = informeBD.DatosGeneralesId,
+                DatosGenerales = informeBD.DatosGenerales != null ? new DatosGenerales
+                {
+                    Id = informeBD.DatosGenerales.Id,
+                    Evento = informeBD.DatosGenerales.Evento,
+                    Fecha = informeBD.DatosGenerales.Fecha,
+                    Hora = informeBD.DatosGenerales.Hora,
+                    Subestacion = informeBD.DatosGenerales.Subestacion,
+                    LT = informeBD.DatosGenerales.LT,
+                    Equipo = informeBD.DatosGenerales.Equipo
+                } : null,
+
                 TeleproteccionId = informeBD.TeleproteccionId,
+                Teleproteccion = informeBD.Teleproteccion != null ? new Teleproteccion
+                {
+                    Id = informeBD.Teleproteccion.Id,
+                    TX_TEL = informeBD.Teleproteccion.TX_TEL,
+                    RX_TEL = informeBD.Teleproteccion.RX_TEL,
+                    TiempoMPLS = informeBD.Teleproteccion.TiempoMPLS
+                } : null,
+
                 DistanciaDeFallaId = informeBD.DistanciaDeFallaId,
+                DistanciaDeFalla = informeBD.DistanciaDeFalla != null ? new DistanciaDeFalla
+                {
+                    Id = informeBD.DistanciaDeFalla.Id,
+                    DistanciaKM = informeBD.DistanciaDeFalla.DistanciaKM,
+                    DistanciaPorcentaje = informeBD.DistanciaDeFalla.DistanciaPorcentaje,
+                    DistanciaReportada = informeBD.DistanciaDeFalla.DistanciaReportada,
+                    DistanciaDobleTemporal = informeBD.DistanciaDeFalla.DistanciaDobleTemporal,
+                    Error = informeBD.DistanciaDeFalla.Error,
+                    Error_Doble = informeBD.DistanciaDeFalla.Error_Doble
+                } : null,
+
                 TiemposDeDisparoId = informeBD.TiemposDeDisparoId,
+                TiemposDeDisparo = informeBD.TiemposDeDisparo != null ? new TiemposDeDisparo
+                {
+                    Id = informeBD.TiemposDeDisparo.Id,
+                    R = informeBD.TiemposDeDisparo.R,
+                    S = informeBD.TiemposDeDisparo.S,
+                    T = informeBD.TiemposDeDisparo.T,
+                    Reserva = informeBD.TiemposDeDisparo.Reserva
+                } : null,
+
                 CorrientesDeFallaId = informeBD.CorrientesDeFallaId,
+                CorrientesDeFalla = informeBD.CorrientesDeFalla != null ? new CorrientesDeFalla
+                {
+                    Id = informeBD.CorrientesDeFalla.Id,
+                    RealIR = informeBD.CorrientesDeFalla.RealIR,
+                    RealIS = informeBD.CorrientesDeFalla.RealIS,
+                    RealIT = informeBD.CorrientesDeFalla.RealIT,
+                    AcumuladaR = informeBD.CorrientesDeFalla.AcumuladaR,
+                    AcumuladaS = informeBD.CorrientesDeFalla.AcumuladaS,
+                    AcumuladaT = informeBD.CorrientesDeFalla.AcumuladaT
+                } : null,
+
                 Estado = informeBD.Estado
             };
         }
