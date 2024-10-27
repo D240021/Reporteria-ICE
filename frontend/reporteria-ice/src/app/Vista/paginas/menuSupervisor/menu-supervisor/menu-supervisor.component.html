@@ -1,1 +1,54 @@
-<p>Menú Supervisor</p>
+<div>
+    <header>
+        <h1>BIENVENIDO, SUPERVISOR MARIO VARGAS</h1>
+        <button mat-flat-button class="btn-salir" routerLink="">SALIR</button>
+    </header>
+
+    <section class="cards-reportes">
+        <!-- Reportes Pendientes -->
+        <mat-card class="card">
+            <mat-card-header>
+                <p>PENDIENTES</p>
+            </mat-card-header>
+            <mat-card-content class="contenido-cards">
+                <div class="reporte-item">
+                    <p><strong>Guápiles - San José</strong></p>
+                    <p>ID Reporte: 146621F</p>
+                </div>
+                <div class="reporte-item">
+                    <p><strong>Río Macho - Paraíso</strong></p>
+                    <p>ID Reporte: 9549T</p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button class="btn-ver-mas">VER MÁS</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <!-- Reportes Pasados -->
+        <mat-card class="card">
+            <mat-card-header>
+                <p>PASADOS</p>
+            </mat-card-header>
+            <mat-card-content class="contenido-cards">
+                <div class="reporte-item">
+                    <p><strong>Desamparados - Río Macho</strong></p>
+                    <p>1 de Junio de 2024</p>
+                </div>
+                <div class="reporte-item">
+                    <p><strong>Turrialba - Río Macho</strong></p>
+                    <p>5 de Marzo de 2024</p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button class="btn-ver-mas">VER MÁS</button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+    <footer>
+        <p>Instituto Costarricense de Electricidad</p>
+        <button mat-flat-button routerLink="">SALIR</button>
+    </footer>
+</div>
+

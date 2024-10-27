@@ -1,0 +1,44 @@
+<div>
+
+    <h1>Editar Reporte "Falla Rio Macho - Desamparados"</h1>
+
+    <!-- Formulario de edición de reporte -->
+    <form [formGroup]="contenedorFormulario">
+
+        <section>
+            <label>MAPA DE DESCARGAS:</label>
+            <div class="input-group">
+                <input type="file" id="mapaDescargas" class="form-control" [formControl]="contenedorFormulario.controls.mapaDescargas">
+                <label for="mapaDescargas">Subir archivo</label>
+            </div>
+        </section>
+
+        <section>
+            <label>CUADRILLA</label>
+            <select class="form-control" [formControl]="contenedorFormulario.controls.cuadrilla">
+                <option value="Subestación Rio Macho">Subestación Rio Macho</option>
+            </select>
+        </section>
+
+        <section>
+            <label>SUBESTACIÓN</label>
+            <select class="form-control" [formControl]="contenedorFormulario.controls.subestacion">
+                <option value="Subestación Desamparados">Subestación Desamparados</option>
+            </select>
+        </section>
+
+        <section>
+            <label>OBSERVACIONES</label>
+            <textarea class="form-control" rows="5" [formControl]="contenedorFormulario.controls.observaciones"></textarea>
+        </section>
+
+        <!-- Botones -->
+        <div class="contenedor-botones">
+            <button mat-stroked-button type="button" (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+            <button mat-stroked-button type="submit" [disabled]="contenedorFormulario.invalid">ACTUALIZAR</button>
+            <button mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+        </div>
+
+    </form>
+
+</div>
