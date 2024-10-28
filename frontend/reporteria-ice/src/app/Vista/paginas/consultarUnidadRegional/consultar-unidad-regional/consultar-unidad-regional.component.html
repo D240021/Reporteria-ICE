@@ -16,7 +16,7 @@
 
           <label for="filtro" class="me-2">Valor:</label>
           <input type="text" id="filtro" class="form-control me-3"
-          [formControl]="contenedorFormulario.controls.valor">
+                 [formControl]="contenedorFormulario.controls.valor">
 
         </div>
 
@@ -30,7 +30,9 @@
             <option value="nombre">Subestación</option>
           </select>
           <button class="btn btn-buscar "
-          [disabled]="contenedorFormulario.invalid">Buscar</button>
+                  [disabled]="contenedorFormulario.invalid">
+            Buscar
+          </button>
         </div>
       </form>
 
@@ -68,11 +70,11 @@
           <tr mat-row *matRowDef="let row; columns: atributosUnidad;"></tr>
         </table>
 
-        <!-- Boton -->
-        <div class="col-md-6">
-          <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
-        </div>
+      </div>
 
+      <!-- Boton -->
+      <div class="col-md-6">
+        <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
       </div>
 
 

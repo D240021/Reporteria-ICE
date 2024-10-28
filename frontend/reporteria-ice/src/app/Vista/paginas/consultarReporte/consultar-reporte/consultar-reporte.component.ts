@@ -42,18 +42,17 @@ export class ConsultarReporteComponent {
       lineaTransmision: 'Línea 3'
     }
   ];
- 
 
-  // Atributos de la tabla de reportes
+
   public atributosReporte = ['IDENTIFICADOR', 'FECHA', 'SUBESTACIONES', 'LÍNEA DE TRANSMISIÓN'];
 
-  // Inyectamos FormBuilder para el formulario
+
   private formBuilder = inject(FormBuilder);
 
-  // Creamos el formulario con validaciones
+
   public contenedorFormulario = this.formBuilder.group({
     valor: ['', { validators: [Validators.required] }],
     filtro: ['', { validators: [Validators.required] }]
   });
-  
+
 }

@@ -26,10 +26,15 @@ h2 {
     background: var(--color-terciario-fondo)
   }
 
-.cont-tabla table {
+
+.cont-tabla {
   width: 100%;
-  overflow-block: hidden
+  overflow-x: auto;
 }
+
+  .cont-tabla table {
+    width: 100%;
+  }
 
   .cont-tabla table th {
     background: #FFFFFF;
