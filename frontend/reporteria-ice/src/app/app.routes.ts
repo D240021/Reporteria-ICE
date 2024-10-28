@@ -8,6 +8,7 @@ import { AgregarUnidadRegionalComponent } from './Vista/paginas/agregarUnidadReg
 import { AgregarSubestacionComponent } from './Vista/paginas/agregarSubestacion/agregar-subestacion/agregar-subestacion.component';
 import { AgregarLineaTransmisionComponent } from './Vista/paginas/agregarLineaTransmision/agregar-linea-transmision/agregar-linea-transmision.component';
 import { ConsultarSupervisorComponent } from './Vista/paginas/consultarSupervisor/consultar-supervisor/consultar-supervisor.component';
+import { ConsultarReporteComponent } from './Vista/paginas/consultarReporte/consultar-reporte/consultar-reporte.component';
 import { ConsultarUnidadRegionalComponent } from './Vista/paginas/consultarUnidadRegional/consultar-unidad-regional/consultar-unidad-regional.component';
 import { EditarLineaTransmisionComponent } from './Vista/paginas/editarLineaTransmision/editar-linea-transmision/editar-linea-transmision.component';
 import { ConsultarLineaTransmisionComponent } from './Vista/paginas/consultarLineaTransmision/consultar-linea-transmision/consultar-linea-transmision.component';
@@ -15,6 +16,7 @@ import { EditarSupervisorComponent } from './Vista/paginas/editarSupervisor/edit
 import { EditarSubestacionComponent } from './Vista/paginas/editarSubestacion/editar-subestacion/editar-subestacion.component';
 import { CrearReporteComponent } from './Vista/paginas/crearReporte/crear-reporte/crear-reporte.component';
 import { MenuSupervisorComponent } from './Vista/paginas/menuSupervisor/menu-supervisor/menu-supervisor.component';
+import { EditarReporteComponent } from './Vista/paginas/editarReporte/editar-reporte/editar-reporte.component';
 import { EditarReporteTLTComponent } from './Vista/paginas/editarReporteTLT/editar-reporte-tlt/editar-reporte-tlt.component';
 
 export const routes: Routes = [
@@ -52,6 +54,9 @@ export const routes: Routes = [
         path: 'consultar-unidad-regional', component: ConsultarUnidadRegionalComponent
     },
     {
+        path: 'consultar-reporte', component: ConsultarReporteComponent
+    },
+    {
         path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent
     },
     {
@@ -70,6 +75,9 @@ export const routes: Routes = [
         path: 'menu-supervisor', component: MenuSupervisorComponent
     },
     {
-        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+        path: 'editar-reporte', component: EditarReporteComponent
     },
+    {
+        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+    }
 ];

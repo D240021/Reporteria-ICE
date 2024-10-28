@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'menu-supervisor',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule, RouterLink],
   templateUrl: './menu-supervisor.component.html',
-  styleUrl: './menu-supervisor.component.css'
+  styleUrls: ['./menu-supervisor.component.css']
 })
 export class MenuSupervisorComponent {
 
