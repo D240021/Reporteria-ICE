@@ -19,7 +19,7 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             }
 
             // Validación del Identificador
-            if (lineaTransmision.Identificador <= 0)
+            if (lineaTransmision.Identificador.Length <= 0)
             {
                 return (false, "El identificador de la línea de transmisión debe ser mayor que cero.");
             }

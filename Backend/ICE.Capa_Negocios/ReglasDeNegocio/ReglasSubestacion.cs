@@ -19,7 +19,7 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             }
 
             // Validación del Identificador
-            if (subestacion.Identificador <= 0)
+            if (subestacion.Identificador.Length <= 0)
             {
                 return (false, "El identificador de la subestación debe ser mayor que cero.");
             }

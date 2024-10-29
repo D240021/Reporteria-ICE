@@ -19,6 +19,12 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<int> RegistrarUsuario(Usuario usuario)
         {
+            var existeUsuario = await _context.Usuarios.AnyAsync(u => u.NombreUsuario == usuario.NombreUsuario || u.Identificador == usuario.Identificador);
+            if (existeUsuario)
+            {
+                throw new Exception("El nombre de usuario o el identificador ya están en uso.");
+            }
+
             var usuarioDA = new UsuarioDA
             {
                 Contrasenia = usuario.Contrasenia,
@@ -27,9 +33,9 @@ namespace ICE.Capa_Datos.Acciones
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
                 Identificador = usuario.Identificador,
-                RollId = usuario.RollId,
-                SubestacionId = usuario.SubestacionId == 0 ? (int?)null : usuario.SubestacionId,  
-                UnidadRegionalId = usuario.UnidadRegionalId == 0 ? (int?)null : usuario.UnidadRegionalId  
+                Rol = usuario.Rol,
+                SubestacionId = usuario.SubestacionId == 0 ? (int?)null : usuario.SubestacionId,
+                UnidadRegionalId = usuario.UnidadRegionalId == 0 ? (int?)null : usuario.UnidadRegionalId
             };
 
             _context.Usuarios.Add(usuarioDA);
@@ -55,7 +61,7 @@ namespace ICE.Capa_Datos.Acciones
                 Nombre = usuarioBD.Nombre,
                 Apellido = usuarioBD.Apellido,
                 Identificador = usuarioBD.Identificador,
-                RollId = usuarioBD.RollId,
+                Rol = usuarioBD.Rol,
                 SubestacionId = usuarioBD.SubestacionId,
                 UnidadRegionalId = usuarioBD.UnidadRegionalId
             };
@@ -77,7 +83,7 @@ namespace ICE.Capa_Datos.Acciones
                     Nombre = usuarioBD.Nombre,
                     Apellido = usuarioBD.Apellido,
                     Identificador = usuarioBD.Identificador,
-                    RollId = usuarioBD.RollId,
+                    Rol = usuarioBD.Rol,
                     SubestacionId = usuarioBD.SubestacionId,
                     UnidadRegionalId = usuarioBD.UnidadRegionalId
                 });
@@ -91,14 +97,19 @@ namespace ICE.Capa_Datos.Acciones
             var usuarioBD = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
             if (usuarioBD != null)
             {
+                var existeUsuario = await _context.Usuarios.AnyAsync(u => (u.NombreUsuario == usuario.NombreUsuario || u.Identificador == usuario.Identificador) && u.Id != id);
+                if (existeUsuario)
+                {
+                    throw new Exception("El nombre de usuario o el identificador ya están en uso por otro usuario.");
+                }
+
                 usuarioBD.Contrasenia = usuario.Contrasenia;
                 usuarioBD.NombreUsuario = usuario.NombreUsuario;
                 usuarioBD.Correo = usuario.Correo;
                 usuarioBD.Nombre = usuario.Nombre;
                 usuarioBD.Apellido = usuario.Apellido;
                 usuarioBD.Identificador = usuario.Identificador;
-                usuarioBD.RollId = usuario.RollId;
-
+                usuarioBD.Rol = usuario.Rol;
                 usuarioBD.SubestacionId = usuario.SubestacionId == 0 ? (int?)null : usuario.SubestacionId;
                 usuarioBD.UnidadRegionalId = usuario.UnidadRegionalId == 0 ? (int?)null : usuario.UnidadRegionalId;
 

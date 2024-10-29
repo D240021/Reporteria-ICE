@@ -78,6 +78,12 @@ export const routes: Routes = [
     },
     {
         path: 'editar-reporte', component: EditarReporteComponent
+<<<<<<< HEAD
+    },
+    {
+        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+    }
+=======
     },
     {
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
@@ -90,4 +96,5 @@ export const routes: Routes = [
     }
 
     
+>>>>>>> DanielBranch
 ];
