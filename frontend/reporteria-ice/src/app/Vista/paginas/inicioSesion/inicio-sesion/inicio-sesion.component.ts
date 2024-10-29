@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
+import { usuarioRoles } from '../../../../Util/Enum/Roles';
 
 @Component({
   selector: 'inicio-sesion',
@@ -25,25 +26,23 @@ export class InicioSesionComponent {
     contrasenia: ['']
   });
 
-  usuario = {
-    ADMIN: 'ADMIN',
-    TPM: 'TPM',
-    TLT: 'TLT',
-    SPRV: 'SPRV'
-  };
+
+
 
   redireccionarUsuario() {
 
-    const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
-    if (tipoUsuario === this.usuario.ADMIN.toLocaleLowerCase()) {
-      this.router.navigate(['/menu-administrador']);
-    }else if(tipoUsuario === this.usuario.TPM.toLocaleLowerCase()){
-      this.router.navigate(['/crear-reporte']);
-    }else if(tipoUsuario === this.usuario.SPRV.toLocaleLowerCase()){
-      this.router.navigate(['/menu-supervisor']);
-    }else if(tipoUsuario === this.usuario.TLT.toLocaleLowerCase()){
-      this.router.navigate(['/editar-reporte-tlt']);
-    }
+    // const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
+    // if (tipoUsuario === usuarioRoles.ADMIN.toLocaleLowerCase()) {
+    //   this.router.navigate(['/menu-administrador']);
+    // }else if(tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()){
+    //   this.router.navigate(['/crear-reporte']);
+    // }else if(tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()){
+    //   this.router.navigate(['/menu-supervisor']);
+    // }else if(tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()){
+    //   this.router.navigate(['/editar-reporte-tlt']);
+    // }
+    const valor = this.contenedorFormulario.value.nombreUsuario || '';
+    console.log(this.encriptacion.encriptarAES(valor));
   }
 
 }

@@ -20,6 +20,8 @@ import { EditarReporteComponent } from './Vista/paginas/editarReporte/editar-rep
 import { EditarReporteTLTComponent } from './Vista/paginas/editarReporteTLT/editar-reporte-tlt/editar-reporte-tlt.component';
 import { RegistrarOperarioComponent } from './Vista/paginas/registrarOperario/registrar-operario/registrar-operario.component';
 import { ConsultarOperarioComponent } from './Vista/paginas/consultar-operario/consultar-operario/consultar-operario.component';
+import { NoAutorizadoComponent } from './Vista/paginas/noAutorizado/no-autorizado/no-autorizado.component';
+import { esAdminGuard } from './Seguridad/Guards/es-admin.guard';
 
 export const routes: Routes = [
     {
@@ -29,7 +31,7 @@ export const routes: Routes = [
         path: '', redirectTo: 'inicio-sesion', pathMatch: 'full'
     },
     {
-        path: 'menu-administrador', component: MenuAdministradorComponent
+        path: 'menu-administrador', component: MenuAdministradorComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'editar-tecnico', component: EditarTecnicoComponent
@@ -41,19 +43,19 @@ export const routes: Routes = [
         path: 'agregar-supervisor', component: AgregarSupervisorComponent
     },
     {
-        path: 'agregar-unidad-regional', component: AgregarUnidadRegionalComponent
+        path: 'agregar-unidad-regional', component: AgregarUnidadRegionalComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'agregar-subestacion', component: AgregarSubestacionComponent
+        path: 'agregar-subestacion', component: AgregarSubestacionComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'agregar-linea-transmision', component: AgregarLineaTransmisionComponent
+        path: 'agregar-linea-transmision', component: AgregarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'consultar-supervisor', component: ConsultarSupervisorComponent
     },
     {
-        path: 'consultar-unidad-regional', component: ConsultarUnidadRegionalComponent
+        path: 'consultar-unidad-regional', component: ConsultarUnidadRegionalComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'consultar-reporte', component: ConsultarReporteComponent
@@ -62,7 +64,7 @@ export const routes: Routes = [
         path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent
     },
     {
-        path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent
+        path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'editar-supervisor', component: EditarSupervisorComponent
@@ -84,10 +86,13 @@ export const routes: Routes = [
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
     },
     {
-        path: 'registrar-operario', component: RegistrarOperarioComponent
+        path: 'registrar-operario', component: RegistrarOperarioComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'consultar-operario', component: ConsultarOperarioComponent
+        path: 'consultar-operario', component: ConsultarOperarioComponent, canActivate: [esAdminGuard]
+    },
+    {
+        path: 'no-autorizado', component: NoAutorizadoComponent
     }
 
 ];

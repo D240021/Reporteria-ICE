@@ -8,7 +8,7 @@ export class AESService {
 
   constructor() { }
 
-  private llavePrivada = 'tu_clave_secreta';
+  private llavePrivada = '1234567890123456';
 
   
   encriptarAES(datos: string): string {
