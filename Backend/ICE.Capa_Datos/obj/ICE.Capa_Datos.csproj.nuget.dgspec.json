@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj": {}
+    "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj": {}
   },
   "projects": {
-    "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
         "projectName": "ICE.Capa_Datos",
-        "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
-        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-        "outputPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -33,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
-                "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj"
+              "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj"
               }
             }
           }
@@ -91,25 +87,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj",
         "projectName": "ICE.Capa_Negocios",
-        "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj",
-        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-        "outputPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -124,8 +116,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
-                "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj"
+              "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
+                "projectPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj"
               }
             }
           }
@@ -160,25 +152,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
+    "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj",
         "projectName": "ICE.Capa_Dominio",
-        "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj",
-        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-        "outputPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\obj\\",
+        "projectPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\Desktop\\Proyectos\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -225,7 +213,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

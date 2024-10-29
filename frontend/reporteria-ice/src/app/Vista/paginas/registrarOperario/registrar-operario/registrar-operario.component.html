@@ -1,0 +1,105 @@
+<div>
+
+    <div class="contenedor-principal">
+
+        <div></div>
+
+        <div class="contenedor-form">
+
+            <form [formGroup]="contenedorFormulario">
+                <h2>Agregar Operario</h2>
+
+                <section class="row mb-3 align-items-center" appearance="outline">
+                    <label class="col-md-4">IDENTIFICADOR</label>
+                    <div class="col-md-8">
+                        <input matInput type="text" placeholder="Inserte un identificador único"
+                            [formControl]="contenedorFormulario.controls.identificador">
+                    </div>
+                </section>
+
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">NOMBRE DE USUARIO</label>
+                    <div class="col-md-8">
+                        <input type="text" placeholder="Inserte un nombre de usuario único"
+                            [formControl]="contenedorFormulario.controls.nombreUsuario">
+                    </div>
+                </section>
+
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">CONTRASEÑA</label>
+                    <div class="col-md-8">
+                        <input type="password" placeholder="Inserte una contraseña"
+                            [formControl]="contenedorFormulario.controls.contrasenia">
+                    </div>
+                </section>
+
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">CORREO</label>
+                    <div class="col-md-8">
+                        <input type="text" placeholder="Inserte el nombre"
+                            [formControl]="contenedorFormulario.controls.correo">
+                    </div>
+                </section>
+
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">NOMBRE</label>
+                    <div class="col-md-8">
+                        <input type="text" placeholder="Inserte los apellidos"
+                            [formControl]="contenedorFormulario.controls.nombre">
+                    </div>
+                </section>
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">APELLIDOS</label>
+                    <div class="col-md-8">
+                        <input type="text" placeholder="Inserte los apellidos"
+                            [formControl]="contenedorFormulario.controls.apellidos">
+                    </div>
+                </section>
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">OCUPACIÓN</label>
+                    <div class="col-md-8">
+                        <select [formControl]="contenedorFormulario.controls.tipo">
+                          <option value="Técnico de Protección y Medición">Técnico de Protección y Medición</option>
+                          <option value="Técnico de Línea de Transmisión">Técnico de Línea de Transmisión</option>
+                          <option value="Supervisor">Supervisor</option>
+                        </select>
+                      </div>
+                </section>
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">UNIDAD REGIONAL A ASIGNAR</label>
+                    <div class="col-md-8">
+                        <select [formControl]="contenedorFormulario.controls.unidadRegional">
+                          <option value="SJ">SJ</option>
+                          <option value="PZ">PZ</option>
+                        </select>
+                      </div>
+                </section>
+                <div class="contenedor-botones row mb-3 align-items-center">
+                  
+                  <div class="col-md-3 col-12">
+                    <button class="btn btn-volver" type="button"
+                            routerLink="/menu-administrador">
+                      VOLVER
+                    </button>
+                  </div>
+
+                  <div class="col-md-9 col-12">
+                    <button class="btn btn-limpiar"  type="button"
+                            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+                      LIMPIAR
+                    </button>
+                    <button class="btn btn-agregar" type="submit"
+                            [disabled]="contenedorFormulario.invalid">
+                      GUARDAR
+                    </button>
+                  </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+

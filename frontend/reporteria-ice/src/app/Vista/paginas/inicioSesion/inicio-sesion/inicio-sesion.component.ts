@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
 
 @Component({
   selector: 'inicio-sesion',
@@ -16,10 +17,10 @@ export class InicioSesionComponent {
 
 
   private router = inject(Router);
-
   private formBuilder = inject(FormBuilder);
+  private encriptacion = inject(AESService);
 
-  form = this.formBuilder.group({
+  public contenedorFormulario = this.formBuilder.group({
     nombreUsuario: ['', { validators: [Validators.required] }],
     contrasenia: ['']
   });
@@ -31,14 +32,9 @@ export class InicioSesionComponent {
     SPRV: 'SPRV'
   };
 
-  enviarAdmin() {
-    // this.router.navigate(['/menu-administrador']);
-    console.log(this.form.value.nombreUsuario);
-  }
-
   redireccionarUsuario() {
 
-    const tipoUsuario = this.form.value?.nombreUsuario?.toLocaleLowerCase();
+    const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
     if (tipoUsuario === this.usuario.ADMIN.toLocaleLowerCase()) {
       this.router.navigate(['/menu-administrador']);
     }else if(tipoUsuario === this.usuario.TPM.toLocaleLowerCase()){

@@ -909,18 +909,12 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
         },
         "runtime": {
-          "ICE.Capa_Datos.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ICE.Capa_Datos.dll": {}
         }
       },
       "ICE.Capa_Dominio/1.0.0": {
         "runtime": {
-          "ICE.Capa_Dominio.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ICE.Capa_Dominio.dll": {}
         }
       },
       "ICE.Capa_Integracion/1.0.0": {
@@ -929,10 +923,7 @@
           "ICE.Capa_Negocios": "1.0.0"
         },
         "runtime": {
-          "ICE.Capa_Integracion.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ICE.Capa_Integracion.dll": {}
         }
       },
       "ICE.Capa_Negocios/1.0.0": {
@@ -940,10 +931,7 @@
           "ICE.Capa_Dominio": "1.0.0"
         },
         "runtime": {
-          "ICE.Capa_Negocios.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ICE.Capa_Negocios.dll": {}
         }
       }
     }

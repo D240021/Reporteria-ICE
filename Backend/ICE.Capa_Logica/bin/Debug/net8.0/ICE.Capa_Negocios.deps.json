@@ -16,10 +16,7 @@
       },
       "ICE.Capa_Dominio/1.0.0": {
         "runtime": {
-          "ICE.Capa_Dominio.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ICE.Capa_Dominio.dll": {}
         }
       }
     }

@@ -18,3 +18,23 @@ C:\UCR\2024 - CICLO II\Análisis y Diseño de Software\Proyecto\Proyecto_Program
 C:\UCR\2024 - CICLO II\Análisis y Diseño de Software\Proyecto\Proyecto_Programado\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.pdb
 C:\UCR\2024 - CICLO II\Análisis y Diseño de Software\Proyecto\Proyecto_Programado\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.genruntimeconfig.cache
 C:\UCR\2024 - CICLO II\Análisis y Diseño de Software\Proyecto\Proyecto_Programado\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ref\ICE.Capa_Datos.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Datos.deps.json
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Datos.runtimeconfig.json
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Datos.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Datos.pdb
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Dominio.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Negocios.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Negocios.pdb
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\bin\Debug\net8.0\ICE.Capa_Dominio.pdb
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.csproj.AssemblyReference.cache
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.sourcelink.json
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa.0BFD8D63.Up2Date
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\refint\ICE.Capa_Datos.dll
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.pdb
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ICE.Capa_Datos.genruntimeconfig.cache
+C:\Users\Daniel\Desktop\Proyectos\Reporteria-ICE\Backend\ICE.Capa_Datos\obj\Debug\net8.0\ref\ICE.Capa_Datos.dll
