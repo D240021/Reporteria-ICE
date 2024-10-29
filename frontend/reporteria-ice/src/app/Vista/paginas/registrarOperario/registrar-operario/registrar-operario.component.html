@@ -68,9 +68,13 @@
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">UNIDAD REGIONAL A ASIGNAR</label>
                     <div class="col-md-8">
-                        <select [formControl]="contenedorFormulario.controls.unidadRegional">
-                          <option value="SJ">SJ</option>
-                          <option value="PZ">PZ</option>
+                        <select [formControl]="contenedorFormulario.controls.unidadRegionalId" >
+                            @for (unidadRegional of unidadesRegionales; track $index) {
+                                <option value={{unidadRegional.id}}>
+                                    <span>{{unidadRegional.identificador}}</span>
+                                    {{unidadRegional.nombreUbicacion}}
+                                </option>
+                            }
                         </select>
                       </div>
                 </section>
