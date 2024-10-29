@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\reporteria-ice-api.props" />
-</Project>
