@@ -25,10 +25,6 @@ namespace reporteria_ice_api.Controllers
             {
                 UnidadRegional unidadRegional = UnidadRegionalDTOMapper.ConvertirDTOAUnidadRegional(unidadRegionalDTO);
                 var respuesta = await gestionarUnidadRegionalCN.RegistrarUnidadRegional(unidadRegional);
-                if (!respuesta)
-                {
-                    return BadRequest("Error al registrar la unidad regional.");
-                }
                 return Ok(respuesta);
             }
             catch (Exception e)
@@ -77,12 +73,6 @@ namespace reporteria_ice_api.Controllers
             {
                 UnidadRegional unidadRegional = UnidadRegionalDTOMapper.ConvertirDTOAUnidadRegional(unidadRegionalDTO);
                 var respuesta = await gestionarUnidadRegionalCN.ActualizarUnidadRegional(id, unidadRegional);
-
-                if (!respuesta)
-                {
-                    return BadRequest("Error al actualizar la unidad regional.");
-                }
-
                 return Ok(respuesta);
             }
             catch (Exception e)

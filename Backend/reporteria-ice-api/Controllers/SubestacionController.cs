@@ -27,10 +27,6 @@ namespace reporteria_ice_api.Controllers
             {
                 Subestacion subestacion = SubestacionDTOMapper.ConvertirDTOASubestacion(subestacionDTO);
                 var respuesta = await _gestionarSubestacionCN.RegistrarSubestacion(subestacion);
-                if (!respuesta)
-                {
-                    return BadRequest("Error al registrar la subestación.");
-                }
                 return Ok(respuesta);
             }
             catch (Exception e)

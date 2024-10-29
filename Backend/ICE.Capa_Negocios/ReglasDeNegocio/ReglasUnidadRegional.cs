@@ -20,7 +20,7 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             }
 
             // Validación del Identificador
-            if (unidadRegional.Identificador <= 0)
+            if (unidadRegional.Identificador.Length <= 0)
             {
                 return (false, "El identificador de la unidad regional debe ser mayor que cero.");
             }

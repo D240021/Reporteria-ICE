@@ -27,13 +27,9 @@ namespace reporteria_ice_api.Controllers
             {
                 var lineaTransmision = LineaTransmisionDTOMapper.ConvertirDTOALineaTransmision(lineaTransmisionDTO);
                 var respuesta = await _gestionarLineasTransmisionCN.RegistrarLineaTransmision(lineaTransmision);
-                if (!respuesta)
-                {
-                    return BadRequest("Error al registrar la línea de transmisión.");
-                }
                 return Ok(respuesta);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -87,7 +83,7 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(respuesta);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

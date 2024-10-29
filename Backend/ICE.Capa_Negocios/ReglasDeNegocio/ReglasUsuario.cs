@@ -31,13 +31,13 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "La contraseña debe tener al menos 8 caracteres.");
             }
 
-            if (usuario.Identificador <= 0)
+            if (usuario.Identificador.Length <= 0)
             {
                 Console.WriteLine("El identificador debe ser mayor que cero.");
                 return (false, "El identificador debe ser mayor que cero.");
             }
 
-            if (usuario.RollId <= 0)
+            if (usuario.Rol.Length <= 0)
             {
                 Console.WriteLine("El rol no es válido.");
                 return (false, "El rol no es válido.");
