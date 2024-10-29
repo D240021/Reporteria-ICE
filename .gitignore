@@ -1,3 +1,2 @@
-# Ignorar carpetas de compilación en bin y obj
 Backend/**/bin/
 Backend/**/obj/
