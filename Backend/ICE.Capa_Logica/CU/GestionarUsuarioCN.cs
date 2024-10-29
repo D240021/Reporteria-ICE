@@ -39,5 +39,13 @@ namespace ICE.Capa_Negocios.CU
         {
             return await _gestionarUsuarioDA.EliminarUsuario(id);
         }
+
+        public async Task<Usuario> AutenticarUsuario(string nombreUsuario, string contraseniaCifrada)
+        {
+            return await _gestionarUsuarioDA.AutenticarUsuario(nombreUsuario, contraseniaCifrada);
+        }
+
+
+
     }
 }

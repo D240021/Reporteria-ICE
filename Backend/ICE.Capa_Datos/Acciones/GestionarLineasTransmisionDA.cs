@@ -31,6 +31,12 @@ namespace ICE.Capa_Datos.Acciones
                     throw new Exception("El identificador ya está en uso por otra línea de transmisión.");
                 }
 
+                var existeNombre = await _context.LineasTransmision.AnyAsync(lt => lt.NombreUbicacion == lineaTransmision.NombreUbicacion && lt.Id != id);
+                if (existeNombre)
+                {
+                    throw new Exception("El nombre de la ubicación ya está en uso por otra línea de transmisión.");
+                }
+
                 lineaTransmisionBD.NombreUbicacion = lineaTransmision.NombreUbicacion;
                 lineaTransmisionBD.Identificador = lineaTransmision.Identificador;
 
@@ -40,6 +46,7 @@ namespace ICE.Capa_Datos.Acciones
 
             throw new Exception("La línea de transmisión no se encontró en la base de datos.");
         }
+
 
         public async Task<bool> EliminarLineaTransmision(int id)
         {
@@ -88,11 +95,16 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<bool> RegistrarLineaTransmision(LineaTransmision lineaTransmision)
         {
-
             var existeIdentificador = await _context.LineasTransmision.AnyAsync(lt => lt.Identificador == lineaTransmision.Identificador);
             if (existeIdentificador)
             {
                 throw new Exception("El identificador ya está en uso.");
+            }
+
+            var existeNombre = await _context.LineasTransmision.AnyAsync(lt => lt.NombreUbicacion == lineaTransmision.NombreUbicacion);
+            if (existeNombre)
+            {
+                throw new Exception("El nombre de la ubicación ya está en uso.");
             }
 
             var lineaTransmisionBD = new LineaTransmisionDA
@@ -106,5 +118,6 @@ namespace ICE.Capa_Datos.Acciones
 
             return resultado > 0;
         }
+
     }
 }

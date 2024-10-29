@@ -31,6 +31,12 @@ namespace ICE.Capa_Datos.Acciones
                     throw new Exception("El identificador ya está en uso por otra unidad regional.");
                 }
 
+                var existeNombre = await _context.UnidadesRegionales.AnyAsync(ur => ur.NombreUbicacion == unidadRegional.NombreUbicacion && ur.Id != id);
+                if (existeNombre)
+                {
+                    throw new Exception("El nombre ya está en uso por otra unidad regional.");
+                }
+
                 unidadRegionalBD.NombreUbicacion = unidadRegional.NombreUbicacion;
                 unidadRegionalBD.Identificador = unidadRegional.Identificador;
 
@@ -92,6 +98,12 @@ namespace ICE.Capa_Datos.Acciones
             if (existeIdentificador)
             {
                 throw new Exception("El identificador ya está en uso.");
+            }
+
+            var existeNombre = await _context.UnidadesRegionales.AnyAsync(ur => ur.NombreUbicacion == unidadRegional.NombreUbicacion);
+            if (existeNombre)
+            {
+                throw new Exception("El nombre ya está en uso.");
             }
 
             var unidadRegionalBD = new UnidadRegionalDA

@@ -31,6 +31,12 @@ namespace ICE.Capa_Datos.Acciones
                     throw new Exception("El identificador ya está en uso por otra subestación.");
                 }
 
+                var existeNombre = await _context.Subestaciones.AnyAsync(s => s.NombreUbicacion == subestacion.NombreUbicacion && s.Id != id);
+                if (existeNombre)
+                {
+                    throw new Exception("El nombre de la ubicación ya está en uso por otra subestación.");
+                }
+
                 subestacionBD.NombreUbicacion = subestacion.NombreUbicacion;
                 subestacionBD.Identificador = subestacion.Identificador;
                 subestacionBD.UnidadRegionalId = subestacion.UnidadRegionalId;
@@ -41,6 +47,7 @@ namespace ICE.Capa_Datos.Acciones
 
             throw new Exception("La subestación no se encontró en la base de datos.");
         }
+
 
         public async Task<bool> EliminarSubestacion(int id)
         {
@@ -97,6 +104,12 @@ namespace ICE.Capa_Datos.Acciones
                 throw new Exception("El identificador ya está en uso.");
             }
 
+            var existeNombre = await _context.Subestaciones.AnyAsync(s => s.NombreUbicacion == subestacion.NombreUbicacion);
+            if (existeNombre)
+            {
+                throw new Exception("El nombre de la ubicación ya está en uso.");
+            }
+
             var subestacionBD = new SubestacionDA
             {
                 NombreUbicacion = subestacion.NombreUbicacion,
@@ -109,5 +122,6 @@ namespace ICE.Capa_Datos.Acciones
 
             return resultado > 0;
         }
+
     }
 }

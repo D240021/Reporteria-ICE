@@ -1,2 +1,5 @@
 Backend/**/bin/
 Backend/**/obj/
+**/bin/
+**/obj/
+**/.vs/
