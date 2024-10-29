@@ -1,5 +1,5 @@
 export interface UnidadRegional {
-    identificador: string,
+    id: number,
     nombreUbicacion : string,
-    subestaciones: string[],
+    identificador: string,
 }

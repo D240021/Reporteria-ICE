@@ -23,7 +23,7 @@ import { ConsultarOperarioComponent } from './Vista/paginas/consultar-operario/c
 
 export const routes: Routes = [
     {
-        path: 'inicio-sesion', component:InicioSesionComponent
+        path: 'inicio-sesion', component: InicioSesionComponent
     },
     {
         path: '', redirectTo: 'inicio-sesion', pathMatch: 'full'
@@ -78,12 +78,7 @@ export const routes: Routes = [
     },
     {
         path: 'editar-reporte', component: EditarReporteComponent
-<<<<<<< HEAD
-    },
-    {
-        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
-    }
-=======
+
     },
     {
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
@@ -95,6 +90,4 @@ export const routes: Routes = [
         path: 'consultar-operario', component: ConsultarOperarioComponent
     }
 
-    
->>>>>>> DanielBranch
 ];

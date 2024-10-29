@@ -1,8 +1,12 @@
 export interface Usuario {
-    identificador: string,
-    nombreUsuario : string,
+    id: number,
     contrasenia : string,
+    nombreUsuario : string,
     correo: string,
     nombre: string,
-    apellidos: string
+    apellido: string,
+    identificador: string,
+    rol: string,
+    subestacionId : number,
+    unidadRegionalId: number
 }
