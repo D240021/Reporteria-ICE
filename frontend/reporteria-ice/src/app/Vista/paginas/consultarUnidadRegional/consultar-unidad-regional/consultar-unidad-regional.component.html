@@ -6,7 +6,7 @@
 
     <h2>Consultar Unidad Regional</h2>
 
-    @if (unidadesRegionales.length > 0) {
+    @if (unidadesRegionalesOriginales.length > 0 ) {
 
     <form class="cont-buscador row align-items-center" [formGroup]="contenedorFormulario">
       <div class="contenedor-filtro col-md-4">
@@ -23,9 +23,6 @@
           <option value="identificador">Identificador</option>
           <option value="nombre">Nombre de Ubicación</option>
         </select>
-        <button class="btn btn-buscar " [disabled]="contenedorFormulario.invalid">
-          Buscar
-        </button>
       </div>
     </form>
 

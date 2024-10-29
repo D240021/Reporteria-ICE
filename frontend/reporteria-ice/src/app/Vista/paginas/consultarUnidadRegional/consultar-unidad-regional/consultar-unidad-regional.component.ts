@@ -17,28 +17,42 @@ import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/un
   templateUrl: './consultar-unidad-regional.component.html',
   styleUrl: './consultar-unidad-regional.component.css'
 })
-export class ConsultarUnidadRegionalComponent implements OnInit{
+export class ConsultarUnidadRegionalComponent implements OnInit {
   
-  public unidadesRegionales : UnidadRegional[] = [];
-
-  ngOnInit(): void {
-
-    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
-      this.unidadesRegionales = unidadesRegionales;
-    })
-
-  }
+  public unidadesRegionalesOriginales : UnidadRegional[] = [];
+  public unidadesRegionales: UnidadRegional[] = [];
 
   public atributosUnidad = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'GESTIÓN'];
 
   private formBuilder = inject(FormBuilder);
-
   private unidadRegionalService = inject(UnidadRegionalService);
 
-
   public contenedorFormulario = this.formBuilder.group({
-    valor: ['', {validators: [Validators.required]}],
-    filtro: ['', {validators: [Validators.required]}]
+    valor: ['', { validators: [Validators.required] }],
+    filtro: ['nombre', { validators: [Validators.required] }]
   });
 
+  ngOnInit(): void {
+    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
+      this.unidadesRegionalesOriginales = unidadesRegionales;
+      this.unidadesRegionales = unidadesRegionales;
+    });
+
+    this.contenedorFormulario.valueChanges.subscribe(() => {
+      this.filtrarValores();
+    });
+  }
+
+  filtrarValores() {
+    const { valor, filtro } = this.contenedorFormulario.value;
+
+    if (!valor) {
+      this.unidadesRegionales = this.unidadesRegionalesOriginales;
+    } else {
+      this.unidadesRegionales = this.unidadesRegionalesOriginales.filter(unidad => {
+        const campo = filtro === 'identificador' ? unidad.identificador : unidad.nombreUbicacion;
+        return campo.toLowerCase().includes(valor.toLowerCase());
+      });
+    }
+  }
 }
