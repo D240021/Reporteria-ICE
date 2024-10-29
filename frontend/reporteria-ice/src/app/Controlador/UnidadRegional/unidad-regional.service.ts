@@ -1,0 +1,20 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { ambiente } from '../../Ambientes/ambienteDesarrollo';
+import { UnidadRegional } from '../../Modelo/UnidadRegional';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UnidadRegionalService {
+
+  constructor() { }
+
+  private http = inject(HttpClient);
+  private urlBase = ambiente.apiURL + '/UnidadRegional';
+
+  public crearUnidadRegional(unidadRegional: UnidadRegional): Observable<any>{
+    return this.http.post(this.urlBase, unidadRegional);
+  }
+}

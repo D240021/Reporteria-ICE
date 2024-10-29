@@ -18,10 +18,12 @@ import { CrearReporteComponent } from './Vista/paginas/crearReporte/crear-report
 import { MenuSupervisorComponent } from './Vista/paginas/menuSupervisor/menu-supervisor/menu-supervisor.component';
 import { EditarReporteComponent } from './Vista/paginas/editarReporte/editar-reporte/editar-reporte.component';
 import { EditarReporteTLTComponent } from './Vista/paginas/editarReporteTLT/editar-reporte-tlt/editar-reporte-tlt.component';
+import { RegistrarOperarioComponent } from './Vista/paginas/registrarOperario/registrar-operario/registrar-operario.component';
+import { ConsultarOperarioComponent } from './Vista/paginas/consultar-operario/consultar-operario/consultar-operario.component';
 
 export const routes: Routes = [
     {
-        path: 'inicio-sesion', component:InicioSesionComponent
+        path: 'inicio-sesion', component: InicioSesionComponent
     },
     {
         path: '', redirectTo: 'inicio-sesion', pathMatch: 'full'
@@ -76,8 +78,16 @@ export const routes: Routes = [
     },
     {
         path: 'editar-reporte', component: EditarReporteComponent
+
     },
     {
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+    },
+    {
+        path: 'registrar-operario', component: RegistrarOperarioComponent
+    },
+    {
+        path: 'consultar-operario', component: ConsultarOperarioComponent
     }
+
 ];

@@ -4,16 +4,16 @@
     </header>
 
     <section>
-        <form>
+        <form [formGroup]="contenedorFormulario">
             <mat-form-field appearance="outline">
                 <mat-label>Nombre de usuario</mat-label>
                 <input matInput type="text" placeholder="Inserte su usuario"
-                    [formControl]='form.controls.nombreUsuario'>
+                    [formControl]='contenedorFormulario.controls.nombreUsuario'>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Contraseña</mat-label>
                 <input matInput type="password" placeholder="Inserte su contraseña"
-                    [formControl]='form.controls.contrasenia'>
+                    [formControl]='contenedorFormulario.controls.contrasenia'>
             </mat-form-field>
 
             <button mat-stroked-button (click)="redireccionarUsuario()" type="button">Ingresar</button>
