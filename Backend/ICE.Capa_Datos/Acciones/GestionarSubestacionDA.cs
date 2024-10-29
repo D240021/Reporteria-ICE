@@ -25,15 +25,21 @@ namespace ICE.Capa_Datos.Acciones
 
             if (subestacionBD != null)
             {
+                var existeIdentificador = await _context.Subestaciones.AnyAsync(s => s.Identificador == subestacion.Identificador && s.Id != id);
+                if (existeIdentificador)
+                {
+                    throw new Exception("El identificador ya está en uso por otra subestación.");
+                }
+
                 subestacionBD.NombreUbicacion = subestacion.NombreUbicacion;
                 subestacionBD.Identificador = subestacion.Identificador;
                 subestacionBD.UnidadRegionalId = subestacion.UnidadRegionalId;
 
                 var resultado = await _context.SaveChangesAsync();
-                return resultado > 0 ? true : throw new Exception("Error al guardar los cambios en la base de datos.");
+                return resultado > 0;
             }
 
-            throw new Exception("Error al actualizar, la subestación no se encontró en la base de datos.");
+            throw new Exception("La subestación no se encontró en la base de datos.");
         }
 
         public async Task<bool> EliminarSubestacion(int id)
@@ -85,6 +91,12 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<bool> RegistrarSubestacion(Subestacion subestacion)
         {
+            var existeIdentificador = await _context.Subestaciones.AnyAsync(s => s.Identificador == subestacion.Identificador);
+            if (existeIdentificador)
+            {
+                throw new Exception("El identificador ya está en uso.");
+            }
+
             var subestacionBD = new SubestacionDA
             {
                 NombreUbicacion = subestacion.NombreUbicacion,
@@ -95,7 +107,7 @@ namespace ICE.Capa_Datos.Acciones
             _context.Subestaciones.Add(subestacionBD);
             var resultado = await _context.SaveChangesAsync();
 
-            return resultado > 0 ? true : throw new Exception("Error al registrar la subestación en la base de datos.");
+            return resultado > 0;
         }
     }
 }

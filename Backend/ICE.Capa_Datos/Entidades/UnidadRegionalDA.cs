@@ -20,6 +20,7 @@ namespace ICE.Capa_Datos.Entidades
         public string NombreUbicacion { get; set; }
 
         [Required]
-        public int Identificador { get; set; }
+        [StringLength(100)]
+        public string Identificador { get; set; }
     }
 }

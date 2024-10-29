@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ICE.Capa_Datos.Entidades; // Asegúrate de incluir la referencia a la capa de datos
+using ICE.Capa_Datos.Entidades;
 
 namespace ICE.Capa_Datos.Acciones
 {
@@ -19,25 +19,28 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
-        // Método para actualizar una unidad regional
         public async Task<bool> ActualizarUnidadRegional(int id, UnidadRegional unidadRegional)
         {
             var unidadRegionalBD = await _context.UnidadesRegionales.FirstOrDefaultAsync(ur => ur.Id == id);
 
             if (unidadRegionalBD != null)
             {
-                // Mapea los valores de la clase del dominio a la clase de acceso a datos
+                var existeIdentificador = await _context.UnidadesRegionales.AnyAsync(ur => ur.Identificador == unidadRegional.Identificador && ur.Id != id);
+                if (existeIdentificador)
+                {
+                    throw new Exception("El identificador ya está en uso por otra unidad regional.");
+                }
+
                 unidadRegionalBD.NombreUbicacion = unidadRegional.NombreUbicacion;
                 unidadRegionalBD.Identificador = unidadRegional.Identificador;
 
                 var resultado = await _context.SaveChangesAsync();
-                return resultado > 0 ? true : throw new Exception("Error al guardar los cambios en la base de datos.");
+                return resultado > 0;
             }
 
-            throw new Exception("Error al actualizar, la unidad regional no se encontró en la base de datos.");
+            throw new Exception("La unidad regional no se encontró en la base de datos.");
         }
 
-        // Método para eliminar una unidad regional
         public async Task<bool> EliminarUnidadRegional(int id)
         {
             var unidadRegionalBD = await _context.UnidadesRegionales.FirstOrDefaultAsync(ur => ur.Id == id);
@@ -54,7 +57,6 @@ namespace ICE.Capa_Datos.Acciones
             throw new Exception("Error al eliminar, la unidad regional no se encontró en la base de datos.");
         }
 
-        // Método para obtener una unidad regional por su ID
         public async Task<UnidadRegional> ObtenerUnidadRegional(int id)
         {
             var unidadRegionalBD = await _context.UnidadesRegionales.FirstOrDefaultAsync(ur => ur.Id == id);
@@ -62,7 +64,6 @@ namespace ICE.Capa_Datos.Acciones
             if (unidadRegionalBD == null)
                 throw new Exception("Error al obtener, la unidad regional no se encontró en la base de datos.");
 
-            // Convertir la entidad de acceso a datos a la entidad del dominio
             return new UnidadRegional
             {
                 Id = unidadRegionalBD.Id,
@@ -71,7 +72,6 @@ namespace ICE.Capa_Datos.Acciones
             };
         }
 
-        // Método para obtener todas las unidades regionales
         public async Task<IEnumerable<UnidadRegional>> ObtenerTodasLasUnidadesRegionales()
         {
             var unidades = await _context.UnidadesRegionales
@@ -86,10 +86,14 @@ namespace ICE.Capa_Datos.Acciones
             return unidades;
         }
 
-        // Método para registrar una nueva unidad regional
         public async Task<bool> RegistrarUnidadRegional(UnidadRegional unidadRegional)
         {
-            // Convertir la entidad de dominio a la entidad de acceso a datos
+            var existeIdentificador = await _context.UnidadesRegionales.AnyAsync(ur => ur.Identificador == unidadRegional.Identificador);
+            if (existeIdentificador)
+            {
+                throw new Exception("El identificador ya está en uso.");
+            }
+
             var unidadRegionalBD = new UnidadRegionalDA
             {
                 NombreUbicacion = unidadRegional.NombreUbicacion,
@@ -99,7 +103,7 @@ namespace ICE.Capa_Datos.Acciones
             _context.UnidadesRegionales.Add(unidadRegionalBD);
             var resultado = await _context.SaveChangesAsync();
 
-            return resultado > 0 ? true : throw new Exception("Error al registrar la unidad regional en la base de datos.");
+            return resultado > 0;
         }
     }
 }

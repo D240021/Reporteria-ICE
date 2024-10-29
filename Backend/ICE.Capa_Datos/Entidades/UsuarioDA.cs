@@ -29,12 +29,11 @@ namespace ICE.Capa_Datos.Entidades
         public string Apellido { get; set; }
 
         [Required]
-        public int Identificador { get; set; }
+        [StringLength(100)]
+        public string Identificador { get; set; }
 
-        // Relación con Rol
-        [ForeignKey("Rol")]
-        public int RollId { get; set; }
-        public RolDA Rol { get; set; }
+        [StringLength(100)]
+        public string Rol { get; set; }
 
         // Relación opcional con Subestacion
         [ForeignKey("Subestacion")]

@@ -52,11 +52,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\Capa_Integracion\\ICE.Capa_Integracion.csproj",
+      "projectUniqueName": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\Capa_Integracion\\ICE.Capa_Integracion.csproj",
       "projectName": "ICE.Capa_Integracion",
-      "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\Capa_Integracion\\ICE.Capa_Integracion.csproj",
+      "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\Capa_Integracion\\ICE.Capa_Integracion.csproj",
       "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-      "outputPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\Capa_Integracion\\obj\\",
+      "outputPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\Capa_Integracion\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -78,11 +78,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
-              "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj"
+            "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj": {
+              "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\ICE.Capa_Logica\\ICE.Capa_Negocios.csproj"
             },
-            "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
-              "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj"
+            "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj": {
+              "projectPath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\ICE.Capa_Negocios\\ICE.Capa_Dominio.csproj"
             }
           }
         }

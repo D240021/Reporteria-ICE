@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EDX9yNiqqSo=",
+  "dgSpecHash": "mX8leOsv680=",
   "success": true,
-  "projectFilePath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto_Programado\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
+  "projectFilePath": "C:\\UCR\\2024 - CICLO II\\Análisis y Diseño de Software\\Proyecto\\Proyecto\\Reporteria-ICE\\Backend\\ICE.Capa_Datos\\ICE.Capa_Datos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josue\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\josue\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
