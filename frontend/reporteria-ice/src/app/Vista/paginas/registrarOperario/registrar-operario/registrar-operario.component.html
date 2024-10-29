@@ -44,7 +44,7 @@
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">NOMBRE</label>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Inserte los apellidos"
+                        <input type="text" placeholder="Inserte el nombre"
                             [formControl]="contenedorFormulario.controls.nombre">
                     </div>
                 </section>
@@ -52,13 +52,13 @@
                     <label class="col-md-4">APELLIDOS</label>
                     <div class="col-md-8">
                         <input type="text" placeholder="Inserte los apellidos"
-                            [formControl]="contenedorFormulario.controls.apellidos">
+                            [formControl]="contenedorFormulario.controls.apellido">
                     </div>
                 </section>
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">OCUPACIÓN</label>
                     <div class="col-md-8">
-                        <select [formControl]="contenedorFormulario.controls.tipo">
+                        <select [formControl]="contenedorFormulario.controls.rol">
                           <option value="Técnico de Protección y Medición">Técnico de Protección y Medición</option>
                           <option value="Técnico de Línea de Transmisión">Técnico de Línea de Transmisión</option>
                           <option value="Supervisor">Supervisor</option>
@@ -89,7 +89,8 @@
                       LIMPIAR
                     </button>
                     <button class="btn btn-agregar" type="submit"
-                            [disabled]="contenedorFormulario.invalid">
+                            [disabled]="contenedorFormulario.invalid"
+                            (click)="registrarNuevoUsuario()">
                       GUARDAR
                     </button>
                   </div>
