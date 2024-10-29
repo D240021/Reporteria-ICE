@@ -68,8 +68,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Datos\\Acciones\\GestionarSubestacionDA.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T22:31:59.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T22:31:59.187Z"
             },
             {
               "$type": "Document",
@@ -81,8 +80,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Datos\\Acciones\\GestionarUnidadRegionalDA.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T22:28:54.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T22:28:54.857Z"
             },
             {
               "$type": "Document",
@@ -94,8 +92,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAnwGgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T21:05:36.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T21:05:36.771Z"
             },
             {
               "$type": "Document",
@@ -107,8 +104,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Logica\\Interfaces\\Capa_Negocios\\IGestionarUsuarioCN.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T21:04:57.621Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T21:04:57.621Z"
             },
             {
               "$type": "Document",
@@ -120,8 +116,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Logica\\Interfaces\\Capa_Datos\\IGestionarUsuarioDA.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T21:04:30.268Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T21:04:30.268Z"
             },
             {
               "$type": "Document",
@@ -133,8 +128,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Logica\\CU\\GestionarUsuarioCN.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T21:04:16.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T21:04:16.973Z"
             },
             {
               "$type": "Document",
@@ -146,8 +140,7 @@
               "RelativeToolTip": "..\\ICE.Capa_Datos\\Acciones\\GestionarUsuarioDA.cs",
               "ViewState": "AgIAAFgAAAAAAAAAAAAkwG0AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T20:57:51.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T20:57:51.861Z"
             },
             {
               "$type": "Document",
@@ -159,8 +152,7 @@
               "RelativeToolTip": "Controllers\\UsuarioController.cs",
               "ViewState": "AgIAAGkAAAAAAAAAAAAAAH0AAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T20:53:08.554Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T20:53:08.554Z"
             }
           ]
         }

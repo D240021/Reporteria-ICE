@@ -3,3 +3,5 @@ Backend/**/obj/
 **/bin/
 **/obj/
 **/.vs/
+*.suo
+.vs/
