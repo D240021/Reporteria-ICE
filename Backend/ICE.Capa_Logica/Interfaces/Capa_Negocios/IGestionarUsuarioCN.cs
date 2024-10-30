@@ -11,5 +11,6 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Negocios
         Task<IEnumerable<Usuario>> ObtenerTodosLosUsuarios();
         Task<bool> ActualizarUsuario(int id, Usuario usuario);
         Task<bool> EliminarUsuario(int id);
+        Task<Usuario> AutenticarUsuario(string nombreUsuario, string contraseniaCifrada);
     }
 }

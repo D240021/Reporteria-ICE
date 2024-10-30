@@ -117,5 +117,32 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost("IniciarSesion")]
+        public async Task<ActionResult<UsuarioDTO>> IniciarSesion([FromBody] CredencialesDTO credencialesDTO)
+        {
+            try
+            {
+                var credenciales = CredencialesDTOMapper.ConvertirDTOACredenciales(credencialesDTO);
+                var usuario = await gestionarUsuarioCN.AutenticarUsuario(credenciales.NombreUsuario, credenciales.Contrasenia);
+
+                if (usuario == null)
+                {
+                    return Unauthorized("Credenciales inválidas.");
+                }
+
+                var usuarioDTOAutenticado = UsuarioDTOMapper.ConvertirUsuarioADTO(usuario);
+
+                return Ok(usuarioDTOAutenticado);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+
+
     }
 }
