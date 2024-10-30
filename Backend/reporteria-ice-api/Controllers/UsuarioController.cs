@@ -119,11 +119,12 @@ namespace reporteria_ice_api.Controllers
         }
 
         [HttpPost("IniciarSesion")]
-        public async Task<ActionResult<UsuarioDTO>> IniciarSesion([FromBody] UsuarioDTO usuarioDTO)
+        public async Task<ActionResult<UsuarioDTO>> IniciarSesion([FromBody] CredencialesDTO credencialesDTO)
         {
             try
             {
-                var usuario = await gestionarUsuarioCN.AutenticarUsuario(usuarioDTO.NombreUsuario, usuarioDTO.Contrasenia);
+                var credenciales = CredencialesDTOMapper.ConvertirDTOACredenciales(credencialesDTO);
+                var usuario = await gestionarUsuarioCN.AutenticarUsuario(credenciales.NombreUsuario, credenciales.Contrasenia);
 
                 if (usuario == null)
                 {
@@ -139,6 +140,7 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
 
 
 
