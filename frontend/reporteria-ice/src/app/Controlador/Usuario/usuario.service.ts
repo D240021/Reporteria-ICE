@@ -19,4 +19,8 @@ export class UsuarioService {
     return this.http.post(this.urlBase, usuario);
   }
 
+  public obtenerUsuarios(){
+    return this.http.get<Usuario[]>(this.urlBase);
+  }
+
 }

@@ -123,7 +123,7 @@ namespace ICE.Capa_Datos.Acciones
 
             foreach (var usuarioBD in usuariosBD)
             {
-               // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
+                // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
 
                 usuarios.Add(new Usuario
                 {
@@ -218,21 +218,22 @@ namespace ICE.Capa_Datos.Acciones
 
         private string DesencriptarAES(string textoCifrado)
         {
-            byte[] datosCifrados = Convert.FromBase64String(textoCifrado);
+            // Divide el texto en IV y texto cifrado usando el delimitador ":"
+            var partes = textoCifrado.Split(':');
+            if (partes.Length != 2) throw new ArgumentException("El texto cifrado no está en el formato esperado");
+
+            byte[] iv = Convert.FromBase64String(partes[0]);
+            byte[] datosCifrados = Convert.FromBase64String(partes[1]);
             byte[] claveBytes = Encoding.UTF8.GetBytes(_encryptionKey);
 
             using (Aes aes = Aes.Create())
             {
                 aes.Key = claveBytes;
+                aes.IV = iv;
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
 
-                // Extraer IV de los primeros 16 bytes
-                byte[] iv = new byte[16];
-                Array.Copy(datosCifrados, 0, iv, 0, iv.Length);
-                aes.IV = iv;
-
-                using (var ms = new MemoryStream(datosCifrados, 16, datosCifrados.Length - 16))
+                using (var ms = new MemoryStream(datosCifrados))
                 using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
                 using (var reader = new StreamReader(cs))
                 {
