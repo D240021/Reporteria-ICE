@@ -11,7 +11,7 @@ namespace ICE.Capa_Datos.Entidades
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(400)]
         public string Contrasenia { get; set; }
 
         [Required]

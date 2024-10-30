@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
 
 namespace ICE.Capa_Datos.Acciones
 {
     public class GestionarUsuarioDA : IGestionarUsuarioDA
     {
         private readonly ICE_Context _context;
-        private readonly string _encryptionKey = "1234567890123456";
-        private readonly string _ivString = "1234567890123456";
+        private readonly string _encryptionKey = "12345678901234567890123456789012"; // 32 caracteres para 256 bits
 
         public GestionarUsuarioDA(ICE_Context context)
         {
@@ -29,7 +29,11 @@ namespace ICE.Capa_Datos.Acciones
                 throw new Exception("El nombre de usuario o el identificador ya están en uso.");
             }
 
-            var contraseniaEncriptada = EncriptarAES(usuario.Contrasenia, _encryptionKey);
+            // Desencripta la contraseña recibida para verificar el valor original
+            var contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
+
+            // Re-encripta la contraseña antes de guardarla en la base de datos
+            var contraseniaEncriptada = EncriptarAES(contraseniaDesencriptada);
 
             var usuarioDA = new UsuarioDA
             {
@@ -61,7 +65,12 @@ namespace ICE.Capa_Datos.Acciones
                     throw new Exception("El nombre de usuario o el identificador ya están en uso por otro usuario.");
                 }
 
-                usuarioBD.Contrasenia = EncriptarAES(usuario.Contrasenia, _encryptionKey);
+                // Desencripta la contraseña proporcionada para verificar su valor original
+                string contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
+
+                // Re-encripta la contraseña antes de actualizarla en la base de datos
+                usuarioBD.Contrasenia = EncriptarAES(contraseniaDesencriptada);
+
                 usuarioBD.NombreUsuario = usuario.NombreUsuario;
                 usuarioBD.Correo = usuario.Correo;
                 usuarioBD.Nombre = usuario.Nombre;
@@ -85,6 +94,9 @@ namespace ICE.Capa_Datos.Acciones
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (usuarioBD == null) return null;
+
+            // Desencripta la contraseña antes de devolver el usuario
+            // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
 
             return new Usuario
             {
@@ -111,6 +123,8 @@ namespace ICE.Capa_Datos.Acciones
 
             foreach (var usuarioBD in usuariosBD)
             {
+               // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
+
                 usuarios.Add(new Usuario
                 {
                     Id = usuarioBD.Id,
@@ -129,7 +143,6 @@ namespace ICE.Capa_Datos.Acciones
             return usuarios;
         }
 
-
         public async Task<bool> EliminarUsuario(int id)
         {
             var usuarioBD = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
@@ -146,12 +159,17 @@ namespace ICE.Capa_Datos.Acciones
         {
             var usuarioDA = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
 
-            if (usuarioDA == null || usuarioDA.Contrasenia != contraseniaCifrada)
-            {
-                return null; 
-            }
+            if (usuarioDA == null) return null;
 
-            var usuario = new Usuario
+            // Desencripta la contraseña almacenada en la base de datos
+            var contraseniaDesencriptadaBD = DesencriptarAES(usuarioDA.Contrasenia);
+            // Desencripta la contraseña ingresada
+            var contraseniaDesencriptadaIngresada = DesencriptarAES(contraseniaCifrada);
+
+            // Compara las contraseñas desencriptadas
+            if (contraseniaDesencriptadaBD != contraseniaDesencriptadaIngresada) return null;
+
+            return new Usuario
             {
                 Id = usuarioDA.Id,
                 NombreUsuario = usuarioDA.NombreUsuario,
@@ -163,73 +181,64 @@ namespace ICE.Capa_Datos.Acciones
                 SubestacionId = usuarioDA.SubestacionId,
                 UnidadRegionalId = usuarioDA.UnidadRegionalId
             };
-
-            return usuario; 
         }
 
 
-        private string EncriptarAES(string textoPlano, string clave)
+        private string EncriptarAES(string textoPlano)
         {
-
-            byte[] keyBytes = Encoding.UTF8.GetBytes(clave);
-            byte[] ivBytes = Encoding.UTF8.GetBytes("1234567890123456"); // IV de 16 caracteres
+            byte[] claveBytes = Encoding.UTF8.GetBytes(_encryptionKey);
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = keyBytes;
-                aes.IV = ivBytes;
-                aes.Padding = PaddingMode.PKCS7;
+                aes.Key = claveBytes;
                 aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+
+                // Generar IV aleatorio
+                aes.GenerateIV();
+                byte[] iv = aes.IV;
 
                 using (var ms = new MemoryStream())
                 {
+                    // Escribir el IV en el inicio del stream para ser parte del texto cifrado
+                    ms.Write(iv, 0, iv.Length);
+
                     using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
                     using (var writer = new StreamWriter(cs))
                     {
                         writer.Write(textoPlano);
                     }
 
+                    // Convertir todo el contenido (IV + texto cifrado) a Base64
                     string textoCifrado = Convert.ToBase64String(ms.ToArray());
                     return textoCifrado;
                 }
             }
         }
 
-
-        private string DesencriptarAES(string textoCifrado, string clave)
+        private string DesencriptarAES(string textoCifrado)
         {
+            byte[] datosCifrados = Convert.FromBase64String(textoCifrado);
+            byte[] claveBytes = Encoding.UTF8.GetBytes(_encryptionKey);
 
-            try
+            using (Aes aes = Aes.Create())
             {
-                byte[] keyBytes = Encoding.UTF8.GetBytes(clave);
-                byte[] ivBytes = Encoding.UTF8.GetBytes("1234567890123456"); // IV fijo de 16 caracteres
-                byte[] textoCifradoBytes = Convert.FromBase64String(textoCifrado);
+                aes.Key = claveBytes;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
 
-                using (Aes aes = Aes.Create())
+                // Extraer IV de los primeros 16 bytes
+                byte[] iv = new byte[16];
+                Array.Copy(datosCifrados, 0, iv, 0, iv.Length);
+                aes.IV = iv;
+
+                using (var ms = new MemoryStream(datosCifrados, 16, datosCifrados.Length - 16))
+                using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
+                using (var reader = new StreamReader(cs))
                 {
-                    aes.Key = keyBytes;
-                    aes.IV = ivBytes;
-                    aes.Padding = PaddingMode.PKCS7;
-                    aes.Mode = CipherMode.CBC;
-
-                    using (var ms = new MemoryStream(textoCifradoBytes))
-                    using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
-                    using (var reader = new StreamReader(cs))
-                    {
-                        string textoDesencriptado = reader.ReadToEnd();
-                        return textoDesencriptado;
-                    }
+                    return reader.ReadToEnd();
                 }
             }
-            catch (CryptographicException ex)
-            {
-                throw new Exception("Error al desencriptar: asegúrate de que el texto cifrado y la configuración de AES sean correctos. " + ex.Message);
-            }
         }
-
-
-
-
-
     }
 }
