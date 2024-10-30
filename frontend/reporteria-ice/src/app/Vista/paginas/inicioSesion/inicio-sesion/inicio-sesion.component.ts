@@ -31,18 +31,18 @@ export class InicioSesionComponent {
 
   redireccionarUsuario() {
 
-    // const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
-    // if (tipoUsuario === usuarioRoles.ADMIN.toLocaleLowerCase()) {
-    //   this.router.navigate(['/menu-administrador']);
-    // }else if(tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()){
-    //   this.router.navigate(['/crear-reporte']);
-    // }else if(tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()){
-    //   this.router.navigate(['/menu-supervisor']);
-    // }else if(tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()){
-    //   this.router.navigate(['/editar-reporte-tlt']);
-    // }
-    const valor = this.contenedorFormulario.value.nombreUsuario || '';
-    console.log(this.encriptacion.encriptarAES(valor));
+    const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
+    if (tipoUsuario === usuarioRoles.ADMIN.toLocaleLowerCase()) {
+      this.router.navigate(['/menu-administrador']);
+    }else if(tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()){
+      this.router.navigate(['/crear-reporte']);
+    }else if(tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()){
+      this.router.navigate(['/menu-supervisor']);
+    }else if(tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()){
+      this.router.navigate(['/editar-reporte-tlt']);
+    }
+    // const valor = this.contenedorFormulario.value.nombreUsuario || '';
+    // console.log(this.encriptacion.encriptarAES(valor));
   }
 
 }
