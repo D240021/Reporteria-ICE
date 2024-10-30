@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <header class="text-center my-4">
         <h1>BIENVENIDO, SUPERVISOR MARIO VARGAS</h1>
-        <button class="btn btn-warning float-end me-4" routerLink="/inicio-sesion">SALIR</button>
+        <button class="btn btn-warning float-end me-4" routerLink="/editar-reporte">SALIR</button>
       </header>
 
       <h4 class="text-center mb-4">Reportes</h4>
@@ -16,6 +16,14 @@
               <p class="mb-0">PENDIENTES</p>
             </div>
             <div class="card-body">
+
+              <!-- Iterar sobre reportes para observar el editar-reporte -->
+              <div *ngFor="let reporte of reportes" class="reporte-item mb-3" (click)="irAEditar(reporte.id)">
+                <p><strong>{{ reporte.nombre }}</strong></p>
+                <p class="text-muted">ID Reporte: {{ reporte.id }}</p>
+              </div>
+              <!--    Fin   -->
+
               <div class="reporte-item mb-3">
                 <p><strong>Guápiles - San José</strong></p>
                 <p class="text-muted">ID Reporte: 146621F</p>

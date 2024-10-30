@@ -18,6 +18,7 @@ import { CrearReporteComponent } from './Vista/paginas/crearReporte/crear-report
 import { MenuSupervisorComponent } from './Vista/paginas/menuSupervisor/menu-supervisor/menu-supervisor.component';
 import { EditarReporteComponent } from './Vista/paginas/editarReporte/editar-reporte/editar-reporte.component';
 import { EditarReporteTLTComponent } from './Vista/paginas/editarReporteTLT/editar-reporte-tlt/editar-reporte-tlt.component';
+import { EditarReporteTPMComponent } from './Vista/paginas/editarReporteTPM/editar-reporte-tpm/editar-reporte-tpm.component';
 import { RegistrarOperarioComponent } from './Vista/paginas/registrarOperario/registrar-operario/registrar-operario.component';
 import { ConsultarOperarioComponent } from './Vista/paginas/consultar-operario/consultar-operario/consultar-operario.component';
 import { NoAutorizadoComponent } from './Vista/paginas/noAutorizado/no-autorizado/no-autorizado.component';
@@ -81,6 +82,9 @@ export const routes: Routes = [
     {
         path: 'editar-reporte', component: EditarReporteComponent
 
+    },
+    {
+        path: 'editar-reporte-tpm', component: EditarReporteTPMComponent
     },
     {
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
