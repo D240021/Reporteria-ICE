@@ -1,1 +1,57 @@
-<p>Crear Reporte</p>
+<div class="form-container">
+  <form>
+    <h2>Crear reporte nuevo</h2>
+
+    <!-- Nombre del Reporte -->
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">NOMBRE DEL REPORTE:</label>
+      <div class="col-md-8">
+        <input type="text" placeholder="esto se omite, para no cambiar le modelo otra vez" />
+      </div>
+    </section>
+
+    <!-- Subestación Actual -->
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">SUBESTACION ACTUAL:</label>
+      <div class="col-md-8">
+        <input type="text" value="Rio Macho" disabled />
+      </div>
+    </section>
+
+    <!-- Línea de Transmisión -->
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">LINEA DE TRANSMISION:</label>
+      <div class="col-md-8">
+        <select>
+          <option value="QZT8">QZT8</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Subestaciones Asociadas -->
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">SUBESTACIONES ASOCIADAS:</label>
+      <div class="col-md-8">
+        <select>
+          <option value="desamparados">Desamparados</option>
+          <option value="turrialba">Turrialba</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Botones -->
+    <div class="contenedor-botones row mb-3 align-items-center">
+      <div class="col-md-3 col-12">
+        <button class="btn btn-volver" type="button" routerLink="/menu-administrador">VOLVER</button>
+      </div>
+      <div class="col-md-9 col-12">
+        <button class="btn btn-limpiar" type="button">LIMPIAR</button>
+        <button class="btn btn-agregar" type="submit">GENERAR</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+<button routerLink="/editar-reporte-tpm">VER</button>

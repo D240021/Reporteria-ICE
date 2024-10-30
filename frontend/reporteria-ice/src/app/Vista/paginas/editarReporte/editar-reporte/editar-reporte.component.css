@@ -49,7 +49,7 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1.5rem 0
+  margin: 1.5rem 0;  
 }
 
 div button {
@@ -62,6 +62,8 @@ div button {
   border: none;
   background-color: var(--color-terciario-fondo);
   color: var(--color-secundario-fondo);
+  color: black;
+  font-weight: bolder;
   border-radius: 10px;
 }
 
