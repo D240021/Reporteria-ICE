@@ -17,4 +17,8 @@ export class UnidadRegionalService {
   public crearUnidadRegional(unidadRegional: UnidadRegional): Observable<any>{
     return this.http.post(this.urlBase, unidadRegional);
   }
+
+  public obtenerUnidadesRegionales(){
+    return this.http.get<UnidadRegional[]>(this.urlBase);
+  }
 }

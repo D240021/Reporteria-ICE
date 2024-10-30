@@ -31,7 +31,7 @@ export class AgregarUnidadRegionalComponent {
     const valoresFormulario = this.contenedorFormulario.value as UnidadRegional;
 
     this.unidadRegionalService.crearUnidadRegional(valoresFormulario).subscribe( unidadRegional => {
-      alert("OK");
+      this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });
   }
 
