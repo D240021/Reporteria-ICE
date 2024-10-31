@@ -56,36 +56,7 @@ namespace ICE.Capa_Datos.Acciones
             await _context.SaveChangesAsync();
             return informeDA.Id;
 
-            //var resultado = await _context.SaveChangesAsync();
-            //return resultado > 0;
         }
-
-
-
-        /*
-        public async Task<bool> ActualizarInforme(int id, Informe informe)
-        {
-            var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
-            if (informeBD != null)
-            {
-                informeBD.Tipo = informe.Tipo;
-                informeBD.SubestacionId = informe.SubestacionId;
-                informeBD.LineaTransmisionId = informe.LineaTransmisionId;
-                informeBD.DatosDeLineaId = informe.DatosDeLineaId;
-                informeBD.DatosGeneralesId = informe.DatosGeneralesId;
-                informeBD.TeleproteccionId = informe.TeleproteccionId;
-                informeBD.DistanciaDeFallaId = informe.DistanciaDeFallaId;
-                informeBD.TiemposDeDisparoId = informe.TiemposDeDisparoId;
-                informeBD.CorrientesDeFallaId = informe.CorrientesDeFallaId;
-                informeBD.Estado = informe.Estado;
-
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
-            }
-            return false;
-        }
-        */
-
 
         public async Task<bool> ActualizarInforme(int id, Informe informe)
         {
@@ -102,7 +73,6 @@ namespace ICE.Capa_Datos.Acciones
                         .Include(i => i.TiemposDeDisparo)
                         .Include(i => i.CorrientesDeFalla)
                         .FirstOrDefaultAsync(i => i.Id == id);
-
 
                     //se actualizan los campos simples del informe
                     informeBD.Tipo = informe.Tipo;
