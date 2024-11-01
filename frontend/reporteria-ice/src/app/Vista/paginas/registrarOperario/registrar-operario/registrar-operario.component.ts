@@ -7,6 +7,7 @@ import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service'
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
 import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
 import { Usuario } from '../../../../Modelo/Usuario';
+import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
 
 @Component({
   selector: 'registrar-operario',
@@ -32,6 +33,7 @@ export class RegistrarOperarioComponent implements OnInit {
   private usuarioService = inject(UsuarioService);
   private unidadRegionalService = inject(UnidadRegionalService);
   public unidadesRegionales : UnidadRegional[] = [];
+  private encriptacion = inject(AESService);
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
@@ -47,9 +49,12 @@ export class RegistrarOperarioComponent implements OnInit {
   });
 
   registrarNuevoUsuario() {
+
+    const contraseniaEncriptada = this.encriptacion.encriptarAES(this.contenedorFormulario.value.contrasenia || '') ;
+
     const valoresFormulario: Usuario = {
       id: Number(this.contenedorFormulario.value.id) || 0,
-      contrasenia: this.contenedorFormulario.value.contrasenia || '',
+      contrasenia: contraseniaEncriptada,
       nombreUsuario: this.contenedorFormulario.value.nombreUsuario || '',
       correo: this.contenedorFormulario.value.correo || '',
       nombre: this.contenedorFormulario.value.nombre || '',
@@ -60,6 +65,8 @@ export class RegistrarOperarioComponent implements OnInit {
       unidadRegionalId: Number(this.contenedorFormulario.value.unidadRegionalId) || 0
     };
   
+    console.log(valoresFormulario);
+
     this.usuarioService.crearUsuario(valoresFormulario).subscribe(usuario => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });

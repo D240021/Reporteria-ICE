@@ -29,7 +29,7 @@ export class ConsultarUnidadRegionalComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     valor: ['', { validators: [Validators.required] }],
-    filtro: ['nombre', { validators: [Validators.required] }]
+    filtro: ['', { validators: [Validators.required] }]
   });
 
   ngOnInit(): void {
