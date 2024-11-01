@@ -30,7 +30,7 @@ namespace ICE.Capa_Datos.Acciones
             }
 
             // Desencripta la contraseña recibida para verificar el valor original
-            var contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
+           var contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
 
             // Re-encripta la contraseña antes de guardarla en la base de datos
             var contraseniaEncriptada = EncriptarAES(contraseniaDesencriptada);
@@ -186,35 +186,38 @@ namespace ICE.Capa_Datos.Acciones
 
         private string EncriptarAES(string textoPlano)
         {
+            // Convierte la clave de cifrado a bytes usando codificación UTF8
             byte[] claveBytes = Encoding.UTF8.GetBytes(_encryptionKey);
 
+            // Crea una instancia de AES para el cifrado
             using (Aes aes = Aes.Create())
             {
                 aes.Key = claveBytes;
-                aes.Mode = CipherMode.CBC;
-                aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CBC; // Modo de cifrado CBC
+                aes.Padding = PaddingMode.PKCS7; // Padding para completar bloques
 
-                // Generar IV aleatorio
+                // Genera un IV aleatorio
                 aes.GenerateIV();
                 byte[] iv = aes.IV;
 
                 using (var ms = new MemoryStream())
                 {
-                    // Escribir el IV en el inicio del stream para ser parte del texto cifrado
-                    ms.Write(iv, 0, iv.Length);
-
                     using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
                     using (var writer = new StreamWriter(cs))
                     {
-                        writer.Write(textoPlano);
+                        writer.Write(textoPlano); // Escribe y cifra el texto plano en el stream
                     }
 
-                    // Convertir todo el contenido (IV + texto cifrado) a Base64
-                    string textoCifrado = Convert.ToBase64String(ms.ToArray());
+                    // Convierte los datos cifrados a un array de bytes
+                    byte[] datosCifrados = ms.ToArray();
+
+                    // Convierte el IV y los datos cifrados a Base64 y los concatena con ":" como delimitador
+                    string textoCifrado = Convert.ToBase64String(iv) + ":" + Convert.ToBase64String(datosCifrados);
                     return textoCifrado;
                 }
             }
         }
+
 
         private string DesencriptarAES(string textoCifrado)
         {
