@@ -112,5 +112,18 @@ namespace ICE.Capa_Datos.Acciones
                 TecnicoLineaId = reporteBD.TecnicoLineaId
             }).ToList();
         }
+
+
+        public async Task<IEnumerable<int>> ObtenerIdsInformesDeReporte(int informeId)
+        {
+            //Se busca el reporte con el id asociado
+            var reporte = await _context.Reportes
+                .Where(r => r.InformeV1Id == informeId || r.InformeV2Id == informeId || r.InformeV3Id == informeId || r.InformeV4Id == informeId)
+                .Select(r => new List<int> { r.InformeV1Id, r.InformeV2Id, r.InformeV3Id, r.InformeV4Id })
+                .FirstOrDefaultAsync();
+
+            //Si no se ecuentra el reporte, se obtiene una lista vacia
+            return reporte ?? new List<int>();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using ICE.Capa_Dominio.Modelos;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using ICE.Capa_Negocios.Interfaces.Capa_Negocios;
+using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,14 +10,11 @@ namespace ICE.Capa_Negocios.CU
 
     public class GestionarReporteConInformesService: IGestionarReporteConInformesService
     {
-        private readonly IGestionarReporteCN _gestionarReporteCN;
-        private readonly IGestionarInformeCN _gestionarInformeCN;
-
-        //Datos
-        //private readonly ICE_Context _context;
-
-
+        //private readonly IGestionarReporteCN _gestionarReporteCN;
+        //private readonly IGestionarInformeCN _gestionarInformeCN;
+        
         private readonly IGestionarInformeDA _gestionarInformeDA;
+        private readonly IGestionarReporteDA _gestionarReporteDA;
         private readonly IGestionarTeleproteccionDA _gestionarTeleproteccionDA;
         private readonly IGestionarDistanciaDeFallaDA _gestionarDistanciaDeFallaDA;
         private readonly IGestionarCorrientesDeFallaDA _gestionarCorrientesDeFallaDA;
@@ -25,10 +23,13 @@ namespace ICE.Capa_Negocios.CU
         private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
         private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
 
+        //IGestionarReporteCN gestionarReporteCN,
+          //IGestionarInformeCN gestionarInformeCN,
+
         public GestionarReporteConInformesService(
-            IGestionarReporteCN gestionarReporteCN, 
-            IGestionarInformeCN gestionarInformeCN,
+           
             IGestionarInformeDA gestionarInformeDA,
+            IGestionarReporteDA gestionarReporteDA,
             IGestionarTeleproteccionDA gestionarTeleproteccionDA,
             IGestionarDistanciaDeFallaDA gestionarDistanciaDeFallaDA,
             IGestionarCorrientesDeFallaDA gestionarCorrientesDeFallaDA,
@@ -37,10 +38,11 @@ namespace ICE.Capa_Negocios.CU
             IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
             IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)
         {
-            _gestionarReporteCN = gestionarReporteCN;
-            _gestionarInformeCN = gestionarInformeCN;
+            //_gestionarReporteCN = gestionarReporteCN;
+            //_gestionarInformeCN = gestionarInformeCN;
 
             _gestionarInformeDA = gestionarInformeDA;
+            _gestionarReporteDA = gestionarReporteDA;
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
             _gestionarDistanciaDeFallaDA = gestionarDistanciaDeFallaDA;
             _gestionarCorrientesDeFallaDA = gestionarCorrientesDeFallaDA;
@@ -51,6 +53,7 @@ namespace ICE.Capa_Negocios.CU
 
         }
 
+        //Aqui no se deben aplicar las Reglas de Informe , ya que deben crearse con valores nulos en un inicio para ser actualizados despues
         public async Task<bool> RegistrarReporteConInformes(Reporte reporte, List<int> subestacionIds, int lineaTransmisionId)
         {
             try
@@ -133,7 +136,8 @@ namespace ICE.Capa_Negocios.CU
                 //se insertan los informes en la BD y se recupera su ID para el reporte
                 for (int i = 0; i < informes.Count; i++)
                 {
-                    informes[i].Id = await _gestionarInformeCN.RegistrarInformeCompleto(informes[i]);
+                    //informes[i].Id = await _gestionarInformeCN.RegistrarInformeCompleto(informes[i]);
+                    informes[i].Id = await _gestionarInformeDA.RegistrarInforme(informes[i]);
                 }
 
                 // se asignan los informes al reporte
@@ -146,7 +150,8 @@ namespace ICE.Capa_Negocios.CU
                 }
 
                 // Registrar el reporte
-                return await _gestionarReporteCN.RegistrarReporte(reporte);
+                //return await _gestionarReporteCN.RegistrarReporte(reporte);
+                return await _gestionarReporteDA.RegistrarReporte(reporte);
 
                 // await transaction.CommitAsync();
                 //return true;
@@ -158,6 +163,63 @@ namespace ICE.Capa_Negocios.CU
                 //  await transaction.RollbackAsync();
                 throw new Exception("Error al registrar los datos del informe y reporte: " + ex.Message);
             }
+        }
+
+
+        // Método privado para obtener los informes asociados de un reporte
+        private async Task<List<Informe>> ObtenerInformesAsociados(int informeId)
+        {
+            var idsInformesAsociados = await _gestionarReporteDA.ObtenerIdsInformesDeReporte(informeId);
+            var informesAsociados = new List<Informe>();
+
+            foreach (var id in idsInformesAsociados)
+            {
+                var informe = await _gestionarInformeDA.ObtenerInformePorId(id);
+                if (informe != null)
+                {
+                    informesAsociados.Add(informe);
+                }
+            }
+
+            return informesAsociados;
+        }
+
+        public async Task VerificarEstadoInformesAsociados(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+
+            bool todosConfirmados = informesAsociados.All(inf => inf.Estado == 1);
+
+            if (todosConfirmados)
+            {
+                bool hayInformeCompleto = await VerificarInformesCompletosAsociados(informeId);
+
+                if (!hayInformeCompleto)
+                {
+                    await ActualizarEstadosDeInformesAPendiente(informeId);
+                }
+            }
+        }
+
+        public async Task<bool> VerificarInformesCompletosAsociados(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+
+            return informesAsociados.Any(inf => ReglasInforme.EsInformeCompleto(inf).esValido);
+        }
+
+        public async Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+
+            ReglasInforme.CambiarTodosLosInformesAPendientes(informesAsociados);
+
+            foreach (var informe in informesAsociados)
+            {
+                await _gestionarInformeDA.ActualizarInforme(informe.Id, informe);
+            }
+
+            return true;
         }
     }
 }

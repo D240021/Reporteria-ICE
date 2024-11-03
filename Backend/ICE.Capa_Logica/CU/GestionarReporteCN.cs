@@ -39,5 +39,11 @@ namespace ICE.Capa_Negocios.CU
         {
             return await _gestionarReporteDA.ObtenerTodosLosReportes();
         }
+
+        public async Task<IEnumerable<int>> ObtenerIdsInformesDeReporte(int informeId)
+        {
+            // Llamada al método de la capa de datos para obtener los IDs de los informes asociados al reporte
+            return await _gestionarReporteDA.ObtenerIdsInformesDeReporte(informeId);
+        }        
     }
 }
