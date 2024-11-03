@@ -2,6 +2,7 @@
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using ICE.Capa_Negocios.Interfaces.Capa_Negocios;
 using System.Collections.Generic;
+using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Threading.Tasks;
 
 namespace ICE.Capa_Negocios.CU
@@ -10,19 +11,51 @@ namespace ICE.Capa_Negocios.CU
     {
         private readonly IGestionarReporteDA _gestionarReporteDA;
 
-        public GestionarReporteCN(IGestionarReporteDA gestionarReporteDA)
+        //Servicio de Informes y Reportes
+        private readonly IGestionarReporteConInformesService _gestionarReporteConInformesService;
+
+        public GestionarReporteCN(IGestionarReporteDA gestionarReporteDA, IGestionarReporteConInformesService gestionarReporteConInformesService)
         {
             _gestionarReporteDA = gestionarReporteDA;
+            _gestionarReporteConInformesService = gestionarReporteConInformesService;
         }
 
         public async Task<bool> RegistrarReporte(Reporte reporte)
         {
+
+            var reporteActualizado = ReglasReporte.ActualizarEstadoReporte(reporte);
+            if (!reporteActualizado.esValido)
+            {
+                return reporteActualizado.esValido;
+            }
             return await _gestionarReporteDA.RegistrarReporte(reporte);
         }
 
         public async Task<bool> ActualizarReporte(int id, Reporte reporte)
         {
-            return await _gestionarReporteDA.ActualizarReporte(id, reporte);
+
+            var validacionReporte = ReglasReporte.EsReporteValido(reporte);
+            if (!validacionReporte.esValido)
+            {
+                return validacionReporte.esValido;
+            }
+            //Verificamos sus Informes (sin son Completos y tienen Estado 1) desde el servicio compartido (GestionarReporteConInformesService)
+            var validacionInformesDeReporte =  await _gestionarReporteConInformesService.VerificarInformesCompletosAsociados(reporte.InformeV1Id);
+
+            if (!validacionInformesDeReporte)
+            {
+                return validacionInformesDeReporte;
+            }
+
+            // Actualizar el estado del reporte según los informes asociados
+            var resultadoActualizacion = await _gestionarReporteConInformesService.ActualizarEstadoReporteSegunInformes(reporte);
+            if (!resultadoActualizacion.esValido)
+            {
+                return false;
+            }
+
+
+            return true;
         }
 
         public async Task<bool> EliminarReporte(int id)

@@ -125,5 +125,35 @@ namespace ICE.Capa_Datos.Acciones
             //Si no se ecuentra el reporte, se obtiene una lista vacia
             return reporte ?? new List<int>();
         }
+
+
+        public async Task<Reporte> ObtenerReportePorInformeId(int informeId)
+        {
+            // Buscar el reporte que contenga el informeId en cualquiera de los cuatro campos de informe
+            var reporteBD = await _context.Reportes
+                .FirstOrDefaultAsync(r => r.InformeV1Id == informeId ||
+                                          r.InformeV2Id == informeId ||
+                                          r.InformeV3Id == informeId ||
+                                          r.InformeV4Id == informeId);
+            
+            if (reporteBD == null)
+            {
+                return null;
+            }
+            return new Reporte
+            {
+                Id = reporteBD.Id,
+                MapaDeDescargas = reporteBD.MapaDeDescargas,
+                Observaciones = reporteBD.Observaciones,
+                InformeV1Id = reporteBD.InformeV1Id,
+                InformeV2Id = reporteBD.InformeV2Id,
+                InformeV3Id = reporteBD.InformeV3Id,
+                InformeV4Id = reporteBD.InformeV4Id,
+                Estado = reporteBD.Estado,
+                UsuarioSupervisorId = reporteBD.UsuarioSupervisorId,
+                TecnicoLineaId = reporteBD.TecnicoLineaId
+            };
+        }
+
     }
 }

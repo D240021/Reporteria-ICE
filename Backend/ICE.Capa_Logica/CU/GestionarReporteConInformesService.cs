@@ -149,22 +149,22 @@ namespace ICE.Capa_Negocios.CU
                     reporte.InformeV4Id = informes[3].Id;
                 }
 
-                // Registrar el reporte
-                //return await _gestionarReporteCN.RegistrarReporte(reporte);
-                return await _gestionarReporteDA.RegistrarReporte(reporte);
+                // Llamar a ActualizarEstadoReporte para que actualice el estado antes de registrar
+                var reporteActualizado = ReglasReporte.ActualizarEstadoReporte(reporte);
+                if (!reporteActualizado.esValido)
+                {
+                    return false;
+                }
 
-                // await transaction.CommitAsync();
-                //return true;
+                // Registrar el reporte
+                return await _gestionarReporteDA.RegistrarReporte(reporte);
 
             }
             catch (Exception ex)
             {
-                //revertir todo ante cualquier insercion fallida, ya que son muchas
-                //  await transaction.RollbackAsync();
                 throw new Exception("Error al registrar los datos del informe y reporte: " + ex.Message);
             }
         }
-
 
         // Método privado para obtener los informes asociados de un reporte
         private async Task<List<Informe>> ObtenerInformesAsociados(int informeId)
@@ -184,23 +184,31 @@ namespace ICE.Capa_Negocios.CU
             return informesAsociados;
         }
 
+        //Metodo para obtener los informes de un reporte y verificar si todos estan confirmados, pero si al menos
+        //1 no esta completo, se quedan pendientes los 4 otra vez
         public async Task VerificarEstadoInformesAsociados(int informeId)
         {
             var informesAsociados = await ObtenerInformesAsociados(informeId);
+            var reporteAsociado = await ObtenerReportePorInformeId(informeId);
 
             bool todosConfirmados = informesAsociados.All(inf => inf.Estado == 1);
 
             if (todosConfirmados)
             {
-                bool hayInformeCompleto = await VerificarInformesCompletosAsociados(informeId);
-
+                //A pesar de estar como confirmados, revisar que las instancias no tengan atributos nulos
+                bool hayInformeCompleto = await VerificarInformesCompletosAsociados(informeId);                
                 if (!hayInformeCompleto)
                 {
                     await ActualizarEstadosDeInformesAPendiente(informeId);
+                    return;
                 }
+                //Como hay al menos 1 informe con datos completos, se actualiza el reporte
+                ReglasReporte.ActualizarEstadoReporte(reporteAsociado);
+                await _gestionarReporteDA.ActualizarReporte(reporteAsociado.Id, reporteAsociado);
             }
         }
 
+        //Metodo para verificar que los atributos de tipo Instanciad de Informe no esten nulos
         public async Task<bool> VerificarInformesCompletosAsociados(int informeId)
         {
             var informesAsociados = await ObtenerInformesAsociados(informeId);
@@ -208,11 +216,13 @@ namespace ICE.Capa_Negocios.CU
             return informesAsociados.Any(inf => ReglasInforme.EsInformeCompleto(inf).esValido);
         }
 
+        //Se actualizan a pendientes todos los informes de un reporte
         public async Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId)
         {
             var informesAsociados = await ObtenerInformesAsociados(informeId);
 
             ReglasInforme.CambiarTodosLosInformesAPendientes(informesAsociados);
+
 
             foreach (var informe in informesAsociados)
             {
@@ -221,5 +231,62 @@ namespace ICE.Capa_Negocios.CU
 
             return true;
         }
+
+
+
+
+        //Para GestionarReporteCN
+        public async Task<bool> VerificarEstadoInformesDeReporte(int reporteId)
+        {
+            // Obtener los informes asociados al reporte
+            var informesAsociados = await ObtenerInformesAsociados(reporteId);
+
+            // Verificar si todos los informes asociados están completos (Estado == 1)
+            return informesAsociados.All(informe => informe.Estado == 1);
+        }
+
+        public async Task<(bool esValido, string mensaje)> ActualizarEstadoReporteSegunInformes(Reporte reporte)
+        {
+            // Verificar si todos los informes asociados están completos
+            bool informesCompletos = await VerificarEstadoInformesDeReporte(reporte.Id);
+
+            if (!informesCompletos)
+            {
+                return (false, "No todos los informes asociados están completos.");
+            }
+
+            // Llamar a ReglasReporte para actualizar el estado del reporte según las reglas
+            var resultado = ReglasReporte.ActualizarEstadoReporte(reporte);
+
+            if (!resultado.esValido)
+            {
+                return (false, resultado.mensaje);
+            }
+
+            // Actualizar el reporte en la base de datos
+            await _gestionarReporteDA.ActualizarReporte(reporte.Id, reporte);
+
+            return (true, "El estado del reporte ha sido actualizado exitosamente.");
+        }
+
+        public async Task<Reporte> ObtenerReportePorInformeId(int informeId)
+        {
+            // Intentar obtener el reporte usando cada uno de los IDs de informe
+            var reporte = await _gestionarReporteDA.ObtenerReportePorInformeId(informeId);
+
+            if (reporte != null &&
+                (reporte.InformeV1Id == informeId ||
+                 reporte.InformeV2Id == informeId ||
+                 reporte.InformeV3Id == informeId ||
+                 reporte.InformeV4Id == informeId))
+            {
+                return reporte;
+            }
+
+            // Si no se encuentra el reporte, retornar null
+            return null;
+        }
+
+
     }
 }
