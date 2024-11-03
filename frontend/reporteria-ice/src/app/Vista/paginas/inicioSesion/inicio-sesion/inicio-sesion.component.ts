@@ -8,6 +8,7 @@ import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
 import { usuarioRoles } from '../../../../Util/Enum/Roles';
 import { AutenticacionUsuario, Usuario } from '../../../../Modelo/Usuario';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
+import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 
 @Component({
   selector: 'inicio-sesion',
@@ -23,6 +24,7 @@ export class InicioSesionComponent {
   private formBuilder = inject(FormBuilder);
   private encriptacion = inject(AESService);
   private usuarioService = inject(UsuarioService);
+  private seguridadService = inject(SeguridadService);
 
   public contenedorFormulario = this.formBuilder.group({
     nombreUsuario: ['', { validators: [Validators.required] }],
@@ -41,6 +43,9 @@ export class InicioSesionComponent {
     this.usuarioService.esUsuarioAutenticado(credenciales).subscribe(
       respuesta => {
         if (respuesta && typeof respuesta === 'object') {
+          const objetoRespuesta = respuesta as Usuario;
+          const rolUsuario = objetoRespuesta.rol.toLocaleLowerCase();
+          this.seguridadService.establecerRol(rolUsuario);
           this.redireccionarUsuario(respuesta as Usuario);
         }
       },

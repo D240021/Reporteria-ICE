@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { Router, RouterLink } from '@angular/router';
+import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 
 @Component({
   selector: 'crear-reporte',
@@ -15,7 +16,7 @@ export class CrearReporteComponent {
   // Inyección de dependencias
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
-
+  public seguridadService = inject(SeguridadService);
  
 
 }

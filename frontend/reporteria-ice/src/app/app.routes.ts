@@ -23,6 +23,9 @@ import { RegistrarOperarioComponent } from './Vista/paginas/registrarOperario/re
 import { ConsultarOperarioComponent } from './Vista/paginas/consultar-operario/consultar-operario/consultar-operario.component';
 import { NoAutorizadoComponent } from './Vista/paginas/noAutorizado/no-autorizado/no-autorizado.component';
 import { esAdminGuard } from './Seguridad/Guards/es-admin.guard';
+import { esTltGuard } from './Seguridad/Guards/es-tlt.guard';
+import { esTpmGuard } from './Seguridad/Guards/es-tpm.guard';
+import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
 
 export const routes: Routes = [
     {
@@ -74,13 +77,13 @@ export const routes: Routes = [
         path: 'editar-subestacion', component: EditarSubestacionComponent
     },
     {
-        path: 'crear-reporte', component: CrearReporteComponent
+        path: 'crear-reporte', component: CrearReporteComponent, canActivate: [esTpmGuard]
     },
     {
-        path: 'menu-supervisor', component: MenuSupervisorComponent
+        path: 'menu-supervisor', component: MenuSupervisorComponent, canActivate: [esSprvGuard]
     },
     {
-        path: 'editar-reporte', component: EditarReporteComponent
+        path: 'editar-reporte', component: EditarReporteComponent, canActivate: [esTpmGuard]
 
     },
     {
