@@ -245,14 +245,14 @@ namespace ICE.Capa_Negocios.CU
             return informesAsociados.All(informe => informe.Estado == 1);
         }
 
-        public async Task<(bool esValido, string mensaje)> ActualizarEstadoReporteSegunInformes(Reporte reporte)
+        public async Task<bool> ActualizarEstadoReporteSegunInformes(Reporte reporte)
         {
             // Verificar si todos los informes asociados están completos
             bool informesCompletos = await VerificarEstadoInformesDeReporte(reporte.Id);
 
             if (!informesCompletos)
             {
-                return (false, "No todos los informes asociados están completos.");
+                return false;
             }
 
             // Llamar a ReglasReporte para actualizar el estado del reporte según las reglas
@@ -260,13 +260,13 @@ namespace ICE.Capa_Negocios.CU
 
             if (!resultado.esValido)
             {
-                return (false, resultado.mensaje);
+                return false;
             }
 
             // Actualizar el reporte en la base de datos
-            await _gestionarReporteDA.ActualizarReporte(reporte.Id, reporte);
+            var actualizacionReporte = await _gestionarReporteDA.ActualizarReporte(reporte.Id, reporte);
 
-            return (true, "El estado del reporte ha sido actualizado exitosamente.");
+            return actualizacionReporte;
         }
 
         public async Task<Reporte> ObtenerReportePorInformeId(int informeId)

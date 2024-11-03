@@ -40,23 +40,32 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<bool> ActualizarReporte(int id, Reporte reporte)
         {
+            // Verificar si el reporte existe
             var reporteBD = await _context.Reportes.FirstOrDefaultAsync(r => r.Id == id);
-            if (reporteBD != null)
+            if (reporteBD == null)
             {
-                reporteBD.MapaDeDescargas = reporte.MapaDeDescargas;
-                reporteBD.Observaciones = reporte.Observaciones;
-                reporteBD.InformeV1Id = reporte.InformeV1Id;
-                reporteBD.InformeV2Id = reporte.InformeV2Id;
-                reporteBD.InformeV3Id = reporte.InformeV3Id;
-                reporteBD.InformeV4Id = reporte.InformeV4Id;
-                reporteBD.Estado = reporte.Estado;
-                reporteBD.UsuarioSupervisorId = reporte.UsuarioSupervisorId;
-                reporteBD.TecnicoLineaId = reporte.TecnicoLineaId;
-
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
+                return false;
             }
-            return false;
+
+            // Validar las referencias antes de la actualización (FK)
+            var resultadoValidacion = await ValidarReporteReferencias(reporte);
+            if (!resultadoValidacion)
+            {
+                return false;
+            }
+            // Actualizar el reporte existente
+            reporteBD.MapaDeDescargas = reporte.MapaDeDescargas;
+            reporteBD.Observaciones = reporte.Observaciones;
+            reporteBD.InformeV1Id = reporte.InformeV1Id;
+            reporteBD.InformeV2Id = reporte.InformeV2Id;
+            reporteBD.InformeV3Id = reporte.InformeV3Id;
+            reporteBD.InformeV4Id = reporte.InformeV4Id;
+            reporteBD.Estado = reporte.Estado;
+            reporteBD.UsuarioSupervisorId = reporte.UsuarioSupervisorId;
+            reporteBD.TecnicoLineaId = reporte.TecnicoLineaId;
+
+            var resultado = await _context.SaveChangesAsync();
+            return resultado > 0;
         }
 
         public async Task<bool> EliminarReporte(int id)
@@ -153,6 +162,64 @@ namespace ICE.Capa_Datos.Acciones
                 UsuarioSupervisorId = reporteBD.UsuarioSupervisorId,
                 TecnicoLineaId = reporteBD.TecnicoLineaId
             };
+        }
+
+        //Metodos de Validacion
+
+        // Validar que el ID de Informe realmente exista en la tabla Informes
+        private async Task<bool> ValidarExistenciaInforme(int informeId)
+        {
+            return await _context.Informes.AnyAsync(i => i.Id == informeId);
+        }
+
+        // Validar que el Usuario Supervisor realmente exista en la tabla Usuarios
+        private async Task<bool> ValidarExistenciaUsuarioSupervisor(int usuarioSupervisorId)
+        {
+            return await _context.Usuarios.AnyAsync(u => u.Id == usuarioSupervisorId);
+        }
+
+        // Validar que el Técnico de Línea realmente exista en la tabla Usuarios
+        private async Task<bool> ValidarExistenciaTecnicoLinea(int tecnicoLineaId)
+        {
+            return await _context.Usuarios.AnyAsync(t => t.Id == tecnicoLineaId);
+        }
+
+        // Validar que los informes asociados a un reporte específico coincidan con los IDs proporcionados
+        private async Task<bool> ValidarInformesEnReporte(int reporteId, int informeV1Id, int informeV2Id, int informeV3Id, int informeV4Id)
+        {
+            return await _context.Reportes.AnyAsync(r =>
+                r.Id == reporteId &&
+                r.InformeV1Id == informeV1Id &&
+                r.InformeV2Id == informeV2Id &&
+                r.InformeV3Id == informeV3Id &&
+                r.InformeV4Id == informeV4Id);
+        }
+
+        // Método principal de validación de referencias del reporte
+        private async Task<bool> ValidarReporteReferencias(Reporte reporte)
+        {
+            // Validar que los informes existen en la tabla Informes
+            bool informeV1Existe = await ValidarExistenciaInforme(reporte.InformeV1Id);
+            bool informeV2Existe = await ValidarExistenciaInforme(reporte.InformeV2Id);
+            bool informeV3Existe = await ValidarExistenciaInforme(reporte.InformeV3Id);
+            bool informeV4Existe = await ValidarExistenciaInforme(reporte.InformeV4Id);
+
+            // Validar que los usuarios existen en la tabla Usuarios
+            bool usuarioSupervisorExiste = await ValidarExistenciaUsuarioSupervisor(reporte.UsuarioSupervisorId);
+            bool tecnicoLineaExiste = await ValidarExistenciaTecnicoLinea(reporte.TecnicoLineaId);
+
+            // Validar que los informes coincidan con los IDs en el Reporte
+            bool informesEnReporteValidos = await ValidarInformesEnReporte(reporte.Id, reporte.InformeV1Id, reporte.InformeV2Id, reporte.InformeV3Id, reporte.InformeV4Id);
+
+            // Retornar true solo si todos los valores existen y coinciden
+            return informeV1Existe && informeV2Existe && informeV3Existe && informeV4Existe &&
+                   usuarioSupervisorExiste && tecnicoLineaExiste && informesEnReporteValidos;
+        }
+
+
+        private bool ValidarIdsSupervisorYTecnico(Reporte reporte)
+        {
+            return reporte.UsuarioSupervisorId > 0 && reporte.TecnicoLineaId > 0;
         }
 
     }
