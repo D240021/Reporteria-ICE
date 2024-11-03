@@ -16,6 +16,10 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Negocios
         /// <summary>
         /// Cambia el estado de todos los informes asociados a "pendiente" si no hay informes completos.
         /// </summary>
-        Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId);        
+        Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId);
+
+        Task<bool> VerificarEstadoInformesDeReporte(int reporteId);
+        Task<(bool esValido, string mensaje)> ActualizarEstadoReporteSegunInformes(Reporte reporte);
+        Task<Reporte> ObtenerReportePorInformeId(int informeId);
     }
 }
