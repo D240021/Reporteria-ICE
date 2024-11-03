@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'editar-reporte-tlt',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './editar-reporte-tlt.component.html',
   styleUrls: ['./editar-reporte-tlt.component.css']
 })

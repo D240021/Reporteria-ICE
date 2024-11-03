@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ambiente } from '../../Ambientes/ambienteDesarrollo';
-import { Usuario } from '../../Modelo/Usuario';
+import { AutenticacionUsuario, Usuario } from '../../Modelo/Usuario';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +21,12 @@ export class UsuarioService {
 
   public obtenerUsuarios(){
     return this.http.get<Usuario[]>(this.urlBase);
+  }
+
+  public esUsuarioAutenticado(datosAutenticacion: AutenticacionUsuario){
+    
+    const nuevoUrl = `${this.urlBase}/IniciarSesion`;
+    return this.http.post(nuevoUrl, datosAutenticacion);
   }
 
 }
