@@ -4,6 +4,7 @@ import { MatCard, MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 
+
 @Component({
   selector: 'menu-administrador',
   standalone: true,

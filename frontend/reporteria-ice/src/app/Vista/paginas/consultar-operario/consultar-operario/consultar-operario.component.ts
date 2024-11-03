@@ -10,11 +10,14 @@ import { Usuario } from '../../../../Modelo/Usuario';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
 import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
-
+import { EditarOperarioComponent } from "../../editarOperario/editar-operario/editar-operario.component";
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'consultar-operario',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, RouterLink, ReactiveFormsModule, MatButtonModule, MatIconModule],
+  imports: [MatTableModule, MatInputModule, RouterLink,
+    ReactiveFormsModule, MatButtonModule, MatIconModule, EditarOperarioComponent,
+    MatDialogModule],
   templateUrl: './consultar-operario.component.html',
   styleUrl: './consultar-operario.component.css'
 })
@@ -27,6 +30,7 @@ export class ConsultarOperarioComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private usuarioService = inject(UsuarioService);
   private unidadRegionalService = inject(UnidadRegionalService);
+  private cuadroDialogo = inject(MatDialog);
 
   public contenedorFormulario = this.formBuilder.group({
     valor: ['', { validators: [Validators.required] }],
@@ -89,6 +93,17 @@ export class ConsultarOperarioComponent implements OnInit {
         return campo.toLowerCase().includes(valor.toLowerCase());
       });
     }
+  }
+
+  abrirEditarOperario(operario: Usuario) {
+    const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {
+      width: '700px', 
+      height: '500px',
+      data: operario 
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo se ha cerrado');
+    });
   }
 
 
