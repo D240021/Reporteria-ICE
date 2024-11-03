@@ -29,4 +29,8 @@ export class UsuarioService {
     return this.http.post(nuevoUrl, datosAutenticacion);
   }
 
+  public editarUsuario(usuario : Usuario){
+    return this.http.put(`${this.urlBase}/${usuario.id}`, usuario);
+  }
+
 }

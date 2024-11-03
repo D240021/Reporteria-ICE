@@ -26,6 +26,7 @@ import { esAdminGuard } from './Seguridad/Guards/es-admin.guard';
 import { esTltGuard } from './Seguridad/Guards/es-tlt.guard';
 import { esTpmGuard } from './Seguridad/Guards/es-tpm.guard';
 import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
+import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-operario/editar-operario.component';
 
 export const routes: Routes = [
     {
@@ -100,6 +101,9 @@ export const routes: Routes = [
     },
     {
         path: 'no-autorizado', component: NoAutorizadoComponent
+    },
+    {
+        path: 'editar-operario', component: EditarOperarioComponent
     }
 
 ];
