@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
 import { usuarioRoles } from '../../../../Util/Enum/Roles';
+import { AutenticacionUsuario, Usuario } from '../../../../Modelo/Usuario';
+import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 
 @Component({
   selector: 'inicio-sesion',
@@ -20,29 +22,49 @@ export class InicioSesionComponent {
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
   private encriptacion = inject(AESService);
+  private usuarioService = inject(UsuarioService);
 
   public contenedorFormulario = this.formBuilder.group({
     nombreUsuario: ['', { validators: [Validators.required] }],
-    contrasenia: ['']
+    contrasenia: ['', { validators: [Validators.required] }]
   });
 
 
+  verificarCredencialesUsuario() {
+    const contraseniaEncriptada = this.encriptacion.encriptarAES(this.contenedorFormulario.value.contrasenia || '');
+
+    const credenciales: AutenticacionUsuario = {
+      nombreUsuario: this.contenedorFormulario.value.nombreUsuario || '',
+      contrasenia: contraseniaEncriptada
+    };
+
+    this.usuarioService.esUsuarioAutenticado(credenciales).subscribe(
+      respuesta => {
+        if (respuesta && typeof respuesta === 'object') {
+          this.redireccionarUsuario(respuesta as Usuario);
+        }
+      },
+      error => {
+        if (error.status === 401) {
+          console.log('Credenciales inválidas');
+        }
+      }
+    );
+  }
 
 
-  redireccionarUsuario() {
 
-    const tipoUsuario = this.contenedorFormulario.value?.nombreUsuario?.toLocaleLowerCase();
+  redireccionarUsuario(usuario: Usuario) {
+    const tipoUsuario = usuario.rol.toLocaleLowerCase();
     if (tipoUsuario === usuarioRoles.ADMIN.toLocaleLowerCase()) {
       this.router.navigate(['/menu-administrador']);
-    }else if(tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()){
+    } else if (tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()) {
       this.router.navigate(['/crear-reporte']);
-    }else if(tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()){
+    } else if (tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()) {
       this.router.navigate(['/menu-supervisor']);
-    }else if(tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()){
+    } else if (tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()) {
       this.router.navigate(['/editar-reporte-tlt']);
     }
-    // const valor = this.contenedorFormulario.value.nombreUsuario || '';
-    // console.log(this.encriptacion.encriptarAES(valor));
   }
 
 }

@@ -65,8 +65,6 @@ export class RegistrarOperarioComponent implements OnInit {
       unidadRegionalId: Number(this.contenedorFormulario.value.unidadRegionalId) || 0
     };
   
-    console.log(valoresFormulario);
-
     this.usuarioService.crearUsuario(valoresFormulario).subscribe(usuario => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });

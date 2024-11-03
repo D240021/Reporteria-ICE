@@ -1,12 +1,17 @@
 export interface Usuario {
     id: number,
-    contrasenia : string,
-    nombreUsuario : string,
+    contrasenia: string,
+    nombreUsuario: string,
     correo: string,
     nombre: string,
     apellido: string,
     identificador: string,
     rol: string,
-    subestacionId : number,
+    subestacionId: number,
     unidadRegionalId: number
+}
+
+export interface AutenticacionUsuario {
+    contrasenia: string,
+    nombreUsuario: string,
 }
