@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 
 @Component({
   selector: 'menu-supervisor',
@@ -12,7 +13,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./menu-supervisor.component.css']
 })
 export class MenuSupervisorComponent {
-  constructor(private router: Router) { };
+  constructor() { };
+
+  private router = inject(Router);
+  public seguridadService = inject(SeguridadService);
 
   irAEditar(id: string) {    
     this.router.navigate(['/editar-reporte', id]);
@@ -25,7 +29,5 @@ export class MenuSupervisorComponent {
   ];
 
 
-
-  
 
 }

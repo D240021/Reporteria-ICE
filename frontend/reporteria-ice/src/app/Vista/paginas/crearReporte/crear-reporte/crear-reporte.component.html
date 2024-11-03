@@ -42,7 +42,7 @@
     <!-- Botones -->
     <div class="contenedor-botones row mb-3 align-items-center">
       <div class="col-md-3 col-12">
-        <button class="btn btn-volver" type="button" routerLink="/menu-administrador">VOLVER</button>
+        <button class="btn btn-volver" type="button" (click)="seguridadService.cerrarSesion()">VOLVER</button>
       </div>
       <div class="col-md-9 col-12">
         <button class="btn btn-limpiar" type="button">LIMPIAR</button>
