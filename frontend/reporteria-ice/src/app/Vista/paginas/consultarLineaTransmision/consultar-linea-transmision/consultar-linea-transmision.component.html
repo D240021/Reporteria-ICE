@@ -1,65 +1,72 @@
 <div class="cont-principal">
 
-    <!-- Buscador
-      Aqui podria ir el dashboard si el profe lo pide para despues
-  
-     -->
-    <div></div>
+  <div></div>
 
-    <div class="cont-consultar-linea">
+  <div class="cont-consultar-linea">
 
-      <h2>Consultar Línea de Transmisión</h2>
+    <h2>Consultar Línea de Transmisión</h2>
 
-      <!-- Buscadores y Filtros Lineas -->
-      <section class="cont-buscador row align-items-center">
-        <div class="contenedor-filtro col-md-4">
+    @if (lineasTransmisionOriginales.length > 0 ) {
+    <section class="cont-buscador row align-items-center">
+      <div class="contenedor-filtro col-md-4">
 
-          <label for="filtro" class="me-2">Filtro:</label>
-          <input type="text" id="filtro" class="form-control me-3">
-
-        </div>
-
-        <buscador class="col-md-4" [accionInput]="'Buscar'" [accionPlaceholder]="'valor a buscar'"></buscador>
-        <div class="d-flex col-md-4">
-          <select class="form-select me-2">
-            <option value="identificador">Identificador</option>
-            <option value="nombre">Nombre de Ubicación</option>
-          </select>
-          <button class="btn btn-buscar ">Buscar</button>
-        </div>
-      </section>
-      <!-- Tablas Lineas -->
-
-      <div class="cont-tabla row">
-
-        <table class="col-md-12" mat-table [dataSource]="lineasQuemadas">
-
-          <ng-container matColumnDef="IDENTIFICADOR">
-            <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
-            <td mat-cell *matCellDef="let linea">
-              {{linea.identificador}}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="NOMBRE DE UBICACIÓN">
-            <th mat-header-cell *matHeaderCellDef> NOMBRE DE UBICACIÓN </th>
-            <td mat-cell *matCellDef="let linea">
-              {{linea.nombre}}
-            </td>
-          </ng-container>
-
-
-          <tr mat-header-row *matHeaderRowDef="atributosLinea"></tr>
-          <tr mat-row *matRowDef="let row; columns: atributosLinea;"></tr>
-        </table>
-
-        <!-- Boton -->
-        <div class="col-md-6">
-          <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
-        </div>
+        <label for="filtro" class="me-2">Valor:</label>
+        <input type="text" id="filtro" class="form-control me-3" [formControl]="contenedorFormulario.controls.valor">
 
       </div>
 
+      <div class="d-flex col-md-4">
+        <label for="filtro" class="me-2">Filtro:</label>
+        <select class="form-select me-2" [formControl]="contenedorFormulario.controls.filtro">
+          <option value="identificador">Identificador</option>
+          <option value="nombre">Nombre de Ubicación</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="cont-tabla row">
+
+      <table class="col-md-12" mat-table [dataSource]="lineasTransmision">
+
+        <ng-container matColumnDef="IDENTIFICADOR">
+          <th mat-header-cell *matHeaderCellDef> IDENTIFICADOR</th>
+          <td mat-cell *matCellDef="let linea">
+            {{linea.identificador}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NOMBRE DE UBICACIÓN">
+          <th mat-header-cell *matHeaderCellDef> NOMBRE DE UBICACIÓN </th>
+          <td mat-cell *matCellDef="let linea">
+            {{linea.nombreUbicacion}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="GESTIÓN">
+          <th mat-header-cell *matHeaderCellDef> GESTIÓN </th>
+          <td mat-cell *matCellDef="let linea">
+            <button mat-fab type="button"
+            (click)="abrirEditarLineaTransmision(linea)">
+              <mat-icon>create</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="atributosLinea"></tr>
+        <tr mat-row *matRowDef="let row; columns: atributosLinea;"></tr>
+      </table>
+
+      <div class="col-md-6">
+        <button class="btn btn-volver" routerLink="/menu-administrador">Volver</button>
+      </div>
 
     </div>
+    }
+
+    @else {
+    <p>No existen Líneas de transmisión registradas</p>
+    }
+
+  </div>
 </div>

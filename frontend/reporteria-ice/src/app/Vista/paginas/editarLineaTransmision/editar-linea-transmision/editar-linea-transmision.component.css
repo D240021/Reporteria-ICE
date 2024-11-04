@@ -1,4 +1,4 @@
-div {
+/* div {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -63,11 +63,11 @@ div button {
   background-color: var(--color-terciario-fondo);
   color: var(--color-secundario-fondo);
   border-radius: 10px;
-}
+} */
 
 
 /* Media query para pantallas con ancho de 410px o menor */
-@media (max-width: 410px) {
+/* @media (max-width: 410px) {
   form section {
     flex-direction: column;
   }
@@ -92,4 +92,4 @@ div button {
       justify-content: center;
       align-items: center
     }
-}
+} */
