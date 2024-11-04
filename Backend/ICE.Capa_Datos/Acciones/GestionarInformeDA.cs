@@ -60,7 +60,19 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<bool> ActualizarInforme(int id, Informe informe)
         {
-            using (var transaction = await _context.Database.BeginTransactionAsync()) // Iniciar una transacción manual
+            var existeInforme = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
+            if (existeInforme == null)
+            {
+                return false;
+            }
+
+            var validacionReferencia = await ValidarInformeReferencias(informe);
+            if (!validacionReferencia)
+            {
+                return false;
+            }
+            //
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
@@ -115,6 +127,24 @@ namespace ICE.Capa_Datos.Acciones
             return false;
         }
 
+
+        private async Task<bool> ValidarInformeReferencias(Informe informe)
+        {
+            bool subestacionExiste = await _context.Subestaciones.AnyAsync(s => s.Id == informe.SubestacionId);
+            bool lineaTransmisionExiste = await _context.LineasTransmision.AnyAsync(l => l.Id == informe.LineaTransmisionId);
+            bool datosDeLineaExiste = await _context.DatosDeLinea.AnyAsync(d => d.Id == informe.DatosDeLineaId);
+            bool datosGeneralesExiste = await _context.DatosGenerales.AnyAsync(d => d.Id == informe.DatosGeneralesId);
+            bool teleproteccionExiste = await _context.Teleprotecciones.AnyAsync(t => t.Id == informe.TeleproteccionId);
+            bool distanciaDeFallaExiste = await _context.DistanciasDeFalla.AnyAsync(d => d.Id == informe.DistanciaDeFallaId);
+            bool tiemposDeDisparoExiste = await _context.TiemposDeDisparo.AnyAsync(t => t.Id == informe.TiemposDeDisparoId);
+            bool corrientesDeFallaExiste = await _context.CorrientesDeFalla.AnyAsync(c => c.Id == informe.CorrientesDeFallaId);
+
+            // Retornar true solo si todos los registros existen, de lo contrario false
+            return subestacionExiste && lineaTransmisionExiste && datosDeLineaExiste &&
+                   datosGeneralesExiste && teleproteccionExiste && distanciaDeFallaExiste &&
+                   tiemposDeDisparoExiste && corrientesDeFallaExiste;
+        }
+
         public async Task<Informe> ObtenerInformePorId(int id)
         {
             //var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
@@ -133,10 +163,6 @@ namespace ICE.Capa_Datos.Acciones
             {
                 return null;
             }
-
-            //return informeBD;
-
-
             // Mapear los datos desde InformeDA a Informe
             return new Informe
             {

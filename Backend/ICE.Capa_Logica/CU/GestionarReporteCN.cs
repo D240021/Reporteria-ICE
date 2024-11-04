@@ -39,7 +39,7 @@ namespace ICE.Capa_Negocios.CU
             {
                 return validacionReporte.esValido;
             }
-            //Verificamos sus Informes (sin son Completos y tienen Estado 1) desde el servicio compartido (GestionarReporteConInformesService)
+            //erificar si los informes del reporte estan completos
             var validacionInformesDeReporte =  await _gestionarReporteConInformesService.VerificarInformesCompletosAsociados(reporte.InformeV1Id);
 
             if (!validacionInformesDeReporte)
@@ -49,13 +49,7 @@ namespace ICE.Capa_Negocios.CU
 
             // Actualizar el estado del reporte según los informes asociados
             var resultadoActualizacion = await _gestionarReporteConInformesService.ActualizarEstadoReporteSegunInformes(reporte);
-            if (!resultadoActualizacion.esValido)
-            {
-                return false;
-            }
-
-
-            return true;
+            return resultadoActualizacion;
         }
 
         public async Task<bool> EliminarReporte(int id)

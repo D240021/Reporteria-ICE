@@ -19,7 +19,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Negocios
         Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId);
 
         Task<bool> VerificarEstadoInformesDeReporte(int reporteId);
-        Task<(bool esValido, string mensaje)> ActualizarEstadoReporteSegunInformes(Reporte reporte);
+        Task<bool> ActualizarEstadoReporteSegunInformes(Reporte reporte);
         Task<Reporte> ObtenerReportePorInformeId(int informeId);
     }
 }
