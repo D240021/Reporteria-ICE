@@ -8,7 +8,8 @@ export interface Usuario {
     identificador: string,
     rol: string,
     subestacionId: number,
-    unidadRegionalId: number
+    unidadRegionalId: number,
+    nombreUnidadRegional?: string
 }
 
 export interface AutenticacionUsuario {

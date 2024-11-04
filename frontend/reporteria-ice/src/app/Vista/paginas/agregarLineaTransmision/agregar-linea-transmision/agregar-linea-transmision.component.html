@@ -34,7 +34,8 @@
             <button class="btn btn-limpiar" mat-stroked-button type="button"
               (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
             <button class="btn btn-agregar" mat-stroked-button type="submit"
-              [disabled]="contenedorFormulario.invalid">GUARDAR</button>
+              [disabled]="contenedorFormulario.invalid"
+              (click)="registrarLineaTransmision()">GUARDAR</button>
           </div>
         </div>
 

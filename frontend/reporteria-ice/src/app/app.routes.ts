@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { InicioSesionComponent } from './Vista/paginas/inicioSesion/inicio-sesion/inicio-sesion.component';
 import { MenuAdministradorComponent } from './Vista/paginas/menuAdministrador/menu-administrador/menu-administrador.component';
-import { EditarTecnicoComponent } from './Vista/paginas/editarTecnico/editar-tecnico/editar-tecnico.component';
 import { AgregarTecnicoComponent } from './Vista/paginas/agregarTecnico/agregar-tecnico/agregar-tecnico.component';
 import { AgregarSupervisorComponent } from './Vista/paginas/agregarSupervisor/agregar-supervisor/agregar-supervisor.component';
 import { AgregarUnidadRegionalComponent } from './Vista/paginas/agregarUnidadRegional/agregar-unidad-regional/agregar-unidad-regional.component';
@@ -12,7 +11,6 @@ import { ConsultarReporteComponent } from './Vista/paginas/consultarReporte/cons
 import { ConsultarUnidadRegionalComponent } from './Vista/paginas/consultarUnidadRegional/consultar-unidad-regional/consultar-unidad-regional.component';
 import { EditarLineaTransmisionComponent } from './Vista/paginas/editarLineaTransmision/editar-linea-transmision/editar-linea-transmision.component';
 import { ConsultarLineaTransmisionComponent } from './Vista/paginas/consultarLineaTransmision/consultar-linea-transmision/consultar-linea-transmision.component';
-import { EditarSupervisorComponent } from './Vista/paginas/editarSupervisor/editar-supervisor/editar-supervisor.component';
 import { EditarSubestacionComponent } from './Vista/paginas/editarSubestacion/editar-subestacion/editar-subestacion.component';
 import { CrearReporteComponent } from './Vista/paginas/crearReporte/crear-reporte/crear-reporte.component';
 import { MenuSupervisorComponent } from './Vista/paginas/menuSupervisor/menu-supervisor/menu-supervisor.component';
@@ -27,6 +25,7 @@ import { esTltGuard } from './Seguridad/Guards/es-tlt.guard';
 import { esTpmGuard } from './Seguridad/Guards/es-tpm.guard';
 import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
 import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-operario/editar-operario.component';
+import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
 
 export const routes: Routes = [
     {
@@ -37,9 +36,6 @@ export const routes: Routes = [
     },
     {
         path: 'menu-administrador', component: MenuAdministradorComponent, canActivate: [esAdminGuard]
-    },
-    {
-        path: 'editar-tecnico', component: EditarTecnicoComponent
     },
     {
         path: 'agregar-tecnico', component: AgregarTecnicoComponent
@@ -72,9 +68,6 @@ export const routes: Routes = [
         path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'editar-supervisor', component: EditarSupervisorComponent
-    },
-    {
         path: 'editar-subestacion', component: EditarSubestacionComponent
     },
     {
@@ -104,6 +97,9 @@ export const routes: Routes = [
     },
     {
         path: 'editar-operario', component: EditarOperarioComponent
+    },
+    {
+        path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent
     }
 
 ];

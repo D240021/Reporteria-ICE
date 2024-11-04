@@ -8,18 +8,22 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditarUnidadRegionalComponent } from '../../editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
 
 @Component({
   selector: 'consultar-unidad-regional',
   standalone: true,
   imports: [MatTableModule, BuscadorComponent, MatInputModule, RouterLink,
-     ReactiveFormsModule, MatIconModule, MatButtonModule],
+    ReactiveFormsModule, MatIconModule, MatButtonModule],
   templateUrl: './consultar-unidad-regional.component.html',
   styleUrl: './consultar-unidad-regional.component.css'
 })
 export class ConsultarUnidadRegionalComponent implements OnInit {
-  
-  public unidadesRegionalesOriginales : UnidadRegional[] = [];
+
+  private modalAbierto: boolean = false;
+
+  public unidadesRegionalesOriginales: UnidadRegional[] = [];
   public unidadesRegionales: UnidadRegional[] = [];
 
   public atributosUnidad = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'GESTIÓN'];
@@ -32,18 +36,26 @@ export class ConsultarUnidadRegionalComponent implements OnInit {
     filtro: ['', { validators: [Validators.required] }]
   });
 
+  private cuadroDialogo = inject(MatDialog);
+
   ngOnInit(): void {
-    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
-      this.unidadesRegionalesOriginales = unidadesRegionales;
-      this.unidadesRegionales = unidadesRegionales;
-    });
+
+    this.obtenerUnidadesRegionales();
 
     this.contenedorFormulario.valueChanges.subscribe(() => {
       this.filtrarValores();
     });
   }
 
-  filtrarValores() {
+  obtenerUnidadesRegionales(): void {
+    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
+      this.unidadesRegionalesOriginales = unidadesRegionales;
+      this.unidadesRegionales = unidadesRegionales;
+    });
+    return;
+  }
+
+  filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
 
     if (!valor) {
@@ -54,5 +66,21 @@ export class ConsultarUnidadRegionalComponent implements OnInit {
         return campo.toLowerCase().includes(valor.toLowerCase());
       });
     }
+  }
+
+  abrirEditarUnidadRegional(unidadRegional: UnidadRegional): void {
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(EditarUnidadRegionalComponent, {
+        width: '700px',
+        height: '200px',
+        data: unidadRegional
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.modalAbierto = false;
+        this.obtenerUnidadesRegionales();
+      });
+    }
+
   }
 }

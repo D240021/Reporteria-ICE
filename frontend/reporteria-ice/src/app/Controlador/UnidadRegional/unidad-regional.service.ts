@@ -21,4 +21,8 @@ export class UnidadRegionalService {
   public obtenerUnidadesRegionales(){
     return this.http.get<UnidadRegional[]>(this.urlBase);
   }
+
+  public editarUnidadRegional(unidadRegional : UnidadRegional){
+    return this.http.put(`${this.urlBase}/${unidadRegional.id}`, unidadRegional);
+  }
 }

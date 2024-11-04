@@ -37,27 +37,52 @@ export class ConsultarOperarioComponent implements OnInit {
     filtro: ['', { validators: [Validators.required] }]
   });
 
+  private modalAbierto: boolean = false;
+
+  public atributosOperador = ['IDENTIFICADOR', 'NOMBRE', 'APELLIDOS', 'NOMBRE DE USUARIO', 'CORREO',
+    'UNIDAD REGIONAL', 'OCUPACIÓN', 'GESTIÓN'];
+
   ngOnInit(): void {
 
-    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
-      this.unidadesRegionales = unidadesRegionales;
-    });
-
-    this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
-      this.usuariosOriginales = usuarios;
-      this.usuarios = usuarios;
-    });
+    this.cargarDatos();
 
     this.contenedorFormulario.valueChanges.subscribe(() => {
       this.filtrarValores();
     });
   }
 
-  public atributosOperador = ['IDENTIFICADOR', 'NOMBRE', 'APELLIDOS', 'NOMBRE DE USUARIO', 'CORREO',
-    'UNIDAD REGIONAL', 'OCUPACIÓN', 'GESTIÓN'];
+
+  cargarDatos(): void {
+    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
+      this.unidadesRegionales = unidadesRegionales;
+      this.mapearUnidadesRegionalesPorUsuario();
+    });
+
+    this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
+      this.usuariosOriginales = usuarios;
+      this.usuarios = usuarios;
+      
+    });
+
+    return;
+  }
+
+  mapearUnidadesRegionalesPorUsuario(): void {
+    if (this.unidadesRegionales.length && this.usuariosOriginales.length) {
+      const unidadesMap = this.unidadesRegionales.reduce((map, unidad) => {
+        map[unidad.id] = unidad.nombreUbicacion;
+        return map;
+      }, {} as { [key: number]: string });
+
+      this.usuariosOriginales.forEach(usuario => {
+        usuario.nombreUnidadRegional = unidadesMap[usuario.unidadRegionalId] || 'No asignado';
+      });
+    }
+    return;
+  }
 
 
-  filtrarValores() {
+  filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
 
     if (!valor) {
@@ -67,43 +92,48 @@ export class ConsultarOperarioComponent implements OnInit {
         let campo = '';
 
         switch (filtro) {
-
           case 'identificador':
-            campo = 'identificador';
+            campo = usuario.identificador;
             break;
           case 'nombre':
-            campo = 'nombre';
+            campo = usuario.nombre;
             break;
           case 'apellido':
-            campo = 'nombre';
+            campo = usuario.apellido;
             break;
           case 'nombreUsuario':
-            campo = 'nombreUsuario';
+            campo = usuario.nombreUsuario;
             break;
           case 'correo':
-            campo = 'correo';
+            campo = usuario.correo;
             break;
           case 'unidadRegional':
-            campo = 'unidadRegional';
+            campo = usuario.nombreUnidadRegional || '';
             break;
           case 'rol':
-            campo = 'rol';
+            campo = usuario.rol;
             break;
         }
-        return campo.toLowerCase().includes(valor.toLowerCase());
+
+        return campo && campo.toLowerCase().includes(valor.toLowerCase());
       });
     }
   }
 
-  abrirEditarOperario(operario: Usuario) {
-    const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {
-      width: '700px', 
-      height: '500px',
-      data: operario 
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('El diálogo se ha cerrado');
-    });
+  abrirEditarOperario(operario: Usuario): void {
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {
+        width: '700px',
+        height: '500px',
+        data: operario
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.modalAbierto = false;
+        this.cargarDatos();
+      });
+    }
+
   }
 
 

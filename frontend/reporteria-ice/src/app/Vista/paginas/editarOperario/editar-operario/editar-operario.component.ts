@@ -40,7 +40,6 @@ export class EditarOperarioComponent {
   ) {
     this.operario = datos;
     this.contenedorFormulario.patchValue(this.operario);
-    console.log(this.operario);
   }
 
   cerrarCuadroDialogo() {
