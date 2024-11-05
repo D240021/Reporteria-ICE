@@ -9,10 +9,7 @@ namespace ICE.Capa_Negocios.CU
 {
 
     public class GestionarReporteConInformesService: IGestionarReporteConInformesService
-    {
-        //private readonly IGestionarReporteCN _gestionarReporteCN;
-        //private readonly IGestionarInformeCN _gestionarInformeCN;
-        
+    {        
         private readonly IGestionarInformeDA _gestionarInformeDA;
         private readonly IGestionarReporteDA _gestionarReporteDA;
         private readonly IGestionarTeleproteccionDA _gestionarTeleproteccionDA;
@@ -22,10 +19,7 @@ namespace ICE.Capa_Negocios.CU
         private readonly IGestionarLineasTransmisionDA _gestionarLineaTransmisionDA;
         private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
         private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
-
-        //IGestionarReporteCN gestionarReporteCN,
-          //IGestionarInformeCN gestionarInformeCN,
-
+        
         public GestionarReporteConInformesService(
            
             IGestionarInformeDA gestionarInformeDA,
@@ -37,10 +31,7 @@ namespace ICE.Capa_Negocios.CU
             IGestionarLineasTransmisionDA gestionarLineaTransmisionDA,
             IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
             IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)
-        {
-            //_gestionarReporteCN = gestionarReporteCN;
-            //_gestionarInformeCN = gestionarInformeCN;
-
+        {            
             _gestionarInformeDA = gestionarInformeDA;
             _gestionarReporteDA = gestionarReporteDA;
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
@@ -288,5 +279,36 @@ namespace ICE.Capa_Negocios.CU
         }
 
 
+
+        //Metodos para reportes
+        public async Task<Reporte> ObtenerReporteConInformesPorId(int reporteId)
+        {
+            // Obtener el reporte principal
+            var reporte = await _gestionarReporteDA.ObtenerReportePorId(reporteId);
+
+            if (reporte == null)
+            {
+                return null;
+            }
+
+            // Obtener los informes asociados al reporte
+            var informes = await ObtenerInformesAsociados(reporteId);
+
+            // Asignar los informes obtenidos al reporte
+            if (informes.Count >= 4)
+            {
+                reporte.InformeV1Id = informes[0].Id;
+                reporte.InformeV2Id = informes[1].Id;
+                reporte.InformeV3Id = informes[2].Id;
+                reporte.InformeV4Id = informes[3].Id;
+            }
+
+            return reporte;
+        }
+
+        public async Task<List<Informe>> ObtenerReporteConInformesPDF(int reporteId)
+        {
+            return await ObtenerInformesAsociados(reporteId);            
+        }
     }
 }
