@@ -11,10 +11,14 @@ public class PDFGeneratorService : IPDFGeneratorService
 {
 
     private readonly IGestionarReporteConInformesService _gestionarReporteConInformesService;
+    //private readonly IGestionarLineasTransmisionDA _gestionarLineasTransmisionDA;
+    //private readonly IGestionarSubestacionDA _gestionarSubestacionDA;
 
     public PDFGeneratorService(IGestionarReporteConInformesService gestionarReporteConInformesService)
     {
         _gestionarReporteConInformesService = gestionarReporteConInformesService;
+        //_gestionarLineasTransmisionDA
+        //_gestionarSubestacionDA
     }
 
 
@@ -37,14 +41,19 @@ public class PDFGeneratorService : IPDFGeneratorService
             document.Add(new Paragraph($"Observaciones: {reporte.Observaciones ?? "Sin observaciones"}"));
             document.Add(new Paragraph($"Estado: {reporte.Estado}"));
 
-            // Mapa de Descargas como imagen
-            if (reporte.MapaDeDescargas != null)
-            {
-                ImageData imageData = ImageDataFactory.Create(reporte.MapaDeDescargas);
-                Image pdfImage = new Image(imageData).SetAutoScale(true);
-                document.Add(new Paragraph("Mapa de Descargas:").SetBold());
-                document.Add(pdfImage);
-            }
+            // Mapa de Descargas
+            AgregarImagenAlPDF(document, reporte.MapaDeDescargas, "Mapa de Descargas");
+
+            // Información del Técnico de Línea
+            document.Add(new Paragraph($"Fecha y Hora: {reporte.FechaHora?.ToString("yyyy-MM-dd HH:mm:ss") ?? "No especificado"}"));
+            document.Add(new Paragraph("Información del Técnico de Línea").SetBold().SetFontSize(16));
+            document.Add(new Paragraph($"Observaciones del Técnico de Línea: {reporte.ObservacionesTecnicoLinea ?? "Sin observaciones"}"));
+
+            // Evidencia del Técnico de lnea
+            AgregarImagenAlPDF(document, reporte.Evidencia, "Evidencia");
+
+            // Causas del reporte
+            AgregarCausasAlPDF(document, reporte.Causas);
 
             // Obtener la lista de informes asociados usando el servicio
             var informesDeReporte = await _gestionarReporteConInformesService.ObtenerReporteConInformesPDF(reporte.Id);
@@ -145,6 +154,30 @@ public class PDFGeneratorService : IPDFGeneratorService
             document.Add(new Paragraph($"TX TEL: {informe.Teleproteccion.TX_TEL ?? "No disponible"}"));
             document.Add(new Paragraph($"RX TEL: {informe.Teleproteccion.RX_TEL ?? "No disponible"}"));
             document.Add(new Paragraph($"Tiempo MPLS: {informe.Teleproteccion.TiempoMPLS ?? "No disponible"}"));
+        }
+    }
+
+    private void AgregarImagenAlPDF(Document document, byte[] imagenData, string titulo)
+    {
+        if (imagenData != null)
+        {
+            ImageData imageData = ImageDataFactory.Create(imagenData);
+            Image pdfImage = new Image(imageData).SetAutoScale(true);
+            document.Add(new Paragraph(titulo).SetBold());
+            document.Add(pdfImage);
+        }
+    }
+    
+    private void AgregarCausasAlPDF(Document document, string causas)
+    {
+        if (!string.IsNullOrEmpty(causas))
+        {
+            document.Add(new Paragraph("Causas:").SetBold());
+            var listaCausas = causas.Split(',');
+            foreach (var causa in listaCausas)
+            {
+                document.Add(new Paragraph($"- {causa.Trim()}"));
+            }
         }
     }
 }

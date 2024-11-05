@@ -4,6 +4,24 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
 {
     public static class ReglasCausa
     {
+
+        public static (bool esValido, string mensaje) EsCausaValidaParaRegistro(Causa causa)
+        {
+            if (causa == null)
+            {
+                return (false, "La causa no debe ser nula.");
+            }
+
+            // Validación de la Descripción
+            if (string.IsNullOrWhiteSpace(causa.Descripcion))
+            {
+                return (false, "La descripción de la causa no debe estar vacía.");
+            }
+
+            return (true, string.Empty);
+        }
+
+
         // Método para validar que la instancia de Causa es válida
         public static (bool esValido, string mensaje) EsCausaValida(Causa causa)
         {
