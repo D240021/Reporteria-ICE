@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
-import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 
 @Component({
   selector: 'agregar-unidad-regional',

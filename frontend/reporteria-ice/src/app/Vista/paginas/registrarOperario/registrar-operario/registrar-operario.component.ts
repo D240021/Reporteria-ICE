@@ -5,7 +5,7 @@ import { FormulariosService } from '../../../../Util/Formularios/formularios.ser
 import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
-import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { Usuario } from '../../../../Modelo/Usuario';
 import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
 

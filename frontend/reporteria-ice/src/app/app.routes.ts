@@ -6,7 +6,6 @@ import { AgregarSupervisorComponent } from './Vista/paginas/agregarSupervisor/ag
 import { AgregarUnidadRegionalComponent } from './Vista/paginas/agregarUnidadRegional/agregar-unidad-regional/agregar-unidad-regional.component';
 import { AgregarSubestacionComponent } from './Vista/paginas/agregarSubestacion/agregar-subestacion/agregar-subestacion.component';
 import { AgregarLineaTransmisionComponent } from './Vista/paginas/agregarLineaTransmision/agregar-linea-transmision/agregar-linea-transmision.component';
-import { ConsultarSupervisorComponent } from './Vista/paginas/consultarSupervisor/consultar-supervisor/consultar-supervisor.component';
 import { ConsultarReporteComponent } from './Vista/paginas/consultarReporte/consultar-reporte/consultar-reporte.component';
 import { ConsultarUnidadRegionalComponent } from './Vista/paginas/consultarUnidadRegional/consultar-unidad-regional/consultar-unidad-regional.component';
 import { EditarLineaTransmisionComponent } from './Vista/paginas/editarLineaTransmision/editar-linea-transmision/editar-linea-transmision.component';
@@ -26,6 +25,7 @@ import { esTpmGuard } from './Seguridad/Guards/es-tpm.guard';
 import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
 import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-operario/editar-operario.component';
 import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
+import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
 
 export const routes: Routes = [
     {
@@ -51,9 +51,6 @@ export const routes: Routes = [
     },
     {
         path: 'agregar-linea-transmision', component: AgregarLineaTransmisionComponent, canActivate: [esAdminGuard]
-    },
-    {
-        path: 'consultar-supervisor', component: ConsultarSupervisorComponent
     },
     {
         path: 'consultar-unidad-regional', component: ConsultarUnidadRegionalComponent, canActivate: [esAdminGuard]
@@ -100,6 +97,9 @@ export const routes: Routes = [
     },
     {
         path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent
+    },
+    {
+        path: 'consultar-subestacion', component: ConsultarSubestacionComponent
     }
 
 ];

@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Supervisor } from '../../../../Modelo/supervisor';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Usuario } from '../../../../Modelo/Usuario';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
-import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { EditarOperarioComponent } from "../../editarOperario/editar-operario/editar-operario.component";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({

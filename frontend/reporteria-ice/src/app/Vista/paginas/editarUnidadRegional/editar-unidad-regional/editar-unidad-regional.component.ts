@@ -5,7 +5,7 @@ import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Usuario } from '../../../../Modelo/Usuario';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
-import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { RouterLink } from '@angular/router';
 
 @Component({
