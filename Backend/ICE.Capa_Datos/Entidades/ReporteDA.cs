@@ -20,6 +20,18 @@ namespace ICE.Capa_Datos.Entidades
         [StringLength(500)]
         public string? Observaciones { get; set; }
 
+
+        // Datos que llena el Técnico de Línea
+        public byte[]? Evidencia { get; set; }
+
+        [StringLength(500)]
+        public string? ObservacionesTecnicoLinea { get; set; }
+
+        [StringLength(1000)]
+        public string? Causas { get; set; }
+
+        public DateTime? FechaHora { get; set; }
+
         // Relaciones con Informes
         [ForeignKey("InformeV1Id")]
         public int InformeV1Id { get; set; }

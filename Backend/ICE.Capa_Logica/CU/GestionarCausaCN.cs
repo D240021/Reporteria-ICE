@@ -54,8 +54,7 @@ namespace ICE.Capa_Negocios.CU
 
         public async Task<bool> RegistrarCausa(Causa causa)
         {
-            var validacion = ReglasCausa.EsCausaValida(causa);
-
+            var validacion = ReglasCausa.EsCausaValidaParaRegistro(causa);
             if (!validacion.esValido)
                 return false;
 

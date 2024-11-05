@@ -4,7 +4,10 @@ using reporteria_ice_api.DTOs;
 namespace reporteria_ice_api.Utilitarios
 {
     public static class ReporteDTOMapper
+
+    
     {
+
         public static Reporte ConvertirDTOAReporte(ReporteDTO reporteDTO)
         {
             return new Reporte
@@ -12,6 +15,10 @@ namespace reporteria_ice_api.Utilitarios
                 Id = reporteDTO.Id ?? 0,
                 MapaDeDescargas = reporteDTO.MapaDeDescargas,
                 Observaciones = reporteDTO.Observaciones,
+                Evidencia = reporteDTO.Evidencia,
+                ObservacionesTecnicoLinea = reporteDTO.ObservacionesTecnicoLinea,
+                Causas = reporteDTO.Causas,
+                FechaHora = reporteDTO.FechaHora,
                 InformeV1Id = reporteDTO.InformeV1Id,
                 InformeV2Id = reporteDTO.InformeV2Id,
                 InformeV3Id = reporteDTO.InformeV3Id,
@@ -29,6 +36,10 @@ namespace reporteria_ice_api.Utilitarios
                 Id = reporte.Id,
                 MapaDeDescargas = reporte.MapaDeDescargas,
                 Observaciones = reporte.Observaciones,
+                Evidencia = reporte.Evidencia,
+                ObservacionesTecnicoLinea = reporte.ObservacionesTecnicoLinea,
+                Causas = reporte.Causas,
+                FechaHora = reporte.FechaHora,
                 InformeV1Id = reporte.InformeV1Id,
                 InformeV2Id = reporte.InformeV2Id,
                 InformeV3Id = reporte.InformeV3Id,
@@ -44,4 +55,6 @@ namespace reporteria_ice_api.Utilitarios
             return reportes.Select(reporte => ConvertirReporteADTO(reporte)).ToList();
         }
     }
+
+
 }
