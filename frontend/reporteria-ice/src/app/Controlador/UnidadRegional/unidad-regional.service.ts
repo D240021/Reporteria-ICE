@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ambiente } from '../../Ambientes/ambienteDesarrollo';
-import { UnidadRegional } from '../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../Modelo/unidadRegional';
 import { Observable } from 'rxjs';
 
 @Injectable({

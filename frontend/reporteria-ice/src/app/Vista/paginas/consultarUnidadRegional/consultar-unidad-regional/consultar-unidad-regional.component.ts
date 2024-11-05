@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
-import { UnidadRegional } from '../../../../Modelo/UnidadRegional';
+import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';

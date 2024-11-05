@@ -11,43 +11,46 @@
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">IDENTIFICADOR</label>
           <div class="col-md-8">
-
-            <input type="text" placeholder="Inserte un identificador único">
-
-          </div>          
+            <input type="text" placeholder="Inserte un identificador único"
+            [formControl]="contenedorFormulario.controls.identificador">
+          </div>
         </section>
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">NOMBRE</label>
           <div class="col-md-8">
-
-            <input type="text" placeholder="Inserte un nombre de ubicación">
-
-          </div>          
+            <input type="text" placeholder="Inserte un nombre de ubicación"
+            [formControl]="contenedorFormulario.controls.nombreUbicacion">
+          </div>
         </section>
 
         <section class="row mb-3 align-items-center">
-          <label class="col-md-4" >LÍNEAS DE TRANSMISIÓN ASIGNADAS</label>
+          <label class="col-md-4">UNIDAD REGIONAL A ASIGNAR</label>
           <div class="col-md-8">
-
-              <select>
-                <option value="">Orosí</option>
-                <option value="">Desamparados</option>
-              </select>
-
+            <select [formControl]="contenedorFormulario.controls.unidadRegionalId">
+              @for (unidadRegional of unidadesRegionales; track $index) {
+              <option value={{unidadRegional.id}}>
+                <span>{{unidadRegional.identificador}}</span>
+                {{unidadRegional.nombreUbicacion}}
+              </option>
+              }
+            </select>
           </div>
-            
         </section>
 
         <div class="contenedor-botones row mb-3 align-items-center">
 
           <div class="col-md-3 col-12">
-            <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
+            <button class="btn btn-volver" mat-stroked-button type="button"
+              routerLink="/menu-administrador">VOLVER</button>
           </div>
 
           <div class="col-md-9 col-12">
-            <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
-            <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
+            <button class="btn btn-limpiar" mat-stroked-button type="button"
+              (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+            <button class="btn btn-agregar" mat-stroked-button type="button"
+              [disabled]="contenedorFormulario.invalid"
+              (click)="registrarSubestacion()">GUARDAR</button>
           </div>
         </div>
 
@@ -63,4 +66,3 @@
 
 
 </div>
-
