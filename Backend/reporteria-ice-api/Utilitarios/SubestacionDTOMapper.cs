@@ -12,7 +12,8 @@ namespace reporteria_ice_api.Utilitarios
                 Id = subestacion.Id,
                 NombreUbicacion = subestacion.NombreUbicacion,
                 Identificador = subestacion.Identificador,
-                UnidadRegionalId = subestacion.UnidadRegionalId
+                UnidadRegionalId = subestacion.UnidadRegionalId,
+                NombreUnidadRegional = subestacion.NombreUnidadRegional 
             };
         }
 
@@ -23,7 +24,8 @@ namespace reporteria_ice_api.Utilitarios
                 Id = subestacionDTO.Id ?? 0,
                 NombreUbicacion = subestacionDTO.NombreUbicacion,
                 Identificador = subestacionDTO.Identificador,
-                UnidadRegionalId = subestacionDTO.UnidadRegionalId
+                UnidadRegionalId = subestacionDTO.UnidadRegionalId,
+                NombreUnidadRegional = subestacionDTO.NombreUnidadRegional 
             };
         }
 

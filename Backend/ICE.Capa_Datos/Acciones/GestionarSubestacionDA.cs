@@ -67,34 +67,54 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<Subestacion> ObtenerSubestacion(int id)
         {
-            var subestacionBD = await _context.Subestaciones.FirstOrDefaultAsync(s => s.Id == id);
+            // Primero obtenemos la subestación
+            var subestacionBD = await _context.Subestaciones
+                .AsNoTracking()
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (subestacionBD == null)
                 throw new Exception("Error al obtener, la subestación no se encontró en la base de datos.");
 
+            // Luego obtenemos la unidad regional asociada
+            var unidadRegional = await _context.UnidadesRegionales
+                .AsNoTracking()
+                .FirstOrDefaultAsync(ur => ur.Id == subestacionBD.UnidadRegionalId);
+
+            if (unidadRegional == null)
+                throw new Exception("Error al obtener, la unidad regional no se encontró en la base de datos.");
+
+            // Retornamos la subestación con el nombre de la unidad regional
             return new Subestacion
             {
                 Id = subestacionBD.Id,
                 NombreUbicacion = subestacionBD.NombreUbicacion,
                 Identificador = subestacionBD.Identificador,
-                UnidadRegionalId = subestacionBD.UnidadRegionalId
+                UnidadRegionalId = subestacionBD.UnidadRegionalId,
+                NombreUnidadRegional = unidadRegional.NombreUbicacion // Asigna el nombre de la unidad regional
             };
         }
 
         public async Task<IEnumerable<Subestacion>> ObtenerTodasLasSubestaciones()
         {
             var subestaciones = await _context.Subestaciones
-                .Select(s => new Subestacion
-                {
-                    Id = s.Id,
-                    NombreUbicacion = s.NombreUbicacion,
-                    Identificador = s.Identificador,
-                    UnidadRegionalId = s.UnidadRegionalId
-                })
+                .Join(
+                    _context.UnidadesRegionales,
+                    subestacion => subestacion.UnidadRegionalId,
+                    unidadRegional => unidadRegional.Id,
+                    (subestacion, unidadRegional) => new Subestacion
+                    {
+                        Id = subestacion.Id,
+                        NombreUbicacion = subestacion.NombreUbicacion,
+                        Identificador = subestacion.Identificador,
+                        UnidadRegionalId = subestacion.UnidadRegionalId,
+                        NombreUnidadRegional = unidadRegional != null ? unidadRegional.NombreUbicacion : null
+                    })
                 .ToListAsync();
 
             return subestaciones;
         }
+
+
 
         public async Task<bool> RegistrarSubestacion(Subestacion subestacion)
         {

@@ -14,5 +14,6 @@ namespace ICE.Capa_Dominio.Modelos
 
         // Relación con UnidadRegional
         public int UnidadRegionalId { get; set; }
+        public string NombreUnidadRegional { get; set; }
     }
 }
