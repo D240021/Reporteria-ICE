@@ -33,7 +33,7 @@ export class ConsultarSubestacionComponent {
   public subestaciones: Subestacion[] = [];
 
 
-  public atributosLinea = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'GESTIÓN'];
+  public atributosLinea = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'UNIDAD REGIONAL', 'GESTIÓN'];
 
   private formBuilder = inject(FormBuilder);
   private subestacionService = inject(SubestacionService);

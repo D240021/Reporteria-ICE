@@ -24,11 +24,9 @@ export class ConsultarOperarioComponent implements OnInit {
 
   public usuariosOriginales: Usuario[] = [];
   public usuarios: Usuario[] = this.usuariosOriginales;
-  public unidadesRegionales: UnidadRegional[] = [];
 
   private formBuilder = inject(FormBuilder);
   private usuarioService = inject(UsuarioService);
-  private unidadRegionalService = inject(UnidadRegionalService);
   private cuadroDialogo = inject(MatDialog);
 
   public contenedorFormulario = this.formBuilder.group({
@@ -52,10 +50,6 @@ export class ConsultarOperarioComponent implements OnInit {
 
 
   cargarDatos(): void {
-    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
-      this.unidadesRegionales = unidadesRegionales;
-      this.mapearUnidadesRegionalesPorUsuario();
-    });
 
     this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
       this.usuariosOriginales = usuarios;
@@ -63,20 +57,6 @@ export class ConsultarOperarioComponent implements OnInit {
       
     });
 
-    return;
-  }
-
-  mapearUnidadesRegionalesPorUsuario(): void {
-    if (this.unidadesRegionales.length && this.usuariosOriginales.length) {
-      const unidadesMap = this.unidadesRegionales.reduce((map, unidad) => {
-        map[unidad.id] = unidad.nombreUbicacion;
-        return map;
-      }, {} as { [key: number]: string });
-
-      this.usuariosOriginales.forEach(usuario => {
-        usuario.nombreUnidadRegional = unidadesMap[usuario.unidadRegionalId] || 'No asignado';
-      });
-    }
     return;
   }
 
