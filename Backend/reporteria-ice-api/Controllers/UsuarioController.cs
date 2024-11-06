@@ -20,6 +20,7 @@ namespace reporteria_ice_api.Controllers
             this.gestionarUsuarioCN = gestionarUsuarioCN;
         }
 
+        // Método para registrar un nuevo usuario
         [HttpPost]
         public async Task<ActionResult<bool>> RegistrarUsuario(UsuarioDTO usuarioDTO)
         {
@@ -41,15 +42,16 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para obtener todos los usuarios, usando UsuarioViewDTO para visualización
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ObtenerTodosLosUsuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioViewDTO>>> ObtenerTodosLosUsuarios()
         {
             try
             {
                 var usuarios = await gestionarUsuarioCN.ObtenerTodosLosUsuarios();
-                var usuariosDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosADTO(usuarios);
+                var usuariosViewDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosAViewDTO(usuarios);
 
-                return Ok(usuariosDTO);
+                return Ok(usuariosViewDTO);
             }
             catch (Exception e)
             {
@@ -57,8 +59,9 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para obtener un usuario específico por ID, usando UsuarioViewDTO para visualización
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioDTO>> ObtenerUsuario(int id)
+        public async Task<ActionResult<UsuarioViewDTO>> ObtenerUsuario(int id)
         {
             try
             {
@@ -69,7 +72,7 @@ namespace reporteria_ice_api.Controllers
                     return NotFound("Usuario no encontrado.");
                 }
 
-                return Ok(UsuarioDTOMapper.ConvertirUsuarioADTO(usuario));
+                return Ok(UsuarioDTOMapper.ConvertirUsuarioAViewDTO(usuario));
             }
             catch (Exception e)
             {
@@ -77,6 +80,7 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para editar un usuario existente
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarUsuario(int id, UsuarioDTO usuarioDTO)
         {
@@ -98,6 +102,7 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para eliminar un usuario por ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarUsuario(int id)
         {
@@ -118,8 +123,9 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para iniciar sesión, validando las credenciales del usuario
         [HttpPost("IniciarSesion")]
-        public async Task<ActionResult<UsuarioDTO>> IniciarSesion([FromBody] CredencialesDTO credencialesDTO)
+        public async Task<ActionResult<UsuarioViewDTO>> IniciarSesion([FromBody] CredencialesDTO credencialesDTO)
         {
             try
             {
@@ -131,18 +137,14 @@ namespace reporteria_ice_api.Controllers
                     return Unauthorized("Credenciales inválidas.");
                 }
 
-                var usuarioDTOAutenticado = UsuarioDTOMapper.ConvertirUsuarioADTO(usuario);
+                var usuarioViewDTOAutenticado = UsuarioDTOMapper.ConvertirUsuarioAViewDTO(usuario);
 
-                return Ok(usuarioDTOAutenticado);
+                return Ok(usuarioViewDTOAutenticado);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-
-
-
-
     }
 }
