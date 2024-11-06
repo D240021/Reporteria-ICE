@@ -9,11 +9,14 @@ import { usuarioRoles } from '../../../../Util/Enum/Roles';
 import { AutenticacionUsuario, Usuario } from '../../../../Modelo/Usuario';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'inicio-sesion',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, MatButtonModule, ReactiveFormsModule],
+  imports: [MatInputModule, MatFormFieldModule, MatButtonModule, ReactiveFormsModule,
+    CommonModule
+  ],
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.css'
 })
@@ -25,6 +28,7 @@ export class InicioSesionComponent {
   private encriptacion = inject(AESService);
   private usuarioService = inject(UsuarioService);
   private seguridadService = inject(SeguridadService);
+  public mensajeCredenciales : string = ''; 
 
   public contenedorFormulario = this.formBuilder.group({
     nombreUsuario: ['', { validators: [Validators.required] }],
@@ -47,11 +51,12 @@ export class InicioSesionComponent {
           const rolUsuario = objetoRespuesta.rol.toLocaleLowerCase();
           this.seguridadService.establecerRol(rolUsuario);
           this.redireccionarUsuario(respuesta as Usuario);
+          this.mensajeCredenciales = '';
         }
       },
       error => {
         if (error.status === 401) {
-          console.log('Credenciales inválidas');
+          this.mensajeCredenciales = 'El usuario o la contraseña son incorrectos'
         }
       }
     );
