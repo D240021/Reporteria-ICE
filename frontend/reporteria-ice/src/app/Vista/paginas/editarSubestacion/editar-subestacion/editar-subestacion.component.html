@@ -1,0 +1,27 @@
+<div>
+    <h2 mat-dialog-title>Editar Línea de Transmisión</h2>
+    <mat-dialog-content>
+
+        <label class="col-md-4">NOMBRE DE UBICACION</label>
+        <div class="col-md-8">
+            <input type="text" placeholder="Inserte un nombre de usuario único"
+                [formControl]="contenedorFormulario.controls.nombreUbicacion">
+        </div>
+
+        <mat-dialog-actions>
+
+            <button class="btn btn-volver" type="button" (click)="cerrarCuadroDialogo()">
+                CERRAR
+            </button>
+
+            <button class="btn btn-limpiar" type="button"
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+                LIMPIAR
+            </button>
+            <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid"
+                (click)="guardarCambios()">
+                GUARDAR
+            </button>
+        </mat-dialog-actions>
+    </mat-dialog-content>
+</div>
