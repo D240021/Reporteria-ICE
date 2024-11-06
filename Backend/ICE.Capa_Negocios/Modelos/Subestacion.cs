@@ -12,9 +12,9 @@ namespace ICE.Capa_Dominio.Modelos
         public string NombreUbicacion { get; set; }
         public string Identificador { get; set; }
         public int UnidadRegionalId { get; set; }
-
         // Agrega esta propiedad
         public string? NombreUnidadRegional { get; set; } 
+
     }
 
 }

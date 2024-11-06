@@ -42,3 +42,8 @@ p {
     color: var(--color-secundario);
     font-family: var(--fuente-poppins);
 }
+
+.mensajeError {
+    color: red;
+    white-space: pre-wrap;
+}

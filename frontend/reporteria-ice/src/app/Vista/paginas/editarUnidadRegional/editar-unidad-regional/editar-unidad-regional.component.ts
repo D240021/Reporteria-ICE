@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './editar-unidad-regional.component.css'
 })
 export class EditarUnidadRegionalComponent {
-  unidadRegional: any;
+  public unidadRegional: any;
 
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
