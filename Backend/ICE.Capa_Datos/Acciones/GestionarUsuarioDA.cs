@@ -89,14 +89,23 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<Usuario> ObtenerUsuarioPorId(int id)
         {
+            // Primero obtenemos el usuario
             var usuarioBD = await _context.Usuarios
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             if (usuarioBD == null) return null;
 
-            // Desencripta la contraseña antes de devolver el usuario
-            // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
+            // Luego buscamos la unidad regional asociada
+            string nombreUnidadRegional = null;
+            if (usuarioBD.UnidadRegionalId.HasValue)
+            {
+                var unidadRegional = await _context.UnidadesRegionales
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(ur => ur.Id == usuarioBD.UnidadRegionalId.Value);
+
+                nombreUnidadRegional = unidadRegional?.NombreUbicacion;
+            }
 
             return new Usuario
             {
@@ -109,9 +118,11 @@ namespace ICE.Capa_Datos.Acciones
                 Identificador = usuarioBD.Identificador,
                 Rol = usuarioBD.Rol,
                 SubestacionId = usuarioBD.SubestacionId,
-                UnidadRegionalId = usuarioBD.UnidadRegionalId
+                UnidadRegionalId = usuarioBD.UnidadRegionalId,
+                NombreUnidadRegional = nombreUnidadRegional 
             };
         }
+
 
         public async Task<IEnumerable<Usuario>> ObtenerTodosLosUsuarios()
         {
@@ -123,7 +134,16 @@ namespace ICE.Capa_Datos.Acciones
 
             foreach (var usuarioBD in usuariosBD)
             {
-                // var contraseniaDesencriptada = DesencriptarAES(usuarioBD.Contrasenia);
+                string nombreUnidadRegional = null;
+
+                if (usuarioBD.UnidadRegionalId.HasValue)
+                {
+                    var unidadRegional = await _context.UnidadesRegionales
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(ur => ur.Id == usuarioBD.UnidadRegionalId.Value);
+
+                    nombreUnidadRegional = unidadRegional?.NombreUbicacion; 
+                }
 
                 usuarios.Add(new Usuario
                 {
@@ -136,12 +156,14 @@ namespace ICE.Capa_Datos.Acciones
                     Identificador = usuarioBD.Identificador,
                     Rol = usuarioBD.Rol,
                     SubestacionId = usuarioBD.SubestacionId,
-                    UnidadRegionalId = usuarioBD.UnidadRegionalId
+                    UnidadRegionalId = usuarioBD.UnidadRegionalId,
+                    NombreUnidadRegional = nombreUnidadRegional 
                 });
             }
 
             return usuarios;
         }
+
 
         public async Task<bool> EliminarUsuario(int id)
         {

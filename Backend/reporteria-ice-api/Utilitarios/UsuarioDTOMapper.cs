@@ -36,7 +36,8 @@ namespace reporteria_ice_api.Utilitarios
                 Identificador = usuario.Identificador,
                 Rol = usuario.Rol,
                 SubestacionId = usuario.SubestacionId,
-                UnidadRegionalId = usuario.UnidadRegionalId
+                UnidadRegionalId = usuario.UnidadRegionalId,
+                NombreUnidadRegional = usuario.NombreUnidadRegional
             };
         }
 
