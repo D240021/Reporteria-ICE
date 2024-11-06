@@ -13,7 +13,7 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             if (reporte.Estado <= 0 || reporte.Estado > 4)
             {
                 return (false, "El estado del reporte debe estar entre 1 y 4");
-                //El cero es cuando se crea el reporte nada mas
+                //El cero es cuando se crea el reporte nada mas y el backend lo cambia a 1 cuando se registra
             }
 
             // Validación del Usuario Supervisor
@@ -79,10 +79,10 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             //}
 
             // Validar que Observaciones no sea nulo o vacío
-            //if (string.IsNullOrWhiteSpace(reporte.Observaciones))
-            //{
-            //return (false, "Las Observaciones deben estar definidas para continuar.");
-            //}
+            if (string.IsNullOrWhiteSpace(reporte.Observaciones))
+            {
+            return (false, "Las Observaciones deben estar definidas para continuar.");
+            }
 
             return (true, string.Empty);
 
@@ -103,6 +103,18 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
             if (reporte.Estado != 3)
             {
                 return (false, "El reporte no está en el estado correcto para ser actualizado por el técnico de linea.");
+            }
+
+            // Validar que Causas no sea nulo ni vacío
+            if (string.IsNullOrWhiteSpace(reporte.Causas))
+            {
+                return (false, "El campo 'Causas' no puede estar vacío o nulo.");
+            }
+
+            // Validar que FechaHora tenga un valor asignado
+            if (reporte.FechaHora == null)
+            {
+                return (false, "El campo 'FechaHora' debe tener una fecha y hora asignada.");
             }
 
             return (true, string.Empty);

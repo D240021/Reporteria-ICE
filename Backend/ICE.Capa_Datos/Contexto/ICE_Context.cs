@@ -34,8 +34,10 @@ namespace ICE.Capa_Datos.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de clave compuesta para la tabla ReporteCausaDA
+            /*
             modelBuilder.Entity<ReporteCausaDA>()
                 .HasKey(rc => new { rc.ReporteId, rc.CausaId });
+            */
 
             // Configuración para evitar múltiples rutas de cascada en la tabla `ReporteDA`
             modelBuilder.Entity<ReporteDA>()

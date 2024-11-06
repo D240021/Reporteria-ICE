@@ -19,7 +19,10 @@ namespace ICE.Capa_Datos.Acciones
         }
 
         public async Task<bool> RegistrarCausa(Causa causa)
-        {
+        {            
+            var causaExistente = await _context.Causas.AnyAsync(c => c.Descripcion == causa.Descripcion);
+            if (causaExistente) return false;
+
             var causaDA = new CausaDA
             {
                 Descripcion = causa.Descripcion

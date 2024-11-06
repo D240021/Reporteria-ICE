@@ -67,6 +67,10 @@ builder.Services.AddTransient<IGestionarReporteConInformesService, GestionarRepo
 // Inyección de dependencias para el servicio ieText (PDF)
 builder.Services.AddTransient<IPDFGeneratorService, PDFGeneratorService>();
 
+// Inyección de dependencias para Causas
+builder.Services.AddTransient<IGestionarCausaCN, GestionarCausaCN>();
+builder.Services.AddTransient<IGestionarCausaDA, GestionarCausaDA>();
+
 
 
 // Conexión a BD

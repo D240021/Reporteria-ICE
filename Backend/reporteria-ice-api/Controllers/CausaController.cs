@@ -27,6 +27,11 @@ namespace reporteria_ice_api.Controllers
             {
                 var causa = CausaDTOMapper.ConvertirDTOACausa(causaDTO);
                 var respuesta = await _gestionarCausaCN.RegistrarCausa(causa);
+
+                if (!respuesta)
+                {
+                    return BadRequest("La causa ya existe o los datos son inválidos.");
+                }
                 return Ok(respuesta);
             }
             catch (Exception e)

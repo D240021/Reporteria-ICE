@@ -9,9 +9,17 @@ namespace ICE.Capa_Dominio.Modelos
     public class Reporte
     {
         public int Id { get; set; }
+        //Datos que llena el supervisor
         public byte[]? MapaDeDescargas { get; set; }
         public string? Observaciones { get; set; }
 
+        //Datos que llena el Tecnico de Linea
+        public byte[]? Evidencia { get; set; }
+        public string? ObservacionesTecnicoLinea { get; set; }
+        //anidar las causas del frontend
+        public string? Causas {get; set;}
+        public DateTime? FechaHora { get; set; }
+        
         // Relaciones con Informes
         public int InformeV1Id { get; set; }        
 

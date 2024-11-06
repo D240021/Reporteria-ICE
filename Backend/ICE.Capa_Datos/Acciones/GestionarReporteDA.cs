@@ -24,6 +24,10 @@ namespace ICE.Capa_Datos.Acciones
             {
                 MapaDeDescargas = reporte.MapaDeDescargas,
                 Observaciones = reporte.Observaciones,
+                Evidencia = reporte.Evidencia,
+                ObservacionesTecnicoLinea = reporte.ObservacionesTecnicoLinea,
+                Causas = reporte.Causas,
+                FechaHora = reporte.FechaHora,
                 InformeV1Id = reporte.InformeV1Id,
                 InformeV2Id = reporte.InformeV2Id,
                 InformeV3Id = reporte.InformeV3Id,
@@ -56,6 +60,10 @@ namespace ICE.Capa_Datos.Acciones
             // Actualizar el reporte existente
             reporteBD.MapaDeDescargas = reporte.MapaDeDescargas;
             reporteBD.Observaciones = reporte.Observaciones;
+            reporteBD.Evidencia = reporte.Evidencia;
+            reporteBD.ObservacionesTecnicoLinea = reporte.ObservacionesTecnicoLinea;
+            reporteBD.Causas = reporte.Causas;
+            reporteBD.FechaHora = reporte.FechaHora;
             reporteBD.InformeV1Id = reporte.InformeV1Id;
             reporteBD.InformeV2Id = reporte.InformeV2Id;
             reporteBD.InformeV3Id = reporte.InformeV3Id;
@@ -93,6 +101,10 @@ namespace ICE.Capa_Datos.Acciones
                 Id = reporteBD.Id,
                 MapaDeDescargas = reporteBD.MapaDeDescargas,
                 Observaciones = reporteBD.Observaciones,
+                Evidencia = reporteBD.Evidencia,
+                ObservacionesTecnicoLinea = reporteBD.ObservacionesTecnicoLinea,
+                Causas = reporteBD.Causas,
+                FechaHora = reporteBD.FechaHora,
                 InformeV1Id = reporteBD.InformeV1Id,
                 InformeV2Id = reporteBD.InformeV2Id,
                 InformeV3Id = reporteBD.InformeV3Id,
@@ -112,6 +124,10 @@ namespace ICE.Capa_Datos.Acciones
                 Id = reporteBD.Id,
                 MapaDeDescargas = reporteBD.MapaDeDescargas,
                 Observaciones = reporteBD.Observaciones,
+                Evidencia = reporteBD.Evidencia,
+                ObservacionesTecnicoLinea = reporteBD.ObservacionesTecnicoLinea,
+                Causas = reporteBD.Causas,
+                FechaHora = reporteBD.FechaHora,
                 InformeV1Id = reporteBD.InformeV1Id,
                 InformeV2Id = reporteBD.InformeV2Id,
                 InformeV3Id = reporteBD.InformeV3Id,
@@ -154,6 +170,10 @@ namespace ICE.Capa_Datos.Acciones
                 Id = reporteBD.Id,
                 MapaDeDescargas = reporteBD.MapaDeDescargas,
                 Observaciones = reporteBD.Observaciones,
+                Evidencia = reporteBD.Evidencia,
+                ObservacionesTecnicoLinea = reporteBD.ObservacionesTecnicoLinea,
+                Causas = reporteBD.Causas,
+                FechaHora = reporteBD.FechaHora,
                 InformeV1Id = reporteBD.InformeV1Id,
                 InformeV2Id = reporteBD.InformeV2Id,
                 InformeV3Id = reporteBD.InformeV3Id,
