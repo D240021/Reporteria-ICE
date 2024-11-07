@@ -18,7 +18,6 @@ namespace ICE.Capa_Dominio.Modelos
         public string Rol { get; set; }
         public int? SubestacionId { get; set; }
         public int? UnidadRegionalId { get; set; }
-
         // Agrega esta propiedad
         public string? NombreUnidadRegional { get; set; } 
     }

@@ -15,11 +15,11 @@
                 <input matInput type="password" placeholder="Inserte su contraseña"
                     [formControl]='contenedorFormulario.controls.contrasenia'>
             </mat-form-field>
-
+            <span *ngIf="mensajeCredenciales" class="mensajeError">{{ mensajeCredenciales }}</span>
             <button mat-stroked-button (click)="verificarCredencialesUsuario()" type="button"
-            [disabled]="contenedorFormulario.invalid">Ingresar</button>
+                [disabled]="contenedorFormulario.invalid">Ingresar</button>
         </form>
 
     </section>
-    
+
 </div>
