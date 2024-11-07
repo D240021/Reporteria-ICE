@@ -13,6 +13,10 @@ export class FormulariosService {
     return;
   }
 
+  esFormularioVacio(valores: any): boolean {
+    return Object.values(valores).every((valor) => valor === null || valor === '');
+  }
+
   obtenerErroresNombre(contenedorFormulario : FormGroup) : string {
     const campo = contenedorFormulario.controls['nombre']  || contenedorFormulario.controls['nombreUbicacion'];
 

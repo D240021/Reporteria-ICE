@@ -1,6 +1,6 @@
 import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DatosConfirmacion } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 
@@ -13,8 +13,9 @@ import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.serv
 })
 export class DialogoConfirmacionComponent {
 
-  public datosComponente : DatosConfirmacion;
-  public seguridadService = inject(SeguridadService);
+  public datosComponente: DatosConfirmacion;
+  private seguridadService = inject(SeguridadService);
+  private router = inject(Router);
 
   constructor(public referenciaDialogo: MatDialogRef<DialogoConfirmacionComponent>,
     @Inject(MAT_DIALOG_DATA) public datos: DatosConfirmacion
@@ -22,12 +23,18 @@ export class DialogoConfirmacionComponent {
     this.datosComponente = datos;
   }
 
-  cerrarCuadroDialogo() {
+  cerrarCuadroDialogo(): void {
     this.referenciaDialogo.close();
+    return;
   }
 
-  salirCuadroDialogo(){
-    this.seguridadService.cerrarSesion();
+  salirCuadroDialogo(): void {
+    if (this.datosComponente.tipo === 'sesion') {
+      this.seguridadService.cerrarSesion();
+    } else {
+      this.router.navigate(['/menu-administrador']);
+    }
     this.cerrarCuadroDialogo();
+    return;
   }
 }
