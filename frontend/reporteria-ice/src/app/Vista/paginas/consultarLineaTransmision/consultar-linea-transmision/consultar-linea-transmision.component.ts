@@ -10,13 +10,14 @@ import { LineaTransmisionService } from '../../../../Controlador/LineaTransmisio
 import { MatDialog } from '@angular/material/dialog';
 import { EditarLineaTransmisionComponent } from '../../editarLineaTransmision/editar-linea-transmision/editar-linea-transmision.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 
 
 @Component({
   selector: 'consultar-linea-transmision',
   standalone: true,
   imports: [BuscadorComponent, MatTableModule, RouterLink, MatInputModule, MatIconModule,
-    ReactiveFormsModule, MatButtonModule
+    ReactiveFormsModule, MatButtonModule, AnimacionCargaComponent
   ],
   templateUrl: './consultar-linea-transmision.component.html',
   styleUrl: './consultar-linea-transmision.component.css'

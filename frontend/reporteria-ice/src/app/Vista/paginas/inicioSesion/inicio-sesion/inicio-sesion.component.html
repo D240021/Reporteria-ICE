@@ -18,6 +18,11 @@
             <span *ngIf="mensajeCredenciales" class="mensajeError">{{ mensajeCredenciales }}</span>
             <button mat-stroked-button (click)="verificarCredencialesUsuario()" type="button"
                 [disabled]="contenedorFormulario.invalid">Ingresar</button>
+
+                @if (habilitarCarga) {
+                    <animacion-carga></animacion-carga>
+                }
+                
         </form>
 
     </section>

@@ -8,7 +8,7 @@ export interface Usuario {
     identificador: string,
     rol: string,
     subestacionId: number,
-    unidadRegionalId: number,
+    unidadRegionalId: number | null,
     nombreUnidadRegional?: string
 }
 

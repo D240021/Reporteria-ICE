@@ -10,12 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarUnidadRegionalComponent } from '../../editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 
 @Component({
   selector: 'consultar-unidad-regional',
   standalone: true,
   imports: [MatTableModule, BuscadorComponent, MatInputModule, RouterLink,
-    ReactiveFormsModule, MatIconModule, MatButtonModule],
+    ReactiveFormsModule, MatIconModule, MatButtonModule, AnimacionCargaComponent],
   templateUrl: './consultar-unidad-regional.component.html',
   styleUrl: './consultar-unidad-regional.component.css'
 })
