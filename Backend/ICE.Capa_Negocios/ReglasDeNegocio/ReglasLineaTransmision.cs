@@ -8,9 +8,9 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
         public static (bool esValido, string mensaje) EsLineaTransmisionValida(LineaTransmision lineaTransmision)
         {
             // Validación del NombreUbicacion
-            if (string.IsNullOrEmpty(lineaTransmision.NombreUbicacion))
+            if (string.IsNullOrWhiteSpace(lineaTransmision.NombreUbicacion))
             {
-                return (false, "El nombre de la ubicación no puede estar vacío.");
+                return (false, "El nombre de la ubicación no puede estar vacío o solo contener espacios en blanco.");
             }
 
             if (lineaTransmision.NombreUbicacion.Length > 100)
@@ -18,10 +18,14 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "El nombre de la ubicación no puede exceder los 100 caracteres.");
             }
 
-            // Validación del Identificador
-            if (lineaTransmision.Identificador.Length <= 0)
+            if (string.IsNullOrWhiteSpace(lineaTransmision.Identificador))
             {
-                return (false, "El identificador de la línea de transmisión debe ser mayor que cero.");
+                return (false, "El identificador de la subestación no puede estar vacío o solo contener espacios en blanco.");
+            }
+            
+            if (lineaTransmision.Identificador.Length < 3 || lineaTransmision.Identificador.Length > 20)
+            {
+                return (false, "El identificador de la subestación debe tener entre 3 y 20 caracteres.");
             }
 
             return (true, string.Empty); 
