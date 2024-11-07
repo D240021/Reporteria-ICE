@@ -11,12 +11,13 @@ import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/un
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { EditarOperarioComponent } from "../../editarOperario/editar-operario/editar-operario.component";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 @Component({
   selector: 'consultar-operario',
   standalone: true,
   imports: [MatTableModule, MatInputModule, RouterLink,
     ReactiveFormsModule, MatButtonModule, MatIconModule, EditarOperarioComponent,
-    MatDialogModule],
+    MatDialogModule, AnimacionCargaComponent],
   templateUrl: './consultar-operario.component.html',
   styleUrl: './consultar-operario.component.css'
 })

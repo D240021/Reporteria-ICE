@@ -15,6 +15,7 @@
                 <input type="text" placeholder="Inserte un identificador único"
                 [formControl]="contenedorFormulario.controls.identificador">
               </div>
+              <span>{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
             </section>
 
             <section class="row mb-3 align-items-center">
@@ -22,7 +23,8 @@
               <div class="col-md-8">
                 <input type="text" placeholder="Inserte un nombre de ubicación"
                 [formControl]="contenedorFormulario.controls.nombreUbicacion">
-              </div>            
+              </div>
+              <span>{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
             </section>
 
 

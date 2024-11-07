@@ -8,6 +8,7 @@ import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/un
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { Usuario } from '../../../../Modelo/Usuario';
 import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'registrar-operario',
@@ -37,7 +38,7 @@ export class RegistrarOperarioComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    contrasenia: ['', {validators: [Validators.required]}],
+    contrasenia: ['', {validators: [Validators.required, this.validaciones.esContraseniaSegura()]}],
     nombreUsuario: ['', {validators: [Validators.required]}],
     correo: ['', {validators: [Validators.required, Validators.email]}],
     nombre: ['', {validators: [Validators.required, this.validaciones.esSoloLetras()]}],
@@ -45,10 +46,10 @@ export class RegistrarOperarioComponent implements OnInit {
     identificador: ['', {validators: [Validators.required]}],
     rol: ['', {validators: [Validators.required]}],
     subestacionId: [0],
-    unidadRegionalId: [0, {validators: [Validators.required]}]
+    unidadRegionalId: [null, {validators: [Validators.required]}]
   });
 
-  registrarNuevoUsuario() {
+  registrarNuevoUsuario() : void{
 
     const contraseniaEncriptada = this.encriptacion.encriptarAES(this.contenedorFormulario.value.contrasenia || '') ;
 
@@ -69,6 +70,7 @@ export class RegistrarOperarioComponent implements OnInit {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });
   }
+
   
 
 }

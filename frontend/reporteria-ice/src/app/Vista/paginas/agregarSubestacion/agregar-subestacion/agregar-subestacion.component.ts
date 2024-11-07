@@ -36,7 +36,7 @@ export class AgregarSubestacionComponent implements OnInit{
     id: [0],
     nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
     identificador: ['', { validators: [Validators.required] }],
-    unidadRegionalId: [0, { validators: [Validators.required] }]
+    unidadRegionalId: [null, { validators: [Validators.required] }]
   });
 
   registrarSubestacion(){

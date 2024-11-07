@@ -12,16 +12,18 @@
           <label class="col-md-4">IDENTIFICADOR</label>
           <div class="col-md-8">
             <input type="text" placeholder="Inserte un identificador único"
-            [formControl]="contenedorFormulario.controls.identificador">
+              [formControl]="contenedorFormulario.controls.identificador">
           </div>
+          <span>{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
         </section>
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">NOMBRE</label>
           <div class="col-md-8">
             <input type="text" placeholder="Inserte un nombre de ubicación"
-            [formControl]="contenedorFormulario.controls.nombreUbicacion">
+              [formControl]="contenedorFormulario.controls.nombreUbicacion">
           </div>
+          <span>{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
         </section>
 
         <section class="row mb-3 align-items-center">
@@ -35,6 +37,7 @@
               </option>
               }
             </select>
+            <span>{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
           </div>
         </section>
 
@@ -48,8 +51,7 @@
           <div class="col-md-9 col-12">
             <button class="btn btn-limpiar" mat-stroked-button type="button"
               (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
-            <button class="btn btn-agregar" mat-stroked-button type="button"
-              [disabled]="contenedorFormulario.invalid"
+            <button class="btn btn-agregar" mat-stroked-button type="button" [disabled]="contenedorFormulario.invalid"
               (click)="registrarSubestacion()">GUARDAR</button>
           </div>
         </div>
