@@ -7,6 +7,5 @@
         public string Identificador { get; set; }
 
         public int UnidadRegionalId { get; set; }
-        public string? NombreUnidadRegional { get; set; } 
     }
 }
