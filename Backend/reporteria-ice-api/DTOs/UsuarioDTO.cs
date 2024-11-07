@@ -12,6 +12,5 @@
         public string Rol { get; set; }
         public int? SubestacionId { get; set; }
         public int? UnidadRegionalId { get; set; }
-        public string? NombreUnidadRegional { get; set; }
     }
 }
