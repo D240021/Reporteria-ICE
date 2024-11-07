@@ -1,6 +1,7 @@
 ﻿using ICE.Capa_Dominio.Modelos;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using ICE.Capa_Negocios.Interfaces.Capa_Negocios;
+using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -17,6 +18,11 @@ namespace ICE.Capa_Negocios.CU
 
         public async Task<int> RegistrarUsuario(Usuario usuario)
         {
+            var validacionUsuario = ReglasUsuario.EsUsuarioValido(usuario);
+            if (!validacionUsuario.esValido)
+            {
+                return 0;
+            }
             return await _gestionarUsuarioDA.RegistrarUsuario(usuario);
         }
 
@@ -32,6 +38,11 @@ namespace ICE.Capa_Negocios.CU
 
         public async Task<bool> ActualizarUsuario(int id, Usuario usuario)
         {
+            var validacionUsuario = ReglasUsuario.EsUsuarioValido(usuario);
+            if (!validacionUsuario.esValido)
+            {
+                return false;
+            }
             return await _gestionarUsuarioDA.ActualizarUsuario(id, usuario);
         }
 
