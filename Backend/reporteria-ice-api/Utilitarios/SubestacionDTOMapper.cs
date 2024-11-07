@@ -16,6 +16,9 @@ namespace reporteria_ice_api.Utilitarios
                 NombreUbicacion = subestacion.NombreUbicacion,
                 Identificador = subestacion.Identificador,
                 UnidadRegionalId = subestacion.UnidadRegionalId
+
+                // No incluimos NombreUnidadRegional para creación
+
             };
         }
 

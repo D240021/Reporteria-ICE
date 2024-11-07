@@ -10,25 +10,25 @@ import { AutenticacionUsuario, Usuario } from '../../../../Modelo/Usuario';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 import { CommonModule } from '@angular/common';
+import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
 
 @Component({
   selector: 'inicio-sesion',
   standalone: true,
   imports: [MatInputModule, MatFormFieldModule, MatButtonModule, ReactiveFormsModule,
-    CommonModule
-  ],
+    CommonModule, AnimacionCargaComponent],
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.css'
 })
 export class InicioSesionComponent {
 
-
+  public habilitarCarga: boolean = false;
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
   private encriptacion = inject(AESService);
   private usuarioService = inject(UsuarioService);
   private seguridadService = inject(SeguridadService);
-  public mensajeCredenciales : string = ''; 
+  public mensajeCredenciales: string = '';
 
   public contenedorFormulario = this.formBuilder.group({
     nombreUsuario: ['', { validators: [Validators.required] }],
@@ -43,9 +43,8 @@ export class InicioSesionComponent {
       nombreUsuario: this.contenedorFormulario.value.nombreUsuario || '',
       contrasenia: contraseniaEncriptada
     };
-
-    this.usuarioService.esUsuarioAutenticado(credenciales).subscribe(
-      respuesta => {
+    this.habilitarCarga = true;
+    this.usuarioService.esUsuarioAutenticado(credenciales).subscribe(respuesta => {
         if (respuesta && typeof respuesta === 'object') {
           const objetoRespuesta = respuesta as Usuario;
           const rolUsuario = objetoRespuesta.rol.toLocaleLowerCase();
@@ -57,9 +56,13 @@ export class InicioSesionComponent {
       error => {
         if (error.status === 401) {
           this.mensajeCredenciales = 'El usuario o la contraseña son incorrectos'
+          this.habilitarCarga = false;
         }
+        
       }
+
     );
+    
   }
 
 

@@ -11,12 +11,13 @@ import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/un
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { EditarOperarioComponent } from "../../editarOperario/editar-operario/editar-operario.component";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 @Component({
   selector: 'consultar-operario',
   standalone: true,
   imports: [MatTableModule, MatInputModule, RouterLink,
     ReactiveFormsModule, MatButtonModule, MatIconModule, EditarOperarioComponent,
-    MatDialogModule],
+    MatDialogModule, AnimacionCargaComponent],
   templateUrl: './consultar-operario.component.html',
   styleUrl: './consultar-operario.component.css'
 })
@@ -24,11 +25,9 @@ export class ConsultarOperarioComponent implements OnInit {
 
   public usuariosOriginales: Usuario[] = [];
   public usuarios: Usuario[] = this.usuariosOriginales;
-  public unidadesRegionales: UnidadRegional[] = [];
 
   private formBuilder = inject(FormBuilder);
   private usuarioService = inject(UsuarioService);
-  private unidadRegionalService = inject(UnidadRegionalService);
   private cuadroDialogo = inject(MatDialog);
 
   public contenedorFormulario = this.formBuilder.group({
@@ -52,10 +51,6 @@ export class ConsultarOperarioComponent implements OnInit {
 
 
   cargarDatos(): void {
-    this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
-      this.unidadesRegionales = unidadesRegionales;
-      this.mapearUnidadesRegionalesPorUsuario();
-    });
 
     this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
       this.usuariosOriginales = usuarios;
@@ -63,20 +58,6 @@ export class ConsultarOperarioComponent implements OnInit {
       
     });
 
-    return;
-  }
-
-  mapearUnidadesRegionalesPorUsuario(): void {
-    if (this.unidadesRegionales.length && this.usuariosOriginales.length) {
-      const unidadesMap = this.unidadesRegionales.reduce((map, unidad) => {
-        map[unidad.id] = unidad.nombreUbicacion;
-        return map;
-      }, {} as { [key: number]: string });
-
-      this.usuariosOriginales.forEach(usuario => {
-        usuario.nombreUnidadRegional = unidadesMap[usuario.unidadRegionalId] || 'No asignado';
-      });
-    }
     return;
   }
 

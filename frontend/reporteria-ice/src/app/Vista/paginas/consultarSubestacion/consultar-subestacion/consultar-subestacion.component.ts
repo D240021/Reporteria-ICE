@@ -8,12 +8,13 @@ import { EditarSubestacionComponent } from '../../editarSubestacion/editar-subes
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 
 @Component({
   selector: 'consultar-subestacion',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, MatIconModule, MatDialogModule, MatTableModule, 
-    MatButtonModule],
+    MatButtonModule, AnimacionCargaComponent],
   templateUrl: './consultar-subestacion.component.html',
   styleUrl: './consultar-subestacion.component.css'
 })
@@ -33,7 +34,7 @@ export class ConsultarSubestacionComponent {
   public subestaciones: Subestacion[] = [];
 
 
-  public atributosLinea = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'GESTIÓN'];
+  public atributosLinea = ['IDENTIFICADOR', 'NOMBRE DE UBICACIÓN', 'UNIDAD REGIONAL', 'GESTIÓN'];
 
   private formBuilder = inject(FormBuilder);
   private subestacionService = inject(SubestacionService);

@@ -2,6 +2,7 @@ export interface Subestacion {
     id: number,
     nombreUbicacion : string,
     identificador : string,
-    unidadRegionalId : number,
+    unidadRegionalId : number | null,
+    nombreUnidadRegional?: string
 }
 
