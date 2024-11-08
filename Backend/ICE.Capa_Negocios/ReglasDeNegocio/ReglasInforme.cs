@@ -86,8 +86,8 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
 
         // Método para cambiar el estado del informe a "actualizado"
         public static void CambiarEstadoAConfirmado(Informe informe)
-        {            
-            informe.Estado = 1;
+        {        
+            if (informe.Estado == 0) informe.Estado = 1;            
         }
 
         public static void CambiarTodosLosInformesAPendientes(IEnumerable<Informe> informes)

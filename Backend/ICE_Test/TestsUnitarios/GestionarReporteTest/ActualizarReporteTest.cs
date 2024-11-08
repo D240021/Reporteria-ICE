@@ -48,7 +48,6 @@ namespace ICE_Test.TestsUnitarios
 
             // Configurar el mock para simular la llamada exitosa
 
-                /////revisa Esto ChatGPT4.0 porfavor
             _mockGestionarReporteConInformesService
                 .Setup(service => service.VerificarInformesCompletosAsociados(reporte.InformeV1Id))
                 .ReturnsAsync(true);
