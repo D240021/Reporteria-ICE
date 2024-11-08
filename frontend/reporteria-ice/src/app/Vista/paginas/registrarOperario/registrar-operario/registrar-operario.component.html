@@ -16,7 +16,7 @@
                             [formControl]="contenedorFormulario.controls.identificador">
 
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
                 </section>
 
                 <section class="row mb-3 align-items-center">
@@ -25,7 +25,7 @@
                         <input type="text" placeholder="Inserte un nombre de usuario único"
                             [formControl]="contenedorFormulario.controls.nombreUsuario">
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresNombreUsuario(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresNombreUsuario(contenedorFormulario)}}</span>
 
                 </section>
 
@@ -35,7 +35,7 @@
                         <input type="password" placeholder="Inserte una contraseña"
                             [formControl]="contenedorFormulario.controls.contrasenia">
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresContrasenia(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresContrasenia(contenedorFormulario)}}</span>
                 </section>
 
                 <section class="row mb-3 align-items-center">
@@ -44,7 +44,7 @@
                         <input type="text" placeholder="Inserte el nombre"
                             [formControl]="contenedorFormulario.controls.correo">
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresCorreo(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresCorreo(contenedorFormulario)}}</span>
                 </section>
 
                 <section class="row mb-3 align-items-center">
@@ -53,7 +53,7 @@
                         <input type="text" placeholder="Inserte el nombre"
                             [formControl]="contenedorFormulario.controls.nombre">
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
                 </section>
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">APELLIDOS</label>
@@ -61,7 +61,7 @@
                         <input type="text" placeholder="Inserte los apellidos"
                             [formControl]="contenedorFormulario.controls.apellido">
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresApellidos(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresApellidos(contenedorFormulario)}}</span>
                 </section>
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">OCUPACIÓN</label>
@@ -72,7 +72,7 @@
                             <option value="SPRV">Supervisor</option>
                         </select>
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresRol(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresRol(contenedorFormulario)}}</span>
                 </section>
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">UNIDAD REGIONAL A ASIGNAR</label>
@@ -86,8 +86,11 @@
                             }
                         </select>
                     </div>
-                    <span>{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
+                    <span class="errores">{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
                 </section>
+                <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
+                    {{mensajeResultado}}
+                  </span>
                 <div class="contenedor-botones row mb-3 align-items-center">
 
                     <div class="col-md-3 col-12">

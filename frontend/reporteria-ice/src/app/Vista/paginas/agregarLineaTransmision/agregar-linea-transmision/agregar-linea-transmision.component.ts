@@ -9,11 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'agregar-linea-transmision',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatInputModule, CommonModule],
   templateUrl: './agregar-linea-transmision.component.html',
   styleUrl: './agregar-linea-transmision.component.css'
 })
@@ -29,6 +30,8 @@ export class AgregarLineaTransmisionComponent implements OnInit {
     });
   }
 
+  public mensajeResultado : string = '';
+  public exitoOperacion : boolean = false;
   private formBuilder = inject(FormBuilder);
   private validaciones = inject(ValidacionesService)
   public accionesFormulario = inject(FormulariosService);
@@ -49,6 +52,13 @@ export class AgregarLineaTransmisionComponent implements OnInit {
 
     this.lineaTransmision.crearLineaTransmision(valoresFormulario).subscribe(lineaTransmision => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
+      this.mensajeResultado = 'Línea de Transmisión agregada correctamente';
+    },
+    error =>{
+        if(error.status === 409){
+          this.mensajeResultado = 'El identificador ya existe';
+          this.exitoOperacion = false;
+        }
     });
   }
 

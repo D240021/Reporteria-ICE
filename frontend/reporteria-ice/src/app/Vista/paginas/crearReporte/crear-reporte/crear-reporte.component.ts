@@ -13,7 +13,7 @@ import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.serv
 })
 export class CrearReporteComponent {
 
-  // Inyección de dependencias
+ 
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
   public seguridadService = inject(SeguridadService);

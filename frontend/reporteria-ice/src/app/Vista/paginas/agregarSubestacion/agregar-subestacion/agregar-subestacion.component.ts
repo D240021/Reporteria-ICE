@@ -10,11 +10,12 @@ import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'agregar-subestacion',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './agregar-subestacion.component.html',
   styleUrl: './agregar-subestacion.component.css'
 })
@@ -35,7 +36,8 @@ export class AgregarSubestacionComponent implements OnInit {
     });
 
   }
-
+  public mensajeResultado : string = '';
+  public exitoOperacion : boolean = false;
   private formBuilder = inject(FormBuilder);
   private validaciones = inject(ValidacionesService)
   public accionesFormulario = inject(FormulariosService);
@@ -59,6 +61,13 @@ export class AgregarSubestacionComponent implements OnInit {
 
     this.subestacionService.crearSubestacion(valoresFormulario).subscribe(subestacion => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
+      this.mensajeResultado = 'Subestación agregada correctamente';
+    },
+    error =>{
+        if(error.status === 409){
+          this.mensajeResultado = 'El identificador ya existe';
+          this.exitoOperacion = false;
+        }
     });
   }
 

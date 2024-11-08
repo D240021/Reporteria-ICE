@@ -15,7 +15,7 @@
             <input type="text" placeholder="Inserte un identificador único"
               [formControl]="contenedorFormulario.controls.identificador">
           </div>
-          <span>{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
+          <span class="errores">{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
         </section>
 
         <section class="row mb-3 align-items-center">
@@ -24,10 +24,12 @@
             <input type="text" placeholder="Inserte un nombre de ubicación"
               [formControl]="contenedorFormulario.controls.nombreUbicacion">
           </div>
-          <span>{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
+          <span class="errores">{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
         </section>
 
-
+        <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
+          {{mensajeResultado}}
+        </span>
         <div class="contenedor-botones row mb-3 align-items-center">
 
           <div class="col-md-3 col-12">
