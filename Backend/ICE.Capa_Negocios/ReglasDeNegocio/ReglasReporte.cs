@@ -167,5 +167,36 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
         }
 
 
+        //Nuevo metodo para validar los id de las subestacion y la linea de transmision
+        public static (bool esValido, string mensaje) ReporteInicialValido(List<int> subestacionIds, int lineaId, Reporte reporte)
+        {
+
+            foreach (int id in subestacionIds)
+            {
+                if(id <= 0)
+                {
+                    return (false, "El ID de la línea de transmisión proporcionada no es válido.");
+                }
+            }
+
+            if (lineaId <= 0)
+            {
+                return (false, "El ID de la línea de transmisión proporcionada no es válido.");
+            }
+
+            if (reporte.UsuarioSupervisorId <= 0)
+            {
+                return (false, "El ID del supervisor proporcionado no es válido.");
+            }
+
+            if (reporte.TecnicoLineaId <= 0)
+            {
+                return (false, "El ID del técnico de línea proporcionado no es válido.");
+            }
+
+
+
+            return (true, string.Empty);
+        }
     }
 }

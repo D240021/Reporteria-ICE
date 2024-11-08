@@ -49,6 +49,10 @@ namespace ICE.Capa_Negocios.CU
         {
             try
             {
+                if (!ReglasReporte.ReporteInicialValido(subestacionIds, lineaTransmisionId, reporte).esValido) return false;
+                //metodo para compribar que el supervisorId exista y el tecnico tambien
+
+
                 //lista de informes
                 List<Informe> informes = new List<Informe>();
 

@@ -1,12 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
 import { Subestacion } from '../../../../Modelo/Subestacion';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
+import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 
 @Component({
   selector: 'agregar-subestacion',
@@ -15,12 +18,20 @@ import { UnidadRegional } from '../../../../Modelo/unidadRegional';
   templateUrl: './agregar-subestacion.component.html',
   styleUrl: './agregar-subestacion.component.css'
 })
-export class AgregarSubestacionComponent implements OnInit{
-  
+export class AgregarSubestacionComponent implements OnInit {
+
   ngOnInit(): void {
-   
+
     this.unidadRegionalService.obtenerUnidadesRegionales().subscribe(unidadesRegionales => {
       this.unidadesRegionales = unidadesRegionales;
+    });
+
+    this.contenedorFormulario.valueChanges.subscribe((valores) => {
+      if (!this.contenedorFormulario.pristine && !this.accionesFormulario.esFormularioVacio(valores)) {
+        this.formularioModificado = true;
+      } else {
+        this.formularioModificado = false;
+      }
     });
 
   }
@@ -30,7 +41,11 @@ export class AgregarSubestacionComponent implements OnInit{
   public accionesFormulario = inject(FormulariosService);
   private subestacionService = inject(SubestacionService);
   private unidadRegionalService = inject(UnidadRegionalService);
-  public unidadesRegionales : UnidadRegional[] = [];
+  public unidadesRegionales: UnidadRegional[] = [];
+  private modalAbierto: boolean = false;
+  private cuadroDialogo = inject(MatDialog);
+  private formularioModificado: boolean = false;
+  private router = inject(Router);
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
@@ -39,12 +54,35 @@ export class AgregarSubestacionComponent implements OnInit{
     unidadRegionalId: [null, { validators: [Validators.required] }]
   });
 
-  registrarSubestacion(){
+  registrarSubestacion() {
     const valoresFormulario = this.contenedorFormulario.value as Subestacion;
 
-    this.subestacionService.crearSubestacion(valoresFormulario).subscribe( subestacion => {
+    this.subestacionService.crearSubestacion(valoresFormulario).subscribe(subestacion => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });
+  }
+
+  verificarAbandonoFormulario() {
+    if (this.formularioModificado) {
+      this.abrirDialogoConfirmacion();
+    } else {
+      this.router.navigate(['/menu-administrador']);
+    }
+  }
+
+  abrirDialogoConfirmacion(): void {
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
+        width: '700px',
+        height: '200px',
+        data: datosConfirmacionSalidaFormulario
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.modalAbierto = false;
+      });
+    }
+
   }
 
 }

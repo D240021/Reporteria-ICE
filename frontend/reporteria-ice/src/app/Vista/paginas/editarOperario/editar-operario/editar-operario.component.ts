@@ -22,7 +22,7 @@ export class EditarOperarioComponent {
   private validaciones = inject(ValidacionesService);
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    contrasenia: [''],
+    contrasenia: ['12345678'],
     nombreUsuario: ['', { validators: [Validators.required] }],
     correo: ['', { validators: [Validators.required, Validators.email] }],
     nombre: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
@@ -47,9 +47,9 @@ export class EditarOperarioComponent {
   }
 
   guardarCambios() {
-
+    console.log(this.operario);
     const nuevosDatosUsuario = this.contenedorFormulario.value as Usuario;
-
+    console.log(nuevosDatosUsuario);
     this.usuarioService.editarUsuario(nuevosDatosUsuario).subscribe(respuesta => {
         this.cerrarCuadroDialogo();
     });

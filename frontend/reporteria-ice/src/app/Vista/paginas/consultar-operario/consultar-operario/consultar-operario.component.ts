@@ -101,6 +101,7 @@ export class ConsultarOperarioComponent implements OnInit {
   }
 
   abrirEditarOperario(operario: Usuario): void {
+    console.log(operario);
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {

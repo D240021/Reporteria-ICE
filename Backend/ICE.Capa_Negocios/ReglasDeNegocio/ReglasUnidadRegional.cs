@@ -9,9 +9,9 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
         {
 
             // Validación del NombreUbicacion
-            if (string.IsNullOrEmpty(unidadRegional.NombreUbicacion))
+            if (string.IsNullOrWhiteSpace(unidadRegional.NombreUbicacion))
             {
-                return (false, "El nombre de la ubicación no puede estar vacío.");
+                return (false, "El nombre de la ubicación no puede estar vacío o solo contener espacios en blanco.");
             }
 
             if (unidadRegional.NombreUbicacion.Length > 100)
@@ -19,12 +19,16 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "El nombre de la ubicación no puede exceder los 100 caracteres.");
             }
 
-            // Validación del Identificador
-            if (unidadRegional.Identificador.Length <= 0)
+            if (string.IsNullOrWhiteSpace(unidadRegional.Identificador))
             {
-                return (false, "El identificador de la unidad regional debe ser mayor que cero.");
+                return (false, "El identificador de la subestación no puede estar vacío o solo contener espacios en blanco.");
             }
 
+            if (unidadRegional.Identificador.Length < 3 || unidadRegional.Identificador.Length > 20)
+            {
+                return (false, "El identificador de la subestación debe tener entre 3 y 20 caracteres.");
+            }
+            
             return (true, string.Empty); 
         }
 
