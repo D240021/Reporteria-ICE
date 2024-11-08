@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'editar-unidad-regional',
   standalone: true,
-  imports: [RouterLink, MatDialogModule, ReactiveFormsModule],
+  imports: [MatDialogModule, ReactiveFormsModule],
   templateUrl: './editar-unidad-regional.component.html',
   styleUrl: './editar-unidad-regional.component.css'
 })
@@ -48,6 +48,19 @@ export class EditarUnidadRegionalComponent {
       this.cerrarCuadroDialogo();
     });
 
+  }
+
+  esFormularioModificado(): boolean {
+
+    const valoresFormulario = this.contenedorFormulario.value;
+    for (const key in valoresFormulario) {
+      if (valoresFormulario.hasOwnProperty(key) && key in this.unidadRegional) {
+        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.unidadRegional[key as keyof UnidadRegional]) {
+          return true; 
+        }
+      }
+    }
+    return false; 
   }
 
 

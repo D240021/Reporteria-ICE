@@ -18,7 +18,8 @@
                 (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
                 LIMPIAR
             </button>
-            <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid"
+            <button class="btn btn-agregar" type="submit"
+                [disabled]="contenedorFormulario.invalid || contenedorFormulario.pristine || !esFormularioModificado()"
                 (click)="guardarCambios()">
                 GUARDAR
             </button>

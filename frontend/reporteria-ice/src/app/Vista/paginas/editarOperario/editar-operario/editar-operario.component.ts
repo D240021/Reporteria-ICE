@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../../../../Modelo/Usuario';
@@ -13,10 +13,15 @@ import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service'
   templateUrl: './editar-operario.component.html',
   styleUrls: ['./editar-operario.component.css']
 })
-export class EditarOperarioComponent {
+export class EditarOperarioComponent{
+
+  
+
 
   operario: any;
 
+  public mensajeResultado: string = '';
+  public exitoOperacion: boolean = false;
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
   private validaciones = inject(ValidacionesService);
@@ -42,6 +47,7 @@ export class EditarOperarioComponent {
     this.contenedorFormulario.patchValue(this.operario);
   }
 
+
   cerrarCuadroDialogo() {
     this.referenciaDialogo.close();
   }
@@ -51,8 +57,27 @@ export class EditarOperarioComponent {
     const nuevosDatosUsuario = this.contenedorFormulario.value as Usuario;
     console.log(nuevosDatosUsuario);
     this.usuarioService.editarUsuario(nuevosDatosUsuario).subscribe(respuesta => {
-        this.cerrarCuadroDialogo();
-    });
+      this.cerrarCuadroDialogo();
+    },
+      error => {
+        if (error.status === 409) {
+          this.mensajeResultado = 'El identificador o nombre de usuario ya existen';
+          this.exitoOperacion = false;
+        }
+      });
 
+  }
+
+  esFormularioModificado(): boolean {
+
+    const valoresFormulario = this.contenedorFormulario.value;
+    for (const key in valoresFormulario) {
+      if (valoresFormulario.hasOwnProperty(key) && key in this.operario) {
+        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.operario[key as keyof Usuario]) {
+          return true; 
+        }
+      }
+    }
+    return false; 
   }
 }

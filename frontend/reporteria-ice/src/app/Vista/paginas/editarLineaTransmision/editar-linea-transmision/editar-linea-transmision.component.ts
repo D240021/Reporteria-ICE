@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/materia
 @Component({
   selector: 'editar-linea-transmision',
   standalone: true,
-  imports: [RouterLink, MatInputModule, ReactiveFormsModule, MatDialogModule],
+  imports: [MatInputModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './editar-linea-transmision.component.html',
   styleUrl: './editar-linea-transmision.component.css'
 })
@@ -50,6 +50,19 @@ export class EditarLineaTransmisionComponent {
       this.cerrarCuadroDialogo();
     });
 
+  }
+
+  esFormularioModificado(): boolean {
+
+    const valoresFormulario = this.contenedorFormulario.value;
+    for (const key in valoresFormulario) {
+      if (valoresFormulario.hasOwnProperty(key) && key in this.lineaTransmision) {
+        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.lineaTransmision[key as keyof LineaTransmision]) {
+          return true; 
+        }
+      }
+    }
+    return false; 
   }
 
 }

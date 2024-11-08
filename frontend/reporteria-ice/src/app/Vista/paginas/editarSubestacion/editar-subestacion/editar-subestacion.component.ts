@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 @Component({
   selector: 'editar-subestacion',
   standalone: true,
-  imports: [MatInputModule, MatButtonModule, BuscadorComponent, RouterLink, MatDialogModule,
+  imports: [MatInputModule, MatButtonModule, MatDialogModule,
     ReactiveFormsModule
   ],
   templateUrl: './editar-subestacion.component.html',
@@ -50,6 +50,19 @@ export class EditarSubestacionComponent {
       this.cerrarCuadroDialogo();
     });
 
+  }
+
+  esFormularioModificado(): boolean {
+
+    const valoresFormulario = this.contenedorFormulario.value;
+    for (const key in valoresFormulario) {
+      if (valoresFormulario.hasOwnProperty(key) && key in this.subestacion) {
+        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.subestacion[key as keyof Subestacion]) {
+          return true; 
+        }
+      }
+    }
+    return false; 
   }
 
 
