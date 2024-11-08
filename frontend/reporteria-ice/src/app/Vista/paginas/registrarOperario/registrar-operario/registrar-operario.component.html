@@ -16,7 +16,8 @@
                             [formControl]="contenedorFormulario.controls.identificador">
 
                     </div>
-                    <span class="errores">{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
+                    <span
+                        class="errores">{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
                 </section>
 
                 <section class="row mb-3 align-items-center">
@@ -25,7 +26,8 @@
                         <input type="text" placeholder="Inserte un nombre de usuario único"
                             [formControl]="contenedorFormulario.controls.nombreUsuario">
                     </div>
-                    <span class="errores">{{accionesFormulario.obtenerErroresNombreUsuario(contenedorFormulario)}}</span>
+                    <span
+                        class="errores">{{accionesFormulario.obtenerErroresNombreUsuario(contenedorFormulario)}}</span>
 
                 </section>
 
@@ -86,16 +88,16 @@
                             }
                         </select>
                     </div>
-                    <span class="errores">{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
+                    <span
+                        class="errores">{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
                 </section>
                 <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
                     {{mensajeResultado}}
-                  </span>
+                </span>
                 <div class="contenedor-botones row mb-3 align-items-center">
 
                     <div class="col-md-3 col-12">
-                        <button class="btn btn-volver" type="button"
-                        (click)="verificarAbandonoFormulario()">
+                        <button class="btn btn-volver" type="button" (click)="verificarAbandonoFormulario()">
                             VOLVER
                         </button>
                     </div>
