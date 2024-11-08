@@ -8,11 +8,12 @@ import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'agregar-unidad-regional',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './agregar-unidad-regional.component.html',
   styleUrl: './agregar-unidad-regional.component.css'
 })
@@ -29,6 +30,8 @@ export class AgregarUnidadRegionalComponent implements OnInit {
     });
   }
 
+  public mensajeResultado : string = '';
+  public exitoOperacion : boolean = false;
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
   private validaciones = inject(ValidacionesService)
@@ -50,6 +53,13 @@ export class AgregarUnidadRegionalComponent implements OnInit {
 
     this.unidadRegionalService.crearUnidadRegional(valoresFormulario).subscribe(unidadRegional => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
+      this.mensajeResultado = 'Unidad registrada exitosamente';
+    },
+    error =>{
+        if(error.status === 409){
+          this.mensajeResultado = 'El identificador ya existe';
+          this.exitoOperacion = false;
+        }
     });
   }
 

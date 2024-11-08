@@ -12,11 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'registrar-operario',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ ReactiveFormsModule, CommonModule],
   templateUrl: './registrar-operario.component.html',
   styleUrl: './registrar-operario.component.css'
 })
@@ -40,6 +42,8 @@ export class RegistrarOperarioComponent implements OnInit {
 
   }
 
+  public mensajeResultado : string = '';
+  public exitoOperacion : boolean = false;
   private modalAbierto: boolean = false;
   private formularioModificado: boolean = false;
   private formBuilder = inject(FormBuilder);
@@ -84,6 +88,14 @@ export class RegistrarOperarioComponent implements OnInit {
 
     this.usuarioService.crearUsuario(valoresFormulario).subscribe(respuesta => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
+      this.mensajeResultado = 'Operario registrado exitosamente';
+      this.exitoOperacion = true;
+    },
+    error =>{
+        if(error.status === 409){
+          this.mensajeResultado = 'El identificador o nombre de usuario ya existen';
+          this.exitoOperacion = false;
+        }
     });
   }
 

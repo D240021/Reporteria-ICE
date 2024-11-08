@@ -26,13 +26,13 @@ form {
   margin: 0 auto;
 }
 
-  form section {
-    margin: 50px 0
-  }
+form section {
+  margin: 50px 0
+}
 
-  form .contenedor-botones {
-    margin: 50px 0
-  }
+form .contenedor-botones {
+  margin: 50px 0
+}
 
 
 h2 {
@@ -90,7 +90,8 @@ button {
   width: 75%;
 }
 
-.btn-limpiar, .btn-agregar {
+.btn-limpiar,
+.btn-agregar {
   background-color: var(--color-terciario-fondo);
   color: black;
   font-weight: bolder;
@@ -107,7 +108,20 @@ button {
     width: auto;
   }
 
-  .btn-limpiar, .btn-agregar, .btn-volver {
+  .btn-limpiar,
+  .btn-agregar,
+  .btn-volver {
     width: 50%;
   }
+}
+
+.errores,
+.mensaje-error {
+  color: red;
+  font-size: 75%;
+}
+
+.mensaje-exito {
+  color: green;
+  font-size: 75%;
 }
