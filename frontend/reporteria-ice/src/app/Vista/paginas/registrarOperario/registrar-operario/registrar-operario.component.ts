@@ -61,7 +61,7 @@ export class RegistrarOperarioComponent implements OnInit {
     apellido: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
     identificador: ['', { validators: [Validators.required] }],
     rol: ['', { validators: [Validators.required] }],
-    subestacionId: [0],
+    subestacionId: [null],
     unidadRegionalId: [null, { validators: [Validators.required] }]
   });
 
@@ -82,8 +82,7 @@ export class RegistrarOperarioComponent implements OnInit {
       unidadRegionalId: Number(this.contenedorFormulario.value.unidadRegionalId) || 0
     };
 
-
-    this.usuarioService.crearUsuario(valoresFormulario).subscribe(usuario => {
+    this.usuarioService.crearUsuario(valoresFormulario).subscribe(respuesta => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
     });
   }

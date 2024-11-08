@@ -45,11 +45,11 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "El rol no es válido.");
             }
 
-            if (usuario.SubestacionId <= 0)
-            {
-                Console.WriteLine("La subestación no es válida.");
-                return (false, "La subestación no es válida.");
-            }
+            //if (usuario.SubestacionId <= 0)
+            //{
+            //    Console.WriteLine("La subestación no es válida.");
+            //    return (false, "La subestación no es válida.");
+            //}
 
             if (!string.IsNullOrEmpty(usuario.Nombre) && usuario.Nombre.Length > 100)
             {
