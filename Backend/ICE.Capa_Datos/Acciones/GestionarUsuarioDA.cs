@@ -21,16 +21,25 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
+        public class ConflictException : Exception
+        {
+            public ConflictException(string message) : base(message)
+            {
+            }
+        }
+
         public async Task<int> RegistrarUsuario(Usuario usuario)
         {
             var existeUsuario = await _context.Usuarios.AnyAsync(u => u.NombreUsuario == usuario.NombreUsuario || u.Identificador == usuario.Identificador);
+
             if (existeUsuario)
             {
-                throw new Exception("El nombre de usuario o el identificador ya están en uso.");
+                // Lanza una excepción personalizada con un código de estado 409 y el mensaje adecuado
+                throw new ConflictException("El nombre de usuario o el identificador ya están en uso.");
             }
 
             // Desencripta la contraseña recibida para verificar el valor original
-           var contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
+            var contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
 
             // Re-encripta la contraseña antes de guardarla en la base de datos
             var contraseniaEncriptada = EncriptarAES(contraseniaDesencriptada);
@@ -54,6 +63,7 @@ namespace ICE.Capa_Datos.Acciones
         }
 
 
+
         public async Task<bool> ActualizarUsuario(int id, Usuario usuario)
         {
             var usuarioBD = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
@@ -65,11 +75,6 @@ namespace ICE.Capa_Datos.Acciones
                     throw new Exception("El nombre de usuario o el identificador ya están en uso por otro usuario.");
                 }
 
-                // Desencripta la contraseña proporcionada para verificar su valor original
-                string contraseniaDesencriptada = DesencriptarAES(usuario.Contrasenia);
-
-                // Re-encripta la contraseña antes de actualizarla en la base de datos
-                usuarioBD.Contrasenia = EncriptarAES(contraseniaDesencriptada);
 
                 usuarioBD.NombreUsuario = usuario.NombreUsuario;
                 usuarioBD.Correo = usuario.Correo;

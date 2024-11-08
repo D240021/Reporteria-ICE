@@ -6,6 +6,7 @@ using reporteria_ice_api.Utilitarios;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using static ICE.Capa_Datos.Acciones.GestionarUsuarioDA;
 
 namespace reporteria_ice_api.Controllers
 {
@@ -31,16 +32,21 @@ namespace reporteria_ice_api.Controllers
 
                 if (respuesta <= 0)
                 {
-                    return BadRequest("Error al registrar el usuario.");
+                    return BadRequest(new { message = "Error al registrar el usuario." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true, userId = respuesta });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el usuario ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
+
 
         // Método para obtener todos los usuarios, usando UsuarioViewDTO para visualización
         [HttpGet]
