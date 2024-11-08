@@ -16,15 +16,31 @@ namespace ICE.Capa_Negocios.CU
             _gestionarUsuarioDA = gestionarUsuarioDA;
         }
 
+        public class ConflictException : Exception
+        {
+            public ConflictException(string message) : base(message)
+            {
+            }
+        }
+
         public async Task<int> RegistrarUsuario(Usuario usuario)
         {
             var validacionUsuario = ReglasUsuario.EsUsuarioValido(usuario);
             if (!validacionUsuario.esValido)
             {
-                return 0;
+                return 0; // Si no es válido, retorna 0 (error de validación)
             }
-            return await _gestionarUsuarioDA.RegistrarUsuario(usuario);
+
+            try
+            {
+                return await _gestionarUsuarioDA.RegistrarUsuario(usuario);
+            }
+            catch (ConflictException ex)
+            {
+                throw;
+            }
         }
+
 
         public async Task<Usuario> ObtenerUsuarioPorId(int id)
         {
