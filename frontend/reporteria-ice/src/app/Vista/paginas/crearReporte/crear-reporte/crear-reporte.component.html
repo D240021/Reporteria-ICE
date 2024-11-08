@@ -2,21 +2,12 @@
   <form>
     <h2>Crear reporte nuevo</h2>
 
-    <!-- Nombre del Reporte -->
-    <section class="row mb-3 align-items-center">
-      <label class="col-md-4">NOMBRE DEL REPORTE:</label>
-      <div class="col-md-8">
-        <input type="text" placeholder="esto se omite, para no cambiar le modelo otra vez" />
-      </div>
-    </section>
 
-    <!-- Subestación Actual -->
-    <section class="row mb-3 align-items-center">
-      <label class="col-md-4">SUBESTACION ACTUAL:</label>
-      <div class="col-md-8">
-        <input type="text" value="Rio Macho" disabled />
-      </div>
-    </section>
+    <!-- NOTA:
+
+      Aplicar alguna logica si se ve necesario para que la linea de transmision y subestacione esten ya filtradas en los select
+      segun la subestacion actual del TPM que esta creando la subestacion
+    -->
 
     <!-- Línea de Transmisión -->
     <section class="row mb-3 align-items-center">
@@ -32,9 +23,29 @@
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">SUBESTACIONES ASOCIADAS:</label>
       <div class="col-md-8">
+        <label><input type="checkbox" name="subestaciones" value="desamparados"> Desamparados</label><br>
+        <label><input type="checkbox" name="subestaciones" value="turrialba"> Turrialba</label><br>
+        <label><input type="checkbox" name="subestaciones" value="san_jose"> San José</label><br>
+        <label><input type="checkbox" name="subestaciones" value="alajuela"> Alajuela</label>
+      </div>
+    </section>
+
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">Supervisor:</label>
+      <div class="col-md-8">
         <select>
-          <option value="desamparados">Desamparados</option>
-          <option value="turrialba">Turrialba</option>
+          <option value="Lorem Ipsum">Lorem Ipsum</option>
+          <option value="Lorem Ipsum">Lorem Ipsum</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="row mb-3 align-items-center">
+      <label class="col-md-4">Técnico de Línea:</label>
+      <div class="col-md-8">
+        <select>
+          <option value="Lorem Ipsum">Lorem Ipsum</option>
+          <option value="Lorem Ipsum">Lorem Ipsum</option>
         </select>
       </div>
     </section>

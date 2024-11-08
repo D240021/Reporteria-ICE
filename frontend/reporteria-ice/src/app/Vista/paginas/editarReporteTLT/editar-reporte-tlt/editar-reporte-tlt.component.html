@@ -9,13 +9,7 @@
       <form [formGroup]="contenedorFormulario">
         <h2>Editar Reporte "Falla Rio Macho - Desamparados"</h2>
 
-        <section class="row mb-3 align-items-center" appearance="outline">
-          <label class="col-md-4">UBICACIÓN</label>
-          <div class="col-md-8">
-            <input matInput type="text" placeholder="Inserte la ubicación"
-                   [formControl]="contenedorFormulario.controls.ubicacion">
-          </div>
-        </section>
+        <!-- Manejar solo una foto-->
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">EVIDENCIA (FOTOS)</label>
@@ -24,6 +18,8 @@
                    [formControl]="contenedorFormulario.controls.evidencia">
           </div>
         </section>
+
+        <!-- Las causas deben enviarse como un string, con las causas separadas por ¨,¨ -->
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">CAUSAS</label>
@@ -37,6 +33,7 @@
           </div>
         </section>
 
+        <!-- Fecha y hora de detección de la causa/s-->
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">FECHA Y HORA</label>
           <div class="col-md-8">
