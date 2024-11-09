@@ -49,6 +49,7 @@ export class InicioSesionComponent {
           const objetoRespuesta = respuesta as Usuario;
           const rolUsuario = objetoRespuesta.rol.toLocaleLowerCase();
           this.seguridadService.establecerRol(rolUsuario);
+          this.seguridadService.guardarInformacionUsuarioLogeado(objetoRespuesta);
           this.redireccionarUsuario(respuesta as Usuario);
           this.mensajeCredenciales = '';
         }

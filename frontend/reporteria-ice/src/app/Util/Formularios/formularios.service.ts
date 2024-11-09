@@ -24,9 +24,15 @@ export class FormulariosService {
       return 'El campo nombre es requerido';
     }
 
+    if(campo.hasError('esCaracterEspecial') && campo.touched){
+      return 'No se permiten caracteres especiales';
+    }
+
     if(campo.hasError('esSoloLetras') && campo.touched){
       return 'El campo nombre no debe llevar números';
     }
+
+    
 
     return '';
   }
@@ -76,6 +82,7 @@ export class FormulariosService {
     if(campo.hasError('email') && campo.touched){
       return 'Inserte un correo válido';
     }
+
     
     return '';
   }
@@ -87,6 +94,13 @@ export class FormulariosService {
       return 'Los apellidos son requeridos';
     }
 
+    if(campo.hasError('esCaracterEspecial') && campo.touched){
+      return 'No se permiten caracteres especiales';
+    }
+
+    if(campo.hasError('esSoloLetras') && campo.touched){
+      return 'El campo nombre no debe llevar números';
+    }
 
     return '';
   }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ICE.Capa_Datos.Entidades;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ICE.Capa_Datos.Acciones
 {
@@ -94,6 +95,30 @@ namespace ICE.Capa_Datos.Acciones
             };
         }
 
+        public async Task<IEnumerable<Subestacion>> ObtenerSubestacionesPorUnidadRegional(int idUnidadRegional)
+        {
+            var unidadRegionalBD = await _context.UnidadesRegionales.FirstOrDefaultAsync(u => u.Id == idUnidadRegional);
+
+            if (unidadRegionalBD != null)
+            {
+                var subestaciones = await _context.Subestaciones
+                .Where(s => s.UnidadRegionalId == idUnidadRegional)
+                .Select(s => new Subestacion
+                 {   
+                     Id = s.Id,
+                     NombreUbicacion = s.NombreUbicacion,
+                     Identificador = s.Identificador
+                 })
+                .ToListAsync();
+
+                return subestaciones;
+            }
+
+            return Enumerable.Empty<Subestacion>();
+        }
+
+      
+
         public async Task<IEnumerable<Subestacion>> ObtenerTodasLasSubestaciones()
         {
             var subestaciones = await _context.Subestaciones
@@ -143,5 +168,6 @@ namespace ICE.Capa_Datos.Acciones
             return resultado > 0;
         }
 
+       
     }
 }

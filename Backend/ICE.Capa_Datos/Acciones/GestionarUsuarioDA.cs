@@ -169,6 +169,72 @@ namespace ICE.Capa_Datos.Acciones
             return usuarios;
         }
 
+        public async Task<IEnumerable<Usuario>> obtenerSupervisorPorUnidadRegional(int idUnidadRegional)
+        {
+            var supervisoresDA = await _context.Usuarios
+                .Where(u => u.UnidadRegionalId == idUnidadRegional && u.Rol == "SPRV")
+                .ToListAsync();
+
+            var supervisores = supervisoresDA.Select(da => new Usuario
+            {
+                // Mapea las propiedades necesarias de UsuarioDA a Usuario
+                Id = da.Id,
+                NombreUsuario = da.NombreUsuario,
+                Correo = da.Correo,
+                Nombre = da.Nombre,
+                Apellido = da.Apellido,
+                Identificador = da.Identificador,
+                Rol = da.Rol,
+                // Mapea otras propiedades según corresponda
+            });
+
+            return supervisores;
+        }
+
+        public async Task<IEnumerable<Usuario>> obtenerTecnicoTPMPorUnidadRegional(int idUnidadRegional)
+        {
+            var tecnicosTPMDA = await _context.Usuarios
+                .Where(u => u.UnidadRegionalId == idUnidadRegional && u.Rol == "TPM")
+                .ToListAsync();
+
+            var tecnicosTPM = tecnicosTPMDA.Select(da => new Usuario
+            {
+                
+                Id = da.Id,
+                NombreUsuario = da.NombreUsuario,
+                Correo = da.Correo,
+                Nombre = da.Nombre,
+                Apellido = da.Apellido,
+                Identificador = da.Identificador,
+                Rol = da.Rol,
+                
+            });
+
+            return tecnicosTPM;
+        }
+
+        public async Task<IEnumerable<Usuario>> obtenerTecnicoTLTPorUnidadRegional(int idUnidadRegional)
+        {
+            var tecnicosTLTDA = await _context.Usuarios
+                .Where(u => u.UnidadRegionalId == idUnidadRegional && u.Rol == "TLT")
+                .ToListAsync();
+
+            var tecnicosTLT = tecnicosTLTDA.Select(da => new Usuario
+            {
+
+                Id = da.Id,
+                NombreUsuario = da.NombreUsuario,
+                Correo = da.Correo,
+                Nombre = da.Nombre,
+                Apellido = da.Apellido,
+                Identificador = da.Identificador,
+                Rol = da.Rol,
+
+            });
+
+            return tecnicosTLT;
+        }
+
 
         public async Task<bool> EliminarUsuario(int id)
         {
@@ -271,5 +337,7 @@ namespace ICE.Capa_Datos.Acciones
                 }
             }
         }
+
+        
     }
 }

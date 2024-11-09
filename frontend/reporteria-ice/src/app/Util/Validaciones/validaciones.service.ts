@@ -37,4 +37,14 @@ export class ValidacionesService {
       return esSegura ? null : { esContraseniaSegura: true };
     };
   }
+
+  esCaracterEspecial(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valor = control.value;
+      const tieneCaracteresEspeciales = /[^a-zA-Z0-9\s]/.test(valor); 
+      return !tieneCaracteresEspeciales ? null : { esCaracterEspecial: true };
+    };
+  }
+
+  
 }
