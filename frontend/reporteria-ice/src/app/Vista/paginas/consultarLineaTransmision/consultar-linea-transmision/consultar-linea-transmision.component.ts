@@ -61,13 +61,22 @@ export class ConsultarLineaTransmisionComponent implements OnInit{
 
   filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
-
+  
     if (!valor) {
       this.lineasTransmision = this.lineasTransmisionOriginales;
     } else {
       this.lineasTransmision = this.lineasTransmisionOriginales.filter(lineaTransmision => {
-        const campo = filtro === 'identificador' ? lineaTransmision.identificador : lineaTransmision.nombreUbicacion;
-        return campo.toLowerCase().includes(valor.toLowerCase());
+        if (!filtro) {
+          return [
+            lineaTransmision.identificador,
+            lineaTransmision.nombreUbicacion
+          ].some(campo => campo?.toLowerCase().includes(valor.toLowerCase()));
+        }
+  
+        const campoFiltrado = filtro === 'identificador' 
+          ? lineaTransmision.identificador 
+          : lineaTransmision.nombreUbicacion; 
+        return campoFiltrado?.toLowerCase().includes(valor.toLowerCase());
       });
     }
   }

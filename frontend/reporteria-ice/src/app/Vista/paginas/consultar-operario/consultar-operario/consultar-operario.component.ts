@@ -15,9 +15,9 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
 @Component({
   selector: 'consultar-operario',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, RouterLink,
+  imports: [MatTableModule, MatInputModule,
     ReactiveFormsModule, MatButtonModule, MatIconModule, EditarOperarioComponent,
-    MatDialogModule, AnimacionCargaComponent],
+    MatDialogModule, AnimacionCargaComponent, RouterLink],
   templateUrl: './consultar-operario.component.html',
   styleUrl: './consultar-operario.component.css'
 })
@@ -64,44 +64,45 @@ export class ConsultarOperarioComponent implements OnInit {
 
   filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
-
+  
     if (!valor) {
+      
       this.usuarios = this.usuariosOriginales;
-    } else {
-      this.usuarios = this.usuariosOriginales.filter(usuario => {
-        let campo = '';
-
-        switch (filtro) {
-          case 'identificador':
-            campo = usuario.identificador;
-            break;
-          case 'nombre':
-            campo = usuario.nombre;
-            break;
-          case 'apellido':
-            campo = usuario.apellido;
-            break;
-          case 'nombreUsuario':
-            campo = usuario.nombreUsuario;
-            break;
-          case 'correo':
-            campo = usuario.correo;
-            break;
-          case 'unidadRegional':
-            campo = usuario.nombreUnidadRegional || '';
-            break;
-          case 'rol':
-            campo = usuario.rol;
-            break;
-        }
-
-        return campo && campo.toLowerCase().includes(valor.toLowerCase());
-      });
+      return;
     }
+  
+    const valorNormalizado = valor.toLowerCase();
+    this.usuarios = this.usuariosOriginales.filter(usuario => {
+      
+      if (!filtro) {
+        return [
+          usuario.identificador,
+          usuario.nombre,
+          usuario.apellido,
+          usuario.nombreUsuario,
+          usuario.correo,
+          usuario.nombreUnidadRegional,
+          usuario.rol
+        ].some(campo => campo?.toLowerCase().includes(valorNormalizado));
+      }
+  
+      
+      const campoFiltrado = {
+        'identificador': usuario.identificador,
+        'nombre': usuario.nombre,
+        'apellido': usuario.apellido,
+        'nombreUsuario': usuario.nombreUsuario,
+        'correo': usuario.correo,
+        'unidadRegional': usuario.nombreUnidadRegional,
+        'rol': usuario.rol
+      }[filtro] || '';
+  
+      return campoFiltrado.toLowerCase().includes(valorNormalizado);
+    });
   }
 
   abrirEditarOperario(operario: Usuario): void {
-    console.log(operario);
+    
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {
