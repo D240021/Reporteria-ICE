@@ -56,13 +56,22 @@ export class ConsultarSubestacionComponent {
 
   filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
-
+  
     if (!valor) {
       this.subestaciones = this.subestacionesOriginales;
     } else {
       this.subestaciones = this.subestacionesOriginales.filter(subestacion => {
-        const campo = filtro === 'identificador' ? subestacion.identificador : subestacion.nombreUbicacion;
-        return campo.toLowerCase().includes(valor.toLowerCase());
+        if (!filtro) {
+          return [
+            subestacion.identificador,
+            subestacion.nombreUbicacion,
+          ].some(campo => campo?.toLowerCase().includes(valor.toLowerCase()));
+        }
+  
+        const campoFiltrado = filtro === 'identificador' 
+          ? subestacion.identificador 
+          : subestacion.nombreUbicacion; 
+        return campoFiltrado?.toLowerCase().includes(valor.toLowerCase());
       });
     }
   }

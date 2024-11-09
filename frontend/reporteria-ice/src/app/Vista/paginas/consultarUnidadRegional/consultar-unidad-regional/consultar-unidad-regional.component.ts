@@ -58,11 +58,18 @@ export class ConsultarUnidadRegionalComponent implements OnInit {
 
   filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
-
+  
     if (!valor) {
       this.unidadesRegionales = this.unidadesRegionalesOriginales;
     } else {
       this.unidadesRegionales = this.unidadesRegionalesOriginales.filter(unidad => {
+        if (!filtro) {
+          return [
+            unidad.identificador,
+            unidad.nombreUbicacion
+          ].some(campo => campo?.toLowerCase().includes(valor.toLowerCase()));
+        }
+  
         const campo = filtro === 'identificador' ? unidad.identificador : unidad.nombreUbicacion;
         return campo.toLowerCase().includes(valor.toLowerCase());
       });
