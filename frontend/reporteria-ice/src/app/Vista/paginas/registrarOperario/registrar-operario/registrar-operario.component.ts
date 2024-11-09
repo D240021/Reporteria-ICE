@@ -61,7 +61,7 @@ export class RegistrarOperarioComponent implements OnInit {
     id: [0],
     contrasenia: ['', { validators: [Validators.required, this.validaciones.esContraseniaSegura()] }],
     nombreUsuario: ['', { validators: [Validators.required] }],
-    correo: ['', { validators: [Validators.required, Validators.email] }],
+    correo: ['', { validators: [Validators.required, Validators.email, this.validaciones.esCorreoValido()] }],
     nombre: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
     apellido: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
     identificador: ['', { validators: [Validators.required] }],

@@ -41,11 +41,28 @@ export class ValidacionesService {
   esCaracterEspecial(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valor = control.value;
-      const tieneCaracteresEspeciales = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/.test(valor); 
+      const tieneCaracteresEspeciales = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/.test(valor);
       return !tieneCaracteresEspeciales ? null : { esCaracterEspecial: true };
     };
-    
+
   }
 
-  
+  esCorreoValido(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valor = control.value;
+      const correoValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const caracteresEspeciales = /[!#$%^&*(),?":{}|<>;]/;
+
+      if (caracteresEspeciales.test(valor)) {
+        return { caracteresEspecialesNoPermitidos: true };
+      }
+
+      if (!correoValido.test(valor)) {
+        return { correoInvalido: true };
+      }
+
+      return null;
+    };
+  }
+
 }
