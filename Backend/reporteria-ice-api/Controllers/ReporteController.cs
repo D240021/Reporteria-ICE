@@ -15,11 +15,13 @@ namespace reporteria_ice_api.Controllers
         private readonly IGestionarReporteCN _gestionarReporteCN;
 
         private readonly IGestionarReporteConInformesService _gestionarReporteConInformesServiceCN;
+        private readonly IPDFGeneratorService _pdfGeneratorService;
 
-        public ReporteController(IGestionarReporteCN gestionarReporteCN, IGestionarReporteConInformesService gestionarReporteConInformesServiceCN)
+        public ReporteController(IGestionarReporteCN gestionarReporteCN, IGestionarReporteConInformesService gestionarReporteConInformesServiceCN, IPDFGeneratorService pdfGeneratorService)
         {
             _gestionarReporteCN = gestionarReporteCN;
             _gestionarReporteConInformesServiceCN = gestionarReporteConInformesServiceCN;
+            _pdfGeneratorService = pdfGeneratorService;
         }
 
         [HttpPost]
@@ -117,5 +119,32 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}/pdf")]
+        public async Task<IActionResult> GenerarPDFReporte(int id)
+        {
+            try
+            {
+                // Obtener el reporte y sus informes
+                var reporteConInformes = await _gestionarReporteConInformesServiceCN.ObtenerReporteConInformesPorId(id);
+
+                if (reporteConInformes == null)
+                {
+                    return NotFound("Reporte no encontrado.");
+                }
+
+                // Generar el PDF
+                var pdfBytes = await _pdfGeneratorService.GenerarPDF(reporteConInformes);
+
+                return File(pdfBytes, "application/pdf", $"Reporte_{id}.pdf");
+            }
+            catch (Exception e)
+            {
+                // Registrar el stack trace completo para ver detalles del error
+                Console.WriteLine("Error en la generación del PDF: " + e.ToString());
+                return BadRequest("Error en la generación del PDF: " + e.Message);
+            }
+        }
+
     }
 }

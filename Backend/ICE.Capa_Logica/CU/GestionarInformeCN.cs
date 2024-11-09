@@ -1,6 +1,7 @@
 ﻿using ICE.Capa_Dominio.Modelos;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using ICE.Capa_Negocios.Interfaces.Capa_Negocios;
+using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Threading.Tasks;
 
 namespace ICE.Capa_Negocios.CU
@@ -15,6 +16,9 @@ namespace ICE.Capa_Negocios.CU
         private readonly IGestionarLineasTransmisionDA _gestionarLineaTransmisionDA;
         private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
         private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
+        
+        private readonly IGestionarReporteConInformesService _gestionarReporteConInformesService;
+
 
         public GestionarInformeCN(
             IGestionarInformeDA gestionarInformeDA,
@@ -24,7 +28,8 @@ namespace ICE.Capa_Negocios.CU
             IGestionarTiemposDeDisparoDA gestionarTiemposDeDisparoDA,
             IGestionarLineasTransmisionDA gestionarLineaTransmisionDA,
             IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
-            IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)
+            IGestionarDatosGeneralesDA gestionarDatosGeneralesDA,
+            IGestionarReporteConInformesService gestionarReporteConInformesService)
         {
             _gestionarInformeDA = gestionarInformeDA;
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
@@ -34,11 +39,12 @@ namespace ICE.Capa_Negocios.CU
             _gestionarLineaTransmisionDA = gestionarLineaTransmisionDA;
             _gestionarDatosDeLineaDA = gestionarDatosDeLineaDA;
             _gestionarDatosGeneralesDA = gestionarDatosGeneralesDA;
+            _gestionarReporteConInformesService = gestionarReporteConInformesService;
         }
 
         public async Task<int> RegistrarInformeCompleto(Informe informe)
         {
-            //Los datos de "informe" se han generado en la GestionarReporteConInformeService                        
+            //Los datos de "informe" se han generado en la clase GestionarReporteConInformeService                        
             return await _gestionarInformeDA.RegistrarInforme(informe);
         }
 
@@ -49,16 +55,25 @@ namespace ICE.Capa_Negocios.CU
 
         public async Task<bool> ActualizarInforme(Informe informe)
         {
-            await _gestionarTeleproteccionDA.ActualizarTeleproteccion(informe.TeleproteccionId, informe.Teleproteccion);
-            await _gestionarDistanciaDeFallaDA.ActualizarDistanciaDeFalla(informe.DistanciaDeFallaId, informe.DistanciaDeFalla);
-            await _gestionarCorrientesDeFallaDA.ActualizarCorrientesDeFalla(informe.CorrientesDeFallaId, informe.CorrientesDeFalla);
-            await _gestionarTiemposDeDisparoDA.ActualizarTiemposDeDisparo(informe.TiemposDeDisparoId, informe.TiemposDeDisparo);
-            await _gestionarDatosDeLineaDA.ActualizarDatosDeLinea(informe.DatosDeLineaId, informe.DatosDeLinea);
-            await _gestionarDatosGeneralesDA.ActualizarDatosGenerales(informe.DatosGeneralesId, informe.DatosGenerales);
+            // Validación del informe
+            var (esValido, mensaje) = ReglasInforme.EsInformeValido(informe);
+            if (!esValido)
+                return false;
 
-            return await _gestionarInformeDA.ActualizarInforme(informe.Id, informe);
+            // Cambiar el estado del informe a "confirmado"
+            ReglasInforme.CambiarEstadoAConfirmado(informe);
+
+            // Actualizar el informe en la base de datos
+            bool esInformeActualizado = await _gestionarInformeDA.ActualizarInforme(informe.Id, informe);
+            if (!esInformeActualizado)
+                return false;
+
+            // Verificar si los 4 informes asociados a un reporte estan confirmados, de ser asi, revisar tambien que al menos uno de los 4 no tenga instancias anidadas con
+            //datos nulos
+            await _gestionarReporteConInformesService.VerificarEstadoInformesAsociados(informe.Id);
+
+            return true;
         }
-
 
         public async Task<bool> EliminarInforme(int id)
         {

@@ -1,6 +1,7 @@
 using ICE.Capa_Dominio.Modelos;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 using ICE.Capa_Negocios.Interfaces.Capa_Negocios;
+using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,15 +9,9 @@ namespace ICE.Capa_Negocios.CU
 {
 
     public class GestionarReporteConInformesService: IGestionarReporteConInformesService
-    {
-        private readonly IGestionarReporteCN _gestionarReporteCN;
-        private readonly IGestionarInformeCN _gestionarInformeCN;
-
-        //Datos
-        //private readonly ICE_Context _context;
-
-
+    {        
         private readonly IGestionarInformeDA _gestionarInformeDA;
+        private readonly IGestionarReporteDA _gestionarReporteDA;
         private readonly IGestionarTeleproteccionDA _gestionarTeleproteccionDA;
         private readonly IGestionarDistanciaDeFallaDA _gestionarDistanciaDeFallaDA;
         private readonly IGestionarCorrientesDeFallaDA _gestionarCorrientesDeFallaDA;
@@ -24,11 +19,11 @@ namespace ICE.Capa_Negocios.CU
         private readonly IGestionarLineasTransmisionDA _gestionarLineaTransmisionDA;
         private readonly IGestionarDatosDeLineaDA _gestionarDatosDeLineaDA;
         private readonly IGestionarDatosGeneralesDA _gestionarDatosGeneralesDA;
-
+        
         public GestionarReporteConInformesService(
-            IGestionarReporteCN gestionarReporteCN, 
-            IGestionarInformeCN gestionarInformeCN,
+           
             IGestionarInformeDA gestionarInformeDA,
+            IGestionarReporteDA gestionarReporteDA,
             IGestionarTeleproteccionDA gestionarTeleproteccionDA,
             IGestionarDistanciaDeFallaDA gestionarDistanciaDeFallaDA,
             IGestionarCorrientesDeFallaDA gestionarCorrientesDeFallaDA,
@@ -36,11 +31,9 @@ namespace ICE.Capa_Negocios.CU
             IGestionarLineasTransmisionDA gestionarLineaTransmisionDA,
             IGestionarDatosDeLineaDA gestionarDatosDeLineaDA,
             IGestionarDatosGeneralesDA gestionarDatosGeneralesDA)
-        {
-            _gestionarReporteCN = gestionarReporteCN;
-            _gestionarInformeCN = gestionarInformeCN;
-
+        {            
             _gestionarInformeDA = gestionarInformeDA;
+            _gestionarReporteDA = gestionarReporteDA;
             _gestionarTeleproteccionDA = gestionarTeleproteccionDA;
             _gestionarDistanciaDeFallaDA = gestionarDistanciaDeFallaDA;
             _gestionarCorrientesDeFallaDA = gestionarCorrientesDeFallaDA;
@@ -51,10 +44,15 @@ namespace ICE.Capa_Negocios.CU
 
         }
 
+        //Aqui no se deben aplicar las Reglas de Informe , ya que deben crearse con valores nulos en un inicio para ser actualizados despues
         public async Task<bool> RegistrarReporteConInformes(Reporte reporte, List<int> subestacionIds, int lineaTransmisionId)
         {
             try
             {
+                if (!ReglasReporte.ReporteInicialValido(subestacionIds, lineaTransmisionId, reporte).esValido) return false;
+                //metodo para compribar que el supervisorId exista y el tecnico tambien
+
+
                 //lista de informes
                 List<Informe> informes = new List<Informe>();
 
@@ -133,7 +131,8 @@ namespace ICE.Capa_Negocios.CU
                 //se insertan los informes en la BD y se recupera su ID para el reporte
                 for (int i = 0; i < informes.Count; i++)
                 {
-                    informes[i].Id = await _gestionarInformeCN.RegistrarInformeCompleto(informes[i]);
+                    //informes[i].Id = await _gestionarInformeCN.RegistrarInformeCompleto(informes[i]);
+                    informes[i].Id = await _gestionarInformeDA.RegistrarInforme(informes[i]);
                 }
 
                 // se asignan los informes al reporte
@@ -145,19 +144,175 @@ namespace ICE.Capa_Negocios.CU
                     reporte.InformeV4Id = informes[3].Id;
                 }
 
-                // Registrar el reporte
-                return await _gestionarReporteCN.RegistrarReporte(reporte);
+                // Llamar a ActualizarEstadoReporte para que actualice el estado antes de registrar
+                var reporteActualizado = ReglasReporte.ActualizarEstadoReporte(reporte);
+                if (!reporteActualizado.esValido)
+                {
+                    return false;
+                }
 
-                // await transaction.CommitAsync();
-                //return true;
+                // Registrar el reporte
+                return await _gestionarReporteDA.RegistrarReporte(reporte);
 
             }
             catch (Exception ex)
             {
-                //revertir todo ante cualquier insercion fallida, ya que son muchas
-                //  await transaction.RollbackAsync();
                 throw new Exception("Error al registrar los datos del informe y reporte: " + ex.Message);
             }
+        }
+
+        // Método privado para obtener los informes asociados de un reporte
+        private async Task<List<Informe>> ObtenerInformesAsociados(int informeId)
+        {
+            var idsInformesAsociados = await _gestionarReporteDA.ObtenerIdsInformesDeReporte(informeId);
+            var informesAsociados = new List<Informe>();
+
+            foreach (var id in idsInformesAsociados)
+            {
+                var informe = await _gestionarInformeDA.ObtenerInformePorId(id);
+                if (informe != null)
+                {
+                    informesAsociados.Add(informe);
+                }
+            }
+
+            return informesAsociados;
+        }
+
+        //Metodo para obtener los informes de un reporte y verificar si todos estan confirmados, pero si al menos
+        //1 no esta completo, se quedan pendientes los 4 otra vez
+        public async Task VerificarEstadoInformesAsociados(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+            var reporteAsociado = await ObtenerReportePorInformeId(informeId);
+
+            bool todosConfirmados = informesAsociados.All(inf => inf.Estado == 1);
+
+            if (todosConfirmados)
+            {
+                //A pesar de estar como confirmados, revisar que las instancias no tengan atributos nulos
+                bool hayInformeCompleto = await VerificarInformesCompletosAsociados(informeId);                
+                if (!hayInformeCompleto)
+                {
+                    await ActualizarEstadosDeInformesAPendiente(informeId);
+                    return;
+                }
+                //Como hay al menos 1 informe con datos completos, se actualiza el reporte
+                ReglasReporte.ActualizarEstadoReporte(reporteAsociado);
+                await _gestionarReporteDA.ActualizarReporte(reporteAsociado.Id, reporteAsociado);
+            }
+        }
+
+        //Metodo para verificar que los atributos de tipo Instanciad de Informe no esten nulos
+        public async Task<bool> VerificarInformesCompletosAsociados(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+
+            return informesAsociados.Any(inf => ReglasInforme.EsInformeCompleto(inf).esValido);
+        }
+
+        //Se actualizan a pendientes todos los informes de un reporte
+        public async Task<bool> ActualizarEstadosDeInformesAPendiente(int informeId)
+        {
+            var informesAsociados = await ObtenerInformesAsociados(informeId);
+
+            ReglasInforme.CambiarTodosLosInformesAPendientes(informesAsociados);
+
+
+            foreach (var informe in informesAsociados)
+            {
+                await _gestionarInformeDA.ActualizarInforme(informe.Id, informe);
+            }
+
+            return true;
+        }
+
+
+
+
+        //Para GestionarReporteCN
+        public async Task<bool> VerificarEstadoInformesDeReporte(int reporteId)
+        {
+            // Obtener los informes asociados al reporte
+            var informesAsociados = await ObtenerInformesAsociados(reporteId);
+
+            // Verificar si todos los informes asociados están completos (Estado == 1)
+            return informesAsociados.All(informe => informe.Estado == 1);
+        }
+
+        public async Task<bool> ActualizarEstadoReporteSegunInformes(Reporte reporte)
+        {
+            // Verificar si todos los informes asociados están completos
+            bool informesCompletos = await VerificarEstadoInformesDeReporte(reporte.Id);
+
+            if (!informesCompletos)
+            {
+                return false;
+            }
+
+            // Llamar a ReglasReporte para actualizar el estado del reporte según las reglas
+            var resultado = ReglasReporte.ActualizarEstadoReporte(reporte);
+
+            if (!resultado.esValido)
+            {
+                return false;
+            }
+
+            // Actualizar el reporte en la base de datos
+            var actualizacionReporte = await _gestionarReporteDA.ActualizarReporte(reporte.Id, reporte);
+
+            return actualizacionReporte;
+        }
+
+        public async Task<Reporte> ObtenerReportePorInformeId(int informeId)
+        {
+            // Intentar obtener el reporte usando cada uno de los IDs de informe
+            var reporte = await _gestionarReporteDA.ObtenerReportePorInformeId(informeId);
+
+            if (reporte != null &&
+                (reporte.InformeV1Id == informeId ||
+                 reporte.InformeV2Id == informeId ||
+                 reporte.InformeV3Id == informeId ||
+                 reporte.InformeV4Id == informeId))
+            {
+                return reporte;
+            }
+
+            // Si no se encuentra el reporte, retornar null
+            return null;
+        }
+
+
+
+        //Metodos para reportes
+        public async Task<Reporte> ObtenerReporteConInformesPorId(int reporteId)
+        {
+            // Obtener el reporte principal
+            var reporte = await _gestionarReporteDA.ObtenerReportePorId(reporteId);
+
+            if (reporte == null)
+            {
+                return null;
+            }
+
+            // Obtener los informes asociados al reporte
+            var informes = await ObtenerInformesAsociados(reporteId);
+
+            // Asignar los informes obtenidos al reporte
+            if (informes.Count >= 4)
+            {
+                reporte.InformeV1Id = informes[0].Id;
+                reporte.InformeV2Id = informes[1].Id;
+                reporte.InformeV3Id = informes[2].Id;
+                reporte.InformeV4Id = informes[3].Id;
+            }
+
+            return reporte;
+        }
+
+        public async Task<List<Informe>> ObtenerReporteConInformesPDF(int reporteId)
+        {
+            return await ObtenerInformesAsociados(reporteId);            
         }
     }
 }

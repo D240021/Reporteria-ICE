@@ -1,6 +1,8 @@
 export interface Subestacion {
+    id: number,
+    nombreUbicacion : string,
     identificador : string,
-    unidadRegional : string,
-    nombre : string
+    unidadRegionalId : number | null,
+    nombreUnidadRegional?: string
 }
 

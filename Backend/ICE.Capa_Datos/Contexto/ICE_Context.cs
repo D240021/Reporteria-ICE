@@ -14,7 +14,6 @@ namespace ICE.Capa_Datos.Contexto
 
         // Definir DbSet para cada entidad
         public DbSet<UsuarioDA> Usuarios { get; set; }
-        public DbSet<RolDA> Roles { get; set; }
         public DbSet<UnidadRegionalDA> UnidadesRegionales { get; set; }
         public DbSet<SubestacionDA> Subestaciones { get; set; }
         public DbSet<NotificacionDA> Notificaciones { get; set; }
@@ -35,8 +34,10 @@ namespace ICE.Capa_Datos.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuración de clave compuesta para la tabla ReporteCausaDA
+            /*
             modelBuilder.Entity<ReporteCausaDA>()
                 .HasKey(rc => new { rc.ReporteId, rc.CausaId });
+            */
 
             // Configuración para evitar múltiples rutas de cascada en la tabla `ReporteDA`
             modelBuilder.Entity<ReporteDA>()
@@ -75,13 +76,6 @@ namespace ICE.Capa_Datos.Contexto
                 .WithMany()
                 .HasForeignKey(r => r.TecnicoLineaId)
                 .OnDelete(DeleteBehavior.Restrict); // Evitar cascada para TecnicoLinea
-
-            // Configuración de relaciones adicionales para UsuarioDA
-            modelBuilder.Entity<UsuarioDA>()
-                .HasOne(u => u.Rol)
-                .WithMany()
-                .HasForeignKey(u => u.RollId)
-                .OnDelete(DeleteBehavior.Restrict); // Relación Usuario-Rol
 
             modelBuilder.Entity<UsuarioDA>()
                 .HasOne(u => u.Subestacion)

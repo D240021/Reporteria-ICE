@@ -25,15 +25,28 @@ namespace ICE.Capa_Datos.Acciones
 
             if (lineaTransmisionBD != null)
             {
+                var existeIdentificador = await _context.LineasTransmision.AnyAsync(lt => lt.Identificador == lineaTransmision.Identificador && lt.Id != id);
+                if (existeIdentificador)
+                {
+                    throw new Exception("El identificador ya está en uso por otra línea de transmisión.");
+                }
+
+                var existeNombre = await _context.LineasTransmision.AnyAsync(lt => lt.NombreUbicacion == lineaTransmision.NombreUbicacion && lt.Id != id);
+                if (existeNombre)
+                {
+                    throw new Exception("El nombre de la ubicación ya está en uso por otra línea de transmisión.");
+                }
+
                 lineaTransmisionBD.NombreUbicacion = lineaTransmision.NombreUbicacion;
                 lineaTransmisionBD.Identificador = lineaTransmision.Identificador;
 
                 var resultado = await _context.SaveChangesAsync();
-                return resultado > 0 ? true : throw new Exception("Error al guardar los cambios en la base de datos.");
+                return resultado > 0;
             }
 
-            throw new Exception("Error al actualizar, la línea de transmisión no se encontró en la base de datos.");
+            throw new Exception("La línea de transmisión no se encontró en la base de datos.");
         }
+
 
         public async Task<bool> EliminarLineaTransmision(int id)
         {
@@ -82,6 +95,18 @@ namespace ICE.Capa_Datos.Acciones
 
         public async Task<bool> RegistrarLineaTransmision(LineaTransmision lineaTransmision)
         {
+            var existeIdentificador = await _context.LineasTransmision.AnyAsync(lt => lt.Identificador == lineaTransmision.Identificador);
+            if (existeIdentificador)
+            {
+                throw new Exception("El identificador ya está en uso.");
+            }
+
+            var existeNombre = await _context.LineasTransmision.AnyAsync(lt => lt.NombreUbicacion == lineaTransmision.NombreUbicacion);
+            if (existeNombre)
+            {
+                throw new Exception("El nombre de la ubicación ya está en uso.");
+            }
+
             var lineaTransmisionBD = new LineaTransmisionDA
             {
                 NombreUbicacion = lineaTransmision.NombreUbicacion,
@@ -91,7 +116,8 @@ namespace ICE.Capa_Datos.Acciones
             _context.LineasTransmision.Add(lineaTransmisionBD);
             var resultado = await _context.SaveChangesAsync();
 
-            return resultado > 0 ? true : throw new Exception("Error al registrar la línea de transmisión en la base de datos.");
+            return resultado > 0;
         }
+
     }
 }

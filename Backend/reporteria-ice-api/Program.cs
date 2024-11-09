@@ -64,15 +64,19 @@ builder.Services.AddTransient<IGestionarReporteDA, GestionarReporteDA>();
 // Inyección de dependencias para el servicio de dominio de Reporte con Informes
 builder.Services.AddTransient<IGestionarReporteConInformesService, GestionarReporteConInformesService>();
 
-// Inyección de dependencias para Roles
-builder.Services.AddTransient<IGestionarRolCN, GestionarRolCN>();
-builder.Services.AddTransient<IGestionarRolDA, GestionarRolDA>();
+// Inyección de dependencias para el servicio ieText (PDF)
+builder.Services.AddTransient<IPDFGeneratorService, PDFGeneratorService>();
+
+// Inyección de dependencias para Causas
+builder.Services.AddTransient<IGestionarCausaCN, GestionarCausaCN>();
+builder.Services.AddTransient<IGestionarCausaDA, GestionarCausaDA>();
+
 
 
 // Conexión a BD
 builder.Services.AddDbContext<ICE_Context>(options =>
 {
-    var connectionString = "Server=(LocalDB)\\LocalServerJosue; Database=ICE_Reporteria; Trusted_Connection=True;TrustServerCertificate=True;";
+    var connectionString = "Server=(localdb)\\LosPanchos; Database=ICE_Reporteria; Trusted_Connection=True;TrustServerCertificate=True;";
     options.UseSqlServer(connectionString);
 });
 

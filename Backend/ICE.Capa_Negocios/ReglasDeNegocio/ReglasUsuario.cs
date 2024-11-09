@@ -31,23 +31,25 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "La contraseña debe tener al menos 8 caracteres.");
             }
 
-            if (usuario.Identificador <= 0)
+            //Se modifica esta relga en especifico, ya que se validaba como int el identificador
+            if (string.IsNullOrWhiteSpace(usuario.Identificador))
             {
-                Console.WriteLine("El identificador debe ser mayor que cero.");
-                return (false, "El identificador debe ser mayor que cero.");
+                Console.WriteLine("El identificador no puede estar vacío o solo contener espacios en blanco.");
+                return (false, "El identificador no puede estar vacío o solo contener espacios en blanco.");
             }
 
-            if (usuario.RollId <= 0)
+            //Se modifica esta relga en especifico, ya que se validaba como int el rol
+            if (string.IsNullOrWhiteSpace(usuario.Rol))
             {
                 Console.WriteLine("El rol no es válido.");
                 return (false, "El rol no es válido.");
             }
 
-            if (usuario.SubestacionId <= 0)
-            {
-                Console.WriteLine("La subestación no es válida.");
-                return (false, "La subestación no es válida.");
-            }
+            //if (usuario.SubestacionId <= 0)
+            //{
+            //    Console.WriteLine("La subestación no es válida.");
+            //    return (false, "La subestación no es válida.");
+            //}
 
             if (!string.IsNullOrEmpty(usuario.Nombre) && usuario.Nombre.Length > 100)
             {
@@ -61,7 +63,11 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
                 return (false, "El apellido no puede exceder los 100 caracteres.");
             }
 
-            if (!string.IsNullOrEmpty(usuario.Correo) && !usuario.Correo.Contains("@"))
+            bool tieneArroba = usuario.Correo.Contains("@");
+            bool tienePunto = usuario.Correo.Contains(".");
+            bool correoInvalido = !tieneArroba || !tienePunto;
+
+            if (!string.IsNullOrEmpty(usuario.Correo) && correoInvalido)
             {
                 Console.WriteLine("El formato del correo es incorrecto.");
                 return (false, "El formato del correo es incorrecto.");

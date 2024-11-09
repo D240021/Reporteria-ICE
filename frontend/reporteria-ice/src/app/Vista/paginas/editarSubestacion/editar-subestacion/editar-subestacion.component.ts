@@ -1,45 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
-import { Subestacion } from '../../../../Modelo/subestacion';
+import { Subestacion } from '../../../../Modelo/Subestacion';
 import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
+import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
+import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'editar-subestacion',
   standalone: true,
-  imports: [MatInputModule, MatButtonModule, BuscadorComponent, RouterLink],
+  imports: [MatInputModule, MatButtonModule, MatDialogModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './editar-subestacion.component.html',
   styleUrl: './editar-subestacion.component.css'
 })
 export class EditarSubestacionComponent {
 
-  formularioVisible!: boolean;
+  subestacion: any;
 
-  datosQuemados = [
-    { nombre: 'Orosí', identificador: 'S7492' },
-    { nombre: 'Turrialba', identificador: 'S7T92' },
-  ];
+  private formBuilder = inject(FormBuilder);
+  public accionesFormulario = inject(FormulariosService);
+  private validaciones = inject(ValidacionesService);
+  public contenedorFormulario = this.formBuilder.group({
+    id: [0],
+    identificador: ['', { validators: [Validators.required] }],
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
+  });
+  private subestacionService = inject(SubestacionService);
 
-  subestacionesQuemadas: Subestacion[] = [
-    {
-      identificador: 'S7492',
-      unidadRegional: 'Cartago',
-      nombre: 'Turrialba'
-    },
-    {
-      identificador: 'S7T92',
-      unidadRegional: 'Desamparados',
-      nombre: 'San José'
-    },
-  ]
+  constructor(
+    public referenciaDialogo: MatDialogRef<EditarSubestacionComponent>,
+    @Inject(MAT_DIALOG_DATA) public datos: { subestacion: Subestacion }
+  ) {
+    this.subestacion = datos;
+    this.contenedorFormulario.patchValue(this.subestacion);
+  }
 
+  cerrarCuadroDialogo() {
+    this.referenciaDialogo.close();
+  }
 
-  procesarBusqueda(identificadorBuscado: string): void {
+  guardarCambios() {
+    const nuevosDatosSubestacion = this.contenedorFormulario.value as Subestacion;
+    this.subestacionService.editarSubestacion(nuevosDatosSubestacion).subscribe(respuesta => {
+      this.cerrarCuadroDialogo();
+    });
 
-    const subestacionEncontrada = this.subestacionesQuemadas.find((subestacion) =>
-      identificadorBuscado == subestacion.identificador);
-    subestacionEncontrada ? this.formularioVisible = true : undefined;
-    return;
+  }
+
+  esFormularioModificado(): boolean {
+
+    const valoresFormulario = this.contenedorFormulario.value;
+    for (const key in valoresFormulario) {
+      if (valoresFormulario.hasOwnProperty(key) && key in this.subestacion) {
+        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.subestacion[key as keyof Subestacion]) {
+          return true; 
+        }
+      }
+    }
+    return false; 
   }
 
 

@@ -1,1 +1,79 @@
-<p>Editar Reporte TLT</p>
+<div>
+
+  <div class="contenedor-principal">
+
+    <div></div>
+
+    <div class="contenedor-form">
+
+      <form [formGroup]="contenedorFormulario">
+        <h2>Editar Reporte "Falla Rio Macho - Desamparados"</h2>
+
+        <!-- Manejar solo una foto-->
+
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">EVIDENCIA (FOTOS)</label>
+          <div class="col-md-8">
+            <input type="file" multiple placeholder="Subir archivos"
+                   [formControl]="contenedorFormulario.controls.evidencia">
+          </div>
+        </section>
+
+        <!-- Las causas deben enviarse como un string, con las causas separadas por ¨,¨ -->
+
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">CAUSAS</label>
+          <div class="col-md-8">
+            <input type="text" placeholder="Subestación Rio Macho"
+                   [formControl]="contenedorFormulario.controls.subestacion">
+            <div class="causa-list mt-2">
+              <input type="checkbox" [formControl]="contenedorFormulario.controls.causa1"> Causa #1
+              <button class="btn btn-agregar-causa" type="button">+</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Fecha y hora de detección de la causa/s-->
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">FECHA Y HORA</label>
+          <div class="col-md-8">
+            <input type="datetime-local" [formControl]="contenedorFormulario.controls.fechaHora">
+          </div>
+        </section>
+
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">OBSERVACIONES</label>
+          <div class="col-md-8">
+            <textarea rows="4" placeholder="Escriba las observaciones"
+                      [formControl]="contenedorFormulario.controls.observaciones"></textarea>
+          </div>
+        </section>
+
+        <div class="contenedor-botones row mb-3 align-items-center">
+
+          <div class="col-md-3 col-12">
+            <button class="btn btn-volver" type="button" routerLink="/inicio-sesion">
+              VOLVER
+            </button>
+          </div>
+
+          <div class="col-md-9 col-12">
+            <button class="btn btn-limpiar" type="button"
+                    (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+              LIMPIAR
+            </button>
+            <button class="btn btn-actualizar" type="submit"
+                    [disabled]="contenedorFormulario.invalid">
+              ACTUALIZAR
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+

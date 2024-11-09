@@ -6,6 +6,7 @@ using reporteria_ice_api.Utilitarios;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using static ICE.Capa_Datos.Acciones.GestionarUsuarioDA;
 
 namespace reporteria_ice_api.Controllers
 {
@@ -20,6 +21,7 @@ namespace reporteria_ice_api.Controllers
             this.gestionarUsuarioCN = gestionarUsuarioCN;
         }
 
+        // Método para registrar un nuevo usuario
         [HttpPost]
         public async Task<ActionResult<bool>> RegistrarUsuario(UsuarioDTO usuarioDTO)
         {
@@ -30,26 +32,32 @@ namespace reporteria_ice_api.Controllers
 
                 if (respuesta <= 0)
                 {
-                    return BadRequest("Error al registrar el usuario.");
+                    return BadRequest(new { message = "Error al registrar el usuario." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true, userId = respuesta });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el usuario ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
+
+        // Método para obtener todos los usuarios, usando UsuarioViewDTO para visualización
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> ObtenerTodosLosUsuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioViewDTO>>> ObtenerTodosLosUsuarios()
         {
             try
             {
                 var usuarios = await gestionarUsuarioCN.ObtenerTodosLosUsuarios();
-                var usuariosDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosADTO(usuarios);
+                var usuariosViewDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosAViewDTO(usuarios);
 
-                return Ok(usuariosDTO);
+                return Ok(usuariosViewDTO);
             }
             catch (Exception e)
             {
@@ -57,8 +65,9 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para obtener un usuario específico por ID, usando UsuarioViewDTO para visualización
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioDTO>> ObtenerUsuario(int id)
+        public async Task<ActionResult<UsuarioViewDTO>> ObtenerUsuario(int id)
         {
             try
             {
@@ -69,7 +78,7 @@ namespace reporteria_ice_api.Controllers
                     return NotFound("Usuario no encontrado.");
                 }
 
-                return Ok(UsuarioDTOMapper.ConvertirUsuarioADTO(usuario));
+                return Ok(UsuarioDTOMapper.ConvertirUsuarioAViewDTO(usuario));
             }
             catch (Exception e)
             {
@@ -77,6 +86,7 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para editar un usuario existente
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarUsuario(int id, UsuarioDTO usuarioDTO)
         {
@@ -98,6 +108,7 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        // Método para eliminar un usuario por ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarUsuario(int id)
         {
@@ -111,6 +122,30 @@ namespace reporteria_ice_api.Controllers
                 }
 
                 return Ok(respuesta);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // Método para iniciar sesión, validando las credenciales del usuario
+        [HttpPost("IniciarSesion")]
+        public async Task<ActionResult<UsuarioViewDTO>> IniciarSesion([FromBody] CredencialesDTO credencialesDTO)
+        {
+            try
+            {
+                var credenciales = CredencialesDTOMapper.ConvertirDTOACredenciales(credencialesDTO);
+                var usuario = await gestionarUsuarioCN.AutenticarUsuario(credenciales.NombreUsuario, credenciales.Contrasenia);
+
+                if (usuario == null)
+                {
+                    return Unauthorized("Credenciales inválidas.");
+                }
+
+                var usuarioViewDTOAutenticado = UsuarioDTOMapper.ConvertirUsuarioAViewDTO(usuario);
+
+                return Ok(usuarioViewDTOAutenticado);
             }
             catch (Exception e)
             {

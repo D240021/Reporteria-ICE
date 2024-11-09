@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CrearReporteComponent } from './crear-reporte.component';
+import { Router } from '@angular/router';
 
 describe('CrearReporteComponent', () => {
   let component: CrearReporteComponent;

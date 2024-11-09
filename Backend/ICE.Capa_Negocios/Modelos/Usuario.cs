@@ -14,11 +14,12 @@ namespace ICE.Capa_Dominio.Modelos
         public string Correo { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public int Identificador { get; set; }
-
-        // Relación con el rol y subestación
-        public int RollId { get; set; }
+        public string Identificador { get; set; }
+        public string Rol { get; set; }
         public int? SubestacionId { get; set; }
         public int? UnidadRegionalId { get; set; }
+        // Agrega esta propiedad
+        public string? NombreUnidadRegional { get; set; } 
     }
+
 }

@@ -56,40 +56,23 @@ namespace ICE.Capa_Datos.Acciones
             await _context.SaveChangesAsync();
             return informeDA.Id;
 
-            //var resultado = await _context.SaveChangesAsync();
-            //return resultado > 0;
         }
 
-
-
-        /*
         public async Task<bool> ActualizarInforme(int id, Informe informe)
         {
-            var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
-            if (informeBD != null)
+            var existeInforme = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
+            if (existeInforme == null)
             {
-                informeBD.Tipo = informe.Tipo;
-                informeBD.SubestacionId = informe.SubestacionId;
-                informeBD.LineaTransmisionId = informe.LineaTransmisionId;
-                informeBD.DatosDeLineaId = informe.DatosDeLineaId;
-                informeBD.DatosGeneralesId = informe.DatosGeneralesId;
-                informeBD.TeleproteccionId = informe.TeleproteccionId;
-                informeBD.DistanciaDeFallaId = informe.DistanciaDeFallaId;
-                informeBD.TiemposDeDisparoId = informe.TiemposDeDisparoId;
-                informeBD.CorrientesDeFallaId = informe.CorrientesDeFallaId;
-                informeBD.Estado = informe.Estado;
-
-                var resultado = await _context.SaveChangesAsync();
-                return resultado > 0;
+                return false;
             }
-            return false;
-        }
-        */
 
-
-        public async Task<bool> ActualizarInforme(int id, Informe informe)
-        {
-            using (var transaction = await _context.Database.BeginTransactionAsync()) // Iniciar una transacción manual
+            var validacionReferencia = await ValidarInformeReferencias(informe);
+            if (!validacionReferencia)
+            {
+                return false;
+            }
+            //
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
@@ -102,7 +85,6 @@ namespace ICE.Capa_Datos.Acciones
                         .Include(i => i.TiemposDeDisparo)
                         .Include(i => i.CorrientesDeFalla)
                         .FirstOrDefaultAsync(i => i.Id == id);
-
 
                     //se actualizan los campos simples del informe
                     informeBD.Tipo = informe.Tipo;
@@ -145,6 +127,24 @@ namespace ICE.Capa_Datos.Acciones
             return false;
         }
 
+
+        private async Task<bool> ValidarInformeReferencias(Informe informe)
+        {
+            bool subestacionExiste = await _context.Subestaciones.AnyAsync(s => s.Id == informe.SubestacionId);
+            bool lineaTransmisionExiste = await _context.LineasTransmision.AnyAsync(l => l.Id == informe.LineaTransmisionId);
+            bool datosDeLineaExiste = await _context.DatosDeLinea.AnyAsync(d => d.Id == informe.DatosDeLineaId);
+            bool datosGeneralesExiste = await _context.DatosGenerales.AnyAsync(d => d.Id == informe.DatosGeneralesId);
+            bool teleproteccionExiste = await _context.Teleprotecciones.AnyAsync(t => t.Id == informe.TeleproteccionId);
+            bool distanciaDeFallaExiste = await _context.DistanciasDeFalla.AnyAsync(d => d.Id == informe.DistanciaDeFallaId);
+            bool tiemposDeDisparoExiste = await _context.TiemposDeDisparo.AnyAsync(t => t.Id == informe.TiemposDeDisparoId);
+            bool corrientesDeFallaExiste = await _context.CorrientesDeFalla.AnyAsync(c => c.Id == informe.CorrientesDeFallaId);
+
+            // Retornar true solo si todos los registros existen, de lo contrario false
+            return subestacionExiste && lineaTransmisionExiste && datosDeLineaExiste &&
+                   datosGeneralesExiste && teleproteccionExiste && distanciaDeFallaExiste &&
+                   tiemposDeDisparoExiste && corrientesDeFallaExiste;
+        }
+
         public async Task<Informe> ObtenerInformePorId(int id)
         {
             //var informeBD = await _context.Informes.FirstOrDefaultAsync(i => i.Id == id);
@@ -163,10 +163,6 @@ namespace ICE.Capa_Datos.Acciones
             {
                 return null;
             }
-
-            //return informeBD;
-
-
             // Mapear los datos desde InformeDA a Informe
             return new Informe
             {

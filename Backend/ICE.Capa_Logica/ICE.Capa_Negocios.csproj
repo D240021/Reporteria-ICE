@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ICE.Capa_Negocios\ICE.Capa_Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="8.0.5"/>    
+  </ItemGroup>
+
 </Project>

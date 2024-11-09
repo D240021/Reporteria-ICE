@@ -282,8 +282,10 @@ namespace ICE.Capa_Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Identificador")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificador")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NombreUbicacion")
                         .IsRequired()
@@ -328,21 +330,23 @@ namespace ICE.Capa_Datos.Migrations
 
             modelBuilder.Entity("ICE.Capa_Datos.Entidades.ReporteCausaDA", b =>
                 {
-                    b.Property<int>("ReporteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CausaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasKey("ReporteId", "CausaId");
+                    b.Property<int>("CausaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReporteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CausaId");
+
+                    b.HasIndex("ReporteId");
 
                     b.ToTable("ReporteCausa");
                 });
@@ -355,8 +359,18 @@ namespace ICE.Capa_Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Causas")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<int>("Estado")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("Evidencia")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime?>("FechaHora")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("InformeV1Id")
                         .HasColumnType("int");
@@ -374,6 +388,10 @@ namespace ICE.Capa_Datos.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Observaciones")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ObservacionesTecnicoLinea")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -400,24 +418,6 @@ namespace ICE.Capa_Datos.Migrations
                     b.ToTable("Reporte");
                 });
 
-            modelBuilder.Entity("ICE.Capa_Datos.Entidades.RolDA", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rol");
-                });
-
             modelBuilder.Entity("ICE.Capa_Datos.Entidades.SubestacionDA", b =>
                 {
                     b.Property<int>("Id")
@@ -426,8 +426,10 @@ namespace ICE.Capa_Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Identificador")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificador")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NombreUbicacion")
                         .IsRequired()
@@ -527,8 +529,10 @@ namespace ICE.Capa_Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Identificador")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificador")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NombreUbicacion")
                         .IsRequired()
@@ -555,15 +559,17 @@ namespace ICE.Capa_Datos.Migrations
 
                     b.Property<string>("Contrasenia")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
 
                     b.Property<string>("Correo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Identificador")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificador")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -575,8 +581,10 @@ namespace ICE.Capa_Datos.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("RollId")
-                        .HasColumnType("int");
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("SubestacionId")
                         .HasColumnType("int");
@@ -585,8 +593,6 @@ namespace ICE.Capa_Datos.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RollId");
 
                     b.HasIndex("SubestacionId");
 
@@ -753,12 +759,6 @@ namespace ICE.Capa_Datos.Migrations
 
             modelBuilder.Entity("ICE.Capa_Datos.Entidades.UsuarioDA", b =>
                 {
-                    b.HasOne("ICE.Capa_Datos.Entidades.RolDA", "Rol")
-                        .WithMany()
-                        .HasForeignKey("RollId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ICE.Capa_Datos.Entidades.SubestacionDA", "Subestacion")
                         .WithMany()
                         .HasForeignKey("SubestacionId")
@@ -767,8 +767,6 @@ namespace ICE.Capa_Datos.Migrations
                     b.HasOne("ICE.Capa_Datos.Entidades.UnidadRegionalDA", "UnidadRegional")
                         .WithMany()
                         .HasForeignKey("UnidadRegionalId");
-
-                    b.Navigation("Rol");
 
                     b.Navigation("Subestacion");
 

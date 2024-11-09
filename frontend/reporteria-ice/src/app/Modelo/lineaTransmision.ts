@@ -1,4 +1,5 @@
 export interface LineaTransmision {
-    identificador : string,
-    nombre: string
+    id: number,
+    nombreUbicacion: string,
+    identificador : string
 }

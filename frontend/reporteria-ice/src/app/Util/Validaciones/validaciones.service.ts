@@ -8,11 +8,33 @@ export class ValidacionesService {
 
   constructor() { }
 
+
   esSoloLetras(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valor = control.value;
-      const esSoloLetras = /^[a-zA-Z]+$/.test(valor);
+      const esSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valor);
       return esSoloLetras ? null : { esSoloLetras: true };
+    };
+  }
+
+  esContraseniaSegura(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valor = control.value;
+
+      // Verificar que el campo tenga al menos 8 caracteres
+      const longitudValida = /.{8,}/.test(valor);
+      // Verificar al menos una letra mayúscula
+      const tieneMayuscula = /[A-Z]/.test(valor);
+      // Verificar al menos una letra minúscula
+      const tieneMinuscula = /[a-z]/.test(valor);
+      // Verificar al menos un número
+      const tieneNumero = /[0-9]/.test(valor);
+      // Verificar al menos un carácter especial
+      const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(valor);
+
+      const esSegura = longitudValida && tieneMayuscula && tieneMinuscula && tieneNumero && tieneCaracterEspecial;
+
+      return esSegura ? null : { esContraseniaSegura: true };
     };
   }
 }

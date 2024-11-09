@@ -5,65 +5,48 @@
     <div></div>
 
     <div class="contenedor-form">
-      
-      
-        <form [formGroup]="contenedorFormulario">
-            <h2>Agregar Unidad Regional</h2>
-            <section class="row mb-3 align-items-center">
-              <label class="col-md-4">IDENTIFICADOR</label>
-              <div class="col-md-8">
-                <input type="text" placeholder="Inserte un identificador único"
-                [formControl]="contenedorFormulario.controls.identificador">
-              </div>
-            </section>
 
-            <section class="row mb-3 align-items-center">
-              <label class="col-md-4">NOMBRE</label>
-              <div class="col-md-8">
-                <input type="text" placeholder="Inserte un nombre de ubicación"
-                [formControl]="contenedorFormulario.controls.nombre">
-              </div>            
-            </section>
 
-            <section class="row mb-3 align-items-center">
-              <label class="col-md-4">SUPERVISOR ASIGNADO</label>
+      <form [formGroup]="contenedorFormulario">
+        <h2>Agregar Unidad Regional</h2>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">IDENTIFICADOR</label>
+          <div class="col-md-8">
+            <input type="text" placeholder="Inserte un identificador único"
+              [formControl]="contenedorFormulario.controls.identificador">
+          </div>
+          <span class="errores">{{accionesFormulario.obtenerErroresIdentificador(contenedorFormulario)}}</span>
+        </section>
 
-              <div class="col-md-8">
-                <select [formControl]="contenedorFormulario.controls.supervisorAsignado">
-                  <option value="Saúl">Saúl</option>
-                  <option value="Álvaro">Álvaro</option>
-                  <option value="Daniel">Daniel</option>
-                </select>
-              </div>
-            
-            </section>
+        <section class="row mb-3 align-items-center">
+          <label class="col-md-4">NOMBRE</label>
+          <div class="col-md-8">
+            <input type="text" placeholder="Inserte un nombre de ubicación"
+              [formControl]="contenedorFormulario.controls.nombreUbicacion">
+          </div>
+          <span class="errores">{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
+        </section>
 
-            <section class="row mb-3 align-items-center">
-              <label class="col-md-4">SUBESTACIONES ASOCIADAS</label>
-              <div class="col-md-8">
-                  <select class="col-md-8" [formControl]="contenedorFormulario.controls.subestaciones">
-                    <option value="Turrialba">Turrialba</option>
-                    <option value="Desamparados">Desamparados</option>
-                  </select>
-              </div>            
-            </section>
+        <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
+          {{mensajeResultado}}
+        </span>
+        <div class="contenedor-botones row mb-3 align-items-center">
 
-          <div class="contenedor-botones row mb-3 align-items-center">
-
-            <div class="col-md-3 col-12">
-              <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/menu-administrador">VOLVER</button>
-            </div>
-
-            <div class="col-md-9 col-12">
-              <button class="btn btn-limpiar" mat-stroked-button type="button"
-              (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
-              <button class="btn btn-agregar" mat-stroked-button type="submit"
-              [disabled]="contenedorFormulario.invalid">GUARDAR</button>
-            </div>
+          <div class="col-md-3 col-12">
+            <button class="btn btn-volver" mat-stroked-button type="button"
+              (click)="verificarAbandonoFormulario()">VOLVER</button>
           </div>
 
-        </form>
-      
+          <div class="col-md-9 col-12">
+            <button class="btn btn-limpiar" mat-stroked-button type="button"
+              (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+            <button class="btn btn-agregar" mat-stroked-button type="submit" [disabled]="contenedorFormulario.invalid"
+              (click)="registrarNuevaUnidadRegional()">GUARDAR</button>
+          </div>
+        </div>
+
+      </form>
+
     </div>
 
   </div>

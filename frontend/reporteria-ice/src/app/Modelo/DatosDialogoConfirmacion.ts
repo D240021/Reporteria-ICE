@@ -1,0 +1,17 @@
+export interface DatosConfirmacion {
+    titulo: string,
+    descripcion: string,
+    tipo: string
+}
+
+export const datosCerrarSesion: DatosConfirmacion = {
+    titulo: 'Cerrar sesión',
+    descripcion: '¿Desea cerrar sesión?',
+    tipo: 'sesion'
+}
+
+export const datosConfirmacionSalidaFormulario : DatosConfirmacion = {
+    titulo: 'Salir',
+    descripcion: 'Los cambios no guardados se perderán',
+    tipo: 'formularioAdmin'
+}

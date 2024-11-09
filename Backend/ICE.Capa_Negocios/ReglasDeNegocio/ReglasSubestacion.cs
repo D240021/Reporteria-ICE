@@ -8,23 +8,26 @@ namespace ICE.Capa_Dominio.ReglasDeNegocio
         public static (bool esValido, string mensaje) EsSubestacionValida(Subestacion subestacion)
         {
             // Validación del NombreUbicacion
-            if (string.IsNullOrEmpty(subestacion.NombreUbicacion))
+            if (string.IsNullOrWhiteSpace(subestacion.NombreUbicacion))
             {
-                return (false, "El nombre de la ubicación no puede estar vacío.");
+                return (false, "El nombre de la ubicación no puede estar vacío o solo contener espacios en blanco.");
             }
 
             if (subestacion.NombreUbicacion.Length > 100)
             {
                 return (false, "El nombre de la ubicación no puede exceder los 100 caracteres.");
             }
-
-            // Validación del Identificador
-            if (subestacion.Identificador <= 0)
+            
+            if (string.IsNullOrWhiteSpace(subestacion.Identificador))
             {
-                return (false, "El identificador de la subestación debe ser mayor que cero.");
+                return (false, "El identificador de la subestación no puede estar vacío o solo contener espacios en blanco.");
             }
 
-            // Validación del UnidadRegionalId
+            if (subestacion.Identificador.Length < 3 || subestacion.Identificador.Length > 20)
+            {
+                return (false, "El identificador de la subestación debe tener entre 3 y 20 caracteres.");
+            }
+            
             if (subestacion.UnidadRegionalId <= 0)
             {
                 return (false, "El ID de la unidad regional debe ser mayor que cero.");
