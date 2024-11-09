@@ -88,6 +88,8 @@
                             }
                         </select>
                     </div>
+                    <span *ngIf="unidadesRegionales.length === 0" class="errores">Debe registrar Unidades Regionales
+                        para poder avanzar</span>
                     <span
                         class="errores">{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
                 </section>

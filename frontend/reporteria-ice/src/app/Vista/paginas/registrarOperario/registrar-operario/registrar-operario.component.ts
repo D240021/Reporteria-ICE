@@ -42,6 +42,7 @@ export class RegistrarOperarioComponent implements OnInit {
 
   }
 
+  
   public mensajeResultado : string = '';
   public exitoOperacion : boolean = false;
   private modalAbierto: boolean = false;
