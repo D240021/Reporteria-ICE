@@ -38,9 +38,14 @@ export class CrearReporteComponent implements OnInit {
     this.usuarioService.obtenerSPRVSegunUnidadRegional(unidadRegionalId).subscribe(supervisores => {
       this.supervisores = supervisores;
     });
+
+    this.usuarioService.obtenerTLTSegunUnidadRegional(unidadRegionalId).subscribe(tecnicosTLT => {
+      this.tecnicosTLT = tecnicosTLT;
+    });
     
   }
 
+  public tecnicosTLT : Usuario[] = [];
   public supervisores : Usuario[] = [];
   public usuarioIngresado !: Usuario;
   public lineasTransmision: LineaTransmision[] = [];
@@ -53,20 +58,11 @@ export class CrearReporteComponent implements OnInit {
   private usuarioService = inject(UsuarioService);
 
   public contenedorFormulario = this.formBuilder.group({
-    id: [0],
-    mapaDeDescargas: [''],
-    observaciones: [''],
-    evidencia: [''],
-    observacionesTecnicoLinea: [''],
-    causas: [''],
-    fechaHora: [''],
-    informeV1Id: [0],
-    informeV2Id: [0],
-    informeV3Id: [0],
-    informeV4Id: [0],
+    lineaTransmisionId: ['',{ validators: [Validators.required] }],
+    subestacionA: ['',{ validators: [Validators.required] }],
+    subestacionB: ['',{ validators: [Validators.required] }],
     usuarioSupervisorId: ['', { validators: [Validators.required] }],
-    tecnicoLineaId: ['', { validators: [Validators.required] }],
-    estado: ['', { validators: [Validators.required] }]
+    tecnicoLineaId: ['', { validators: [Validators.required] }]
   });
 
 

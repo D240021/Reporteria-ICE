@@ -11,11 +11,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { CommonModule } from '@angular/common';
+import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 
 @Component({
   selector: 'agregar-subestacion',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, AnimacionCargaComponent],
   templateUrl: './agregar-subestacion.component.html',
   styleUrl: './agregar-subestacion.component.css'
 })

@@ -1,19 +1,12 @@
 <div class="form-container">
-  <form>
-    <h2>Crear reporte nuevo</h2>
+  <form formGroupName="contenedorFormulario">
+    <h2>Crear nuevo reporte</h2>
 
-
-    <!-- NOTA:
-
-      Aplicar alguna logica si se ve necesario para que la linea de transmision y subestacione esten ya filtradas en los select
-      segun la subestacion actual del TPM que esta creando la subestacion
-    -->
-
-    @if (subestaciones && lineasTransmision && supervisores) {
+    @if (subestaciones && lineasTransmision && supervisores && tecnicosTLT) {
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">LINEA DE TRANSMISION:</label>
       <div class="col-md-8">
-        <select>
+        <select [formControl]="contenedorFormulario.controls.lineaTransmisionId">
           @for (linea of lineasTransmision; track $index) {
 
           <option value={{linea.id}}>
@@ -25,11 +18,10 @@
       </div>
     </section>
 
-    <!-- Subestaciones Asociadas -->
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">SUBESTACIONES ASOCIADAS:</label>
       <div class="col-md-8">
-        <select>
+        <select [formControl]="contenedorFormulario.controls.subestacionA">
           @for (subestacion of subestaciones; track $index) {
 
           <option value={{subestacion.id}}>
@@ -40,7 +32,7 @@
         </select>
       </div>
       <div class="col-md-8">
-        <select>
+        <select [formControl]="contenedorFormulario.controls.subestacionB">
           @for (subestacion of subestaciones; track $index) {
 
           <option value={{subestacion.id}}>
@@ -55,7 +47,7 @@
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">Supervisor:</label>
       <div class="col-md-8">
-        <select>
+        <select [formControl]="contenedorFormulario.controls.usuarioSupervisorId">
           @for (supervisor of supervisores; track $index) {
 
             <option value={{supervisor.id}}>
@@ -70,25 +62,31 @@
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">Técnico de Línea:</label>
       <div class="col-md-8">
-        <select>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
+        <select [formControl]="contenedorFormulario.controls.tecnicoLineaId">
+          @for (tecnicoTLT of tecnicosTLT; track $index) {
+
+            <option value={{tecnicoTLT.id}}>
+              <span>{{tecnicoTLT.identificador}}</span>
+              {{tecnicoTLT.nombre}} {{tecnicoTLT.apellido}}
+            </option>
+            }
         </select>
       </div>
     </section>
 
-    <!-- Botones -->
     <div class="contenedor-botones row mb-3 align-items-center">
       <div class="col-md-3 col-12">
         <button class="btn btn-volver" type="button" (click)="seguridadService.cerrarSesion()">VOLVER</button>
       </div>
       <div class="col-md-9 col-12">
-        <button class="btn btn-limpiar" type="button">LIMPIAR</button>
-        <button class="btn btn-agregar" type="submit">GENERAR</button>
+        <button class="btn btn-limpiar" type="button"
+        (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+        <button class="btn btn-agregar" type="submit"
+        [disabled]="contenedorFormulario.invalid">GENERAR</button>
       </div>
     </div>
     }
-    <!-- Línea de Transmisión -->
+    
     @else { 
       <animacion-carga></animacion-carga>
     }
