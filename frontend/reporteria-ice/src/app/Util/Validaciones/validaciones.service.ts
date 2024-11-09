@@ -41,9 +41,10 @@ export class ValidacionesService {
   esCaracterEspecial(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valor = control.value;
-      const tieneCaracteresEspeciales = /[^a-zA-Z0-9\s]/.test(valor); 
+      const tieneCaracteresEspeciales = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/.test(valor); 
       return !tieneCaracteresEspeciales ? null : { esCaracterEspecial: true };
     };
+    
   }
 
   

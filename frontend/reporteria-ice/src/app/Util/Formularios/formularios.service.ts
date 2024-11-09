@@ -116,13 +116,14 @@ export class FormulariosService {
     return '';
   }
 
+  
+
   obtenerErroresRol(contenedorFormulario : FormGroup) : string {
     const campo = contenedorFormulario.controls['rol'];
 
     if(campo.hasError('required') && campo.touched){
       return 'La ocupación es requerida';
     }
-
 
     return '';
   }
