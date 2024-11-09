@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from '../../Modelo/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,19 @@ export class SeguridadService {
 
   cerrarSesion() : void{
     this.limpiarRol();
+    this.limpiarUsuarioLogeado();
     this.router.navigate(['/inicio-sesion']);
+  }
+
+  guardarInformacionUsuarioLogeado(usuario : Usuario) : void{
+    localStorage.setItem('usuarioLoggeado', JSON.stringify(usuario));
+  }
+
+  obtenerInformacionUsuarioLogeado() : Usuario {
+    return JSON.parse(localStorage.getItem('usuarioLoggeado') || '');
+  }
+
+  limpiarUsuarioLogeado() : void {
+    localStorage.removeItem('usuarioLoggeado');
   }
 }

@@ -14,5 +14,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
         Task<Subestacion> ObtenerSubestacion(int id);
         Task<IEnumerable<Subestacion>> ObtenerTodasLasSubestaciones();
         Task<bool> RegistrarSubestacion(Subestacion subestacion);
+
+        Task<IEnumerable<Subestacion>> ObtenerSubestacionesPorUnidadRegional(int idUnidadRegional);
     }
 }

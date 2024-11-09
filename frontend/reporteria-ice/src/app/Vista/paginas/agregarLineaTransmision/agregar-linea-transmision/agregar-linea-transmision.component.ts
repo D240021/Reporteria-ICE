@@ -43,7 +43,7 @@ export class AgregarLineaTransmisionComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
     identificador: ['', { validators: [Validators.required] }]
   });
 

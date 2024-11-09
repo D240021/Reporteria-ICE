@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Subestacion } from '../../../../Modelo/Subestacion';
+import { Subestacion } from '../../../../Modelo/subestacion';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
 import { EditarSubestacionComponent } from '../../editarSubestacion/editar-subestacion/editar-subestacion.component';

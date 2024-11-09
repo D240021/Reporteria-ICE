@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
-import { Subestacion } from '../../../../Modelo/Subestacion';
+import { Subestacion } from '../../../../Modelo/subestacion';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { MatDialog } from '@angular/material/dialog';
@@ -51,7 +51,7 @@ export class AgregarSubestacionComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
     identificador: ['', { validators: [Validators.required] }],
     unidadRegionalId: [null, { validators: [Validators.required] }]
   });

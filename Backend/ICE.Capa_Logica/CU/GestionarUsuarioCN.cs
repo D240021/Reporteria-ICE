@@ -52,6 +52,21 @@ namespace ICE.Capa_Negocios.CU
             return await _gestionarUsuarioDA.ObtenerTodosLosUsuarios();
         }
 
+        public async Task<IEnumerable<Usuario>> obtenerSupervisorPorUnidadRegional(int idUnidadRegional)
+        {
+            return await _gestionarUsuarioDA.obtenerSupervisorPorUnidadRegional(idUnidadRegional);
+        }
+
+        public async Task<IEnumerable<Usuario>> obtenerTecnicoTPMPorUnidadRegional(int idUnidadRegional)
+        {
+            return await _gestionarUsuarioDA.obtenerTecnicoTPMPorUnidadRegional(idUnidadRegional);
+        }
+
+        public async Task<IEnumerable<Usuario>> obtenerTecnicoTLTPorUnidadRegional(int idUnidadRegional)
+        {
+            return await _gestionarUsuarioDA.obtenerTecnicoTLTPorUnidadRegional(idUnidadRegional);
+        }
+
         public async Task<bool> ActualizarUsuario(int id, Usuario usuario)
         {
             var validacionUsuario = ReglasUsuario.EsUsuarioValido(usuario);
@@ -72,7 +87,6 @@ namespace ICE.Capa_Negocios.CU
             return await _gestionarUsuarioDA.AutenticarUsuario(nombreUsuario, contraseniaCifrada);
         }
 
-
-
+       
     }
 }

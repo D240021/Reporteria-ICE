@@ -12,5 +12,8 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
         Task<bool> ActualizarUsuario(int id, Usuario usuario);
         Task<bool> EliminarUsuario(int id);
         Task<Usuario> AutenticarUsuario(string nombreUsuario, string contraseniaCifrada);
+        Task<IEnumerable<Usuario>> obtenerSupervisorPorUnidadRegional(int idUnidadRegional);
+        Task<IEnumerable<Usuario>> obtenerTecnicoTPMPorUnidadRegional(int idUnidadRegional);
+        Task<IEnumerable<Usuario>> obtenerTecnicoTLTPorUnidadRegional(int idUnidadRegional);
     }
 }

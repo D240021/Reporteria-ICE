@@ -2,7 +2,7 @@ import { Component, Inject, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
-import { Subestacion } from '../../../../Modelo/Subestacion';
+import { Subestacion } from '../../../../Modelo/subestacion';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';

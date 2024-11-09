@@ -65,6 +65,54 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+        [HttpGet("UnidadRegional/SPRV/{idUnidadRegional}")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> obtenerSupervisorPorUnidadRegional(int idUnidadRegional)
+        {
+            try
+            {
+                var usuarios = await gestionarUsuarioCN.obtenerSupervisorPorUnidadRegional(idUnidadRegional);
+                var usuariosViewDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosAViewDTO(usuarios);
+
+                return Ok(usuariosViewDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("UnidadRegional/TPM/{idUnidadRegional}")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> obtenerTecnicoTPMPorUnidadRegional(int idUnidadRegional)
+        {
+            try
+            {
+                var usuarios = await gestionarUsuarioCN.obtenerTecnicoTPMPorUnidadRegional(idUnidadRegional);
+                var usuariosViewDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosAViewDTO(usuarios);
+
+                return Ok(usuariosViewDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("UnidadRegional/TLT/{idUnidadRegional}")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> obtenerTecnicoTLTPorUnidadRegional(int idUnidadRegional)
+        {
+            try
+            {
+                var usuarios = await gestionarUsuarioCN.obtenerTecnicoTLTPorUnidadRegional(idUnidadRegional);
+                var usuariosViewDTO = UsuarioDTOMapper.ConvertirListaDeUsuariosAViewDTO(usuarios);
+
+                return Ok(usuariosViewDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         // Método para obtener un usuario específico por ID, usando UsuarioViewDTO para visualización
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuarioViewDTO>> ObtenerUsuario(int id)
