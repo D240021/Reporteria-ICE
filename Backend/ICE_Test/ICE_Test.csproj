@@ -23,8 +23,9 @@
         <ProjectReference Include="..\Capa_Logica\ICE.Capa_Negocios.csproj" />
         <ProjectReference Include="..\Capa_Negocios\ICE.Capa_Dominio.csproj" />
 	    <ProjectReference Include="..\Capa_Integracion\ICE.Capa_Integracion.csproj" />
+	    <ProjectReference Include="..\reporteria-ice-api\reporteria-ice-api.csproj" />
     </ItemGroup>
-
+	
   <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>	    

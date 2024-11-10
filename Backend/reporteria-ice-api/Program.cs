@@ -73,14 +73,24 @@ builder.Services.AddTransient<IGestionarCausaDA, GestionarCausaDA>();
 
 
 
-// Conexión a BD
+// Conexión a BD según el entorno configurado
 builder.Services.AddDbContext<ICE_Context>(options =>
 {
-    var connectionString = "Server=(localdb)\\LosPanchos; Database=ICE_Reporteria; Trusted_Connection=True;TrustServerCertificate=True;";
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseSqlServer(connectionString);
 });
 
+
+// Conexión a BD original a secas
+//builder.Services.AddDbContext<ICE_Context>(options =>
+//{
+  //  var connectionString = "Server=(localdb)\\LocalServerICE; Database=ICE_Reporteria; Trusted_Connection=True;TrustServerCertificate=True;";
+    //options.UseSqlServer(connectionString);
+//});
+
 var app = builder.Build();
+Console.WriteLine($"Entorno actual: {builder.Environment.EnvironmentName}");
+
 
 // Habilitar CORS
 app.UseCors("AllowOrigin");
@@ -91,12 +101,43 @@ app.UseCors(options =>
     options.AllowAnyHeader();
 });
 
-// Ejecutar migraciones automáticas al iniciar la aplicación
-using (var scope = app.Services.CreateScope())
+
+
+Console.WriteLine($"Entorno ASPNETCORE_ENVIRONMENT detectado: {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
+// Ejecutar migraciones automáticas solo en entornos de Development o Test
+if (app.Environment.IsDevelopment())
 {
-    var context = scope.ServiceProvider.GetRequiredService<ICE_Context>();
-    context.Database.Migrate();
+    // Solo en Development: aplica migraciones sin ejecutar init.sql
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ICE_Context>();
+        context.Database.Migrate();
+    }
 }
+else if (app.Environment.IsEnvironment("Test"))
+{
+    // Solo en Test: elimina y recrea la base de datos, y ejecuta init.sql
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ICE_Context>();
+
+        // Elimina la base de datos existente y vuelve a crearla
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+
+        // Ejecutar el init.sql para insertar datos de prueba en Test
+        RunSqlScript(context, Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Tools", "SQLServer_TestIntegracion", "Database", "init.sql"));        
+    }
+}
+
+
+
+// Ejecutar migraciones automáticas al iniciar la aplicación
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<ICE_Context>();
+//    context.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -112,3 +153,14 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+// Función para ejecutar el script SQL
+void RunSqlScript(ICE_Context context, string scriptPath)
+{
+    if (File.Exists(scriptPath))
+    {
+        var sqlScript = File.ReadAllText(scriptPath);
+        context.Database.ExecuteSqlRaw(sqlScript);
+    }
+}
