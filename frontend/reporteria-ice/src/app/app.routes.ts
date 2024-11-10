@@ -26,6 +26,7 @@ import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
 import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-operario/editar-operario.component';
 import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
 import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
+import { MenuTpmComponent } from './Vista/paginas/menuTpm/menu-tpm/menu-tpm.component';
 
 export const routes: Routes = [
     {
@@ -100,6 +101,9 @@ export const routes: Routes = [
     },
     {
         path: 'consultar-subestacion', component: ConsultarSubestacionComponent
+    },
+    {
+        path: 'menu-tpm', component: MenuTpmComponent
     }
 
 ];

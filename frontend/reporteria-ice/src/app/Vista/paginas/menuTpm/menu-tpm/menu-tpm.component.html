@@ -1,0 +1,22 @@
+<div>
+
+    <header>
+        <h1>BIENVENID&#64;, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
+        <button mat-flat-button (click)="abrirCuadroDialogo()">SALIR</button>
+    </header>
+
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="Crear reporte">
+            <!-- <div class="example-large-box mat-elevation-z4">
+                Small content
+            </div> -->
+            <crear-reporte></crear-reporte>
+        </mat-tab>
+        <mat-tab label="Editar reporte">
+            <div class="example-large-box mat-elevation-z4">
+                Large content
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
