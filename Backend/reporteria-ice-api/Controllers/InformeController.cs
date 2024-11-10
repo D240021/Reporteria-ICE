@@ -80,5 +80,46 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //metodo para obtener informes pendientes de una subestacion
+        [HttpGet("pendientes/{subestacionId}")]
+        public async Task<ActionResult<List<InformeDTO>>> ObtenerInformePendientesPorSubestacion(int subestacionId)
+        {
+            try
+            {
+                var informesPendientes = await _gestionarInformeCN.ObtenerInformesPendientesPorSubestacion(subestacionId);
+                if (informesPendientes == null || !informesPendientes.Any())
+                {
+                    return NotFound("No hay informes pendientes para esta subestación.");
+                }
+                var informesDTO = informesPendientes.Select(informe => InformeDTOMapper.ConvertirInformeADTO(informe)).ToList();
+                return Ok(informesDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //metodo para obtener todos los informes de una subestacion
+        [HttpGet("todos/{subestacionId}")]
+        public async Task<ActionResult<List<InformeDTO>>> ObtenerInformePorSubestacion(int subestacionId)
+        {
+            try
+            {
+                var informesPendientes = await _gestionarInformeCN.ObtenerInformesPorSubestacion(subestacionId);
+                if (informesPendientes == null || !informesPendientes.Any())
+                {
+                    return NotFound("No hay informes para esta subestación.");
+                }
+                var informesDTO = informesPendientes.Select(informe => InformeDTOMapper.ConvertirInformeADTO(informe)).ToList();
+                return Ok(informesDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }
