@@ -23,8 +23,8 @@ export class FormulariosService {
     if (campo.hasError('required') && campo.touched) {
       return 'El campo nombre es requerido';
     }
-
-    if (campo.hasError('esCaracterEspecial') && campo.touched) {
+    
+    if (campo.hasError('esCaracterEspecial') && campo.touched && contenedorFormulario.controls['nombre']) {
       return 'No se permiten caracteres especiales';
     }
 
@@ -32,13 +32,27 @@ export class FormulariosService {
       return 'El campo nombre no debe llevar números';
     }
 
+    if (campo.hasError('maxlength') && campo.touched) {
+      return 'Máximo 100 caracteres';
+    }
 
+    if (campo.hasError('minlength') && campo.touched) {
+      return 'Mínimo 3 caracteres';
+    }
 
     return '';
   }
 
   obtenerErroresIdentificador(contenedorFormulario: FormGroup): string {
     const campo = contenedorFormulario.controls['identificador'];
+
+    if (campo.hasError('maxlength') && campo.touched) {
+      return 'Máximo 20 caracteres';
+    }
+
+    if (campo.hasError('minlength') && campo.touched) {
+      return 'Mínimo 3 caracteres';
+    }
 
     if (campo.hasError('required') && campo.touched) {
       return 'El campo identificador es requerido';
@@ -49,6 +63,14 @@ export class FormulariosService {
 
   obtenerErroresNombreUsuario(contenedorFormulario: FormGroup): string {
     const campo = contenedorFormulario.controls['nombreUsuario'];
+
+    if (campo.hasError('maxlength') && campo.touched) {
+      return 'Máximo 100 caracteres';
+    }
+
+    if (campo.hasError('minlength') && campo.touched) {
+      return 'Mínimo 3 caracteres';
+    }
 
     if (campo.hasError('required') && campo.touched) {
       return 'El nombre de usuario es requerido';
@@ -98,6 +120,15 @@ export class FormulariosService {
 
   obtenerErroresApellidos(contenedorFormulario: FormGroup): string {
     const campo = contenedorFormulario.controls['apellido'];
+
+    if (campo.hasError('maxlength') && campo.touched) {
+      return 'Máximo 70 caracteres';
+    }
+
+    if (campo.hasError('minlength') && campo.touched) {
+      return 'Mínimo 5 caracteres';
+    }
+
 
     if (campo.hasError('required') && campo.touched) {
       return 'Los apellidos son requeridos';

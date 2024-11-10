@@ -15,3 +15,6 @@ export interface Reporte {
     estado: 0
 }
 
+
+
+

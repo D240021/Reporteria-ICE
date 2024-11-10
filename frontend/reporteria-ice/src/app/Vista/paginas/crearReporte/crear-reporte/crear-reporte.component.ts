@@ -12,11 +12,12 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
 import { Reporte } from '../../../../Modelo/Reporte';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'crear-reporte',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, AnimacionCargaComponent],
+  imports: [ReactiveFormsModule, RouterLink, AnimacionCargaComponent, CommonModule],
   templateUrl: './crear-reporte.component.html',
   styleUrl: './crear-reporte.component.css'
 })
@@ -59,6 +60,8 @@ export class CrearReporteComponent implements OnInit {
   private subestacionService = inject(SubestacionService);
   private usuarioService = inject(UsuarioService);
   private reporteService = inject(ReporteService);
+  public mensajeResultado: string = '';
+  public exitoOperacion: boolean = false;
 
   public contenedorFormulario = this.formBuilder.group({
     lineaTransmisionId: ['', { validators: [Validators.required] }],
@@ -94,10 +97,10 @@ export class CrearReporteComponent implements OnInit {
       estado: 0
     };
 
-    console.log(Object(datosReporte));
-
     this.reporteService.crearReporte(datosReporte,subestacionesId,lineaTransmisionId).subscribe(respuesta => {
-
+      this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
+      this.mensajeResultado = 'Operario registrado exitosamente';
+      this.exitoOperacion = true;
     });
 
   }

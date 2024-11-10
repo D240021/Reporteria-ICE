@@ -17,6 +17,8 @@
         </select>
       </div>
       <span class="errores">{{accionesFormulario.obtenerErroresLineaTransmisionId(contenedorFormulario)}}</span>
+      <span *ngIf="lineasTransmision.length === 0" class="errores">Debe registrar líneas de transmisión
+        para poder avanzar</span>
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -46,7 +48,8 @@
         </select>
       </div>
       <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
-
+      <span *ngIf="subestaciones.length === 0" class="errores">Debe registrar subestaciones
+        para poder avanzar</span>
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -63,6 +66,8 @@
         </select>
       </div>
       <span class="errores">{{accionesFormulario.obtenerErroresSupervisorId(contenedorFormulario)}}</span>
+      <span *ngIf="supervisores.length === 0" class="errores">Debe registrar supervisores
+        para poder avanzar</span>
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -79,7 +84,12 @@
         </select>
       </div>
       <span class="errores">{{accionesFormulario.obtenerErroresTecnicoLineaId(contenedorFormulario)}}</span>
+      <span *ngIf="tecnicosTLT.length === 0" class="errores">Debe registrar técnicos
+        para poder avanzar</span>
     </section>
+    <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
+      {{mensajeResultado}}
+    </span>
 
     <div class="contenedor-botones row mb-3 align-items-center">
       <!-- <div class="col-md-3 col-12">

@@ -7,11 +7,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosCerrarSesion, datosConfirmacionSesionSinGuardar } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { InformeService } from '../../../../Controlador/Informe/informe.service';
+import { Informe } from '../../../../Modelo/Informe';
+import { MatCardModule } from '@angular/material/card';
+import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'menu-tpm',
   standalone: true,
-  imports: [MatTabsModule, CrearReporteComponent, MatButtonModule],
+  imports: [MatTabsModule, CrearReporteComponent, MatButtonModule, MatCardModule, AnimacionCargaComponent, MatIconModule],
   templateUrl: './menu-tpm.component.html',
   styleUrl: './menu-tpm.component.css'
 })
@@ -19,13 +24,21 @@ export class MenuTpmComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
-  }
 
+    const subestacionId = this.usuarioIngresado.subestacionId || 0;
+
+    this.informeService.obtenerInformesPendientesPorSubestacion(subestacionId).subscribe(informes => {
+      this.informes = informes;
+    });
+
+  }
 
   public seguridadService = inject(SeguridadService);
   public usuarioIngresado !: Usuario
   private cuadroDialogo = inject(MatDialog);
   private modalAbierto: boolean = false;
+  private informeService = inject(InformeService);
+  public informes: Informe[] = [];
 
 
   abrirCuadroDialogo(): void {
