@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form formGroupName="contenedorFormulario">
+  <form [formGroup]="contenedorFormulario">
     <h2>Crear nuevo reporte</h2>
 
     @if (subestaciones && lineasTransmision && supervisores && tecnicosTLT) {
@@ -75,9 +75,9 @@
     </section>
 
     <div class="contenedor-botones row mb-3 align-items-center">
-      <div class="col-md-3 col-12">
+      <!-- <div class="col-md-3 col-12">
         <button class="btn btn-volver" type="button" (click)="seguridadService.cerrarSesion()">VOLVER</button>
-      </div>
+      </div> -->
       <div class="col-md-9 col-12">
         <button class="btn btn-limpiar" type="button"
         (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>

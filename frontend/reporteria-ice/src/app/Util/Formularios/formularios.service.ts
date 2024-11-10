@@ -83,9 +83,9 @@ export class FormulariosService {
       return 'No se permiten caracteres especiales';
     }
 
-    // if (campo.hasError('email') && campo.touched) {
-    //   return 'Inserte un correo válido';
-    // }
+    if (campo.hasError('email') && campo.touched) {
+      return 'Inserte un correo válido';
+    }
 
     if (campo.hasError('correoInvalido') && campo.touched) {
       return 'Inserte un correo válido';
