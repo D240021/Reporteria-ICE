@@ -91,7 +91,7 @@ export class FormulariosService {
       return 'Inserte un correo válido';
     }
 
-    
+
 
     return '';
   }
@@ -119,6 +119,50 @@ export class FormulariosService {
 
     if (campo.hasError('required') && campo.touched) {
       return 'La Unidad Regional es requerida';
+    }
+
+
+    return '';
+  }
+
+  obtenerErroresLineaTransmisionId(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['lineaTransmisionId'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'Línea de transmisión es requerida';
+    }
+
+
+    return '';
+  }
+
+  obtenerErroresSubestacionId(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['subestacionA'] || contenedorFormulario.controls['subestacionB'] || contenedorFormulario.controls['subestacionId'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'Subestación es requerida';
+    }
+
+
+    return '';
+  }
+
+  obtenerErroresSupervisorId(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['usuarioSupervisorId'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'Supervisor es requerido';
+    }
+
+
+    return '';
+  }
+
+  obtenerErroresTecnicoLineaId(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['tecnicoLineaId'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'Técnico es requerido';
     }
 
 

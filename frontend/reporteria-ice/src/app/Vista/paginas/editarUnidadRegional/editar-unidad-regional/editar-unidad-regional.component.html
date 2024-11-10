@@ -1,11 +1,11 @@
 <div class="manto">
-    
+
   <mat-dialog-content>
     <h2 mat-dialog-title>Editar Unidad Regional</h2>
     <label class="col-md-4">NOMBRE DE UBICACION</label>
     <div class="col-md-8">
       <input type="text" placeholder="Inserte un nombre de usuario único"
-             [formControl]="contenedorFormulario.controls.nombreUbicacion">
+        [formControl]="contenedorFormulario.controls.nombreUbicacion">
     </div>
 
     <mat-dialog-actions>
@@ -14,13 +14,13 @@
         CERRAR
       </button>
 
-      <button class="btn btn-limpiar" type="button"
-              (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+      <button class="btn btn-limpiar" type="button" (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+        [disabled]="contenedorFormulario.pristine">
         LIMPIAR
       </button>
       <button class="btn btn-agregar" type="submit"
-              [disabled]="contenedorFormulario.invalid || contenedorFormulario.pristine || !esFormularioModificado()"
-              (click)="guardarCambios()">
+        [disabled]="contenedorFormulario.invalid || contenedorFormulario.pristine || !esFormularioModificado()"
+        (click)="guardarCambios()">
         GUARDAR
       </button>
     </mat-dialog-actions>

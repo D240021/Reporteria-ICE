@@ -56,7 +56,8 @@
   
             <div class="col-md-9 col-12">
               <button class="btn btn-limpiar" mat-stroked-button type="button"
-                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+                [disabled]="contenedorFormulario.pristine">LIMPIAR</button>
               <button class="btn btn-agregar" mat-stroked-button type="button" [disabled]="contenedorFormulario.invalid"
                 (click)="registrarSubestacion()">GUARDAR</button>
             </div>

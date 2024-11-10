@@ -5,7 +5,7 @@ export interface Reporte {
     evidencia?: string,
     observacionesTecnicoLinea?: string,
     causas?: string,
-    fechaHora?: Date,
+    fechaHora?: Date | null | string,
     informeV1Id: number,
     informeV2Id: number,
     informeV3Id: number,
@@ -14,3 +14,4 @@ export interface Reporte {
     tecnicoLineaId: number,
     estado: 0
 }
+

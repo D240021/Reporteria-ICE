@@ -16,6 +16,7 @@
           }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresLineaTransmisionId(contenedorFormulario)}}</span>
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -31,6 +32,8 @@
           }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
+
       <div class="col-md-8">
         <select [formControl]="contenedorFormulario.controls.subestacionB">
           @for (subestacion of subestaciones; track $index) {
@@ -42,6 +45,8 @@
           }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
+
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -50,13 +55,14 @@
         <select [formControl]="contenedorFormulario.controls.usuarioSupervisorId">
           @for (supervisor of supervisores; track $index) {
 
-            <option value={{supervisor.id}}>
-              <span>{{supervisor.identificador}}</span>
-              {{supervisor.nombre}} {{supervisor.apellido}}
-            </option>
-            }
+          <option value={{supervisor.id}}>
+            <span>{{supervisor.identificador}}</span>
+            {{supervisor.nombre}} {{supervisor.apellido}}
+          </option>
+          }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSupervisorId(contenedorFormulario)}}</span>
     </section>
 
     <section class="row mb-3 align-items-center">
@@ -65,13 +71,14 @@
         <select [formControl]="contenedorFormulario.controls.tecnicoLineaId">
           @for (tecnicoTLT of tecnicosTLT; track $index) {
 
-            <option value={{tecnicoTLT.id}}>
-              <span>{{tecnicoTLT.identificador}}</span>
-              {{tecnicoTLT.nombre}} {{tecnicoTLT.apellido}}
-            </option>
-            }
+          <option value={{tecnicoTLT.id}}>
+            <span>{{tecnicoTLT.identificador}}</span>
+            {{tecnicoTLT.nombre}} {{tecnicoTLT.apellido}}
+          </option>
+          }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresTecnicoLineaId(contenedorFormulario)}}</span>
     </section>
 
     <div class="contenedor-botones row mb-3 align-items-center">
@@ -80,15 +87,16 @@
       </div> -->
       <div class="col-md-9 col-12">
         <button class="btn btn-limpiar" type="button"
-        (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">LIMPIAR</button>
-        <button class="btn btn-agregar" type="submit"
-        [disabled]="contenedorFormulario.invalid">GENERAR</button>
+          (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+          [disabled]="contenedorFormulario.pristine">LIMPIAR</button>
+        <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid"
+          (click)="generarReporte()">GENERAR</button>
       </div>
     </div>
     }
-    
-    @else { 
-      <animacion-carga></animacion-carga>
+
+    @else {
+    <animacion-carga></animacion-carga>
     }
 
   </form>

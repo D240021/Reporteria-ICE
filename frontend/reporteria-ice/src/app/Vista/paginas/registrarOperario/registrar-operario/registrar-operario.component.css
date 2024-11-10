@@ -128,12 +128,3 @@ button {
   }
 }
 
-.errores,
-.mensaje-error {
-  color: red;
-  font-size: 75%;
-}
-
-.mensaje-exito {
-  color: green;
-  font-size: 75%;
