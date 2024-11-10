@@ -44,8 +44,8 @@ export class AgregarUnidadRegionalComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    identificador: ['', { validators: [Validators.required] }],
-    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
+    identificador: ['', { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(3)] }],
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), Validators.maxLength(100), Validators.minLength(3)] }],
   });
 
   registrarNuevaUnidadRegional() {

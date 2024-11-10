@@ -12,8 +12,8 @@ export class ValidacionesService {
   esSoloLetras(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valor = control.value;
-      const esSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valor);
-      return esSoloLetras ? null : { esSoloLetras: true };
+      const esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s!@#$%^&*(),.?":{}|<>_\-+=/'`~\[\]\\]+$/.test(valor);
+      return esValido ? null : { esSoloLetras: true };
     };
   }
 

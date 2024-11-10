@@ -79,15 +79,15 @@ export class RegistrarOperarioComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    contrasenia: ['', { validators: [Validators.required, this.validaciones.esContraseniaSegura()] }],
-    nombreUsuario: ['', { validators: [Validators.required] }],
-    correo: ['', { validators: [Validators.required, Validators.email, this.validaciones.esCorreoValido()] }],
-    nombre: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
-    apellido: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()] }],
-    identificador: ['', { validators: [Validators.required] }],
-    rol: ['', { validators: [Validators.required] }],
-    subestacionId: ['', { validators: [Validators.required] }],
-    unidadRegionalId: [null, { validators: [Validators.required] }]
+    contrasenia: ['', [Validators.required, Validators.minLength(8), this.validaciones.esContraseniaSegura()]],
+    nombreUsuario: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]],
+    correo: ['', [Validators.required, Validators.email, Validators.maxLength(50), this.validaciones.esCorreoValido()]],
+    nombre: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
+    apellido: ['', [Validators.required, Validators.minLength(5) ,Validators.maxLength(70), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
+    identificador: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(3)]],
+    rol: ['', [Validators.required]],
+    subestacionId: ['', [Validators.required]],
+    unidadRegionalId: [null, [Validators.required]]
   });
 
   registrarNuevoUsuario(): void {
