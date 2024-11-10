@@ -6,7 +6,7 @@ import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.serv
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
-import { datosCerrarSesion } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { datosCerrarSesion, datosConfirmacionSesionSinGuardar } from '../../../../Modelo/DatosDialogoConfirmacion';
 
 @Component({
   selector: 'menu-tpm',
@@ -36,7 +36,7 @@ export class MenuTpmComponent implements OnInit {
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datosCerrarSesion
+        data: datosConfirmacionSesionSinGuardar
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;

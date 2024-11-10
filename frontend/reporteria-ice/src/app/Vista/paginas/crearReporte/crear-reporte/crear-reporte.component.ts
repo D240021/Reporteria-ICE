@@ -10,6 +10,8 @@ import { SubestacionService } from '../../../../Controlador/Subestacion/subestac
 import { Subestacion } from '../../../../Modelo/subestacion';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
+import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
+import { Reporte } from '../../../../Modelo/Reporte';
 
 @Component({
   selector: 'crear-reporte',
@@ -42,11 +44,11 @@ export class CrearReporteComponent implements OnInit {
     this.usuarioService.obtenerTLTSegunUnidadRegional(unidadRegionalId).subscribe(tecnicosTLT => {
       this.tecnicosTLT = tecnicosTLT;
     });
-    
+
   }
 
-  public tecnicosTLT : Usuario[] = [];
-  public supervisores : Usuario[] = [];
+  public tecnicosTLT: Usuario[] = [];
+  public supervisores: Usuario[] = [];
   public usuarioIngresado !: Usuario;
   public lineasTransmision: LineaTransmision[] = [];
   public subestaciones: Subestacion[] = [];
@@ -56,14 +58,49 @@ export class CrearReporteComponent implements OnInit {
   private lineaTransmisionService = inject(LineaTransmisionService);
   private subestacionService = inject(SubestacionService);
   private usuarioService = inject(UsuarioService);
+  private reporteService = inject(ReporteService);
 
   public contenedorFormulario = this.formBuilder.group({
-    lineaTransmisionId: ['',{ validators: [Validators.required] }],
-    subestacionA: ['',{ validators: [Validators.required] }],
-    subestacionB: ['',{ validators: [Validators.required] }],
+    lineaTransmisionId: ['', { validators: [Validators.required] }],
+    subestacionA: ['', { validators: [Validators.required] }],
+    subestacionB: ['', { validators: [Validators.required] }],
     usuarioSupervisorId: ['', { validators: [Validators.required] }],
     tecnicoLineaId: ['', { validators: [Validators.required] }]
   });
+
+  generarReporte(): void {
+
+    const subestacionesId: number[] = [
+      parseInt(this.contenedorFormulario.value.subestacionA || '0', 10),
+      parseInt(this.contenedorFormulario.value.subestacionB || '0', 10),
+    ];
+
+    const lineaTransmisionId: number = parseInt(this.contenedorFormulario.value.lineaTransmisionId || '0');
+
+    const datosReporte: Reporte = {
+      id: 0,
+      mapaDeDescargas: '',
+      observaciones: '',
+      evidencia: '',
+      observacionesTecnicoLinea: '',
+      causas: '',
+      fechaHora: new Date().toISOString(),
+      informeV1Id: 0,
+      informeV2Id: 0,
+      informeV3Id: 0,
+      informeV4Id: 0,
+      usuarioSupervisorId: parseInt(this.contenedorFormulario.value.usuarioSupervisorId || '0', 10),
+      tecnicoLineaId: parseInt(this.contenedorFormulario.value.tecnicoLineaId || '0', 10),
+      estado: 0
+    };
+
+    console.log(Object(datosReporte));
+
+    this.reporteService.crearReporte(datosReporte,subestacionesId,lineaTransmisionId).subscribe(respuesta => {
+
+    });
+
+  }
 
 
 }

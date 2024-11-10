@@ -66,7 +66,7 @@ export const routes: Routes = [
         path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'editar-subestacion', component: EditarSubestacionComponent
+        path: 'editar-subestacion', component: EditarSubestacionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'crear-reporte', component: CrearReporteComponent, canActivate: [esTpmGuard]
@@ -94,16 +94,16 @@ export const routes: Routes = [
         path: 'no-autorizado', component: NoAutorizadoComponent
     },
     {
-        path: 'editar-operario', component: EditarOperarioComponent
+        path: 'editar-operario', component: EditarOperarioComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent
+        path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'consultar-subestacion', component: ConsultarSubestacionComponent
+        path: 'consultar-subestacion', component: ConsultarSubestacionComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'menu-tpm', component: MenuTpmComponent
+        path: 'menu-tpm', component: MenuTpmComponent, canActivate: [esTpmGuard]
     }
 
 ];

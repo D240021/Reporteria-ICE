@@ -15,3 +15,9 @@ export const datosConfirmacionSalidaFormulario : DatosConfirmacion = {
     descripcion: 'Los cambios no guardados se perderán',
     tipo: 'formularioAdmin'
 }
+
+export const datosConfirmacionSesionSinGuardar : DatosConfirmacion = {
+    titulo: 'Salir',
+    descripcion: 'Los cambios no guardados se perderán. Desea cerrar sesión?',
+    tipo: 'sesion'
+}
