@@ -6,6 +6,8 @@ using reporteria_ice_api.Utilitarios;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using static ICE.Capa_Datos.Acciones.GestionarLineasTransmisionDA;
 
 namespace reporteria_ice_api.Controllers
 {
@@ -27,7 +29,17 @@ namespace reporteria_ice_api.Controllers
             {
                 var lineaTransmision = LineaTransmisionDTOMapper.ConvertirDTOALineaTransmision(lineaTransmisionDTO);
                 var respuesta = await _gestionarLineasTransmisionCN.RegistrarLineaTransmision(lineaTransmision);
-                return Ok(respuesta);
+
+                if (!respuesta)
+                {
+                    return BadRequest(new { message = "Error al registrar la línea de transmisión." });
+                }
+
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
@@ -44,7 +56,7 @@ namespace reporteria_ice_api.Controllers
                 var lineasDTO = LineaTransmisionDTOMapper.ConvertirListaDeLineasTransmisionADTO(lineas);
                 return Ok(lineasDTO.ToList());
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -62,7 +74,7 @@ namespace reporteria_ice_api.Controllers
                 }
                 return Ok(LineaTransmisionDTOMapper.ConvertirLineaTransmisionADTO(linea));
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -78,10 +90,14 @@ namespace reporteria_ice_api.Controllers
 
                 if (!respuesta)
                 {
-                    return BadRequest("Error al actualizar la línea de transmisión.");
+                    return BadRequest(new { message = "Error al actualizar la línea de transmisión." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
@@ -98,12 +114,12 @@ namespace reporteria_ice_api.Controllers
 
                 if (!respuesta)
                 {
-                    return BadRequest("Error al eliminar la línea de transmisión.");
+                    return BadRequest(new { message = "Error al eliminar la línea de transmisión." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true });
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
