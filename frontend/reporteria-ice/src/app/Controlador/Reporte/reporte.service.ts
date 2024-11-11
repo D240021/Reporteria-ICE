@@ -27,4 +27,6 @@ export class ReporteService {
     return this.http.post(this.urlBase, reporte, { params: parametros });
   }
 
+  
+
 }

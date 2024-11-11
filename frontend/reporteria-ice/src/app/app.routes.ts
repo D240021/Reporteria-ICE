@@ -79,7 +79,7 @@ export const routes: Routes = [
 
     },
     {
-        path: 'editar-reporte-tpm', component: EditarReporteTPMComponent
+        path: 'editar-reporte-tpm', component: EditarReporteTPMComponent, canActivate: [esTpmGuard]
     },
     {
         path: 'editar-reporte-tlt', component: EditarReporteTLTComponent

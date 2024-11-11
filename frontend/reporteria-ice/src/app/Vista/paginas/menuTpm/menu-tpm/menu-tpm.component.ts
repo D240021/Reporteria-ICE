@@ -41,6 +41,7 @@ export class MenuTpmComponent implements OnInit {
   private informeService = inject(InformeService);
   public informes: Informe[] = [];
   private router = inject(Router);
+  
 
 
   abrirCuadroDialogo(): void {

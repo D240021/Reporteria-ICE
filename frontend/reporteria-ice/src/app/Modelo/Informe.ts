@@ -4,61 +4,75 @@ export interface Informe {
     subestacionId: number;
     lineaTransmisionId: number;
     datosDeLineaId: number;
-    datosDeLinea: {
-        id: number;
-        ot: string;
-        aviso: string;
-        sap: string;
-        distancia: string;
-        funcion: string;
-        zona: string;
-    };
+    datosDeLinea: DatosDeLineaInforme;
     datosGeneralesId: number;
-    datosGenerales: {
-        id: number;
-        evento: string;
-        fecha: Date;
-        hora: {
-            ticks: number;
-        };
-        subestacion: string;
-        lt: string;
-        equipo: string;
-    };
+    datosGenerales: DatosGeneralesInforme;
     teleproteccionId: number;
-    teleproteccion: {
-        id: number;
-        tX_TEL: string;
-        rX_TEL: string;
-        tiempoMPLS: string;
-    };
+    teleproteccion: TeleproteccionInforme;
     distanciaDeFallaId: number;
-    distanciaDeFalla: {
-        id: number;
-        distanciaKM: string;
-        distanciaPorcentaje: string;
-        distanciaReportada: string;
-        distanciaDobleTemporal: string;
-        error: string;
-        error_Doble: string;
-    };
+    distanciaDeFalla: DistanciaFallaInforme;
     tiemposDeDisparoId: number;
-    tiemposDeDisparo: {
-        id: number;
-        r: string;
-        s: string;
-        t: string;
-        reserva: string;
-    };
+    tiemposDeDisparo: TiemposDeDisparoInforme;
     corrientesDeFallaId: number;
-    corrientesDeFalla: {
-        id: number;
-        realIR: string;
-        realIS: string;
-        realIT: string;
-        acumuladaR: string;
-        acumuladaS: string;
-        acumuladaT: string;
-    };
+    corrientesDeFalla: CorrientesDeFallaInforme;
     estado: number;
+}
+
+export interface DatosGeneralesInforme {
+    id: number;
+    evento: string;
+    fecha: Date | string;
+    hora: HoraInforme;
+    subestacion: string;
+    lt: string;
+    equipo: string;
+}
+
+export interface DatosDeLineaInforme {
+    id: number;
+    ot: string;
+    aviso: string;
+    sap: string;
+    distancia: string;
+    funcion: string;
+    zona: string;
+}
+
+export interface TeleproteccionInforme {
+    id: number;
+    tX_TEL: string;
+    rX_TEL: string;
+    tiempoMPLS: string;
+}
+
+export interface DistanciaFallaInforme {
+    id: number;
+    distanciaKM: string;
+    distanciaPorcentaje: string;
+    distanciaReportada: string;
+    distanciaDobleTemporal: string;
+    error: string;
+    error_Doble: string;
+}
+
+export interface TiemposDeDisparoInforme {
+    id: number;
+    r: string;
+    s: string;
+    t: string;
+    reserva: string;
+}
+
+export interface CorrientesDeFallaInforme {
+    id: number;
+    realIR: string;
+    realIS: string;
+    realIT: string;
+    acumuladaR: string;
+    acumuladaS: string;
+    acumuladaT: string;
+}
+
+export interface HoraInforme {
+    ticks : number;
 }

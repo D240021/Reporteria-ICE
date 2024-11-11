@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { ambiente } from '../../Ambientes/ambienteDesarrollo';
 import { Informe } from '../../Modelo/Informe';
 import { Observable } from 'rxjs';
+import { Reporte } from '../../Modelo/Reporte';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,8 @@ export class InformeService {
     return this.http.get<Informe[]>(`${this.urlBase}/pendientes/${idSubestacion}`);
   }
 
-
+  public obtenerReportePorInformeId(idInforme: number): Observable<Reporte> {
+    return this.http.get<Reporte>(`${this.urlBase}/reportePorInforme/${idInforme}`);
+  }
+  
 }
