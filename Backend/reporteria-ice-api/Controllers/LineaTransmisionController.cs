@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using static ICE.Capa_Datos.Acciones.GestionarLineasTransmisionDA;
+using static ICE.Capa_Datos.Acciones.GestionarSubestacionDA;
+using ConflictException = ICE.Capa_Datos.Acciones.GestionarLineasTransmisionDA.ConflictException;
 
 namespace reporteria_ice_api.Controllers
 {
@@ -37,7 +39,9 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(new { success = true });
             }
-            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+
+            catch (ConflictException ex) 
+
             {
                 return Conflict(new { message = ex.Message });
             }
@@ -95,7 +99,9 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(new { success = true });
             }
-            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+
+            catch (ConflictException ex) 
+
             {
                 return Conflict(new { message = ex.Message });
             }

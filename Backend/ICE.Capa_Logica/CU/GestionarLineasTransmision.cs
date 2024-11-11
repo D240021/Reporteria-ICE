@@ -4,6 +4,7 @@ using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
+using static ICE.Capa_Negocios.CU.GestionarUsuarioCN;
 
 namespace ICE.Capa_Negocios.CU
 {
@@ -24,7 +25,14 @@ namespace ICE.Capa_Negocios.CU
             if (!validacion.esValido || !validacionID.esValido)
                 return false;
 
-            return await _gestionarLineasTransmisionDA.ActualizarLineaTransmision(id, lineaTransmision);
+            try
+            {
+                return await _gestionarLineasTransmisionDA.ActualizarLineaTransmision(id, lineaTransmision);
+            }
+            catch (ConflictException ex)
+            {
+                throw; 
+            }
         }
 
         public async Task<bool> EliminarLineaTransmision(int id)
@@ -59,7 +67,14 @@ namespace ICE.Capa_Negocios.CU
             if (!validacion.esValido)
                 return false;
 
-            return await _gestionarLineasTransmisionDA.RegistrarLineaTransmision(lineaTransmision);
+            try
+            {
+                return await _gestionarLineasTransmisionDA.RegistrarLineaTransmision(lineaTransmision);
+            }
+            catch (ConflictException ex)
+            {
+                throw;
+            }
         }
     }
 }

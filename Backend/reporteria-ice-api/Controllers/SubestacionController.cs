@@ -8,6 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using static ICE.Capa_Datos.Acciones.GestionarSubestacionDA;
+using static ICE.Capa_Datos.Acciones.GestionarUsuarioDA;
+using ConflictException = ICE.Capa_Datos.Acciones.GestionarSubestacionDA.ConflictException;
+
 
 namespace reporteria_ice_api.Controllers
 {
