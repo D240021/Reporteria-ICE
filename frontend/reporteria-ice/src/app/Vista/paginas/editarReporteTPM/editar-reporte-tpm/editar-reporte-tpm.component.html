@@ -3,10 +3,11 @@
     <h2>Editar Informe</h2>
     @if (informeATrabajar) {
     <span>Informe:
-      <select>
-        <option value="1">Impedancia</option>
-        <option value="2">Diferencial</option>
-      </select>
+      @if(informeATrabajar.tipo === 1){
+        Impedancia
+      }@else {
+        Diferencial
+      }
     </span>
     <hr />
     <span>Subestación: {{subestacionAsociada.nombreUbicacion}}</span>

@@ -51,7 +51,7 @@ export class EditarReporteTPMComponent implements OnInit {
   private informeService = inject(InformeService);
   public contenedorFormulario = this.formBuilder.group({
     id: [''],
-    tipo: ['', {validators: [Validators.required]}],
+    tipo: [''],
     evento: [''],
     fecha: [''],
     hora: [''],
@@ -88,7 +88,7 @@ export class EditarReporteTPMComponent implements OnInit {
 
   construirObjetoInforme(): Informe {
 
-    const tipoValor = this.contenedorFormulario.value.tipo || '0';
+    const tipoValor = this.informeATrabajar.tipo || 0;
     const lineaTransmisionId = this.informeATrabajar.lineaTransmisionId || 0;
     const datosDelineaId = this.informeATrabajar.datosDeLineaId || 0;
     const datosGeneralesId = this.informeATrabajar.datosGeneralesId || 0;
@@ -159,7 +159,7 @@ export class EditarReporteTPMComponent implements OnInit {
 
     const informeResultado: Informe = {
       id: this.informeATrabajar.id,
-      tipo: parseInt(tipoValor, 10),
+      tipo: tipoValor,
       subestacionId: this.subestacionAsociadaId,
       lineaTransmisionId: lineaTransmisionId,
       datosDeLineaId: datosDelineaId,
