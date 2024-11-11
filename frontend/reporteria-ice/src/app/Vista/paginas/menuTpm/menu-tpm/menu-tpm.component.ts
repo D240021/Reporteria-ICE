@@ -12,6 +12,7 @@ import { Informe } from '../../../../Modelo/Informe';
 import { MatCardModule } from '@angular/material/card';
 import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'menu-tpm',
@@ -39,6 +40,7 @@ export class MenuTpmComponent implements OnInit {
   private modalAbierto: boolean = false;
   private informeService = inject(InformeService);
   public informes: Informe[] = [];
+  private router = inject(Router);
 
 
   abrirCuadroDialogo(): void {
@@ -55,5 +57,10 @@ export class MenuTpmComponent implements OnInit {
         this.modalAbierto = false;
       });
     }
+  }
+
+  abrirEditarInforme(informe : Informe) : void {
+    this.router.navigate(['/editar-reporte-tpm'], { state: { informe: informe } });
+    return;
   }
 }

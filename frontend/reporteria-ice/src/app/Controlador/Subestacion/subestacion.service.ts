@@ -22,6 +22,10 @@ export class SubestacionService {
     return this.http.get<Subestacion[]>(this.urlBase);
   }
 
+  public obtenerSubestacionPorId(idSubestacion : number){
+    return this.http.get<Subestacion>(`${this.urlBase}/${idSubestacion}`);
+  }
+
   public editarSubestacion(subestacion : Subestacion){
     return this.http.put(`${this.urlBase}/${subestacion.id}`, subestacion);
   }

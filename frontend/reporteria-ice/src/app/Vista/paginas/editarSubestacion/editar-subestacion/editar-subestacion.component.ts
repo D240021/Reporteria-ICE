@@ -46,6 +46,7 @@ export class EditarSubestacionComponent {
 
   guardarCambios() {
     const nuevosDatosSubestacion = this.contenedorFormulario.value as Subestacion;
+    nuevosDatosSubestacion.unidadRegionalId = this.subestacion.unidadRegionalId;
     this.subestacionService.editarSubestacion(nuevosDatosSubestacion).subscribe(respuesta => {
       this.cerrarCuadroDialogo();
     });

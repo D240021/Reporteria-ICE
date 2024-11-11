@@ -54,6 +54,7 @@ export class AgregarUnidadRegionalComponent implements OnInit {
     this.unidadRegionalService.crearUnidadRegional(valoresFormulario).subscribe(unidadRegional => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Unidad registrada exitosamente';
+      this.exitoOperacion = true;
     },
     error =>{
         if(error.status === 409){
