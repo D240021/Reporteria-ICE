@@ -53,6 +53,7 @@ export class AgregarLineaTransmisionComponent implements OnInit {
     this.lineaTransmision.crearLineaTransmision(valoresFormulario).subscribe(lineaTransmision => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Línea de Transmisión agregada correctamente';
+      this.exitoOperacion = true;
     },
     error =>{
         if(error.status === 409){

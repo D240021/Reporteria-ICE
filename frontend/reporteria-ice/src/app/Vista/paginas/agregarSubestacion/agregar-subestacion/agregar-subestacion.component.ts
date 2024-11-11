@@ -63,6 +63,7 @@ export class AgregarSubestacionComponent implements OnInit {
     this.subestacionService.crearSubestacion(valoresFormulario).subscribe(subestacion => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Subestación agregada correctamente';
+      this.exitoOperacion = true;
     },
     error =>{
         if(error.status === 409){
