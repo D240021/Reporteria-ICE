@@ -1,10 +1,15 @@
 <div class="form-container">
   <form>
     <h2>Editar Informe</h2>
-
-    <span>Informe: Diferencial o Impedancias</span>
+    @if (informe) {
+    <span>Informe:
+      <select>
+        <option value="1">Impedancia</option>
+        <option value="2">Diferencial</option>
+      </select>
+    </span>
     <hr />
-    <span>Subestación: Tapantí</span>
+    <span>Subestación: {{subestacionAsociada.nombreUbicacion}}</span>
     <hr />
     <span>Reporte al que pertenece: Tapanti-Orosi</span>
     <hr />
@@ -213,17 +218,21 @@
          -->
     </section>
 
-      <!-- Botones -->
-      <div class="contenedor-botones row mb-3 align-items-center">
+    <!-- Botones -->
+    <div class="contenedor-botones row mb-3 align-items-center">
 
-        <div class="col-md-3 col-12">
-          <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/crear-reporte">SALIR</button>
-        </div>
-
-        <div class="col-md-9 col-12">
-          <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
-          <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
-        </div>
+      <div class="col-md-3 col-12">
+        <button class="btn btn-volver" mat-stroked-button type="button" routerLink="/crear-reporte">SALIR</button>
       </div>
+
+      <div class="col-md-9 col-12">
+        <button class="btn btn-limpiar" mat-stroked-button type="button">LIMPIAR</button>
+        <button class="btn btn-agregar" mat-stroked-button type="submit">GUARDAR</button>
+      </div>
+    </div>
+    }
+    @else {
+      <animacion-carga></animacion-carga>
+    }
   </form>
 </div>
