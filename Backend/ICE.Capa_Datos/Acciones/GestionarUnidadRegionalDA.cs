@@ -19,6 +19,39 @@ namespace ICE.Capa_Datos.Acciones
             _context = context;
         }
 
+        public class ConflictException : Exception
+        {
+            public ConflictException(string message) : base(message)
+            {
+            }
+        }
+
+        public async Task<bool> RegistrarUnidadRegional(UnidadRegional unidadRegional)
+        {
+            var existeIdentificador = await _context.UnidadesRegionales.AnyAsync(ur => ur.Identificador == unidadRegional.Identificador);
+            if (existeIdentificador)
+            {
+                throw new ConflictException("El identificador ya está en uso.");
+            }
+
+            var existeNombre = await _context.UnidadesRegionales.AnyAsync(ur => ur.NombreUbicacion == unidadRegional.NombreUbicacion);
+            if (existeNombre)
+            {
+                throw new ConflictException("El nombre ya está en uso.");
+            }
+
+            var unidadRegionalBD = new UnidadRegionalDA
+            {
+                NombreUbicacion = unidadRegional.NombreUbicacion,
+                Identificador = unidadRegional.Identificador
+            };
+
+            _context.UnidadesRegionales.Add(unidadRegionalBD);
+            var resultado = await _context.SaveChangesAsync();
+
+            return resultado > 0;
+        }
+
         public async Task<bool> ActualizarUnidadRegional(int id, UnidadRegional unidadRegional)
         {
             var unidadRegionalBD = await _context.UnidadesRegionales.FirstOrDefaultAsync(ur => ur.Id == id);
@@ -28,13 +61,13 @@ namespace ICE.Capa_Datos.Acciones
                 var existeIdentificador = await _context.UnidadesRegionales.AnyAsync(ur => ur.Identificador == unidadRegional.Identificador && ur.Id != id);
                 if (existeIdentificador)
                 {
-                    throw new Exception("El identificador ya está en uso por otra unidad regional.");
+                    throw new ConflictException("El identificador ya está en uso por otra unidad regional.");
                 }
 
                 var existeNombre = await _context.UnidadesRegionales.AnyAsync(ur => ur.NombreUbicacion == unidadRegional.NombreUbicacion && ur.Id != id);
                 if (existeNombre)
                 {
-                    throw new Exception("El nombre ya está en uso por otra unidad regional.");
+                    throw new ConflictException("El nombre ya está en uso por otra unidad regional.");
                 }
 
                 unidadRegionalBD.NombreUbicacion = unidadRegional.NombreUbicacion;
@@ -56,8 +89,7 @@ namespace ICE.Capa_Datos.Acciones
                 _context.UnidadesRegionales.Remove(unidadRegionalBD);
                 var resultado = await _context.SaveChangesAsync();
 
-                if (resultado > 0)
-                    return true;
+                return resultado > 0;
             }
 
             throw new Exception("Error al eliminar, la unidad regional no se encontró en la base de datos.");
@@ -90,32 +122,6 @@ namespace ICE.Capa_Datos.Acciones
                 .ToListAsync();
 
             return unidades;
-        }
-
-        public async Task<bool> RegistrarUnidadRegional(UnidadRegional unidadRegional)
-        {
-            var existeIdentificador = await _context.UnidadesRegionales.AnyAsync(ur => ur.Identificador == unidadRegional.Identificador);
-            if (existeIdentificador)
-            {
-                throw new Exception("El identificador ya está en uso.");
-            }
-
-            var existeNombre = await _context.UnidadesRegionales.AnyAsync(ur => ur.NombreUbicacion == unidadRegional.NombreUbicacion);
-            if (existeNombre)
-            {
-                throw new Exception("El nombre ya está en uso.");
-            }
-
-            var unidadRegionalBD = new UnidadRegionalDA
-            {
-                NombreUbicacion = unidadRegional.NombreUbicacion,
-                Identificador = unidadRegional.Identificador
-            };
-
-            _context.UnidadesRegionales.Add(unidadRegionalBD);
-            var resultado = await _context.SaveChangesAsync();
-
-            return resultado > 0;
         }
     }
 }

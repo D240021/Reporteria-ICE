@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using reporteria_ice_api.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
+using static ICE.Capa_Datos.Acciones.GestionarUnidadRegionalDA;
 
 namespace reporteria_ice_api.Controllers
 {
@@ -25,11 +27,21 @@ namespace reporteria_ice_api.Controllers
             {
                 UnidadRegional unidadRegional = UnidadRegionalDTOMapper.ConvertirDTOAUnidadRegional(unidadRegionalDTO);
                 var respuesta = await gestionarUnidadRegionalCN.RegistrarUnidadRegional(unidadRegional);
-                return Ok(respuesta);
+
+                if (!respuesta)
+                {
+                    return BadRequest(new { message = "Error al registrar la unidad regional." });
+                }
+
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -40,11 +52,11 @@ namespace reporteria_ice_api.Controllers
             {
                 var unidades = await gestionarUnidadRegionalCN.ObtenerTodasLasUnidadesRegionales();
                 var unidadesDTO = UnidadRegionalDTOMapper.ConvertirListaDeUnidadesRegionalesADTO(unidades);
-                return Ok(unidadesDTO.ToList());
+                return Ok(unidadesDTO);
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -54,15 +66,17 @@ namespace reporteria_ice_api.Controllers
             try
             {
                 var unidad = await gestionarUnidadRegionalCN.ObtenerUnidadRegional(id);
+
                 if (unidad == null)
                 {
-                    return NotFound("Unidad regional no encontrada.");
+                    return NotFound(new { message = "Unidad regional no encontrada." });
                 }
+
                 return Ok(UnidadRegionalDTOMapper.ConvertirUnidadRegionalADTO(unidad));
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -73,11 +87,21 @@ namespace reporteria_ice_api.Controllers
             {
                 UnidadRegional unidadRegional = UnidadRegionalDTOMapper.ConvertirDTOAUnidadRegional(unidadRegionalDTO);
                 var respuesta = await gestionarUnidadRegionalCN.ActualizarUnidadRegional(id, unidadRegional);
-                return Ok(respuesta);
+
+                if (!respuesta)
+                {
+                    return BadRequest(new { message = "Error al actualizar la unidad regional." });
+                }
+
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex) // Captura la excepción de conflicto si el identificador ya existe
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -90,14 +114,14 @@ namespace reporteria_ice_api.Controllers
 
                 if (!respuesta)
                 {
-                    return BadRequest("Error al eliminar la unidad regional.");
+                    return BadRequest(new { message = "Error al eliminar la unidad regional." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true });
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new { message = e.Message });
             }
         }
     }

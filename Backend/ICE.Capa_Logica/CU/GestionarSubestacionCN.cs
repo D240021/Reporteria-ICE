@@ -4,6 +4,7 @@ using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
+using static ICE.Capa_Negocios.CU.GestionarUsuarioCN;
 
 namespace ICE.Capa_Negocios.CU
 {
@@ -24,7 +25,14 @@ namespace ICE.Capa_Negocios.CU
             if (!validacion.esValido || !validacionID.esValido)
                 return false;
 
-            return await _gestionarSubestacionDA.ActualizarSubestacion(id, subestacion);
+            try
+            {
+                return await _gestionarSubestacionDA.ActualizarSubestacion(id, subestacion);
+            }
+            catch (ConflictException ex)
+            {
+                throw; // Relanza la excepción de conflicto para que el controlador la maneje
+            }
         }
 
         public async Task<bool> EliminarSubestacion(int id)
@@ -59,7 +67,14 @@ namespace ICE.Capa_Negocios.CU
             if (!validacion.esValido)
                 return false;
 
-            return await _gestionarSubestacionDA.RegistrarSubestacion(subestacion);
+            try
+            {
+                return await _gestionarSubestacionDA.RegistrarSubestacion(subestacion);
+            }
+            catch (ConflictException ex)
+            {
+                throw; // Relanza la excepción de conflicto para que el controlador la maneje
+            }
         }
     }
 }
