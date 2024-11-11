@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using static ICE.Capa_Datos.Acciones.GestionarSubestacionDA;
+using static ICE.Capa_Datos.Acciones.GestionarUsuarioDA;
+using ConflictException = ICE.Capa_Datos.Acciones.GestionarSubestacionDA.ConflictException;
+
 
 namespace reporteria_ice_api.Controllers
 {
@@ -21,7 +25,6 @@ namespace reporteria_ice_api.Controllers
             _gestionarSubestacionCN = gestionarSubestacionCN;
         }
 
-        // Método para registrar una nueva subestación
         [HttpPost]
         public async Task<ActionResult<bool>> RegistrarSubestacion(SubestacionDTO subestacionDTO)
         {
@@ -29,7 +32,17 @@ namespace reporteria_ice_api.Controllers
             {
                 Subestacion subestacion = SubestacionDTOMapper.ConvertirDTOASubestacion(subestacionDTO);
                 var respuesta = await _gestionarSubestacionCN.RegistrarSubestacion(subestacion);
-                return Ok(respuesta);
+
+                if (!respuesta)
+                {
+                    return BadRequest(new { message = "Error al registrar la subestación." });
+                }
+
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex)
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
@@ -37,7 +50,6 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
-        // Método para obtener todas las subestaciones, usando SubestacionViewDTO para visualización
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubestacionViewDTO>>> ObtenerTodasLasSubestaciones()
         {
@@ -67,7 +79,6 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
-        // Método para obtener una subestación específica por ID, usando SubestacionViewDTO para visualización
         [HttpGet("{id}")]
         public async Task<ActionResult<SubestacionViewDTO>> ObtenerSubestacion(int id)
         {
@@ -86,7 +97,6 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
-        // Método para editar una subestación existente
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarSubestacion(int id, SubestacionDTO subestacionDTO)
         {
@@ -97,10 +107,14 @@ namespace reporteria_ice_api.Controllers
 
                 if (!respuesta)
                 {
-                    return BadRequest("Error al actualizar la subestación.");
+                    return BadRequest(new { message = "Error al actualizar la subestación." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true });
+            }
+            catch (ConflictException ex)
+            {
+                return Conflict(new { message = ex.Message });
             }
             catch (Exception e)
             {
@@ -108,7 +122,6 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
-        // Método para eliminar una subestación por ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarSubestacion(int id)
         {
@@ -118,10 +131,10 @@ namespace reporteria_ice_api.Controllers
 
                 if (!respuesta)
                 {
-                    return BadRequest("Error al eliminar la subestación.");
+                    return BadRequest(new { message = "Error al eliminar la subestación." });
                 }
 
-                return Ok(respuesta);
+                return Ok(new { success = true });
             }
             catch (Exception e)
             {
