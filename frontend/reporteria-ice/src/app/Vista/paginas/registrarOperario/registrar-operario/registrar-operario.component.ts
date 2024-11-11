@@ -8,17 +8,18 @@ import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/un
 import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { Usuario } from '../../../../Modelo/Usuario';
 import { AESService } from '../../../../Util/Encriptacion/AES/aes.service';
-import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { CommonModule } from '@angular/common';
+import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
+import { Subestacion } from '../../../../Modelo/subestacion';
 
 
 @Component({
   selector: 'registrar-operario',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './registrar-operario.component.html',
   styleUrl: './registrar-operario.component.css'
 })
@@ -40,11 +41,28 @@ export class RegistrarOperarioComponent implements OnInit {
       }
     });
 
+    this.contenedorFormulario.get('unidadRegionalId')?.valueChanges.subscribe(idUnidadRegional => {
+      if (idUnidadRegional) {
+        this.subestacionService.obtenerSubestacionesPorUnidadRegional(Number(idUnidadRegional))
+          .subscribe(subestaciones => {
+            this.subestaciones = subestaciones;
+            if (this.subestaciones.length === 0) {
+              this.contenedorFormulario.get('subestacionId')?.setErrors({ noSubestaciones: true });
+            } else {
+              this.contenedorFormulario.get('subestacionId')?.setErrors(null);
+            }
+          });
+      } else {
+        this.subestaciones = [];
+        this.contenedorFormulario.get('subestacionId')?.setErrors({ noSubestaciones: true });
+      }
+    });
+
   }
 
-  
-  public mensajeResultado : string = '';
-  public exitoOperacion : boolean = false;
+
+  public mensajeResultado: string = '';
+  public exitoOperacion: boolean = false;
   private modalAbierto: boolean = false;
   private formularioModificado: boolean = false;
   private formBuilder = inject(FormBuilder);
@@ -52,22 +70,24 @@ export class RegistrarOperarioComponent implements OnInit {
   private validaciones = inject(ValidacionesService);
   private usuarioService = inject(UsuarioService);
   private unidadRegionalService = inject(UnidadRegionalService);
+  private subestacionService = inject(SubestacionService);
   public unidadesRegionales: UnidadRegional[] = [];
+  public subestaciones: Subestacion[] = [];
   private encriptacion = inject(AESService);
   private cuadroDialogo = inject(MatDialog);
   private router = inject(Router);
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    contrasenia: ['', { validators: [Validators.required, this.validaciones.esContraseniaSegura()] }],
-    nombreUsuario: ['', { validators: [Validators.required] }],
-    correo: ['', { validators: [Validators.required, Validators.email] }],
-    nombre: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
-    apellido: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
-    identificador: ['', { validators: [Validators.required] }],
-    rol: ['', { validators: [Validators.required] }],
-    subestacionId: [null],
-    unidadRegionalId: [null, { validators: [Validators.required] }]
+    contrasenia: ['', [Validators.required, Validators.minLength(8), this.validaciones.esContraseniaSegura()]],
+    nombreUsuario: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]],
+    correo: ['', [Validators.required, Validators.email, Validators.maxLength(50), this.validaciones.esCorreoValido()]],
+    nombre: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
+    apellido: ['', [Validators.required, Validators.minLength(5) ,Validators.maxLength(70), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
+    identificador: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(3)]],
+    rol: ['', [Validators.required]],
+    subestacionId: ['', [Validators.required]],
+    unidadRegionalId: [null, [Validators.required]]
   });
 
   registrarNuevoUsuario(): void {
@@ -92,15 +112,15 @@ export class RegistrarOperarioComponent implements OnInit {
       this.mensajeResultado = 'Operario registrado exitosamente';
       this.exitoOperacion = true;
     },
-    error =>{
-        if(error.status === 409){
+      error => {
+        if (error.status === 409) {
           this.mensajeResultado = 'El identificador o nombre de usuario ya existen';
           this.exitoOperacion = false;
         }
-    });
+      });
   }
 
-  
+
 
   abrirDialogoConfirmacion(): void {
     if (!this.modalAbierto) {
@@ -117,7 +137,7 @@ export class RegistrarOperarioComponent implements OnInit {
 
   }
 
-  verificarAbandonoFormulario(){
+  verificarAbandonoFormulario() {
     if (this.formularioModificado) {
       this.abrirDialogoConfirmacion();
     } else {

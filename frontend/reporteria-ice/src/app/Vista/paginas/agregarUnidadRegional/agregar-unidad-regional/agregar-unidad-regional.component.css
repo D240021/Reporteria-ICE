@@ -2,18 +2,20 @@
   font-family: var(--fuente-poppins)
 }
 
-contenedor-principal {
+.contenedor-principal {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-content: center;
   align-items: center;
-  height: 100vh
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
 .contenedor-form {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  width: 100%
 }
 
 
@@ -49,9 +51,9 @@ form input {
   font-size: 1rem;
 }
 
-  input::placeholder {
-    color: #999;
-  }
+input::placeholder {
+  color: #999;
+}
 
 form select {
   width: 100%;
@@ -90,7 +92,8 @@ button {
   width: 75%;
 }
 
-.btn-limpiar, .btn-agregar {
+.btn-limpiar,
+.btn-agregar {
   background-color: var(--color-terciario-fondo);
   color: black;
   font-weight: bolder;
@@ -107,18 +110,20 @@ button {
     width: auto;
   }
 
-  .btn-limpiar, .btn-agregar, .btn-volver {
+  .btn-limpiar,
+  .btn-agregar,
+  .btn-volver {
     width: 50%;
   }
 }
 
 .errores,
-.mensaje-error{
-    color: red;
-    font-size: 75%;
+.mensaje-error {
+  color: red;
+  font-size: 75%;
 }
 
 .mensaje-exito {
-    color: green;
-    font-size: 75%;
+  color: green;
+  font-size: 75%;
 }

@@ -26,6 +26,7 @@ import { esSprvGuard } from './Seguridad/Guards/es-sprv.guard';
 import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-operario/editar-operario.component';
 import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
 import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
+import { MenuTpmComponent } from './Vista/paginas/menuTpm/menu-tpm/menu-tpm.component';
 
 export const routes: Routes = [
     {
@@ -65,7 +66,7 @@ export const routes: Routes = [
         path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'editar-subestacion', component: EditarSubestacionComponent
+        path: 'editar-subestacion', component: EditarSubestacionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'crear-reporte', component: CrearReporteComponent, canActivate: [esTpmGuard]
@@ -93,13 +94,16 @@ export const routes: Routes = [
         path: 'no-autorizado', component: NoAutorizadoComponent
     },
     {
-        path: 'editar-operario', component: EditarOperarioComponent
+        path: 'editar-operario', component: EditarOperarioComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent
+        path: 'editar-unidad-regional', component: EditarUnidadRegionalComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'consultar-subestacion', component: ConsultarSubestacionComponent
+        path: 'consultar-subestacion', component: ConsultarSubestacionComponent, canActivate: [esAdminGuard]
+    },
+    {
+        path: 'menu-tpm', component: MenuTpmComponent, canActivate: [esTpmGuard]
     }
 
 ];

@@ -10,5 +10,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
         Task<bool> ActualizarInforme(int id, Informe informe);
         Task<bool> EliminarInforme(int id);
         Task<Informe> ObtenerInformePorId(int id);
+        Task<List<Informe>> ObtenerInformesPendientesPorSubestacion(int subestacionId);
+        Task<List<Informe>> ObtenerInformesPorSubestacion(int subestacionId);
     }
 }

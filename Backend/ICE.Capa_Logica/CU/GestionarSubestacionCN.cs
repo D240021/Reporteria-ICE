@@ -55,6 +55,11 @@ namespace ICE.Capa_Negocios.CU
             return await _gestionarSubestacionDA.ObtenerSubestacion(id);
         }
 
+        public async Task<IEnumerable<Subestacion>> ObtenerSubestacionesPorUnidadRegional(int idUnidadRegional)
+        {
+            return await _gestionarSubestacionDA.ObtenerSubestacionesPorUnidadRegional(idUnidadRegional);
+        }
+
         public async Task<IEnumerable<Subestacion>> ObtenerTodasLasSubestaciones()
         {
             return await _gestionarSubestacionDA.ObtenerTodasLasSubestaciones();

@@ -93,6 +93,23 @@
                     <span
                         class="errores">{{accionesFormulario.obtenerErroresUnidadRegionalId(contenedorFormulario)}}</span>
                 </section>
+
+                <section class="row mb-3 align-items-center">
+                    <label class="col-md-4">SUBESTACIÓN A ASIGNAR</label>
+                    <div class="col-md-8">
+                        <select [formControl]="contenedorFormulario.controls.subestacionId">
+                            @for (subestacion of subestaciones; track $index) {
+                            <option value={{subestacion.id}}>
+                                <span>{{subestacion.identificador}}</span>
+                                {{subestacion.nombreUbicacion}}
+                            </option>
+                            }
+                        </select>
+                    </div>
+                    <span *ngIf="subestaciones.length === 0 && contenedorFormulario.value.unidadRegionalId" class="errores">No existen subestaciones asociadas la Unidad Regional</span>
+                    <span
+                        class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
+                </section>
                 <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
                     {{mensajeResultado}}
                 </span>
@@ -106,7 +123,8 @@
 
                     <div class="col-md-9 col-12">
                         <button class="btn btn-limpiar" type="button"
-                            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+                            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+                            [disabled]="contenedorFormulario.pristine">
                             LIMPIAR
                         </button>
                         <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid"

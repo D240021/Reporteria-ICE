@@ -39,7 +39,9 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(new { success = true });
             }
+
             catch (ConflictException ex) 
+
             {
                 return Conflict(new { message = ex.Message });
             }
@@ -97,7 +99,9 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(new { success = true });
             }
+
             catch (ConflictException ex) 
+
             {
                 return Conflict(new { message = ex.Message });
             }

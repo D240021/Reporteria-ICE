@@ -14,5 +14,7 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
         Task<bool> EliminarUnidadRegional(int id);
         Task<IEnumerable<UnidadRegional>> ObtenerTodasLasUnidadesRegionales();
         Task<UnidadRegional> ObtenerUnidadRegional(int id);
+
+        
     }
 }

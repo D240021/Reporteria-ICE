@@ -12,8 +12,8 @@ export class ValidacionesService {
   esSoloLetras(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const valor = control.value;
-      const esSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(valor);
-      return esSoloLetras ? null : { esSoloLetras: true };
+      const esValido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s!@#$%^&*(),.?":{}|<>_\-+=/'`~\[\]\\]+$/.test(valor);
+      return esValido ? null : { esSoloLetras: true };
     };
   }
 
@@ -37,4 +37,32 @@ export class ValidacionesService {
       return esSegura ? null : { esContraseniaSegura: true };
     };
   }
+
+  esCaracterEspecial(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valor = control.value;
+      const tieneCaracteresEspeciales = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/.test(valor);
+      return !tieneCaracteresEspeciales ? null : { esCaracterEspecial: true };
+    };
+
+  }
+
+  esCorreoValido(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valor = control.value;
+      const correoValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const caracteresEspeciales = /[!#$%^&*(),?":{}|<>;]/;
+
+      if (caracteresEspeciales.test(valor)) {
+        return { caracteresEspecialesNoPermitidos: true };
+      }
+
+      if (!correoValido.test(valor)) {
+        return { correoInvalido: true };
+      }
+
+      return null;
+    };
+  }
+
 }

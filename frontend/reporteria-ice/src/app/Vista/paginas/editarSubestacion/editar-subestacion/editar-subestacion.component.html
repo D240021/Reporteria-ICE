@@ -1,7 +1,7 @@
-<div>
-    <h2 mat-dialog-title>Editar Línea de Transmisión</h2>
-    <mat-dialog-content>
+<div class="manto">
 
+    <mat-dialog-content>
+        <h2 mat-dialog-title>Editar Línea de Transmisión</h2>
         <label class="col-md-4">NOMBRE DE UBICACION</label>
         <div class="col-md-8">
             <input type="text" placeholder="Inserte un nombre de usuario único"
@@ -15,10 +15,12 @@
             </button>
 
             <button class="btn btn-limpiar" type="button"
-                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+                (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+                [disabled]="contenedorFormulario.pristine">
                 LIMPIAR
             </button>
-            <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid || contenedorFormulario.pristine || !esFormularioModificado()"
+            <button class="btn btn-agregar" type="submit"
+                [disabled]="contenedorFormulario.invalid || contenedorFormulario.pristine || !esFormularioModificado()"
                 (click)="guardarCambios()">
                 GUARDAR
             </button>

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { ValidacionesService } from '../../../../Util/Validaciones/validaciones.service';
 import { UnidadRegionalService } from '../../../../Controlador/UnidadRegional/unidad-regional.service';
@@ -44,8 +44,8 @@ export class AgregarUnidadRegionalComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    identificador: ['', { validators: [Validators.required] }],
-    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
+    identificador: ['', { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(3)] }],
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), Validators.maxLength(100), Validators.minLength(3)] }],
   });
 
   registrarNuevaUnidadRegional() {

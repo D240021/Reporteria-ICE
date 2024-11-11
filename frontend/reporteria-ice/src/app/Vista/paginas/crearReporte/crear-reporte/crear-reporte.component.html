@@ -1,65 +1,113 @@
 <div class="form-container">
-  <form>
-    <h2>Crear reporte nuevo</h2>
+  <form [formGroup]="contenedorFormulario">
+    <h2>Crear nuevo reporte</h2>
 
-
-    <!-- NOTA:
-
-      Aplicar alguna logica si se ve necesario para que la linea de transmision y subestacione esten ya filtradas en los select
-      segun la subestacion actual del TPM que esta creando la subestacion
-    -->
-
-    <!-- Línea de Transmisión -->
+    @if (subestaciones && lineasTransmision && supervisores && tecnicosTLT) {
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">LINEA DE TRANSMISION:</label>
       <div class="col-md-8">
-        <select>
-          <option value="QZT8">QZT8</option>
+        <select [formControl]="contenedorFormulario.controls.lineaTransmisionId">
+          @for (linea of lineasTransmision; track $index) {
+
+          <option value={{linea.id}}>
+            <span>{{linea.identificador}}</span>
+            {{linea.nombreUbicacion}}
+          </option>
+          }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresLineaTransmisionId(contenedorFormulario)}}</span>
+      <span *ngIf="lineasTransmision.length === 0" class="errores">Debe registrar líneas de transmisión
+        para poder avanzar</span>
     </section>
 
-    <!-- Subestaciones Asociadas -->
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">SUBESTACIONES ASOCIADAS:</label>
       <div class="col-md-8">
-        <label><input type="checkbox" name="subestaciones" value="desamparados"> Desamparados</label><br>
-        <label><input type="checkbox" name="subestaciones" value="turrialba"> Turrialba</label><br>
-        <label><input type="checkbox" name="subestaciones" value="san_jose"> San José</label><br>
-        <label><input type="checkbox" name="subestaciones" value="alajuela"> Alajuela</label>
+        <select [formControl]="contenedorFormulario.controls.subestacionA">
+          @for (subestacion of subestaciones; track $index) {
+
+          <option value={{subestacion.id}}>
+            <span>{{subestacion.identificador}}</span>
+            {{subestacion.nombreUbicacion}}
+          </option>
+          }
+        </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
+
+      <div class="col-md-8">
+        <select [formControl]="contenedorFormulario.controls.subestacionB">
+          @for (subestacion of subestaciones; track $index) {
+
+          <option value={{subestacion.id}}>
+            <span>{{subestacion.identificador}}</span>
+            {{subestacion.nombreUbicacion}}
+          </option>
+          }
+        </select>
+      </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
+      <span *ngIf="subestaciones.length === 0" class="errores">Debe registrar subestaciones
+        para poder avanzar</span>
     </section>
 
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">Supervisor:</label>
       <div class="col-md-8">
-        <select>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
+        <select [formControl]="contenedorFormulario.controls.usuarioSupervisorId">
+          @for (supervisor of supervisores; track $index) {
+
+          <option value={{supervisor.id}}>
+            <span>{{supervisor.identificador}}</span>
+            {{supervisor.nombre}} {{supervisor.apellido}}
+          </option>
+          }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresSupervisorId(contenedorFormulario)}}</span>
+      <span *ngIf="supervisores.length === 0" class="errores">Debe registrar supervisores
+        para poder avanzar</span>
     </section>
 
     <section class="row mb-3 align-items-center">
       <label class="col-md-4">Técnico de Línea:</label>
       <div class="col-md-8">
-        <select>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
-          <option value="Lorem Ipsum">Lorem Ipsum</option>
+        <select [formControl]="contenedorFormulario.controls.tecnicoLineaId">
+          @for (tecnicoTLT of tecnicosTLT; track $index) {
+
+          <option value={{tecnicoTLT.id}}>
+            <span>{{tecnicoTLT.identificador}}</span>
+            {{tecnicoTLT.nombre}} {{tecnicoTLT.apellido}}
+          </option>
+          }
         </select>
       </div>
+      <span class="errores">{{accionesFormulario.obtenerErroresTecnicoLineaId(contenedorFormulario)}}</span>
+      <span *ngIf="tecnicosTLT.length === 0" class="errores">Debe registrar técnicos
+        para poder avanzar</span>
     </section>
+    <span [ngClass]="{'mensaje-exito': exitoOperacion, 'mensaje-error': !exitoOperacion}">
+      {{mensajeResultado}}
+    </span>
 
-    <!-- Botones -->
     <div class="contenedor-botones row mb-3 align-items-center">
-      <div class="col-md-3 col-12">
+      <!-- <div class="col-md-3 col-12">
         <button class="btn btn-volver" type="button" (click)="seguridadService.cerrarSesion()">VOLVER</button>
-      </div>
+      </div> -->
       <div class="col-md-9 col-12">
-        <button class="btn btn-limpiar" type="button">LIMPIAR</button>
-        <button class="btn btn-agregar" type="submit">GENERAR</button>
+        <button class="btn btn-limpiar" type="button"
+          (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+          [disabled]="contenedorFormulario.pristine">LIMPIAR</button>
+        <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid"
+          (click)="generarReporte()">GENERAR</button>
       </div>
     </div>
+    }
+
+    @else {
+    <animacion-carga></animacion-carga>
+    }
 
   </form>
 </div>

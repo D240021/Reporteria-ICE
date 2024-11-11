@@ -11,6 +11,7 @@ using static ICE.Capa_Datos.Acciones.GestionarSubestacionDA;
 using static ICE.Capa_Datos.Acciones.GestionarUsuarioDA;
 using ConflictException = ICE.Capa_Datos.Acciones.GestionarSubestacionDA.ConflictException;
 
+
 namespace reporteria_ice_api.Controllers
 {
     [Route("api/[controller]")]
@@ -55,6 +56,20 @@ namespace reporteria_ice_api.Controllers
             try
             {
                 var subestaciones = await _gestionarSubestacionCN.ObtenerTodasLasSubestaciones();
+                var subestacionesViewDTO = SubestacionDTOMapper.ConvertirListaDeSubestacionesAViewDTO(subestaciones);
+                return Ok(subestacionesViewDTO.ToList());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet("UnidadRegional/{idUnidadRegional}")]
+        public async Task<ActionResult<IEnumerable<Subestacion>>> ObtenerSubestacionesPorUnidadRegional(int idUnidadRegional)
+        {
+            try
+            {
+                var subestaciones = await _gestionarSubestacionCN.ObtenerSubestacionesPorUnidadRegional(idUnidadRegional);
                 var subestacionesViewDTO = SubestacionDTOMapper.ConvertirListaDeSubestacionesAViewDTO(subestaciones);
                 return Ok(subestacionesViewDTO.ToList());
             }

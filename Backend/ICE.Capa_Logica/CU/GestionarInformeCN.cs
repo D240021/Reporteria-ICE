@@ -91,5 +91,15 @@ namespace ICE.Capa_Negocios.CU
             }
             return false;
         }
+
+        public async Task<List<Informe>> ObtenerInformesPendientesPorSubestacion(int subestacionId)
+        {
+            return await _gestionarInformeDA.ObtenerInformesPendientesPorSubestacion(subestacionId);
+        }
+
+        public async Task<List<Informe>> ObtenerInformesPorSubestacion(int subestacionId)
+        {
+            return await _gestionarInformeDA.ObtenerInformesPorSubestacion(subestacionId);
+        }
     }
 }

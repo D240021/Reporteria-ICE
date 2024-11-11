@@ -59,24 +59,23 @@
 
 
                 <div class="contenedor-botones row mb-3 align-items-center">
-                  
-                  <div class="col-md-3 col-12">
-                    <button class="btn btn-volver" type="button"
-                            routerLink="/menu-administrador">
-                      VOLVER
-                    </button>
-                  </div>
 
-                  <div class="col-md-9 col-12">
-                    <button class="btn btn-limpiar"  type="button"
-                            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
-                      LIMPIAR
-                    </button>
-                    <button class="btn btn-agregar" type="submit"
-                            [disabled]="contenedorFormulario.invalid">
-                      GUARDAR
-                    </button>
-                  </div>
+                    <div class="col-md-3 col-12">
+                        <button class="btn btn-volver" type="button" routerLink="/menu-administrador">
+                            VOLVER
+                        </button>
+                    </div>
+
+                    <div class="col-md-9 col-12">
+                        <button class="btn btn-limpiar" type="button"
+                            (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+                            [disabled]="contenedorFormulario.pristine">
+                            LIMPIAR
+                        </button>
+                        <button class="btn btn-agregar" type="submit" [disabled]="contenedorFormulario.invalid">
+                            GUARDAR
+                        </button>
+                    </div>
                 </div>
 
             </form>

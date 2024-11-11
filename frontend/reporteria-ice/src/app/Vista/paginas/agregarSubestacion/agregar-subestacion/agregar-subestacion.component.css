@@ -2,18 +2,20 @@
   font-family: var(--fuente-poppins)
 }
 
-contenedor-principal {
+.contenedor-principal {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-content: center;
   align-items: center;
-  height: 100vh
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
 .contenedor-form {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  width: 100%
 }
 
 

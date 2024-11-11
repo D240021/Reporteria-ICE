@@ -1,7 +1,7 @@
 <div class="cont-principal">
 
 
-  <div class="cont-consultar-supervisor">
+  <div class="cont-consultar-operario">
 
     <h2>Consultar Operario</h2>
 
@@ -9,17 +9,43 @@
 
     @if (usuariosOriginales.length > 0 ) {
 
+
+    <!--
+  <form class="cont-buscador row align-items-center" [formGroup]="contenedorFormulario">
+    <div class="contenedor-filtro col-md-4">
+
+      <label for="filtro" class="me-2">Valor:</label>
+      <input type="text" id="filtro" class="form-control me-3" [formControl]="contenedorFormulario.controls.valor">
+
+    </div>
+
+    <div class="d-flex col-md-4">
+      <label for="filtro" class="me-2">Filtro:</label>
+      <select class="form-select me-2" [formControl]="contenedorFormulario.controls.filtro">
+        <option value="identificador">Identificador</option>
+        <option value="nombre">Nombre</option>
+        <option value="apellido">Apellidos</option>
+        <option value="nombreUsuario">Nombre de usuario</option>
+        <option value="correo">Correo</option>
+        <option value="unidadRegional">Unidad Regional</option>
+        <option value="rol">Ocupación</option>
+      </select>
+    </div>
+  </form>
+    -->
+
+
     <form class="cont-buscador row align-items-center" [formGroup]="contenedorFormulario">
+
       <div class="contenedor-filtro col-md-4">
-
-        <label for="filtro" class="me-2">Valor:</label>
-        <input type="text" id="filtro" class="form-control me-3" [formControl]="contenedorFormulario.controls.valor">
-
+        <label for="valor">Valor:</label>
+        <input type="text" id="valor" class="form-control" [formControl]="contenedorFormulario.controls.valor">
       </div>
 
-      <div class="d-flex col-md-4">
-        <label for="filtro" class="me-2">Filtro:</label>
-        <select class="form-select me-2" [formControl]="contenedorFormulario.controls.filtro">
+
+      <div class="contenedor-filtro col-md-4">
+        <label for="filtro">Filtro:</label>
+        <select id="filtro" class="form-select" [formControl]="contenedorFormulario.controls.filtro">
           <option value="identificador">Identificador</option>
           <option value="nombre">Nombre</option>
           <option value="apellido">Apellidos</option>
@@ -29,6 +55,7 @@
           <option value="rol">Ocupación</option>
         </select>
       </div>
+
     </form>
 
 
@@ -118,9 +145,9 @@
     <p>No existen usuarios registrados</p>
     }
 
-    } 
-    @else { 
-      <animacion-carga></animacion-carga>
+    }
+    @else {
+    <animacion-carga></animacion-carga>
     }
   </div>
 </div>

@@ -11,7 +11,7 @@ import { datosCerrarSesion } from '../../../../Modelo/DatosDialogoConfirmacion';
 @Component({
   selector: 'menu-administrador',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, RouterLink, DialogoConfirmacionComponent],
+  imports: [MatCardModule, MatButtonModule, RouterLink],
   templateUrl: './menu-administrador.component.html',
   styleUrl: './menu-administrador.component.css'
 })
