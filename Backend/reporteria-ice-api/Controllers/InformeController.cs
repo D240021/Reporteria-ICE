@@ -13,11 +13,15 @@ namespace reporteria_ice_api.Controllers
     [ApiController]
     public class InformeController : ControllerBase
     {
-        private readonly IGestionarInformeCN _gestionarInformeCN;
 
-        public InformeController(IGestionarInformeCN gestionarInformeCN)
+        private readonly IGestionarInformeCN _gestionarInformeCN;
+        //Para que use la clase servicio entre Informes y Reportes
+        private readonly IGestionarReporteConInformesService _gestionarReporteConInformesServiceCN;
+
+        public InformeController(IGestionarInformeCN gestionarInformeCN, IGestionarReporteConInformesService gestionarReporteConInformesServiceCN)
         {
             _gestionarInformeCN = gestionarInformeCN;
+            _gestionarReporteConInformesServiceCN = gestionarReporteConInformesServiceCN;
         }
         
         // Método para obtener un informe por id
@@ -120,6 +124,27 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("reportePorInforme/{informeId}")]
+        public async Task<ActionResult<ReporteDTO>> ObtenerReportePorInformeId(int informeId)
+        {
+            try
+            {
+                var reporte = await _gestionarReporteConInformesServiceCN.ObtenerReportePorInformeId(informeId);
+                if (reporte == null)
+                {
+                    return NotFound("No se encontró un reporte asociado a este informe.");
+                }
+                
+                var reporteDTO = ReporteDTOMapper.ConvertirReporteADTO(reporte);
+                return Ok(reporteDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }
