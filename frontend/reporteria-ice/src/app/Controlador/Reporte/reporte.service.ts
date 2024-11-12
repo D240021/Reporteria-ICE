@@ -35,4 +35,11 @@ export class ReporteService {
     return this.http.put(`${this.urlBase}/${reporte.id}`, reporte);
   }
 
+  // public obtenerPDFPorReporte(idReporte : number) {
+  //   return this.http.get(`${this.urlBase}/${idReporte}/pdf`);
+  // }
+
+  obtenerPDFPorReporte(reporteId: number) {
+    return this.http.get(`tu-api-endpoint/${reporteId}`, { responseType: 'blob' });
+  }
 }

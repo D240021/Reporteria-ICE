@@ -11,11 +11,12 @@ import { Usuario } from '../../../../Modelo/Usuario';
 import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
 import { Reporte } from '../../../../Modelo/Reporte';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'menu-supervisor',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, RouterLink, CommonModule, AnimacionCargaComponent],
+  imports: [MatCardModule, MatButtonModule, CommonModule, AnimacionCargaComponent, MatIcon],
   templateUrl: './menu-supervisor.component.html',
   styleUrls: ['./menu-supervisor.component.css']
 })
@@ -27,7 +28,17 @@ export class MenuSupervisorComponent implements OnInit {
     this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
       this.reportesTodos = respuesta;
       this.obtenerReportesPendientes();
+      this.obtenerReportesPasados();
+
+      this.reportesPasados.forEach( reportePasado => {
+
+        this.reporteService.obtenerPDFPorReporte(reportePasado.id).subscribe(respuesta => {
+          reportePasado.pdf = respuesta;
+        });
+
+      });
     });
+
 
   }
 
@@ -40,12 +51,8 @@ export class MenuSupervisorComponent implements OnInit {
   public reportesTodos: Reporte[] = [];
   public reportesPendientes: Reporte[] = [];
   private reporteService = inject(ReporteService);
-
-  //Reportes quemados:
-  reportes = [
-    { id: '146621F', nombre: 'Guápiles - San José' },
-    { id: '9549T', nombre: 'Río Macho - Paraíso' }
-  ];
+  public reportesPasados: Reporte[] = [];
+  
 
   abrirCuadroDialogo(): void {
 
@@ -74,6 +81,33 @@ export class MenuSupervisorComponent implements OnInit {
         this.reportesPendientes.push(reporte);
       }
     });
+  }
+
+  obtenerReportesPasados(): void {
+    this.reportesTodos.forEach(reporte => {
+      if (reporte.estado === 4 && this.usuarioIngresado.id === reporte.usuarioSupervisorId) {
+        this.reportesPasados.push(reporte);
+      }
+    });
+  }
+
+  descargarPDF(reporteId: number): void {
+    this.reporteService.obtenerPDFPorReporte(reporteId).subscribe(
+      respuesta => {
+        const blob = new Blob([respuesta], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reporte_${reporteId}.pdf`; 
+        a.click();
+  
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error al descargar el PDF:', error);
+      }
+    );
   }
 
 }
