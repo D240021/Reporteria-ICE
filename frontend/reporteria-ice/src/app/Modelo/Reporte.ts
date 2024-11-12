@@ -12,7 +12,7 @@ export interface Reporte {
     informeV4Id: number,
     usuarioSupervisorId: number,
     tecnicoLineaId: number,
-    estado: 0
+    estado: number
 }
 
 

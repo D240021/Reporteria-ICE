@@ -1,17 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
+import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
+import { Reporte } from '../../../../Modelo/Reporte';
 
 @Component({
   selector: 'editar-reporte',
   standalone: true,
-  imports: [BuscadorComponent, RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './editar-reporte.component.html',
   styleUrls: ['./editar-reporte.component.css']
 })
-export class EditarReporteComponent {
+export class EditarReporteComponent implements OnInit {
+
+  ngOnInit(): void {
+    
+  }
 
   formularioVisible!: boolean;
 
@@ -38,11 +44,9 @@ export class EditarReporteComponent {
     }
   ];
 
-  // FormBuilder y FormulariosService inyectados
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
-
-  // Definir el formulario con validaciones
+  
   public contenedorFormulario = this.formBuilder.group({
     mapaDescargas: [null, Validators.required],
     cuadrilla: ['', Validators.required],
@@ -66,4 +70,6 @@ export class EditarReporteComponent {
       this.formularioVisible = false;
     }
   }
+
+  
 }

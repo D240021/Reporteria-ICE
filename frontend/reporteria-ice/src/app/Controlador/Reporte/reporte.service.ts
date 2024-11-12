@@ -27,6 +27,8 @@ export class ReporteService {
     return this.http.post(this.urlBase, reporte, { params: parametros });
   }
 
-  
+  public obtenerTodosReportes() : Observable<Reporte[]> {
+    return this.http.get<Reporte[]>(this.urlBase);
+  }
 
 }

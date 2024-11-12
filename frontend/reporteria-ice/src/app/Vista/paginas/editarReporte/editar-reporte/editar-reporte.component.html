@@ -2,18 +2,12 @@
 
   <h1>Editar Reporte</h1>
 
-  <!-- Componente buscador para buscar reportes por identificador -->
-  <buscador [datos]="datosQuemados" [accionInput]="'Identificador'" [accionPlaceholder]="'identificador'"
-            (valorBuscado)="procesarBusqueda($event)"></buscador>
-  
-    <!-- Solo muestra el formulario si el reporte fue encontrado -->
-    @if (formularioVisible) {
   <form [formGroup]="contenedorFormulario">
 
     <section>
       <label>MAPA DE DESCARGAS</label>
       <input type="file" id="mapaDescargas" class="form-control"
-             [formControl]="contenedorFormulario.controls.mapaDescargas">
+        [formControl]="contenedorFormulario.controls.mapaDescargas">
       <label for="mapaDescargas">Subir archivo</label>
     </section>
 
@@ -39,11 +33,10 @@
 
     <section>
       <label>OBSERVACIONES</label>
-      <textarea class="form-control" rows="5"
-                [formControl]="contenedorFormulario.controls.observaciones"></textarea>
+      <textarea class="form-control" rows="5" [formControl]="contenedorFormulario.controls.observaciones"></textarea>
     </section>
 
-    <!-- Botones -->
+
     <div class="contenedor-botones">
 
       <section>
@@ -60,10 +53,9 @@
     </div>
 
   </form>
-    }
 
-    <!-- Botón para volver al menú administrador -->
-    <button  class="btn" type="button" routerLink="/menu-administrador">VOLVER</button>  
+
+
+  <button class="btn" type="button" routerLink="/menu-administrador">VOLVER</button>
 
 </div>
-
