@@ -22,6 +22,7 @@ export class EditarSubestacionComponent {
 
   subestacion: any;
 
+  public mensajeResultado : string = '';
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
   private validaciones = inject(ValidacionesService);
@@ -49,6 +50,11 @@ export class EditarSubestacionComponent {
     nuevosDatosSubestacion.unidadRegionalId = this.subestacion.unidadRegionalId;
     this.subestacionService.editarSubestacion(nuevosDatosSubestacion).subscribe(respuesta => {
       this.cerrarCuadroDialogo();
+    },
+    error =>{
+        if(error.status === 409){
+          this.mensajeResultado = 'El nombre de ubicación ya existe';
+        }
     });
 
   }

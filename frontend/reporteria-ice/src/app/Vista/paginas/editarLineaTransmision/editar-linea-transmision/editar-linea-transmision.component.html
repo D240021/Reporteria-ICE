@@ -8,7 +8,9 @@
         [formControl]="contenedorFormulario.controls.nombreUbicacion">
     </div>
     <span class="errores">{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
-
+    <span class="errores">
+      {{mensajeResultado}}
+    </span>
     <mat-dialog-actions>
 
       <button class="btn btn-volver" type="button" (click)="cerrarCuadroDialogo()">

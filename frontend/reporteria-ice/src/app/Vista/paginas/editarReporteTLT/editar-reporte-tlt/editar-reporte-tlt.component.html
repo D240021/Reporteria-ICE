@@ -13,7 +13,7 @@
           <label class="col-md-4">EVIDENCIA (FOTO)</label>
           <div class="col-md-8">
             <input type="file" multiple placeholder="Subir archivos"
-              [formControl]="contenedorFormulario.controls.evidencia">
+            (change)="convertirImagenArregloBytes($event)">
           </div>
         </section>
 

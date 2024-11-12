@@ -97,7 +97,7 @@ export class EditarReporteTLTComponent implements OnInit {
       tecnicoLineaId: this.reporteATrabajar.tecnicoLineaId,
       estado: this.reporteATrabajar.estado
     };
-
+    console.log(reporteAEnviar);
     this.reporteService.editarReporte(reporteAEnviar).subscribe(repuesta => {
       console.log("SI")
     })
@@ -105,12 +105,15 @@ export class EditarReporteTLTComponent implements OnInit {
 
   abrirCuadroDialogoConfirmacionGuardado(): void {
 
+    const datoSalida = datosConfirmacionSalidaFormulario;
+    datoSalida.titulo = 'Editar Reporte';
+    datoSalida.tipo = 'formularioTLT';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datosConfirmacionIrreversible
+        data: datoSalida
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
@@ -124,15 +127,12 @@ export class EditarReporteTLTComponent implements OnInit {
 
   abrirCuadroDialogoConfirmacionSalida(): void {
 
-    const datoSalida = datosConfirmacionSalidaFormulario;
-    datoSalida.titulo = 'Editar Reporte';
-    datoSalida.tipo = 'formularioTLT';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datoSalida
+        data: datosConfirmacionIrreversible
       });
       dialogRef.afterClosed().subscribe(result => {
 
