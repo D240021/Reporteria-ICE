@@ -9,7 +9,7 @@
       <h4 class="text-center mb-4">Reportes</h4>
 
       <section class="row justify-content-center">
-        
+
         <div class="col-md-4">
           <div class="card text-center shadow-sm mb-4">
             <div class="card-header bg-light">
@@ -17,17 +17,17 @@
             </div>
             <div class="card-body">
               @if (reportesPendientes) {
-                @if (reportesPendientes.length> 0) {
-                  @for (reportePendiente of reportesPendientes; track $index) {
-                    <div class="reporte-item mb-3" (click)="redirigirEdicionReporte(reportePendiente)">
-                      <p><strong>{{reportePendiente.usuarioSupervisorId}}</strong></p>
-                      <p class="text-muted">ID Reporte: {{reportePendiente.id}}</p>
-                    </div>
-                  }
-                }
-                @else {
-                <p>No existen reportes pendientes</p>
-                }
+              @if (reportesPendientes.length> 0) {
+              @for (reportePendiente of reportesPendientes; track $index) {
+              <div class="reporte-item mb-3" (click)="redirigirEdicionReporte(reportePendiente)">
+                <p><strong>{{reportePendiente.usuarioSupervisorId}}</strong></p>
+                <p class="text-muted">ID Reporte: {{reportePendiente.id}}</p>
+              </div>
+              }
+              }
+              @else {
+              <p>No existen reportes pendientes</p>
+              }
               }
               @else {
               <animacion-carga></animacion-carga>
@@ -36,33 +36,43 @@
             </div>
             @if (reportesPendientes.length > 4) {
             <div class="card-footer">
-
               <button class="btn btn-warning" routerLink="/consultar-reporte">VER MÁS</button>
-
             </div>
             }
           </div>
         </div>
 
-        <!-- Reportes Pasados -->
         <div class="col-md-4">
           <div class="card text-center shadow-sm mb-4">
             <div class="card-header bg-light">
               <p class="mb-0">PASADOS</p>
             </div>
             <div class="card-body">
+              @if (reportesPasados) {
+              @if (reportesPasados.length> 0) {
+              @for (reportePasado of reportesPasados; track $index) {
               <div class="reporte-item mb-3">
-                <p><strong>Desamparados - Río Macho</strong></p>
-                <p class="text-muted">1 de Junio de 2024</p>
+                <p><strong>{{reportePasado.usuarioSupervisorId}}</strong></p>
+                <p class="text-muted">ID Reporte: {{reportePasado.id}}</p>
+                
+                <mat-icon>download</mat-icon>
               </div>
-              <div class="reporte-item">
-                <p><strong>Turrialba - Río Macho</strong></p>
-                <p class="text-muted">5 de Marzo de 2024</p>
-              </div>
+              }
+              }
+              @else {
+              <p>No existen reportes pasados</p>
+              }
+              }
+              @else {
+              <animacion-carga></animacion-carga>
+              }
+
             </div>
+            @if (reportesPendientes.length > 3) {
             <div class="card-footer">
               <button class="btn btn-warning">VER MÁS</button>
             </div>
+            }
           </div>
         </div>
       </section>
