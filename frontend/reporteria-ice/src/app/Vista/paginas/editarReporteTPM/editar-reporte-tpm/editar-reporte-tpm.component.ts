@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CorrientesDeFallaInforme, DatosDeLineaInforme, DatosGeneralesInforme, DistanciaFallaInforme, HoraInforme, Informe, TeleproteccionInforme, TiemposDeDisparoInforme } from '../../../../Modelo/Informe';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
@@ -10,11 +10,14 @@ import { Subestacion } from '../../../../Modelo/subestacion';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 import { Reporte } from '../../../../Modelo/Reporte';
 import { InformeService } from '../../../../Controlador/Informe/informe.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
+import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 
 @Component({
   selector: 'app-editar-reporte-tpm',
   standalone: true,
-  imports: [RouterLink, AnimacionCargaComponent, ReactiveFormsModule],
+  imports: [AnimacionCargaComponent, ReactiveFormsModule],
   templateUrl: './editar-reporte-tpm.component.html',
   styleUrl: './editar-reporte-tpm.component.css'
 })
@@ -26,7 +29,6 @@ export class EditarReporteTPMComponent implements OnInit {
 
   ngOnInit(): void {
     this.informeATrabajar = history.state.informe;
-    console.log(this.informeATrabajar);
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
 
     this.subestacionAsociadaId = this.usuarioIngresado.subestacionId || 0;
@@ -41,14 +43,30 @@ export class EditarReporteTPMComponent implements OnInit {
     //   console.log(this.reporteAsociado);
     // });
 
+    this.contenedorFormulario.valueChanges.subscribe((valores) => {
+      if (!this.contenedorFormulario.pristine && !this.accionesFormulario.esFormularioVacio(valores)) {
+        this.formularioModificado = true;
+      } else {
+        this.formularioModificado = false;
+      }
+
+      if (this.accionesFormulario.esFormularioVacio(valores)) {
+        this.contenedorFormulario.markAsPristine();
+      }
+    });
+
   }
   private subestacionAsociadaId !: number;
+  private router = inject(Router);
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
   private subestacionService = inject(SubestacionService);
   public usuarioIngresado !: Usuario;
   private seguridadService = inject(SeguridadService);
   private informeService = inject(InformeService);
+  private modalAbierto: boolean = false;
+  private cuadroDialogo = inject(MatDialog);
+  private formularioModificado: boolean = false;
   public contenedorFormulario = this.formBuilder.group({
     id: [''],
     tipo: [''],
@@ -98,9 +116,9 @@ export class EditarReporteTPMComponent implements OnInit {
     const tiemposDeDisparoId = this.informeATrabajar.tiemposDeDisparoId || 0;
     const corrientesDeFallaId = this.informeATrabajar.corrientesDeFallaId || 0;
 
-    const horaObjeto: HoraInforme = {
-      ticks: Date.now()
-    }
+    // const horaObjeto: HoraInforme = {
+    //   ticks: Date.now()
+    // }
 
     const datosDeLineaObjeto: DatosDeLineaInforme = {
       id: datosDelineaId,
@@ -116,7 +134,7 @@ export class EditarReporteTPMComponent implements OnInit {
       id: datosGeneralesId,
       evento: this.contenedorFormulario.value.evento || '',
       fecha: fechaISO.toISOString(),
-      hora: horaObjeto,
+      hora: this.contenedorFormulario.value.hora + ':00' || '',
       subestacion: this.contenedorFormulario.value.subestacion || '',
       lt: this.contenedorFormulario.value.lt || '',
       equipo: this.contenedorFormulario.value.equipo || ''
@@ -182,7 +200,59 @@ export class EditarReporteTPMComponent implements OnInit {
 
   guardarCambios(): void {
 
+    const informeAEditar: Informe = this.construirObjetoInforme();
+    console.log(informeAEditar);
+    this.informeService.editarInforme(informeAEditar).subscribe(respuesta => {
+      console.log("SI")
+    });
 
   }
+
+  abrirCuadroDialogoConfirmacionGuardado(): void {
+
+
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
+        width: '400px',
+        height: '200px',
+        data: datosConfirmacionIrreversible
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.modalAbierto = false;
+        if (result === 'Confirmacion') {
+          this.guardarCambios();
+        }
+      });
+    }
+
+  }
+
+  abrirCuadroDialogoConfirmacionSalida(): void {
+
+    const datoSalida = datosConfirmacionSalidaFormulario;
+    datoSalida.tipo = 'formularioInforme';
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
+        width: '400px',
+        height: '200px',
+        data: datoSalida
+      });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+  }
+
+  verificarAbandonoFormulario() {
+    if (this.formularioModificado) {
+      this.abrirCuadroDialogoConfirmacionSalida();
+    } else {
+      this.router.navigate(['/menu-tpm']);
+    }
+  }
+
 
 }
