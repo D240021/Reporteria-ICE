@@ -1,69 +1,140 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BuscadorComponent } from '../../../componentes/buscador/buscador/buscador.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
+import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
+import { Reporte } from '../../../../Modelo/Reporte';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
+import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 
 @Component({
   selector: 'editar-reporte',
   standalone: true,
-  imports: [BuscadorComponent, RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './editar-reporte.component.html',
   styleUrls: ['./editar-reporte.component.css']
 })
-export class EditarReporteComponent {
+export class EditarReporteComponent implements OnInit {
 
-  formularioVisible!: boolean;
+  public reporteATrabajar !: Reporte;
 
-  // Datos quemados de ejemplo
-  datosQuemados = [
-    { identificador: 'RPT001', nombre: 'Falla Rio Macho' },
-    { identificador: 'RPT002', nombre: 'Falla Orosi' },
-  ];
+  ngOnInit(): void {
+    this.reporteATrabajar = history.state.reporte;
 
-  reportesQuemados: any[] = [
-    {
-      mapaDescargas: 'descarga_rio_macho.png',
-      cuadrilla: 'Cuadrilla 1',
-      subestacion: 'Subestación Rio Macho',
-      observaciones: 'Reparación de línea.',
-      identificador: 'RPT001'
-    },
-    {
-      mapaDescargas: 'descarga_orosi.png',
-      cuadrilla: 'Cuadrilla 2',
-      subestacion: 'Subestación Orosi',
-      observaciones: 'Mantenimiento preventivo.',
-      identificador: 'RPT002'
-    }
-  ];
+    this.contenedorFormulario.valueChanges.subscribe((valores) => {
+      if (!this.contenedorFormulario.pristine && !this.accionesFormulario.esFormularioVacio(valores)) {
+        this.formularioModificado = true;
+      } else {
+        this.formularioModificado = false;
+      }
 
-  // FormBuilder y FormulariosService inyectados
+      if (this.accionesFormulario.esFormularioVacio(valores)) {
+        this.contenedorFormulario.markAsPristine();
+      }
+    });
+  }
+
   private formBuilder = inject(FormBuilder);
+  private reporteService = inject(ReporteService);
   public accionesFormulario = inject(FormulariosService);
-
-  // Definir el formulario con validaciones
+  public arregloBytesImagenSeleccionada: number[] = [];
+  private modalAbierto: boolean = false;
+  private cuadroDialogo = inject(MatDialog);
+  private formularioModificado: boolean = false;
+  private router = inject(Router);
   public contenedorFormulario = this.formBuilder.group({
-    mapaDescargas: [null, Validators.required],
-    cuadrilla: ['', Validators.required],
-    subestacion: ['', Validators.required],
-    observaciones: ['', Validators.required]
+    mapaDescargas: [''],
+    observaciones: ['', { validators: [Validators.required, Validators.minLength(5)] }]
   });
 
-  // Procesar búsqueda para mostrar el formulario
-  procesarBusqueda(identificadorBuscado: string): void {
-    const reporteEncontrado = this.reportesQuemados.find((reporte) =>
-      identificadorBuscado === reporte.identificador);
-    if (reporteEncontrado) {
-      this.formularioVisible = true;
-      this.contenedorFormulario.patchValue({
-        mapaDescargas: reporteEncontrado.mapaDescargas,
-        cuadrilla: reporteEncontrado.cuadrilla,
-        subestacion: reporteEncontrado.subestacion,
-        observaciones: reporteEncontrado.observaciones
-      });
-    } else {
-      this.formularioVisible = false;
+  convertirImagenArregloBytes(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const bytes = new Uint8Array(arrayBuffer);
+        this.arregloBytesImagenSeleccionada = Array.from(bytes);
+
+        
+        const binaryString = String.fromCharCode(...bytes);
+        const base64String = btoa(binaryString);
+        this.contenedorFormulario.controls['mapaDescargas'].setValue(base64String);
+      };
+      reader.readAsArrayBuffer(file);
     }
   }
+  guardarCambios(): void {
+    const reporteAEnviar: Reporte = {
+      id: this.reporteATrabajar.id,
+      mapaDeDescargas: this.contenedorFormulario.value.mapaDescargas,
+      observaciones: this.contenedorFormulario.value.observaciones || '',
+      evidencia: this.reporteATrabajar.evidencia,
+      observacionesTecnicoLinea: this.reporteATrabajar.observacionesTecnicoLinea,
+      causas: this.reporteATrabajar.causas,
+      fechaHora: this.reporteATrabajar.fechaHora,
+      informeV1Id: this.reporteATrabajar.informeV1Id,
+      informeV2Id: this.reporteATrabajar.informeV2Id,
+      informeV3Id: this.reporteATrabajar.informeV3Id,
+      informeV4Id: this.reporteATrabajar.informeV4Id,
+      usuarioSupervisorId: this.reporteATrabajar.usuarioSupervisorId,
+      tecnicoLineaId: this.reporteATrabajar.tecnicoLineaId,
+      estado: this.reporteATrabajar.estado
+    };
+
+    this.reporteService.editarReporte(reporteAEnviar).subscribe(respuesta => {
+      console.log("ENTRA")
+    });
+  }
+
+
+  abrirCuadroDialogoConfirmacionGuardado(): void {
+
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
+        width: '400px',
+        height: '200px',
+        data: datosConfirmacionIrreversible
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.modalAbierto = false;
+        if (result === 'Confirmacion') {
+          this.guardarCambios();
+        }
+      });
+    }
+
+  }
+
+  abrirCuadroDialogoConfirmacionSalida(): void {
+
+    const datoSalida = datosConfirmacionSalidaFormulario;
+    datoSalida.tipo = 'formularioInforme';
+    if (!this.modalAbierto) {
+      this.modalAbierto = true;
+      const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
+        width: '400px',
+        height: '200px',
+        data: datoSalida
+      });
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
+    }
+
+  }
+
+  verificarAbandonoFormulario() {
+    if (this.formularioModificado) {
+      this.abrirCuadroDialogoConfirmacionSalida();
+    } else {
+      this.router.navigate(['/menu-supervisor']);
+    }
+  }
+
+
 }

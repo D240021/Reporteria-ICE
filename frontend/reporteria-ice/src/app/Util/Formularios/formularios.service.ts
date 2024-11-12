@@ -23,7 +23,7 @@ export class FormulariosService {
     if (campo.hasError('required') && campo.touched) {
       return 'El campo nombre es requerido';
     }
-    
+
     if (campo.hasError('esCaracterEspecial') && campo.touched && contenedorFormulario.controls['nombre']) {
       return 'No se permiten caracteres especiales';
     }
@@ -212,7 +212,39 @@ export class FormulariosService {
     return '';
   }
 
+  obtenerErroresObservaciones(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['observaciones'];
 
+    if (campo.hasError('minlength') && campo.touched) {
+      return 'Mínimo 5 caracteres';
+    }
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'El campo observaciones es requerido';
+    }
+
+    return '';
+  }
+
+  obtenerErroresCausa(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['causas'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'La causa es requerida';
+    }
+
+    return '';
+  }
+
+  obtenerErroresFechaHora(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['fechaHora'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'La fecha y hora son requeridas';
+    }
+
+    return '';
+  }
 
 
 }

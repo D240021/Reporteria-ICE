@@ -27,6 +27,7 @@ import { EditarOperarioComponent } from './Vista/paginas/editarOperario/editar-o
 import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegional/editar-unidad-regional/editar-unidad-regional.component';
 import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
 import { MenuTpmComponent } from './Vista/paginas/menuTpm/menu-tpm/menu-tpm.component';
+import { MenuTltComponent } from './Vista/paginas/menuTlt/menu-tlt/menu-tlt.component';
 
 export const routes: Routes = [
     {
@@ -75,14 +76,14 @@ export const routes: Routes = [
         path: 'menu-supervisor', component: MenuSupervisorComponent, canActivate: [esSprvGuard]
     },
     {
-        path: 'editar-reporte', component: EditarReporteComponent, canActivate: [esTpmGuard]
+        path: 'editar-reporte', component: EditarReporteComponent, canActivate: [esSprvGuard]
 
     },
     {
         path: 'editar-reporte-tpm', component: EditarReporteTPMComponent, canActivate: [esTpmGuard]
     },
     {
-        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent
+        path: 'editar-reporte-tlt', component: EditarReporteTLTComponent, canActivate: [esTltGuard]
     },
     {
         path: 'registrar-operario', component: RegistrarOperarioComponent, canActivate: [esAdminGuard]
@@ -104,6 +105,9 @@ export const routes: Routes = [
     },
     {
         path: 'menu-tpm', component: MenuTpmComponent, canActivate: [esTpmGuard]
+    },
+    {
+        path: 'menu-tlt', component: MenuTltComponent, canActivate: [esTltGuard]
     }
 
 ];

@@ -58,7 +58,7 @@ export class AgregarUnidadRegionalComponent implements OnInit {
     },
     error =>{
         if(error.status === 409){
-          this.mensajeResultado = 'El identificador ya existe';
+          this.mensajeResultado = 'El identificador o el nombre de ubicación ya existen';
           this.exitoOperacion = false;
         }
     });

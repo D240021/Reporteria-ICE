@@ -13,5 +13,6 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Datos
         Task<IEnumerable<Reporte>> ObtenerTodosLosReportes();
         Task<IEnumerable<int>> ObtenerIdsInformesDeReporte(int informeId);
         Task<Reporte> ObtenerReportePorInformeId(int informeId);
+        Task<IEnumerable<int>> ObtenerIdsInformesAsociadosPorReporteId(int reporteId);
     }
 }

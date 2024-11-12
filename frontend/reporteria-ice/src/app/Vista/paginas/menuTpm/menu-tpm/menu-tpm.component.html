@@ -7,11 +7,12 @@
 
     <mat-tab-group dynamicHeight>
         <mat-tab label="Crear reporte">
-            <crear-reporte></crear-reporte>
+            <crear-reporte (reporteCreado)="cargarInformacionGeneral()"></crear-reporte>
         </mat-tab>
         <mat-tab label="Editar reporte">
 
             @if (informes) {
+            @if (informes.length !== 0) {
             @for (informe of informes; track $index) {
             <mat-card appearance="outlined">
                 <mat-card-header>
@@ -21,16 +22,29 @@
                         }@else {
                         Diferencial
                         }
+                        <button (click)="abrirEditarInforme(informe)">
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="create"></mat-icon>
+                        </button>
                     </mat-card-title>
-                    <mat-card-subtitle>Herding group</mat-card-subtitle>
+                    <mat-card-subtitle>
+                        @if (informe.reporteAsociado) {
+                             Fecha y hora: {{informe.reporteAsociado.fechaHora}}
+                          } @else {
+                            <animacion-carga></animacion-carga>
+                          }
+                    </mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-actions>
+                <!-- <mat-card-actions>
                     <button (click)="abrirEditarInforme(informe)">
                         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="create"></mat-icon>
                     </button>
-                </mat-card-actions>
+                </mat-card-actions> -->
             </mat-card>
 
+            }
+            }
+            @else {
+                No existen informes disponibles
             }
             }
             @else {

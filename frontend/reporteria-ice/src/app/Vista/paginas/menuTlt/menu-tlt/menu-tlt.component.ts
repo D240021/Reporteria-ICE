@@ -1,26 +1,22 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Usuario } from '../../../../Modelo/Usuario';
+import { Reporte } from '../../../../Modelo/Reporte';
+import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosCerrarSesion } from '../../../../Modelo/DatosDialogoConfirmacion';
-import { Usuario } from '../../../../Modelo/Usuario';
-import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
-import { Reporte } from '../../../../Modelo/Reporte';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 
 @Component({
-  selector: 'menu-supervisor',
+  selector: 'menu-tlt',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, RouterLink, CommonModule, AnimacionCargaComponent],
-  templateUrl: './menu-supervisor.component.html',
-  styleUrls: ['./menu-supervisor.component.css']
+  imports: [AnimacionCargaComponent],
+  templateUrl: './menu-tlt.component.html',
+  styleUrl: './menu-tlt.component.css'
 })
-export class MenuSupervisorComponent implements OnInit {
-
+export class MenuTltComponent implements OnInit{
 
   ngOnInit(): void {
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
@@ -41,11 +37,6 @@ export class MenuSupervisorComponent implements OnInit {
   public reportesPendientes: Reporte[] = [];
   private reporteService = inject(ReporteService);
 
-  //Reportes quemados:
-  reportes = [
-    { id: '146621F', nombre: 'Guápiles - San José' },
-    { id: '9549T', nombre: 'Río Macho - Paraíso' }
-  ];
 
   abrirCuadroDialogo(): void {
 
@@ -65,15 +56,14 @@ export class MenuSupervisorComponent implements OnInit {
   }
 
   redirigirEdicionReporte(reporte : Reporte): void {
-    this.router.navigate(['/editar-reporte'], { state: { reporte: reporte } });
+    this.router.navigate(['/editar-reporte-tlt'], { state: { reporte: reporte } });
   }
 
   obtenerReportesPendientes(): void {
     this.reportesTodos.forEach(reporte => {
-      if (reporte.estado === 2 && this.usuarioIngresado.id === reporte.usuarioSupervisorId) {
+      if (reporte.estado === 3 && this.usuarioIngresado.id === reporte.tecnicoLineaId) {
         this.reportesPendientes.push(reporte);
       }
     });
   }
-
 }

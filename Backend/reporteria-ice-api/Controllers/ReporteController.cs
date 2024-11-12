@@ -120,6 +120,29 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
+
+        [HttpGet("{reporteId}/informes")]
+        public async Task<ActionResult<IEnumerable<InformeDTO>>> ObtenerInformesAsociadosDeReporte(int reporteId)
+        {
+            try
+            {
+                var informesAsociados = await _gestionarReporteConInformesServiceCN.ObtenerInformesAsociadosDeReportePorId(reporteId);
+             
+                if (informesAsociados == null || !informesAsociados.Any())
+                {
+                    return NotFound("No se encontraron informes asociados para este reporte.");
+                }
+
+                var informesDTO = InformeDTOMapper.ConvertirListaDeInformesADTO(informesAsociados);
+                return Ok(informesDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
         [HttpGet("{id}/pdf")]
         public async Task<IActionResult> GenerarPDFReporte(int id)
         {

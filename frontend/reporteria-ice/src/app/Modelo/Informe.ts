@@ -22,7 +22,7 @@ export interface DatosGeneralesInforme {
     id: number;
     evento: string;
     fecha: Date | string;
-    hora: HoraInforme;
+    hora: string;
     subestacion: string;
     lt: string;
     equipo: string;
@@ -71,8 +71,4 @@ export interface CorrientesDeFallaInforme {
     acumuladaR: string;
     acumuladaS: string;
     acumuladaT: string;
-}
-
-export interface HoraInforme {
-    ticks : number;
 }

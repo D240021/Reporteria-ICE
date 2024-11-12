@@ -179,6 +179,25 @@ namespace ICE.Capa_Negocios.CU
             return informesAsociados;
         }
 
+        public async Task<List<Informe>> ObtenerInformesAsociadosDeReportePorId(int reporteId)
+        {
+            var idsInformesAsociados = await _gestionarReporteDA.ObtenerIdsInformesAsociadosPorReporteId(reporteId);
+            var informesAsociados = new List<Informe>();
+
+            foreach (var id in idsInformesAsociados)
+            {
+                var informe = await _gestionarInformeDA.ObtenerInformePorId(id);
+                if (informe != null)
+                {
+                    informesAsociados.Add(informe);
+                }
+            }
+
+            return informesAsociados;
+        }
+
+
+
         //Metodo para obtener los informes de un reporte y verificar si todos estan confirmados, pero si al menos
         //1 no esta completo, se quedan pendientes los 4 otra vez
         public async Task VerificarEstadoInformesAsociados(int informeId)

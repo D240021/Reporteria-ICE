@@ -7,7 +7,7 @@ import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.serv
 @Component({
   selector: 'dialogo-confirmacion',
   standalone: true,
-  imports: [RouterLink, MatDialogModule],
+  imports: [ MatDialogModule],
   templateUrl: './dialogo-confirmacion.component.html',
   styleUrl: './dialogo-confirmacion.component.css'
 })
@@ -23,18 +23,23 @@ export class DialogoConfirmacionComponent {
     this.datosComponente = datos;
   }
 
-  cerrarCuadroDialogo(): void {
-    this.referenciaDialogo.close();
+  cerrarCuadroDialogo(mensajeConfirmacion : string): void {
+    this.referenciaDialogo.close(mensajeConfirmacion);
     return;
   }
 
   salirCuadroDialogo(): void {
+    
     if (this.datosComponente.tipo === 'sesion') {
       this.seguridadService.cerrarSesion();
-    } else {
+    } else if(this.datosComponente.tipo === 'formularioAdmin') {
       this.router.navigate(['/menu-administrador']);
+    } else if(this.datosComponente.tipo === 'formularioInforme') {
+      this.router.navigate(['/menu-tpm']);
+    } else if(this.datosComponente.tipo === 'formularioTLT') {
+      this.router.navigate(['/menu-tlt']);
     }
-    this.cerrarCuadroDialogo();
+    this.cerrarCuadroDialogo('Confirmacion');
     return;
   }
 }

@@ -2,51 +2,45 @@
   <div id="content-wrap">
     <div class="container-fluid">
       <header class="text-center my-4">
-        <h1>BIENVENIDO, SUPERVISOR MARIO VARGAS</h1>
+        <h1>BIENVENIDO&#64;, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
         <button class="btn btn-warning float-end me-4" (click)="abrirCuadroDialogo()">SALIR</button>
       </header>
 
       <h4 class="text-center mb-4">Reportes</h4>
 
       <section class="row justify-content-center">
-        <!-- Reportes Pendientes -->
+        
         <div class="col-md-4">
           <div class="card text-center shadow-sm mb-4">
             <div class="card-header bg-light">
               <p class="mb-0">PENDIENTES</p>
             </div>
             <div class="card-body">
+              @if (reportesPendientes) {
+                @if (reportesPendientes.length> 0) {
+                  @for (reportePendiente of reportesPendientes; track $index) {
+                    <div class="reporte-item mb-3" (click)="redirigirEdicionReporte(reportePendiente)">
+                      <p><strong>{{reportePendiente.usuarioSupervisorId}}</strong></p>
+                      <p class="text-muted">ID Reporte: {{reportePendiente.id}}</p>
+                    </div>
+                  }
+                }
+                @else {
+                <p>No existen reportes pendientes</p>
+                }
+              }
+              @else {
+              <animacion-carga></animacion-carga>
+              }
 
-              <!-- Iterar sobre reportes para observar el editar-reporte -->
-              <div *ngFor="let reporte of reportes" class="reporte-item mb-3" (click)="irAEditar(reporte.id)">
-                <p><strong>{{ reporte.nombre }}</strong></p>
-                <p class="text-muted">ID Reporte: {{ reporte.id }}</p>
-              </div>
-              <!--    Fin   -->
-
-              <div class="reporte-item mb-3">
-                <p><strong>Guápiles - San José</strong></p>
-                <p class="text-muted">ID Reporte: 146621F</p>
-              </div>
-              <div class="reporte-item">
-                <p><strong>Río Macho - Paraíso</strong></p>
-                <p class="text-muted">ID Reporte: 9549T</p>
-              </div>
-
-              <div class="reporte-item">
-                <p><strong>Río Macho - Paraíso</strong></p>
-                <p class="text-muted">ID Reporte: 9549T</p>
-              </div>
-
-
-              <div class="reporte-item">
-                <p><strong>Río Macho - Paraíso</strong></p>
-                <p class="text-muted">ID Reporte: 9549T</p>
-              </div>
             </div>
+            @if (reportesPendientes.length > 4) {
             <div class="card-footer">
+
               <button class="btn btn-warning" routerLink="/consultar-reporte">VER MÁS</button>
+
             </div>
+            }
           </div>
         </div>
 

@@ -95,3 +95,9 @@ div button {
       align-items: center
     }
 }
+
+
+.errores{
+  color: red;
+  font-size: 75%;
+}

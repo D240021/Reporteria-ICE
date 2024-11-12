@@ -1,8 +1,8 @@
 export interface Reporte {
     id: number,
-    mapaDeDescargas?: string,
+    mapaDeDescargas?: string | null | File | number[],
     observaciones?: string,
-    evidencia?: string,
+    evidencia?: string | null | File | number[],
     observacionesTecnicoLinea?: string,
     causas?: string,
     fechaHora?: Date | null | string,
@@ -12,7 +12,7 @@ export interface Reporte {
     informeV4Id: number,
     usuarioSupervisorId: number,
     tecnicoLineaId: number,
-    estado: 0
+    estado: number
 }
 
 

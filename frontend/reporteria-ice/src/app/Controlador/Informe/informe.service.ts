@@ -22,5 +22,9 @@ export class InformeService {
   public obtenerReportePorInformeId(idInforme: number): Observable<Reporte> {
     return this.http.get<Reporte>(`${this.urlBase}/reportePorInforme/${idInforme}`);
   }
+
+  public editarInforme(informe : Informe){
+    return this.http.put(`${this.urlBase}/${informe.id}`, informe);
+  }
   
 }

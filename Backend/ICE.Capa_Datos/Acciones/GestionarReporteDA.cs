@@ -184,6 +184,18 @@ namespace ICE.Capa_Datos.Acciones
             };
         }
 
+        public async Task<IEnumerable<int>> ObtenerIdsInformesAsociadosPorReporteId(int reporteId)
+        {            
+            var idsInformesAsociados = await _context.Reportes
+                .Where(r => r.Id == reporteId)
+                .Select(r => new List<int> { r.InformeV1Id, r.InformeV2Id, r.InformeV3Id, r.InformeV4Id })
+                .FirstOrDefaultAsync();
+         
+            return idsInformesAsociados ?? new List<int>();
+        }
+
+
+
         //Metodos de Validacion
 
         // Validar que el ID de Informe realmente exista en la tabla Informes
