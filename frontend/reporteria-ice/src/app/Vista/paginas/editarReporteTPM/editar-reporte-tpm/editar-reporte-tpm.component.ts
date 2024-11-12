@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CorrientesDeFallaInforme, DatosDeLineaInforme, DatosGeneralesInforme, DistanciaFallaInforme, HoraInforme, Informe, TeleproteccionInforme, TiemposDeDisparoInforme } from '../../../../Modelo/Informe';
+import { CorrientesDeFallaInforme, DatosDeLineaInforme, DatosGeneralesInforme, DistanciaFallaInforme, Informe, TeleproteccionInforme, TiemposDeDisparoInforme } from '../../../../Modelo/Informe';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
@@ -29,19 +29,15 @@ export class EditarReporteTPMComponent implements OnInit {
 
   ngOnInit(): void {
     this.informeATrabajar = history.state.informe;
+    console.log(this.informeATrabajar);
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
 
     this.subestacionAsociadaId = this.usuarioIngresado.subestacionId || 0;
-    const informeId = this.informeATrabajar.id;
 
     this.subestacionService.obtenerSubestacionPorId(this.subestacionAsociadaId).subscribe(subestacion => {
       this.subestacionAsociada = subestacion;
     });
 
-    // this.informeService.obtenerReportePorInformeId(informeId).subscribe(reporte => {
-    //   this.reporteAsociado = reporte;
-    //   console.log(this.reporteAsociado);
-    // });
 
     this.contenedorFormulario.valueChanges.subscribe((valores) => {
       if (!this.contenedorFormulario.pristine && !this.accionesFormulario.esFormularioVacio(valores)) {
@@ -96,7 +92,6 @@ export class EditarReporteTPMComponent implements OnInit {
     distanciaPor: [''],
     distanciaReportada: [''],
     distanciaDobleTemporal: [''],
-    errorDobleTerminal: [''],
     error: [''],
     errorDoble: [''],
     txTel: [''],
@@ -116,9 +111,6 @@ export class EditarReporteTPMComponent implements OnInit {
     const tiemposDeDisparoId = this.informeATrabajar.tiemposDeDisparoId || 0;
     const corrientesDeFallaId = this.informeATrabajar.corrientesDeFallaId || 0;
 
-    // const horaObjeto: HoraInforme = {
-    //   ticks: Date.now()
-    // }
 
     const datosDeLineaObjeto: DatosDeLineaInforme = {
       id: datosDelineaId,

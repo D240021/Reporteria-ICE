@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { Router, RouterLink } from '@angular/router';
@@ -17,13 +17,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'crear-reporte',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, AnimacionCargaComponent, CommonModule],
+  imports: [ReactiveFormsModule, AnimacionCargaComponent, CommonModule],
   templateUrl: './crear-reporte.component.html',
   styleUrl: './crear-reporte.component.css'
 })
 export class CrearReporteComponent implements OnInit {
 
-
+  @Output() reporteCreado = new EventEmitter<void>(); 
 
   ngOnInit(): void {
 
@@ -48,6 +48,7 @@ export class CrearReporteComponent implements OnInit {
 
   }
 
+  
   public tecnicosTLT: Usuario[] = [];
   public supervisores: Usuario[] = [];
   public usuarioIngresado !: Usuario;

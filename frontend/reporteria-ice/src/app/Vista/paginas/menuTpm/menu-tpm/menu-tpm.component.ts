@@ -6,13 +6,14 @@ import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.serv
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
-import { datosCerrarSesion, datosConfirmacionSesionSinGuardar } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { datosConfirmacionSesionSinGuardar } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { InformeService } from '../../../../Controlador/Informe/informe.service';
 import { Informe } from '../../../../Modelo/Informe';
 import { MatCardModule } from '@angular/material/card';
 import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
 
 @Component({
   selector: 'menu-tpm',
@@ -24,25 +25,34 @@ import { Router } from '@angular/router';
 export class MenuTpmComponent implements OnInit {
 
   ngOnInit(): void {
-    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
-
-    const subestacionId = this.usuarioIngresado.subestacionId || 0;
-
-    this.informeService.obtenerInformesPendientesPorSubestacion(subestacionId).subscribe(informes => {
-      this.informes = informes;
-    });
-
+    this.cargarInformacionGeneral()
   }
 
+
   public seguridadService = inject(SeguridadService);
-  public usuarioIngresado !: Usuario
+  public usuarioIngresado !: Usuario;
   private cuadroDialogo = inject(MatDialog);
   private modalAbierto: boolean = false;
   private informeService = inject(InformeService);
-  public informes: Informe[] = [];
+  public informes: any[] = [];
   private router = inject(Router);
-  
 
+  cargarInformacionGeneral(): void {
+    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    const subestacionId = this.usuarioIngresado.subestacionId || 0;
+
+
+    this.informeService.obtenerInformesPendientesPorSubestacion(subestacionId).subscribe(informes => {
+      this.informes = informes;
+      this.informes.forEach(informe => {
+
+        this.informeService.obtenerReportePorInformeId(informe.id).subscribe(reporte => {
+          informe.reporteAsociado = reporte;
+          informe.reporteAsociado.fechaHora = formatearFechaHora(informe.reporteAsociado.fechaHora);
+        });
+      });
+    });
+  }
 
   abrirCuadroDialogo(): void {
 
@@ -56,12 +66,17 @@ export class MenuTpmComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
+        if(result === 'Confirmacion'){
+          this.cargarInformacionGeneral();
+        }
       });
     }
   }
 
-  abrirEditarInforme(informe : Informe) : void {
+  abrirEditarInforme(informe: Informe): void {
     this.router.navigate(['/editar-reporte-tpm'], { state: { informe: informe } });
     return;
   }
+
+
 }
