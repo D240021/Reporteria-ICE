@@ -1,6 +1,6 @@
 export interface Reporte {
     id: number,
-    mapaDeDescargas?: string,
+    mapaDeDescargas?: string | null | File | number[],
     observaciones?: string,
     evidencia?: string,
     observacionesTecnicoLinea?: string,

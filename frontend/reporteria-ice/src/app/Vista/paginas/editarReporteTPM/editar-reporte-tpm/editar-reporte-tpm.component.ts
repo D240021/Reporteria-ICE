@@ -29,7 +29,6 @@ export class EditarReporteTPMComponent implements OnInit {
 
   ngOnInit(): void {
     this.informeATrabajar = history.state.informe;
-    console.log(this.informeATrabajar);
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
 
     this.subestacionAsociadaId = this.usuarioIngresado.subestacionId || 0;
@@ -193,9 +192,7 @@ export class EditarReporteTPMComponent implements OnInit {
   guardarCambios(): void {
 
     const informeAEditar: Informe = this.construirObjetoInforme();
-    console.log(informeAEditar);
     this.informeService.editarInforme(informeAEditar).subscribe(respuesta => {
-      console.log("SI")
     });
 
   }

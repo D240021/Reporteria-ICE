@@ -31,4 +31,8 @@ export class ReporteService {
     return this.http.get<Reporte[]>(this.urlBase);
   }
 
+  public editarReporte(reporte : Reporte){
+    return this.http.put(`${this.urlBase}/${reporte.id}`, reporte);
+  }
+
 }

@@ -7,7 +7,7 @@
       <input type="text" placeholder="Inserte un nombre de usuario único"
         [formControl]="contenedorFormulario.controls.nombreUbicacion">
     </div>
-
+    <span class="errores">{{accionesFormulario.obtenerErroresNombre(contenedorFormulario)}}</span>
     <mat-dialog-actions>
 
       <button class="btn btn-volver" type="button" (click)="cerrarCuadroDialogo()">
