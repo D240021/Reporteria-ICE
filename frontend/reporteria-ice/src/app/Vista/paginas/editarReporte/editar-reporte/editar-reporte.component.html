@@ -7,44 +7,28 @@
     <section>
       <label>MAPA DE DESCARGAS</label>
       <input type="file" id="mapaDescargas" class="form-control"
-        [formControl]="contenedorFormulario.controls.mapaDescargas">
+        (change)="convertirImagenArregloBytes($event)">
       <label for="mapaDescargas">Subir archivo</label>
     </section>
 
-
-    <!-- De escoger las subestaciones y al tecnico de linea se encargar el TPM -->
-    <!--
-      <section>
-        <label>CUADRILLA</label>
-        <select class="form-control" [formControl]="contenedorFormulario.controls.cuadrilla">
-          <option value="Cuadrilla 1">Cuadrilla 1</option>
-          <option value="Cuadrilla 2">Cuadrilla 2</option>
-        </select>
-      </section>
-
-      <section>
-        <label>SUBESTACIÓN</label>
-        <select class="form-control" [formControl]="contenedorFormulario.controls.subestacion">
-          <option value="Subestación Rio Macho">Subestación Rio Macho</option>
-          <option value="Subestación Orosi">Subestación Orosi</option>
-        </select>
-      </section>
-     -->
 
     <section>
       <label>OBSERVACIONES</label>
       <textarea class="form-control" rows="5" [formControl]="contenedorFormulario.controls.observaciones"></textarea>
     </section>
+    <span class="errores">{{accionesFormulario.obtenerErroresObservaciones(contenedorFormulario)}}</span>
 
 
     <div class="contenedor-botones">
 
       <section>
 
-        <button class="btn" type="button" (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+        <button class="btn" type="button" [disabled]="contenedorFormulario.pristine"
+          (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
           LIMPIAR
         </button>
-        <button class="btn" type="submit" [disabled]="contenedorFormulario.invalid">
+        <button class="btn" type="submit" [disabled]="contenedorFormulario.invalid"
+        (click)="abrirCuadroDialogoConfirmacionGuardado()">
           ACTUALIZAR
         </button>
 
@@ -56,6 +40,6 @@
 
 
 
-  <button class="btn" type="button" routerLink="/menu-administrador">VOLVER</button>
+  <button class="btn" type="button" (click)="verificarAbandonoFormulario()">VOLVER</button>
 
 </div>

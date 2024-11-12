@@ -1,7 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormulariosService } from '../../../../Util/Formularios/formularios.service';
 import { RouterLink } from '@angular/router';
+import { Usuario } from '../../../../Modelo/Usuario';
+import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
+import { Reporte } from '../../../../Modelo/Reporte';
 
 @Component({
   selector: 'editar-reporte-tlt',
@@ -10,13 +13,23 @@ import { RouterLink } from '@angular/router';
   templateUrl: './editar-reporte-tlt.component.html',
   styleUrls: ['./editar-reporte-tlt.component.css']
 })
-export class EditarReporteTLTComponent {
+export class EditarReporteTLTComponent implements OnInit {
 
-  // Inyección de dependencias
+  public reporteATrabajar !: Reporte;
+
+  ngOnInit(): void {
+
+    this.reporteATrabajar = history.state.reporte;
+    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    console.log(this.reporteATrabajar);
+
+  }
+
+
   private formBuilder = inject(FormBuilder);
   public accionesFormulario = inject(FormulariosService);
-
-  // Definición del formulario reactivo
+  public usuarioIngresado !: Usuario;
+  private seguridadService = inject(SeguridadService);
   public contenedorFormulario = this.formBuilder.group({
     ubicacion: ['', { validators: [Validators.required] }],
     evidencia: ['', { validators: [Validators.required] }],
@@ -25,12 +38,9 @@ export class EditarReporteTLTComponent {
     fechaHora: ['', { validators: [Validators.required] }],
     observaciones: ['', { validators: [Validators.required] }]
   });
-  
 
-  // Método para limpiar el formulario
-  limpiarFormulario(): void {
-    this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
-  }
+
+
 
 
 }

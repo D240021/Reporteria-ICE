@@ -78,7 +78,7 @@ export class InicioSesionComponent {
     } else if (tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()) {
       this.router.navigate(['/menu-supervisor']);
     } else if (tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()) {
-      this.router.navigate(['/editar-reporte-tlt']);
+      this.router.navigate(['/menu-tlt']);
     }
   }
 
