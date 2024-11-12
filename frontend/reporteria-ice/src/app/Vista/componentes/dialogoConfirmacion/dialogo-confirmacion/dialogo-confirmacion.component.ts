@@ -36,6 +36,8 @@ export class DialogoConfirmacionComponent {
       this.router.navigate(['/menu-administrador']);
     } else if(this.datosComponente.tipo === 'formularioInforme') {
       this.router.navigate(['/menu-tpm']);
+    } else if(this.datosComponente.tipo === 'formularioTLT') {
+      this.router.navigate(['/menu-tlt']);
     }
     this.cerrarCuadroDialogo('Confirmacion');
     return;

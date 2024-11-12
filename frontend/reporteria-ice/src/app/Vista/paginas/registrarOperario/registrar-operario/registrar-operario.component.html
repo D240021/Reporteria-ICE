@@ -106,7 +106,8 @@
                             }
                         </select>
                     </div>
-                    <span *ngIf="subestaciones.length === 0 && contenedorFormulario.value.unidadRegionalId" class="errores">No existen subestaciones asociadas la Unidad Regional</span>
+                    <span *ngIf="subestaciones.length === 0 && contenedorFormulario.value.unidadRegionalId"
+                        class="errores">No existen subestaciones asociadas la Unidad Regional</span>
                     <span
                         class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
                 </section>

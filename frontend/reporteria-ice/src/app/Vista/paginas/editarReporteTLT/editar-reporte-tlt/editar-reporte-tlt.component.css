@@ -90,3 +90,8 @@ button {
     width: 50%;
   }
 }
+
+.errores{
+    color: red;
+    font-size: 75%;
+}

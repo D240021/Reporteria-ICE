@@ -9,66 +9,60 @@
       <form [formGroup]="contenedorFormulario">
         <h2>Editar Reporte</h2>
 
-        <!-- Manejar solo una foto-->
-
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">EVIDENCIA (FOTO)</label>
           <div class="col-md-8">
             <input type="file" multiple placeholder="Subir archivos"
-                   [formControl]="contenedorFormulario.controls.evidencia">
+              [formControl]="contenedorFormulario.controls.evidencia">
           </div>
         </section>
-
-        <!-- Las causas deben enviarse como un string, con las causas separadas por ¨,¨ -->
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">CAUSAS</label>
           <div class="col-md-8">
-            <input type="text" placeholder="Subestación Rio Macho"
-                   [formControl]="contenedorFormulario.controls.subestacion">
             <div class="causa-list mt-2">
-              <input type="checkbox" [formControl]="contenedorFormulario.controls.causa1"> Causa #1
-              <button class="btn btn-agregar-causa" type="button">+</button>
+              <textarea rows="4" placeholder="Escriba las causas"
+                [formControl]="contenedorFormulario.controls.causas"></textarea>
             </div>
+            <span class="errores">{{accionesFormulario.obtenerErroresCausa(contenedorFormulario)}}</span>
           </div>
         </section>
 
-        <!-- Fecha y hora de detección de la causa/s-->
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">FECHA Y HORA</label>
           <div class="col-md-8">
             <input type="datetime-local" [formControl]="contenedorFormulario.controls.fechaHora">
           </div>
+          <span class="errores">{{accionesFormulario.obtenerErroresFechaHora(contenedorFormulario)}}</span>
         </section>
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">OBSERVACIONES</label>
           <div class="col-md-8">
             <textarea rows="4" placeholder="Escriba las observaciones"
-                      [formControl]="contenedorFormulario.controls.observaciones"></textarea>
+              [formControl]="contenedorFormulario.controls.observaciones"></textarea>
           </div>
         </section>
 
         <div class="contenedor-botones row mb-3 align-items-center">
 
           <div class="col-md-3 col-12">
-            <button class="btn btn-volver" type="button" routerLink="/inicio-sesion">
+            <button class="btn btn-volver" type="button" (click)="verificarAbandonoFormulario()">
               VOLVER
             </button>
           </div>
 
           <div class="col-md-9 col-12">
             <button class="btn btn-limpiar" type="button"
-                    (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
+              (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)"
+              [disabled]="contenedorFormulario.pristine">
               LIMPIAR
             </button>
-            <button class="btn btn-actualizar" type="submit"
-                    [disabled]="contenedorFormulario.invalid">
-              ACTUALIZAR
+            <button class="btn btn-actualizar" type="submit" [disabled]="contenedorFormulario.invalid" (click)="abrirCuadroDialogoConfirmacionGuardado()">
+              GUARDAR
             </button>
           </div>
         </div>
-
       </form>
 
     </div>
@@ -76,4 +70,3 @@
   </div>
 
 </div>
-
