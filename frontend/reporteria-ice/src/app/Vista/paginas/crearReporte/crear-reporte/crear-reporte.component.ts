@@ -100,7 +100,7 @@ export class CrearReporteComponent implements OnInit {
 
     this.reporteService.crearReporte(datosReporte,subestacionesId,lineaTransmisionId).subscribe(respuesta => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
-      this.mensajeResultado = 'Operario registrado exitosamente';
+      this.mensajeResultado = 'Reporte creado exitosamente';
       this.exitoOperacion = true;
     });
 

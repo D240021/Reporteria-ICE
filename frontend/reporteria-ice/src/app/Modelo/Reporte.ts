@@ -12,7 +12,8 @@ export interface Reporte {
     informeV4Id: number,
     usuarioSupervisorId: number,
     tecnicoLineaId: number,
-    estado: number
+    estado: number,
+    pdf?: any
 }
 
 
