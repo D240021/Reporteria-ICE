@@ -23,5 +23,6 @@ namespace ICE.Capa_Negocios.Interfaces.Capa_Negocios
         Task<Reporte> ObtenerReportePorInformeId(int informeId);
         Task<Reporte> ObtenerReporteConInformesPorId(int reporteId);
         Task<List<Informe>> ObtenerReporteConInformesPDF(int reporteId);
+        Task<List<Informe>> ObtenerInformesAsociadosDeReportePorId(int reporteId);
     }
 }
