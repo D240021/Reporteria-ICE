@@ -49,6 +49,7 @@ export class InicioSesionComponent {
           const objetoRespuesta = respuesta as Usuario;
           const rolUsuario = objetoRespuesta.rol.toLocaleLowerCase();
           this.seguridadService.establecerRol(rolUsuario);
+          this.seguridadService.guardarInformacionUsuarioLogeado(objetoRespuesta);
           this.redireccionarUsuario(respuesta as Usuario);
           this.mensajeCredenciales = '';
         }
@@ -72,7 +73,8 @@ export class InicioSesionComponent {
     if (tipoUsuario === usuarioRoles.ADMIN.toLocaleLowerCase()) {
       this.router.navigate(['/menu-administrador']);
     } else if (tipoUsuario === usuarioRoles.TPM.toLocaleLowerCase()) {
-      this.router.navigate(['/crear-reporte']);
+      // this.router.navigate(['/crear-reporte']);
+      this.router.navigate(['/menu-tpm']);
     } else if (tipoUsuario === usuarioRoles.SPRV.toLocaleLowerCase()) {
       this.router.navigate(['/menu-supervisor']);
     } else if (tipoUsuario === usuarioRoles.TLT.toLocaleLowerCase()) {

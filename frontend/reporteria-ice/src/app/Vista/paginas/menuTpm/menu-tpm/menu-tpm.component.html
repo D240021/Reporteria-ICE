@@ -1,0 +1,42 @@
+<div>
+
+    <header>
+        <h1>BIENVENID&#64;, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
+        <button mat-flat-button (click)="abrirCuadroDialogo()">SALIR</button>
+    </header>
+
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="Crear reporte">
+            <crear-reporte></crear-reporte>
+        </mat-tab>
+        <mat-tab label="Editar reporte">
+
+            @if (informes) {
+            @for (informe of informes; track $index) {
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title> Informe de equipo
+                        @if(informe.tipo === 1){
+                        de Impedancia
+                        }@else {
+                        Diferencial
+                        }
+                    </mat-card-title>
+                    <mat-card-subtitle>Herding group</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                    <button (click)="abrirEditarInforme(informe)">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="create"></mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+
+            }
+            }
+            @else {
+            <animacion-carga></animacion-carga>
+            }
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

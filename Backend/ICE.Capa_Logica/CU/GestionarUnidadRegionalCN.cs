@@ -4,6 +4,7 @@ using ICE.Capa_Dominio.ReglasDeNegocio;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ICE.Capa_Negocios.Interfaces.Capa_Datos;
+using static ICE.Capa_Negocios.CU.GestionarUsuarioCN;
 
 namespace ICE.Capa_Negocios.CU
 {
@@ -16,6 +17,25 @@ namespace ICE.Capa_Negocios.CU
             _gestionarUnidadRegionalDA = gestionarUnidadRegionalDA;
         }
 
+        public async Task<bool> RegistrarUnidadRegional(UnidadRegional unidadRegional)
+        {
+            var validacion = ReglasUnidadRegional.EsUnidadRegionalValida(unidadRegional);
+
+            if (!validacion.esValido)
+            {
+                return false; // Si no es válida, retorna false
+            }
+
+            try
+            {
+                return await _gestionarUnidadRegionalDA.RegistrarUnidadRegional(unidadRegional);
+            }
+            catch (ConflictException ex)
+            {
+                throw; // Relanza la excepción de conflicto para que el controlador la maneje
+            }
+        }
+
         public async Task<bool> ActualizarUnidadRegional(int id, UnidadRegional unidadRegional)
         {
             var validacion = ReglasUnidadRegional.EsUnidadRegionalValida(unidadRegional);
@@ -24,7 +44,14 @@ namespace ICE.Capa_Negocios.CU
             if (!validacion.esValido || !validacionID.esValido)
                 return false;
 
-            return await _gestionarUnidadRegionalDA.ActualizarUnidadRegional(id, unidadRegional);
+            try
+            {
+                return await _gestionarUnidadRegionalDA.ActualizarUnidadRegional(id, unidadRegional);
+            }
+            catch (ConflictException ex)
+            {
+                throw; // Relanza la excepción de conflicto para que el controlador la maneje
+            }
         }
 
         public async Task<bool> EliminarUnidadRegional(int id)
@@ -50,16 +77,6 @@ namespace ICE.Capa_Negocios.CU
         public async Task<IEnumerable<UnidadRegional>> ObtenerTodasLasUnidadesRegionales()
         {
             return await _gestionarUnidadRegionalDA.ObtenerTodasLasUnidadesRegionales();
-        }
-
-        public async Task<bool> RegistrarUnidadRegional(UnidadRegional unidadRegional)
-        {
-            var validacion = ReglasUnidadRegional.EsUnidadRegionalValida(unidadRegional);
-
-            if (!validacion.esValido)
-                return false;
-
-            return await _gestionarUnidadRegionalDA.RegistrarUnidadRegional(unidadRegional);
         }
     }
 }

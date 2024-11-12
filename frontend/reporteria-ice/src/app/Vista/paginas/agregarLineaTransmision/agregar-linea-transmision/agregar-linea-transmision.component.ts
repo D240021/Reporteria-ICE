@@ -43,8 +43,8 @@ export class AgregarLineaTransmisionComponent implements OnInit {
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
-    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras()] }],
-    identificador: ['', { validators: [Validators.required] }]
+    nombreUbicacion: ['', { validators: [Validators.required, this.validaciones.esSoloLetras(), Validators.maxLength(100), Validators.minLength(3)] }],
+    identificador: ['', { validators: [Validators.required, Validators.maxLength(20), Validators.minLength(3)] }]
   });
 
   registrarLineaTransmision() {
@@ -53,6 +53,7 @@ export class AgregarLineaTransmisionComponent implements OnInit {
     this.lineaTransmision.crearLineaTransmision(valoresFormulario).subscribe(lineaTransmision => {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Línea de Transmisión agregada correctamente';
+      this.exitoOperacion = true;
     },
     error =>{
         if(error.status === 409){

@@ -2,18 +2,20 @@
   font-family: var(--fuente-poppins)
 }
 
-contenedor-principal{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content:center;
-    align-content:center;
-    align-items: center;
-    height: 100vh
+.contenedor-principal {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
 .contenedor-form {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  width: 100%
 }
 
 
@@ -26,20 +28,20 @@ form {
   margin: 0 auto;
 }
 
-  form section{
-      margin: 50px 0
+  form section {
+    margin: 50px 0
   }
 
-  form .contenedor-botones{
+  form .contenedor-botones {
     margin: 50px 0
   }
 
 
-  h2 {
-    color: var(--color-principal);
-  }
+h2 {
+  color: var(--color-principal);
+}
 
-input {
+form input {
   width: 100%;
   background: var(--color-sextario-fondo);
   border: 1px solid #ddd;
@@ -49,9 +51,19 @@ input {
   font-size: 1rem;
 }
 
-  input::placeholder {
-    color: #999;
-  }
+input::placeholder {
+  color: #999;
+}
+
+form select {
+  width: 100%;
+  background: var(--color-sextario-fondo);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  color: #666;
+  font-size: 1rem;
+}
 
 
 label {
@@ -63,53 +75,55 @@ label {
 .contenedor-botones {
   text-align: center;
   display: flex;
-  flex-flow: row wrap;  
-  align-items:center;
-  justify-content:center
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center
 }
 
 button {
   cursor: pointer;
   border-radius: 10px;
   margin: 20px 20px;
-  
 }
 
-  .btn-volver {
-    background-color: #545454;
-    color: white;
-    width: 75%;
-  }
+.btn-volver {
+  background-color: #545454;
+  color: white;
+  width: 75%;
+}
 
-  .btn-limpiar, .btn-agregar {
-    background-color: var(--color-terciario-fondo);
-    color: black;
-    font-weight: bolder;
-    width: 25%;
-  }
+.btn-limpiar,
+.btn-agregar {
+  background-color: var(--color-terciario-fondo);
+  color: black;
+  font-weight: bolder;
+  width: 25%;
+}
 
 @media (max-width: 767.98px) {
 
   .contenedor-botones {
     flex-direction: column-reverse
   }
+
   contenedor-botones button {
     width: auto;
   }
 
-  .btn-limpiar, .btn-agregar, .btn-volver {
+  .btn-limpiar,
+  .btn-agregar,
+  .btn-volver {
     width: 50%;
   }
-
 }
 
 .errores,
-.mensaje-error{
-    color: red;
-    font-size: 75%;
+.mensaje-error {
+  color: red;
+  font-size: 75%;
 }
 
 .mensaje-exito {
-    color: green;
-    font-size: 75%;
+  color: green;
+  font-size: 75%;
 }

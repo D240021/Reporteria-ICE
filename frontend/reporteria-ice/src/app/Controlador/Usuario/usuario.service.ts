@@ -23,6 +23,21 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.urlBase);
   }
 
+  public obtenerTPMSegunUnidadRegional(idUnidadRegional : number){
+    const nuevoUrl = `${this.urlBase}/UnidadRegional/TPM/${idUnidadRegional}`
+    return this.http.get<Usuario[]>(nuevoUrl)
+  } 
+
+  public obtenerTLTSegunUnidadRegional(idUnidadRegional : number){
+    const nuevoUrl = `${this.urlBase}/UnidadRegional/TLT/${idUnidadRegional}`
+    return this.http.get<Usuario[]>(nuevoUrl)
+  } 
+
+  public obtenerSPRVSegunUnidadRegional(idUnidadRegional : number){
+    const nuevoUrl = `${this.urlBase}/UnidadRegional/SPRV/${idUnidadRegional}`
+    return this.http.get<Usuario[]>(nuevoUrl)
+  } 
+
   public esUsuarioAutenticado(datosAutenticacion: AutenticacionUsuario){
     
     const nuevoUrl = `${this.urlBase}/IniciarSesion`;

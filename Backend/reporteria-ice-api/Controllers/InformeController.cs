@@ -13,11 +13,15 @@ namespace reporteria_ice_api.Controllers
     [ApiController]
     public class InformeController : ControllerBase
     {
-        private readonly IGestionarInformeCN _gestionarInformeCN;
 
-        public InformeController(IGestionarInformeCN gestionarInformeCN)
+        private readonly IGestionarInformeCN _gestionarInformeCN;
+        //Para que use la clase servicio entre Informes y Reportes
+        private readonly IGestionarReporteConInformesService _gestionarReporteConInformesServiceCN;
+
+        public InformeController(IGestionarInformeCN gestionarInformeCN, IGestionarReporteConInformesService gestionarReporteConInformesServiceCN)
         {
             _gestionarInformeCN = gestionarInformeCN;
+            _gestionarReporteConInformesServiceCN = gestionarReporteConInformesServiceCN;
         }
         
         // Método para obtener un informe por id
@@ -80,5 +84,67 @@ namespace reporteria_ice_api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //metodo para obtener informes pendientes de una subestacion
+        [HttpGet("pendientes/{subestacionId}")]
+        public async Task<ActionResult<List<InformeDTO>>> ObtenerInformePendientesPorSubestacion(int subestacionId)
+        {
+            try
+            {
+                var informesPendientes = await _gestionarInformeCN.ObtenerInformesPendientesPorSubestacion(subestacionId);
+                if (informesPendientes == null || !informesPendientes.Any())
+                {
+                    return NotFound("No hay informes pendientes para esta subestación.");
+                }
+                var informesDTO = informesPendientes.Select(informe => InformeDTOMapper.ConvertirInformeADTO(informe)).ToList();
+                return Ok(informesDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //metodo para obtener todos los informes de una subestacion
+        [HttpGet("todos/{subestacionId}")]
+        public async Task<ActionResult<List<InformeDTO>>> ObtenerInformePorSubestacion(int subestacionId)
+        {
+            try
+            {
+                var informesPendientes = await _gestionarInformeCN.ObtenerInformesPorSubestacion(subestacionId);
+                if (informesPendientes == null || !informesPendientes.Any())
+                {
+                    return NotFound("No hay informes para esta subestación.");
+                }
+                var informesDTO = informesPendientes.Select(informe => InformeDTOMapper.ConvertirInformeADTO(informe)).ToList();
+                return Ok(informesDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("reportePorInforme/{informeId}")]
+        public async Task<ActionResult<ReporteDTO>> ObtenerReportePorInformeId(int informeId)
+        {
+            try
+            {
+                var reporte = await _gestionarReporteConInformesServiceCN.ObtenerReportePorInformeId(informeId);
+                if (reporte == null)
+                {
+                    return NotFound("No se encontró un reporte asociado a este informe.");
+                }
+                
+                var reporteDTO = ReporteDTOMapper.ConvertirReporteADTO(reporte);
+                return Ok(reporteDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }

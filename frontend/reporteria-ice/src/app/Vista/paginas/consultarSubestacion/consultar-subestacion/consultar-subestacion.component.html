@@ -2,23 +2,42 @@
 
   <div></div>
 
-  <div class="cont-consultar-linea">
+  <div class="cont-consultar-subestacion">
 
     <h2>Consultar Subestación</h2>
 
     @if (subestacionesOriginales) {
     @if (subestacionesOriginales.length > 0 ) {
+
+    <!--
+
+  <section class="cont-buscador row align-items-center">
+    <div class="contenedor-filtro col-md-4">
+
+      <label for="filtro" class="me-2">Valor:</label>
+      <input type="text" id="filtro" class="form-control me-3" [formControl]="contenedorFormulario.controls.valor">
+
+    </div>
+
+    <div class="d-flex col-md-4">
+      <label for="filtro" class="me-2">Filtro:</label>
+      <select class="form-select me-2" [formControl]="contenedorFormulario.controls.filtro">
+        <option value="identificador">Identificador</option>
+        <option value="nombre">Nombre de Ubicación</option>
+      </select>
+    </div>
+  </section>
+    -->
+
     <section class="cont-buscador row align-items-center">
       <div class="contenedor-filtro col-md-4">
-
-        <label for="filtro" class="me-2">Valor:</label>
-        <input type="text" id="filtro" class="form-control me-3" [formControl]="contenedorFormulario.controls.valor">
-
+        <label for="valor">Valor:</label>
+        <input type="text" id="valor" class="form-control" [formControl]="contenedorFormulario.controls.valor">
       </div>
 
-      <div class="d-flex col-md-4">
-        <label for="filtro" class="me-2">Filtro:</label>
-        <select class="form-select me-2" [formControl]="contenedorFormulario.controls.filtro">
+      <div class="contenedor-filtro col-md-4">
+        <label for="filtro">Filtro:</label>
+        <select id="filtro" class="form-select" [formControl]="contenedorFormulario.controls.filtro">
           <option value="identificador">Identificador</option>
           <option value="nombre">Nombre de Ubicación</option>
         </select>
@@ -76,7 +95,7 @@
     }
     }
     @else {
-      <animacion-carga></animacion-carga>
+    <animacion-carga></animacion-carga>
     }
 
   </div>

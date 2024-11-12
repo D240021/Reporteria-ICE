@@ -1,95 +1,122 @@
-/* div {
+.errores {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+
+.manto {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  margin-top: 1rem;
-  gap: .5rem 0;
+  z-index: 1000;
+}
+
+* {
   font-family: var(--fuente-poppins);
 }
 
-
-h1 {
+h2[mat-dialog-title] {
   color: var(--color-principal);
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-form {
+mat-dialog-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  max-width: 1000px;
+}
+
+label {
+  display: block;
+  width: 100%;
+  color: var(--color-secundario);
+  font-weight: bold;
   margin-top: 1rem;
-  width: 70%;
+}
+
+.col-md-4 {
+  width: 100%;
+  text-align: left;
+}
+
+.col-md-8 {
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+  background-color: var(--color-sextario-fondo);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+  input[type="text"]::placeholder {
+    color: #999;
+  }
+
+mat-dialog-actions {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 1rem 0;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-  form section {
-    display: flex;
-    flex-direction: row;
-    gap: 0 1rem;
-  }
-
-    form section label {
-      width: 40%;
-      color: var(--color-secundario);
-      padding: 0.5rem
-    }
-
-    form section input,
-    form section select {
-      width: 60%;
-    }
-
-    form section input,
-    form section select {
-      background-color: var(--color-sextario-fondo);
-      border: none;
-    }
-
-.contenedor-botones {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1.5rem 0
-}
-
-div button {
-  background-color: var(--color-principal);
-  color: var(--color-secundario-fondo);
+button {
+  cursor: pointer;
   border-radius: 10px;
-}
-
-.contenedor-botones section button {
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
   border: none;
-  background-color: var(--color-terciario-fondo);
-  color: var(--color-secundario-fondo);
-  border-radius: 10px;
-} */
+}
 
+.btn-volver {
+  background-color: #545454;
+  color: white;
+  width: 100px;
+}
 
-/* Media query para pantallas con ancho de 410px o menor */
-/* @media (max-width: 410px) {
-  form section {
+.btn-limpiar {
+  background-color: #ffd700;
+  color: black;
+}
+
+.btn-agregar {
+  background-color: #ffeb3b;
+  color: black;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 767.98px) {
+  mat-dialog-content {
+    max-width: 90%;
+  }
+
+  mat-dialog-actions {
     flex-direction: column;
+    align-items: center;
   }
 
-    form section label {
-      width: 100%;
-    }
-
-    form section input,
-    form section select {
-      width: 100%;
-    }
-
-  .contenedor-botones {
-    justify-content: center;
-    align-items: center
+  button {
+    width: 100%;
+    margin-top: 0.5rem;
   }
-
-    .contenedor-botones section {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center
-    }
-} */
+}

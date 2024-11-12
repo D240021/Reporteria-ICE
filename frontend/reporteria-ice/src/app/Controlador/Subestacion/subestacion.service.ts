@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ambiente } from '../../Ambientes/ambienteDesarrollo';
-import { Subestacion } from '../../Modelo/Subestacion';
+import { Subestacion } from '../../Modelo/subestacion';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -22,7 +22,15 @@ export class SubestacionService {
     return this.http.get<Subestacion[]>(this.urlBase);
   }
 
+  public obtenerSubestacionPorId(idSubestacion : number){
+    return this.http.get<Subestacion>(`${this.urlBase}/${idSubestacion}`);
+  }
+
   public editarSubestacion(subestacion : Subestacion){
     return this.http.put(`${this.urlBase}/${subestacion.id}`, subestacion);
+  }
+
+  public obtenerSubestacionesPorUnidadRegional(idUnidadRegional : number){
+    return this.http.get<Subestacion[]>(`${this.urlBase}/UnidadRegional/${idUnidadRegional}`);
   }
 }
