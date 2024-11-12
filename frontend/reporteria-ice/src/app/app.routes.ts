@@ -75,7 +75,7 @@ export const routes: Routes = [
         path: 'menu-supervisor', component: MenuSupervisorComponent, canActivate: [esSprvGuard]
     },
     {
-        path: 'editar-reporte', component: EditarReporteComponent, canActivate: [esTpmGuard]
+        path: 'editar-reporte', component: EditarReporteComponent, canActivate: [esSprvGuard]
 
     },
     {

@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosCerrarSesion } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { Usuario } from '../../../../Modelo/Usuario';
+import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
+import { Reporte } from '../../../../Modelo/Reporte';
 
 @Component({
   selector: 'menu-supervisor',
@@ -17,12 +19,16 @@ import { Usuario } from '../../../../Modelo/Usuario';
   styleUrls: ['./menu-supervisor.component.css']
 })
 export class MenuSupervisorComponent implements OnInit {
- 
-  
+
+
   ngOnInit(): void {
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
+      this.reportesTodos = respuesta;
+      this.obtenerReportesPendientes();
+      console.log(this.reportesPendientes);
+    });
 
-    
   }
 
 
@@ -31,11 +37,9 @@ export class MenuSupervisorComponent implements OnInit {
   private modalAbierto: boolean = false;
   private cuadroDialogo = inject(MatDialog);
   public usuarioIngresado !: Usuario;
-
-
-  irAEditar(id: string) {    
-    this.router.navigate(['/editar-reporte', id]);
-  }
+  public reportesTodos: Reporte[] = [];
+  public reportesPendientes: Reporte[] = [];
+  private reporteService = inject(ReporteService);
 
   //Reportes quemados:
   reportes = [
@@ -60,6 +64,16 @@ export class MenuSupervisorComponent implements OnInit {
 
   }
 
+  redirigirEdicionReporte(): void {
+    this.router.navigate(['/editar-reporte']);
+  }
 
+  obtenerReportesPendientes(): void {
+    this.reportesPendientes.forEach(reporte => {
+      if (reporte.estado === 2) {
+        this.reportesPendientes.push(reporte);
+      }
+    });
+  }
 
 }

@@ -18,7 +18,7 @@
             <div class="card-body">
 
               <!-- Iterar sobre reportes para observar el editar-reporte -->
-              <div *ngFor="let reporte of reportes" class="reporte-item mb-3" (click)="irAEditar(reporte.id)">
+              <div *ngFor="let reporte of reportes" class="reporte-item mb-3" (click)="redirigirEdicionReporte()">
                 <p><strong>{{ reporte.nombre }}</strong></p>
                 <p class="text-muted">ID Reporte: {{ reporte.id }}</p>
               </div>
