@@ -226,5 +226,25 @@ export class FormulariosService {
     return '';
   }
 
+  obtenerErroresCausa(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['causas'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'La causa es requerida';
+    }
+
+    return '';
+  }
+
+  obtenerErroresFechaHora(contenedorFormulario: FormGroup): string {
+    const campo = contenedorFormulario.controls['fechaHora'];
+
+    if (campo.hasError('required') && campo.touched) {
+      return 'La fecha y hora son requeridas';
+    }
+
+    return '';
+  }
+
 
 }
