@@ -22,7 +22,7 @@ export interface DatosGeneralesInforme {
     id: number;
     evento: string;
     fecha: Date | string;
-    hora: HoraInforme;
+    hora: string;
     subestacion: string;
     lt: string;
     equipo: string;
