@@ -72,7 +72,3 @@ export interface CorrientesDeFallaInforme {
     acumuladaS: string;
     acumuladaT: string;
 }
-
-export interface HoraInforme {
-    ticks : number;
-}
