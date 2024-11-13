@@ -29,14 +29,6 @@ export class MenuSupervisorComponent implements OnInit {
       this.reportesTodos = respuesta;
       this.obtenerReportesPendientes();
       this.obtenerReportesPasados();
-
-      this.reportesPasados.forEach( reportePasado => {
-
-        this.reporteService.obtenerPDFPorReporte(reportePasado.id).subscribe(respuesta => {
-          reportePasado.pdf = respuesta;
-        });
-
-      });
     });
 
 
@@ -94,9 +86,16 @@ export class MenuSupervisorComponent implements OnInit {
   descargarPDF(reporteId: number): void {
     this.reporteService.obtenerPDFPorReporte(reporteId).subscribe(
       respuesta => {
+        // Verifica si el tipo de contenido es 'application/pdf'
+        if (respuesta.type !== 'application/pdf') {
+          console.error('El servidor devolvió un contenido no válido:', respuesta);
+          alert('Ocurrió un error al descargar el PDF. Por favor, verifica que el archivo esté disponible.');
+          return;
+        }
+  
         const blob = new Blob([respuesta], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
-
+  
         const a = document.createElement('a');
         a.href = url;
         a.download = `reporte_${reporteId}.pdf`; 

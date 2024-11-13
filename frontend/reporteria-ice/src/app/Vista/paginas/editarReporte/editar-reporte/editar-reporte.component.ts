@@ -59,7 +59,7 @@ export class EditarReporteComponent implements OnInit {
         const bytes = new Uint8Array(arrayBuffer);
         this.arregloBytesImagenSeleccionada = Array.from(bytes);
 
-        
+
         const binaryString = String.fromCharCode(...bytes);
         const base64String = btoa(binaryString);
         this.contenedorFormulario.controls['mapaDescargas'].setValue(base64String);
@@ -86,19 +86,20 @@ export class EditarReporteComponent implements OnInit {
     };
 
     this.reporteService.editarReporte(reporteAEnviar).subscribe(respuesta => {
-      console.log("ENTRA")
     });
   }
 
 
   abrirCuadroDialogoConfirmacionGuardado(): void {
 
+    const datoSalida = datosConfirmacionIrreversible;
+    datoSalida.tipo = 'formularioInforme';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datosConfirmacionIrreversible
+        data: datoSalida
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
