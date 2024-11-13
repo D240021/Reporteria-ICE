@@ -125,12 +125,13 @@ export class EditarReporteTPMComponent implements OnInit {
       id: datosGeneralesId,
       evento: this.contenedorFormulario.value.evento || '',
       fecha: fechaISO.toISOString(),
-      hora: this.contenedorFormulario.value.hora + ':00' || '',
+      hora: this.contenedorFormulario.value.hora + ':00' || '00:00:00',
       subestacion: this.contenedorFormulario.value.subestacion || '',
       lt: this.contenedorFormulario.value.lt || '',
       equipo: this.contenedorFormulario.value.equipo || ''
     }
 
+    datosGeneralesObjeto.hora === ':00' ? datosGeneralesObjeto.hora = '00:00:00' : undefined;
     const teleproteccionObjeto: TeleproteccionInforme = {
       id: teleproteccionId,
       tX_TEL: this.contenedorFormulario.value.txTel || '',
@@ -192,6 +193,7 @@ export class EditarReporteTPMComponent implements OnInit {
   guardarCambios(): void {
 
     const informeAEditar: Informe = this.construirObjetoInforme();
+    console.log(informeAEditar);
     this.informeService.editarInforme(informeAEditar).subscribe(respuesta => {
     });
 
