@@ -54,8 +54,7 @@
               <div class="reporte-item mb-3">
                 <p><strong>{{reportePasado.usuarioSupervisorId}}</strong></p>
                 <p class="text-muted">ID Reporte: {{reportePasado.id}}</p>
-                
-                <mat-icon>download</mat-icon>
+                <mat-icon (click)="descargarPDF(reportePasado.id)">download</mat-icon>
               </div>
               }
               }
