@@ -38,7 +38,11 @@ export class DialogoConfirmacionComponent {
       this.router.navigate(['/menu-tpm']);
     } else if(this.datosComponente.tipo === 'formularioTLT') {
       this.router.navigate(['/menu-tlt']);
+    } else if(this.datosComponente.tipo === 'formularioSprv') {
+      this.router.navigate(['/menu-supervisor']);
     }
+
+    
     this.cerrarCuadroDialogo('Confirmacion');
     return;
   }

@@ -7,9 +7,12 @@
     <section>
       <label>MAPA DE DESCARGAS</label>
       <input type="file" id="mapaDescargas" class="form-control"
-        (change)="convertirImagenArregloBytes($event)">
+        (change)="convertirImagenArregloBytes($event)"
+        accept="image/*">
       <label for="mapaDescargas">Subir archivo</label>
     </section>
+    <span class="errores">{{mensajeErrorImagen}}</span>
+
 
 
     <section>
@@ -27,7 +30,7 @@
           (click)="accionesFormulario.limpiarFormulario(contenedorFormulario)">
           LIMPIAR
         </button>
-        <button class="btn" type="submit" [disabled]="contenedorFormulario.invalid"
+        <button class="btn" type="submit" [disabled]="contenedorFormulario.invalid || mensajeErrorImagen !== ''"
         (click)="abrirCuadroDialogoConfirmacionGuardado()">
           ACTUALIZAR
         </button>

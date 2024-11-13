@@ -12,8 +12,9 @@ import { Informe } from '../../../../Modelo/Informe';
 import { MatCardModule } from '@angular/material/card';
 import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'menu-tpm',
@@ -25,7 +26,16 @@ import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
 export class MenuTpmComponent implements OnInit {
 
   ngOnInit(): void {
-    this.cargarInformacionGeneral()
+    this.cargarInformacionGeneral();
+
+    this.router.events //Verifica cuando el usuario se redirige a esta página
+    .pipe(
+      filter(event => event instanceof NavigationEnd),
+      filter((event: NavigationEnd) => event.urlAfterRedirects === '/crear-reporte') 
+    )
+    .subscribe(() => {
+      this.cargarInformacionGeneral();
+    });
   }
 
 
@@ -38,6 +48,7 @@ export class MenuTpmComponent implements OnInit {
   private router = inject(Router);
 
   cargarInformacionGeneral(): void {
+    console.log("ENTRA AL METODO");
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
     const subestacionId = this.usuarioIngresado.subestacionId || 0;
 
