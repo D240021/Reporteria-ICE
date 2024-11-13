@@ -36,6 +36,7 @@ export class EditarReporteComponent implements OnInit {
     });
   }
 
+  public mensajeErrorImagen: string = '';
   private formBuilder = inject(FormBuilder);
   private reporteService = inject(ReporteService);
   public accionesFormulario = inject(FormulariosService);
@@ -53,6 +54,21 @@ export class EditarReporteComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
+
+      if (input.files.length > 1) {
+        this.mensajeErrorImagen = 'Solo se permite subir un único archivo.';
+        return; 
+      }
+
+      const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+      if (!formatosPermitidos.includes(file.type)) {
+        this.mensajeErrorImagen = 'El archivo debe ser una imagen válida (png, jpeg, jpg, gif).';
+        return; 
+      }
+
+      this.mensajeErrorImagen = '';
+
       const reader = new FileReader();
       reader.onload = () => {
         const arrayBuffer = reader.result as ArrayBuffer;
@@ -93,7 +109,7 @@ export class EditarReporteComponent implements OnInit {
   abrirCuadroDialogoConfirmacionGuardado(): void {
 
     const datoSalida = datosConfirmacionIrreversible;
-    datoSalida.tipo = 'formularioInforme';
+    datoSalida.tipo = 'formularioSprv';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
@@ -114,7 +130,7 @@ export class EditarReporteComponent implements OnInit {
   abrirCuadroDialogoConfirmacionSalida(): void {
 
     const datoSalida = datosConfirmacionSalidaFormulario;
-    datoSalida.tipo = 'formularioInforme';
+    datoSalida.tipo = 'formularioSprv';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {

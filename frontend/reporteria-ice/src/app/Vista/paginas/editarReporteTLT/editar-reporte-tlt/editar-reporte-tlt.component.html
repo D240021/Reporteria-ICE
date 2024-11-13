@@ -12,10 +12,12 @@
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">EVIDENCIA (FOTO)</label>
           <div class="col-md-8">
-            <input type="file" multiple placeholder="Subir archivos"
-            (change)="convertirImagenArregloBytes($event)">
+            <input type="file" multiple placeholder="Subir archivos" (change)="convertirImagenArregloBytes($event)"
+              accept="image/*">
           </div>
         </section>
+        <span class="errores">{{mensajeErrorImagen}}</span>
+
 
         <section class="row mb-3 align-items-center">
           <label class="col-md-4">CAUSAS</label>
@@ -58,7 +60,8 @@
               [disabled]="contenedorFormulario.pristine">
               LIMPIAR
             </button>
-            <button class="btn btn-actualizar" type="submit" [disabled]="contenedorFormulario.invalid" (click)="abrirCuadroDialogoConfirmacionGuardado()">
+            <button class="btn btn-actualizar" type="submit" [disabled]="contenedorFormulario.invalid || mensajeErrorImagen !== ''"
+              (click)="abrirCuadroDialogoConfirmacionGuardado()">
               GUARDAR
             </button>
           </div>
