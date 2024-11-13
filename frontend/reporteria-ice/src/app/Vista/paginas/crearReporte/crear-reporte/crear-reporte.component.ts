@@ -102,6 +102,7 @@ export class CrearReporteComponent implements OnInit {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Reporte creado exitosamente';
       this.exitoOperacion = true;
+      this.reporteCreado.emit();
     });
 
   }
