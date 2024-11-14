@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CorrientesDeFallaInforme, DatosDeLineaInforme, DatosGeneralesInforme, DistanciaFallaInforme, Informe, TeleproteccionInforme, TiemposDeDisparoInforme } from '../../../../Modelo/Informe';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,10 +12,10 @@ import { Reporte } from '../../../../Modelo/Reporte';
 import { InformeService } from '../../../../Controlador/Informe/informe.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
-import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { DatosConfirmacion, datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
 
 @Component({
-  selector: 'app-editar-reporte-tpm',
+  selector: 'editar-reporte-tpm',
   standalone: true,
   imports: [AnimacionCargaComponent, ReactiveFormsModule],
   templateUrl: './editar-reporte-tpm.component.html',
@@ -23,12 +23,18 @@ import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from
 })
 export class EditarReporteTPMComponent implements OnInit {
 
+  @Input()
   public informeATrabajar !: Informe;
-  public subestacionAsociada !: Subestacion;
+
+  @Output()
+  private cerrarComponente = new EventEmitter<void>();
+
+  public subestacionAsociada !: Subestacion | null;
   public reporteAsociado !: Reporte;
 
+
+
   ngOnInit(): void {
-    this.informeATrabajar = history.state.informe;
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
 
     this.subestacionAsociadaId = this.usuarioIngresado.subestacionId || 0;
@@ -193,8 +199,8 @@ export class EditarReporteTPMComponent implements OnInit {
   guardarCambios(): void {
 
     const informeAEditar: Informe = this.construirObjetoInforme();
-    console.log(informeAEditar);
     this.informeService.editarInforme(informeAEditar).subscribe(respuesta => {
+      this.cerrarComponente.emit();
     });
 
   }
@@ -221,17 +227,17 @@ export class EditarReporteTPMComponent implements OnInit {
 
   abrirCuadroDialogoConfirmacionSalida(): void {
 
-    const datoSalida = datosConfirmacionSalidaFormulario;
-    datoSalida.tipo = 'formularioInforme';
+    const datosSalida : DatosConfirmacion = datosConfirmacionSalidaFormulario;
+    datosSalida.tipo = ''
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datoSalida
+        data: datosSalida
       });
       dialogRef.afterClosed().subscribe(result => {
-
+        this.cerrarComponente.emit();
       });
     }
 
@@ -241,7 +247,7 @@ export class EditarReporteTPMComponent implements OnInit {
     if (this.formularioModificado) {
       this.abrirCuadroDialogoConfirmacionSalida();
     } else {
-      this.router.navigate(['/menu-tpm']);
+      this.cerrarComponente.emit();
     }
   }
 
