@@ -12,6 +12,8 @@ import { ReporteService } from '../../../../Controlador/Reporte/reporte.service'
 import { Reporte } from '../../../../Modelo/Reporte';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
 import { MatIcon } from '@angular/material/icon';
+import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
+import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
 
 @Component({
   selector: 'menu-supervisor',
@@ -27,8 +29,20 @@ export class MenuSupervisorComponent implements OnInit {
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
     this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
       this.reportesTodos = respuesta;
+      this.reportesTodos.forEach(reporte => {
+        if (reporte.fechaHora) {
+          reporte.fechaFormateada = formatearFechaHora(reporte.fechaHora.toString());
+        }
+        this.usuarioService.obtenerUsuarioPorId(reporte.tecnicoLineaId).subscribe(respuesta => {
+          const usuarioTecnicoLinea = respuesta as Usuario;
+          reporte.nombreTecnicoLinea = usuarioTecnicoLinea.nombre + ' ' + usuarioTecnicoLinea.apellido;
+        });
+
+      });
+
       this.obtenerReportesPendientes();
       this.obtenerReportesPasados();
+
     });
 
 
@@ -42,9 +56,10 @@ export class MenuSupervisorComponent implements OnInit {
   public usuarioIngresado !: Usuario;
   public reportesTodos: Reporte[] = [];
   public reportesPendientes: Reporte[] = [];
-  private reporteService = inject(ReporteService);
+  public reporteService = inject(ReporteService);
   public reportesPasados: Reporte[] = [];
-  
+  private usuarioService = inject(UsuarioService);
+
 
   abrirCuadroDialogo(): void {
 
@@ -63,7 +78,7 @@ export class MenuSupervisorComponent implements OnInit {
 
   }
 
-  redirigirEdicionReporte(reporte : Reporte): void {
+  redirigirEdicionReporte(reporte: Reporte): void {
     this.router.navigate(['/editar-reporte'], { state: { reporte: reporte } });
   }
 
@@ -83,22 +98,10 @@ export class MenuSupervisorComponent implements OnInit {
     });
   }
 
-  descargarPDF(reporteId: number): void {
-    this.reporteService.obtenerPDFPorReporte(reporteId).subscribe(
-      respuesta => {
-        console.log(respuesta);
-        const blob = new Blob([respuesta], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `reporte_${reporteId}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      },
-      error => {
-        console.error('Error al descargar el PDF:', error);
-      }
-    );
+
+  abrirConsultarReporte(reportes: Reporte[], tipo: string): void {
+
+    this.router.navigate(['/consultar-reporte'], { state: { reportes : reportes, tipo: tipo } });
   }
 
 }

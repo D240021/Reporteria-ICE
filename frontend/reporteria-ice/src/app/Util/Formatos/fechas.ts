@@ -14,3 +14,16 @@ export function obtenerFechaHoraLocalISO(): string {
     const adjustedDate = new Date(now.getTime() - offset * 60 * 1000);
     return adjustedDate.toISOString().slice(0, -1);
 }
+
+
+export function convertirStringAFormatoISO(fechaString: string): string {
+    const [fecha, hora] = fechaString.split(' ');
+
+    const [dia, mes, anio] = fecha.split('/').map(part => parseInt(part, 10));
+
+    const [horas, minutos, segundos] = hora.split(':').map(part => parseInt(part, 10));
+
+    const fechaISO = new Date(anio, mes - 1, dia, horas, minutos, segundos);
+
+    return fechaISO.toISOString();
+}

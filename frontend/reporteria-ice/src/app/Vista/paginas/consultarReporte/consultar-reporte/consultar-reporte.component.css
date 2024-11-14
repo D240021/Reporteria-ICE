@@ -60,3 +60,7 @@ h2 {
   color: white;
   margin-top: 25px
 }
+
+mat-icon {
+  cursor: pointer;
+}

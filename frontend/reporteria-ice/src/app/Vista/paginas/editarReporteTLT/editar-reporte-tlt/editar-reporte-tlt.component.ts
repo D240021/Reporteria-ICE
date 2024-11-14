@@ -111,7 +111,6 @@ export class EditarReporteTLTComponent implements OnInit {
       tecnicoLineaId: this.reporteATrabajar.tecnicoLineaId,
       estado: this.reporteATrabajar.estado
     };
-    console.log(reporteAEnviar);
     this.reporteService.editarReporte(reporteAEnviar).subscribe(repuesta => {
     })
   }
