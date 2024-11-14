@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CrearReporteComponent } from "../../crearReporte/crear-reporte/crear-reporte.component";
 import { Usuario } from '../../../../Modelo/Usuario';
@@ -28,9 +28,7 @@ import { CommonModule } from '@angular/common';
 export class MenuTpmComponent implements OnInit {
 
   ngOnInit(): void {
-    this.informes = [];
     this.cargarInformacionGeneral();
-
   }
 
 
@@ -42,13 +40,11 @@ export class MenuTpmComponent implements OnInit {
   public informes: any[] = [];
   public mostrarEditar = false;
   public informeSeleccionado!: Informe;
-  private detectorCambios =  inject(ChangeDetectorRef)
-
 
   cargarInformacionGeneral(): void {
+    this.informes = [];
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
     const subestacionId = this.usuarioIngresado.subestacionId || 0;
-  
     this.informeService.obtenerInformesPendientesPorSubestacion(subestacionId).subscribe(informes => {
       this.informes = [...informes];
       this.informes.forEach(informe => {
@@ -71,7 +67,7 @@ export class MenuTpmComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
-        if(result === 'Confirmacion'){
+        if (result === 'Confirmacion') {
           this.cargarInformacionGeneral();
         }
       });
@@ -87,7 +83,6 @@ export class MenuTpmComponent implements OnInit {
   cerrarEditar(): void {
     this.cargarInformacionGeneral();
     this.mostrarEditar = false;
-    this.detectorCambios.detectChanges(); 
   }
 
 

@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { EventEmitter, inject, Injectable } from '@angular/core';
 import { ambiente } from '../../Ambientes/ambienteDesarrollo';
 import { Reporte } from '../../Modelo/Reporte';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ export class ReporteService {
 
   private http = inject(HttpClient);
   private urlBase = ambiente.apiURL + '/Reporte';
+  public reporteGuardado = new EventEmitter<void>();
 
 
   public crearReporte(reporte: Reporte, subestacionesId: number[], lineaTransmisionId: number): Observable<any> {
@@ -35,11 +36,11 @@ export class ReporteService {
     return this.http.put(`${this.urlBase}/${reporte.id}`, reporte);
   }
 
-  obtenerPDFPorReporte(reporteId: number) {
+  public obtenerPDFPorReporte(reporteId: number) {
     return this.http.get(`${this.urlBase}/${reporteId}/pdf`, { responseType: 'blob' });
   }
 
-  descargarPDF(reporteId: number): void {
+  public descargarPDF(reporteId: number): void {
     this.obtenerPDFPorReporte(reporteId).subscribe(
       respuesta => {
         console.log(respuesta);
@@ -55,5 +56,9 @@ export class ReporteService {
         console.error('Error al descargar el PDF:', error);
       }
     );
+  }
+
+  public emitirReporteGuardado(): void {
+    this.reporteGuardado.emit();
   }
 }

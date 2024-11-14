@@ -16,15 +16,16 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
   templateUrl: './menu-tlt.component.html',
   styleUrl: './menu-tlt.component.css'
 })
-export class MenuTltComponent implements OnInit{
+export class MenuTltComponent implements OnInit {
+
+  constructor() {
+    this.reporteService.reporteGuardado.subscribe(() => {
+      this.cargarInformacionGeneral();
+    });
+  }
 
   ngOnInit(): void {
-    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
-    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
-      this.reportesTodos = respuesta;
-      this.obtenerReportesPendientes();
-    });
-
+    this.cargarInformacionGeneral();
   }
 
 
@@ -55,15 +56,25 @@ export class MenuTltComponent implements OnInit{
 
   }
 
-  redirigirEdicionReporte(reporte : Reporte): void {
+  redirigirEdicionReporte(reporte: Reporte): void {
     this.router.navigate(['/editar-reporte-tlt'], { state: { reporte: reporte } });
   }
 
   obtenerReportesPendientes(): void {
+    this.reportesPendientes = [];
     this.reportesTodos.forEach(reporte => {
       if (reporte.estado === 3 && this.usuarioIngresado.id === reporte.tecnicoLineaId) {
         this.reportesPendientes.push(reporte);
       }
+    });
+  }
+
+  cargarInformacionGeneral(): void {
+    this.reportesTodos = [];
+    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
+      this.reportesTodos = respuesta;
+      this.obtenerReportesPendientes();
     });
   }
 }

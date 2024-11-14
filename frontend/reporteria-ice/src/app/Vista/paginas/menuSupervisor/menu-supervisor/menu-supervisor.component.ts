@@ -24,28 +24,14 @@ import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
 })
 export class MenuSupervisorComponent implements OnInit {
 
+  constructor(){
+    this.reporteService.reporteGuardado.subscribe(() => {
+      this.obtenerInformacionGeneral();
+    });
+  }
 
   ngOnInit(): void {
-    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
-    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
-      this.reportesTodos = respuesta;
-      this.reportesTodos.forEach(reporte => {
-        if (reporte.fechaHora) {
-          reporte.fechaFormateada = formatearFechaHora(reporte.fechaHora.toString());
-        }
-        this.usuarioService.obtenerUsuarioPorId(reporte.tecnicoLineaId).subscribe(respuesta => {
-          const usuarioTecnicoLinea = respuesta as Usuario;
-          reporte.nombreTecnicoLinea = usuarioTecnicoLinea.nombre + ' ' + usuarioTecnicoLinea.apellido;
-        });
-
-      });
-
-      this.obtenerReportesPendientes();
-      this.obtenerReportesPasados();
-
-    });
-
-
+    this.obtenerInformacionGeneral();
   }
 
 
@@ -62,7 +48,6 @@ export class MenuSupervisorComponent implements OnInit {
 
 
   abrirCuadroDialogo(): void {
-
 
     if (!this.modalAbierto) {
       this.modalAbierto = true;
@@ -83,6 +68,7 @@ export class MenuSupervisorComponent implements OnInit {
   }
 
   obtenerReportesPendientes(): void {
+    this.reportesPendientes = [];
     this.reportesTodos.forEach(reporte => {
       if (reporte.estado === 2 && this.usuarioIngresado.id === reporte.usuarioSupervisorId) {
         this.reportesPendientes.push(reporte);
@@ -91,6 +77,7 @@ export class MenuSupervisorComponent implements OnInit {
   }
 
   obtenerReportesPasados(): void {
+    this.reportesPasados = [];
     this.reportesTodos.forEach(reporte => {
       if (reporte.estado === 4 && this.usuarioIngresado.id === reporte.usuarioSupervisorId) {
         this.reportesPasados.push(reporte);
@@ -101,7 +88,29 @@ export class MenuSupervisorComponent implements OnInit {
 
   abrirConsultarReporte(reportes: Reporte[], tipo: string): void {
 
-    this.router.navigate(['/consultar-reporte'], { state: { reportes : reportes, tipo: tipo } });
+    this.router.navigate(['/consultar-reporte'], { state: { reportes: reportes, tipo: tipo } });
+  }
+
+  obtenerInformacionGeneral(): void {
+    this.reportesTodos = [];
+    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
+      this.reportesTodos = respuesta;
+      this.reportesTodos.forEach(reporte => {
+        if (reporte.fechaHora) {
+          reporte.fechaFormateada = formatearFechaHora(reporte.fechaHora.toString());
+        }
+        this.usuarioService.obtenerUsuarioPorId(reporte.tecnicoLineaId).subscribe(respuesta => {
+          const usuarioTecnicoLinea = respuesta as Usuario;
+          reporte.nombreTecnicoLinea = usuarioTecnicoLinea.nombre + ' ' + usuarioTecnicoLinea.apellido;
+        });
+
+      });
+
+      this.obtenerReportesPendientes();
+      this.obtenerReportesPasados();
+
+    });
   }
 
 }
