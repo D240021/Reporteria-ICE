@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { InicioSesionComponent } from './Vista/paginas/inicioSesion/inicio-sesion/inicio-sesion.component';
 import { MenuAdministradorComponent } from './Vista/paginas/menuAdministrador/menu-administrador/menu-administrador.component';
-import { AgregarTecnicoComponent } from './Vista/paginas/agregarTecnico/agregar-tecnico/agregar-tecnico.component';
-import { AgregarSupervisorComponent } from './Vista/paginas/agregarSupervisor/agregar-supervisor/agregar-supervisor.component';
 import { AgregarUnidadRegionalComponent } from './Vista/paginas/agregarUnidadRegional/agregar-unidad-regional/agregar-unidad-regional.component';
 import { AgregarSubestacionComponent } from './Vista/paginas/agregarSubestacion/agregar-subestacion/agregar-subestacion.component';
 import { AgregarLineaTransmisionComponent } from './Vista/paginas/agregarLineaTransmision/agregar-linea-transmision/agregar-linea-transmision.component';
@@ -40,12 +38,6 @@ export const routes: Routes = [
         path: 'menu-administrador', component: MenuAdministradorComponent, canActivate: [esAdminGuard]
     },
     {
-        path: 'agregar-tecnico', component: AgregarTecnicoComponent
-    },
-    {
-        path: 'agregar-supervisor', component: AgregarSupervisorComponent
-    },
-    {
         path: 'agregar-unidad-regional', component: AgregarUnidadRegionalComponent, canActivate: [esAdminGuard]
     },
     {
@@ -61,7 +53,7 @@ export const routes: Routes = [
         path: 'consultar-reporte', component: ConsultarReporteComponent
     },
     {
-        path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent
+        path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
