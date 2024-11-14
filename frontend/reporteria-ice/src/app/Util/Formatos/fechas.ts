@@ -7,3 +7,10 @@ export function formatearFechaHora(fechaHora: string): string {
     const horaFormateada = date.toLocaleTimeString('es-ES', opcionesHora);
     return `${fechaFormateada} ${horaFormateada}`;
 }
+
+export function obtenerFechaHoraLocalISO(): string {
+    const now = new Date();
+    const offset = now.getTimezoneOffset();
+    const adjustedDate = new Date(now.getTime() - offset * 60 * 1000);
+    return adjustedDate.toISOString().slice(0, -1);
+}
