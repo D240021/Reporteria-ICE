@@ -13,7 +13,10 @@ export interface Reporte {
     usuarioSupervisorId: number,
     tecnicoLineaId: number,
     estado: number,
-    pdf?: any
+    pdf?: any,
+    nombreTecnicoLinea?: string,
+    nombreSupervisor?: string,
+    fechaFormateada?: string
 }
 
 

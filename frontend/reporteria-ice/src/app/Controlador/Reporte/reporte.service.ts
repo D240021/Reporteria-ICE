@@ -38,4 +38,22 @@ export class ReporteService {
   obtenerPDFPorReporte(reporteId: number) {
     return this.http.get(`${this.urlBase}/${reporteId}/pdf`, { responseType: 'blob' });
   }
+
+  descargarPDF(reporteId: number): void {
+    this.obtenerPDFPorReporte(reporteId).subscribe(
+      respuesta => {
+        console.log(respuesta);
+        const blob = new Blob([respuesta], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reporte_${reporteId}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error al descargar el PDF:', error);
+      }
+    );
+  }
 }

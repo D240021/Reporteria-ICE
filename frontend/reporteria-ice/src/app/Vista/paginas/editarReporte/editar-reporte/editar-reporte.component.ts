@@ -8,6 +8,7 @@ import { Reporte } from '../../../../Modelo/Reporte';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { convertirStringAFormatoISO, formatearFechaHora } from '../../../../Util/Formatos/fechas';
 
 @Component({
   selector: 'editar-reporte',
@@ -57,14 +58,14 @@ export class EditarReporteComponent implements OnInit {
 
       if (input.files.length > 1) {
         this.mensajeErrorImagen = 'Solo se permite subir un único archivo.';
-        return; 
+        return;
       }
 
       const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 
       if (!formatosPermitidos.includes(file.type)) {
         this.mensajeErrorImagen = 'El archivo debe ser una imagen válida (png, jpeg, jpg, gif).';
-        return; 
+        return;
       }
 
       this.mensajeErrorImagen = '';
@@ -84,6 +85,8 @@ export class EditarReporteComponent implements OnInit {
     }
   }
   guardarCambios(): void {
+
+
     const reporteAEnviar: Reporte = {
       id: this.reporteATrabajar.id,
       mapaDeDescargas: this.contenedorFormulario.value.mapaDescargas,
