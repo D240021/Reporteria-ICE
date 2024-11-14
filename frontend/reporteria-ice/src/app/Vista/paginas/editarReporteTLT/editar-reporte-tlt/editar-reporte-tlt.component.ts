@@ -112,6 +112,7 @@ export class EditarReporteTLTComponent implements OnInit {
       estado: this.reporteATrabajar.estado
     };
     this.reporteService.editarReporte(reporteAEnviar).subscribe(repuesta => {
+      this.reporteService.emitirReporteGuardado();
     })
   }
 

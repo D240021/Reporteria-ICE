@@ -105,6 +105,7 @@ export class EditarReporteComponent implements OnInit {
     };
 
     this.reporteService.editarReporte(reporteAEnviar).subscribe(respuesta => {
+      this.reporteService.emitirReporteGuardado();
     });
   }
 
