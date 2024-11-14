@@ -18,28 +18,24 @@ export class ReporteService {
   public crearReporte(reporte: Reporte, subestacionesId: number[], lineaTransmisionId: number): Observable<any> {
     let parametros = new HttpParams()
       .set('lineaTransmisionId', lineaTransmisionId.toString());
-  
+
 
     subestacionesId.forEach(id => {
       parametros = parametros.append('subestacionIds', id.toString());
     });
-  
+
     return this.http.post(this.urlBase, reporte, { params: parametros });
   }
 
-  public obtenerTodosReportes() : Observable<Reporte[]> {
+  public obtenerTodosReportes(): Observable<Reporte[]> {
     return this.http.get<Reporte[]>(this.urlBase);
   }
 
-  public editarReporte(reporte : Reporte){
+  public editarReporte(reporte: Reporte) {
     return this.http.put(`${this.urlBase}/${reporte.id}`, reporte);
   }
 
-  // public obtenerPDFPorReporte(idReporte : number) {
-  //   return this.http.get(`${this.urlBase}/${idReporte}/pdf`);
-  // }
-
   obtenerPDFPorReporte(reporteId: number) {
-    return this.http.get(`tu-api-endpoint/${reporteId}`, { responseType: 'blob' });
+    return this.http.get(`${this.urlBase}/${reporteId}/pdf`, { responseType: 'blob' });
   }
 }
