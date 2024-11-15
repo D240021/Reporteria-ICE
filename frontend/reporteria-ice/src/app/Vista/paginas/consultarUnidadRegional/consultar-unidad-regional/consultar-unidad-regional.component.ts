@@ -15,7 +15,7 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
 @Component({
   selector: 'consultar-unidad-regional',
   standalone: true,
-  imports: [MatTableModule, BuscadorComponent, MatInputModule, RouterLink,
+  imports: [MatTableModule, MatInputModule, RouterLink,
     ReactiveFormsModule, MatIconModule, MatButtonModule, AnimacionCargaComponent],
   templateUrl: './consultar-unidad-regional.component.html',
   styleUrl: './consultar-unidad-regional.component.css'
