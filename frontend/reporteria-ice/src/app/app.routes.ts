@@ -26,6 +26,7 @@ import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegio
 import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
 import { MenuTpmComponent } from './Vista/paginas/menuTpm/menu-tpm/menu-tpm.component';
 import { MenuTltComponent } from './Vista/paginas/menuTlt/menu-tlt/menu-tlt.component';
+import { NotFoundPageComponent } from './Vista/paginas/notFoundPage/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
     {
@@ -100,6 +101,9 @@ export const routes: Routes = [
     },
     {
         path: 'menu-tlt', component: MenuTltComponent, canActivate: [esTltGuard]
+    },
+    {
+        path: '**', component: NotFoundPageComponent
     }
 
 ];

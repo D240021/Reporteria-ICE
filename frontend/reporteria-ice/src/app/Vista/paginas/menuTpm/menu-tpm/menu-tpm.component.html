@@ -1,7 +1,7 @@
 <div *ngIf="!mostrarEditar; else editarInformeTemplate">
     <!-- Contenido principal del MenuTpmComponent -->
     <header>
-      <h1>BIENVENID&#64;, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
+      <h1 class="text-center">BIENVENIDO, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
       <button mat-flat-button (click)="abrirCuadroDialogo()">SALIR</button>
     </header>
   
@@ -10,15 +10,12 @@
         <crear-reporte (reporteCreado)="cargarInformacionGeneral()"></crear-reporte>
       </mat-tab>
       <mat-tab label="Editar reporte">
-        <ng-container *ngIf="informes && informes.length > 0; else noInformes">
-          <mat-card *ngFor="let informe of informes" appearance="outlined">
+        <ng-container *ngIf="informes && informes.length > 0; else noInformes" id="informes">
+          <mat-card *ngFor="let informe of informes" appearance="outlined" (click)="abrirEditarInforme(informe)">
             <mat-card-header>
               <mat-card-title>
                 Informe de equipo
                 {{ informe.tipo === 1 ? 'de Impedancia' : 'Diferencial' }}
-                <button (click)="abrirEditarInforme(informe)">
-                  <mat-icon aria-hidden="false" aria-label="Editar informe" fontIcon="create"></mat-icon>
-                </button>
               </mat-card-title>
               <mat-card-subtitle>
                 <ng-container *ngIf="informe.reporteAsociado; else cargando">
@@ -31,7 +28,7 @@
             </mat-card-header>
           </mat-card>
         </ng-container>
-        <ng-template #noInformes>
+        <ng-template #noInformes class="sinInformes">
           No existen informes disponibles
         </ng-template>
       </mat-tab>
