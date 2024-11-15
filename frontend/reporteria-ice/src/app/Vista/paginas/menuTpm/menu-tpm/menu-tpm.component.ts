@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
 import { EditarReporteTPMComponent } from '../../editarReporteTPM/editar-reporte-tpm/editar-reporte-tpm.component';
 import { CommonModule } from '@angular/common';
+import { DialogoInformativoComponent } from '../../../componentes/dialogoInformativo/dialogo-informativo/dialogo-informativo.component';
+import { datosInforme } from '../../../../Modelo/DatosDialogoInformativo';
 
 @Component({
   selector: 'menu-tpm',
@@ -40,6 +42,8 @@ export class MenuTpmComponent implements OnInit {
   public informes: any[] = [];
   public mostrarEditar = false;
   public informeSeleccionado!: Informe;
+  private dialogo = inject(MatDialog);
+  private dialogoRef: any;
 
   cargarInformacionGeneral(): void {
     this.informes = [];
@@ -85,6 +89,21 @@ export class MenuTpmComponent implements OnInit {
     this.mostrarEditar = false;
   }
 
+
+  abrirDialogoInformativo() {
+    this.dialogoRef = this.dialogo.open(DialogoInformativoComponent, {
+      position: { top: '10%', left: '10%' },
+      data : datosInforme,
+      disableClose: true,
+      hasBackdrop: false,
+    });
+  }
+
+  cerrarDialogoInformativo() {
+    if (this.dialogoRef) {
+      this.dialogoRef.close();
+    }
+  }
 
 
 }
