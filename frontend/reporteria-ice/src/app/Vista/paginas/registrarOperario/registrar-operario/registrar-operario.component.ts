@@ -14,12 +14,13 @@ import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialo
 import { CommonModule } from '@angular/common';
 import { SubestacionService } from '../../../../Controlador/Subestacion/subestacion.service';
 import { Subestacion } from '../../../../Modelo/subestacion';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'registrar-operario',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatIconModule],
   templateUrl: './registrar-operario.component.html',
   styleUrl: './registrar-operario.component.css'
 })
@@ -76,6 +77,7 @@ export class RegistrarOperarioComponent implements OnInit {
   private encriptacion = inject(AESService);
   private cuadroDialogo = inject(MatDialog);
   private router = inject(Router);
+  public mostrarMensajeInformativo : boolean = false;
 
   public contenedorFormulario = this.formBuilder.group({
     id: [0],
@@ -83,7 +85,7 @@ export class RegistrarOperarioComponent implements OnInit {
     nombreUsuario: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]],
     correo: ['', [Validators.required, Validators.email, Validators.maxLength(50), this.validaciones.esCorreoValido()]],
     nombre: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
-    apellido: ['', [Validators.required, Validators.minLength(5) ,Validators.maxLength(70), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
+    apellido: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(70), this.validaciones.esSoloLetras(), this.validaciones.esCaracterEspecial()]],
     identificador: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(3)]],
     rol: ['', [Validators.required]],
     subestacionId: ['', [Validators.required]],
@@ -143,6 +145,15 @@ export class RegistrarOperarioComponent implements OnInit {
     } else {
       this.router.navigate(['/menu-administrador']);
     }
+  }
+
+  habilitarMensajeInformativo() : void{
+    this.mostrarMensajeInformativo = true;
+  }
+
+  ocultarMensajeInformativo() : void{
+  
+    this.mostrarMensajeInformativo = false;
   }
 
 

@@ -102,3 +102,37 @@ mat-card-subtitle {
         align-items: flex-start;
     }
 }
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
+
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.contenedor-form {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.hover-target {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+}
