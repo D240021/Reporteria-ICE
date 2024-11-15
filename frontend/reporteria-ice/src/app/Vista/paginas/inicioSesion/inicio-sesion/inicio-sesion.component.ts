@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +11,9 @@ import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service'
 import { SeguridadService } from '../../../../Seguridad/Seguridad/seguridad.service';
 import { CommonModule } from '@angular/common';
 import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
+import { datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'inicio-sesion',
@@ -20,7 +23,7 @@ import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/ani
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.css'
 })
-export class InicioSesionComponent {
+export class InicioSesionComponent{
 
   public habilitarCarga: boolean = false;
   private router = inject(Router);

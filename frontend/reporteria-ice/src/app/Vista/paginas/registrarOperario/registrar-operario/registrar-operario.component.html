@@ -34,10 +34,18 @@
                 <section class="row mb-3 align-items-center">
                     <label class="col-md-4">CONTRASEÑA</label>
                     <div class="col-md-8">
-                        <input type="password" placeholder="Inserte una contraseña"
-                            [formControl]="contenedorFormulario.controls.contrasenia">
+                        <div class="d-flex align-items-center">
+                            <input type="password" class="form-control" placeholder="Inserte una contraseña"
+                                [formControl]="contenedorFormulario.controls.contrasenia" style="flex: 1;">
+                            <div (pointerenter)="habilitarMensajeInformativo()" (pointerleave)="ocultarMensajeInformativo()"
+                                class="hover-target ms-2">
+                                <img src="iconoInfo.png" alt="info">
+                            </div>
+                        </div>
                     </div>
                     <span class="errores">{{accionesFormulario.obtenerErroresContrasenia(contenedorFormulario)}}</span>
+                    <span class="errores" *ngIf="mostrarMensajeInformativo">Una contraseña segura debe tener al menos: ocho caracteres, una letra
+                        mayúscula, una letra minúscula, un número y un caracter especial.</span>
                 </section>
 
                 <section class="row mb-3 align-items-center">

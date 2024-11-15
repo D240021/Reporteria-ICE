@@ -13,6 +13,7 @@ import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service'
 import { ReporteService } from '../../../../Controlador/Reporte/reporte.service';
 import { Reporte } from '../../../../Modelo/Reporte';
 import { CommonModule } from '@angular/common';
+import { obtenerFechaHoraLocalISO } from '../../../../Util/Formatos/fechas';
 
 @Component({
   selector: 'crear-reporte',
@@ -45,7 +46,6 @@ export class CrearReporteComponent implements OnInit {
     this.usuarioService.obtenerTLTSegunUnidadRegional(unidadRegionalId).subscribe(tecnicosTLT => {
       this.tecnicosTLT = tecnicosTLT;
     });
-
   }
 
   
@@ -88,7 +88,7 @@ export class CrearReporteComponent implements OnInit {
       evidencia: '',
       observacionesTecnicoLinea: '',
       causas: '',
-      fechaHora: new Date().toISOString(),
+      fechaHora: obtenerFechaHoraLocalISO(),
       informeV1Id: 0,
       informeV2Id: 0,
       informeV3Id: 0,
@@ -102,6 +102,7 @@ export class CrearReporteComponent implements OnInit {
       this.accionesFormulario.limpiarFormulario(this.contenedorFormulario);
       this.mensajeResultado = 'Reporte creado exitosamente';
       this.exitoOperacion = true;
+      this.reporteCreado.emit();
     });
 
   }

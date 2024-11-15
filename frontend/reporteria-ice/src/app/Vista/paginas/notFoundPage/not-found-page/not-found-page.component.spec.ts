@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgregarTecnicoComponent } from './agregar-tecnico.component';
+import { NotFoundPageComponent } from './not-found-page.component';
 
-describe('AgregarTecnicoComponent', () => {
-  let component: AgregarTecnicoComponent;
-  let fixture: ComponentFixture<AgregarTecnicoComponent>;
+describe('NotFoundPageComponent', () => {
+  let component: NotFoundPageComponent;
+  let fixture: ComponentFixture<NotFoundPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AgregarTecnicoComponent]
+      imports: [NotFoundPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AgregarTecnicoComponent);
+    fixture = TestBed.createComponent(NotFoundPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

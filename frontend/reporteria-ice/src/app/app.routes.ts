@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { InicioSesionComponent } from './Vista/paginas/inicioSesion/inicio-sesion/inicio-sesion.component';
 import { MenuAdministradorComponent } from './Vista/paginas/menuAdministrador/menu-administrador/menu-administrador.component';
-import { AgregarTecnicoComponent } from './Vista/paginas/agregarTecnico/agregar-tecnico/agregar-tecnico.component';
-import { AgregarSupervisorComponent } from './Vista/paginas/agregarSupervisor/agregar-supervisor/agregar-supervisor.component';
 import { AgregarUnidadRegionalComponent } from './Vista/paginas/agregarUnidadRegional/agregar-unidad-regional/agregar-unidad-regional.component';
 import { AgregarSubestacionComponent } from './Vista/paginas/agregarSubestacion/agregar-subestacion/agregar-subestacion.component';
 import { AgregarLineaTransmisionComponent } from './Vista/paginas/agregarLineaTransmision/agregar-linea-transmision/agregar-linea-transmision.component';
@@ -28,6 +26,7 @@ import { EditarUnidadRegionalComponent } from './Vista/paginas/editarUnidadRegio
 import { ConsultarSubestacionComponent } from './Vista/paginas/consultarSubestacion/consultar-subestacion/consultar-subestacion.component';
 import { MenuTpmComponent } from './Vista/paginas/menuTpm/menu-tpm/menu-tpm.component';
 import { MenuTltComponent } from './Vista/paginas/menuTlt/menu-tlt/menu-tlt.component';
+import { NotFoundPageComponent } from './Vista/paginas/notFoundPage/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
     {
@@ -38,12 +37,6 @@ export const routes: Routes = [
     },
     {
         path: 'menu-administrador', component: MenuAdministradorComponent, canActivate: [esAdminGuard]
-    },
-    {
-        path: 'agregar-tecnico', component: AgregarTecnicoComponent
-    },
-    {
-        path: 'agregar-supervisor', component: AgregarSupervisorComponent
     },
     {
         path: 'agregar-unidad-regional', component: AgregarUnidadRegionalComponent, canActivate: [esAdminGuard]
@@ -61,7 +54,7 @@ export const routes: Routes = [
         path: 'consultar-reporte', component: ConsultarReporteComponent
     },
     {
-        path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent
+        path: 'editar-linea-transmision', component: EditarLineaTransmisionComponent, canActivate: [esAdminGuard]
     },
     {
         path: 'consultar-linea-transmision', component: ConsultarLineaTransmisionComponent, canActivate: [esAdminGuard]
@@ -108,6 +101,9 @@ export const routes: Routes = [
     },
     {
         path: 'menu-tlt', component: MenuTltComponent, canActivate: [esTltGuard]
+    },
+    {
+        path: '**', component: NotFoundPageComponent
     }
 
 ];

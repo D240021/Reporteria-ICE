@@ -1,6 +1,6 @@
 <div class="form-container">
   <form [formGroup]="contenedorFormulario">
-    <h2>Crear nuevo reporte</h2>
+    <h2 class="text-center">Crear nuevo reporte</h2>
 
     @if (subestaciones && lineasTransmision && supervisores && tecnicosTLT) {
     <section class="row mb-3 align-items-center">
@@ -22,7 +22,7 @@
     </section>
 
     <section class="row mb-3 align-items-center">
-      <label class="col-md-4">SUBESTACIONES ASOCIADAS:</label>
+      <label class="col-md-4">SUBESTACIÓN ASOCIADA 1</label>
       <div class="col-md-8">
         <select [formControl]="contenedorFormulario.controls.subestacionA">
           @for (subestacion of subestaciones; track $index) {
@@ -35,7 +35,7 @@
         </select>
       </div>
       <span class="errores">{{accionesFormulario.obtenerErroresSubestacionId(contenedorFormulario)}}</span>
-
+      <label class="col-md-4">SUBESTACIÓN ASOCIADA 2</label>
       <div class="col-md-8">
         <select [formControl]="contenedorFormulario.controls.subestacionB">
           @for (subestacion of subestaciones; track $index) {
@@ -53,7 +53,7 @@
     </section>
 
     <section class="row mb-3 align-items-center">
-      <label class="col-md-4">Supervisor:</label>
+      <label class="col-md-4">SUPERVISOR:</label>
       <div class="col-md-8">
         <select [formControl]="contenedorFormulario.controls.usuarioSupervisorId">
           @for (supervisor of supervisores; track $index) {
@@ -71,7 +71,7 @@
     </section>
 
     <section class="row mb-3 align-items-center">
-      <label class="col-md-4">Técnico de Línea:</label>
+      <label class="col-md-4">TÉCNICO DE LÍNEA:</label>
       <div class="col-md-8">
         <select [formControl]="contenedorFormulario.controls.tecnicoLineaId">
           @for (tecnicoTLT of tecnicosTLT; track $index) {

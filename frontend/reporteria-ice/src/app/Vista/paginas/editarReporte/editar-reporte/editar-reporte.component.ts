@@ -8,6 +8,7 @@ import { Reporte } from '../../../../Modelo/Reporte';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosConfirmacionIrreversible, datosConfirmacionSalidaFormulario } from '../../../../Modelo/DatosDialogoConfirmacion';
+import { convertirStringAFormatoISO, formatearFechaHora } from '../../../../Util/Formatos/fechas';
 
 @Component({
   selector: 'editar-reporte',
@@ -36,6 +37,7 @@ export class EditarReporteComponent implements OnInit {
     });
   }
 
+  public mensajeErrorImagen: string = '';
   private formBuilder = inject(FormBuilder);
   private reporteService = inject(ReporteService);
   public accionesFormulario = inject(FormulariosService);
@@ -53,13 +55,28 @@ export class EditarReporteComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
+
+      if (input.files.length > 1) {
+        this.mensajeErrorImagen = 'Solo se permite subir un único archivo.';
+        return;
+      }
+
+      const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+      if (!formatosPermitidos.includes(file.type)) {
+        this.mensajeErrorImagen = 'El archivo debe ser una imagen válida (png, jpeg, jpg, gif).';
+        return;
+      }
+
+      this.mensajeErrorImagen = '';
+
       const reader = new FileReader();
       reader.onload = () => {
         const arrayBuffer = reader.result as ArrayBuffer;
         const bytes = new Uint8Array(arrayBuffer);
         this.arregloBytesImagenSeleccionada = Array.from(bytes);
 
-        
+
         const binaryString = String.fromCharCode(...bytes);
         const base64String = btoa(binaryString);
         this.contenedorFormulario.controls['mapaDescargas'].setValue(base64String);
@@ -68,6 +85,8 @@ export class EditarReporteComponent implements OnInit {
     }
   }
   guardarCambios(): void {
+
+
     const reporteAEnviar: Reporte = {
       id: this.reporteATrabajar.id,
       mapaDeDescargas: this.contenedorFormulario.value.mapaDescargas,
@@ -86,19 +105,21 @@ export class EditarReporteComponent implements OnInit {
     };
 
     this.reporteService.editarReporte(reporteAEnviar).subscribe(respuesta => {
-      console.log("ENTRA")
+      this.reporteService.emitirReporteGuardado();
     });
   }
 
 
   abrirCuadroDialogoConfirmacionGuardado(): void {
 
+    const datoSalida = datosConfirmacionIrreversible;
+    datoSalida.tipo = 'formularioSprv';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datosConfirmacionIrreversible
+        data: datoSalida
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
@@ -113,7 +134,7 @@ export class EditarReporteComponent implements OnInit {
   abrirCuadroDialogoConfirmacionSalida(): void {
 
     const datoSalida = datosConfirmacionSalidaFormulario;
-    datoSalida.tipo = 'formularioInforme';
+    datoSalida.tipo = 'formularioSprv';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {

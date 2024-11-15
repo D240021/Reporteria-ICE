@@ -43,6 +43,7 @@ export class EditarReporteTLTComponent implements OnInit {
 
   }
 
+  public mensajeErrorImagen: string = '';
   private router = inject(Router);
   private formularioModificado: boolean = false;
   private reporteService = inject(ReporteService);
@@ -65,6 +66,19 @@ export class EditarReporteTLTComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
+
+      if (input.files.length > 1) {
+        this.mensajeErrorImagen = 'Solo se permite subir un único archivo.';
+        return; 
+      }
+
+      const formatosPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+      if (!formatosPermitidos.includes(file.type)) {
+        this.mensajeErrorImagen = 'El archivo debe ser una imagen válida (png, jpeg, jpg, gif).';
+        return; 
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         const arrayBuffer = reader.result as ArrayBuffer;
@@ -97,9 +111,8 @@ export class EditarReporteTLTComponent implements OnInit {
       tecnicoLineaId: this.reporteATrabajar.tecnicoLineaId,
       estado: this.reporteATrabajar.estado
     };
-    console.log(reporteAEnviar);
     this.reporteService.editarReporte(reporteAEnviar).subscribe(repuesta => {
-      console.log("SI")
+      this.reporteService.emitirReporteGuardado();
     })
   }
 
@@ -127,12 +140,15 @@ export class EditarReporteTLTComponent implements OnInit {
 
   abrirCuadroDialogoConfirmacionSalida(): void {
 
+    const datoSalida = datosConfirmacionIrreversible;
+    datoSalida.titulo = 'Editar Reporte';
+    datoSalida.tipo = 'formularioTLT';
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
         width: '400px',
         height: '200px',
-        data: datosConfirmacionIrreversible
+        data: datoSalida
       });
       dialogRef.afterClosed().subscribe(result => {
 

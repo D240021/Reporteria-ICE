@@ -12,20 +12,25 @@ import { Informe } from '../../../../Modelo/Informe';
 import { MatCardModule } from '@angular/material/card';
 import { AnimacionCargaComponent } from "../../../componentes/animacionCarga/animacion-carga/animacion-carga.component";
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
 import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
+import { EditarReporteTPMComponent } from '../../editarReporteTPM/editar-reporte-tpm/editar-reporte-tpm.component';
+import { CommonModule } from '@angular/common';
+import { DialogoInformativoComponent } from '../../../componentes/dialogoInformativo/dialogo-informativo/dialogo-informativo.component';
+import { datosInforme } from '../../../../Modelo/DatosDialogoInformativo';
 
 @Component({
   selector: 'menu-tpm',
   standalone: true,
-  imports: [MatTabsModule, CrearReporteComponent, MatButtonModule, MatCardModule, AnimacionCargaComponent, MatIconModule],
+  imports: [MatTabsModule, CrearReporteComponent, MatButtonModule, MatCardModule, AnimacionCargaComponent, MatIconModule, EditarReporteTPMComponent,
+    CommonModule
+  ],
   templateUrl: './menu-tpm.component.html',
   styleUrl: './menu-tpm.component.css'
 })
 export class MenuTpmComponent implements OnInit {
 
   ngOnInit(): void {
-    this.cargarInformacionGeneral()
+    this.cargarInformacionGeneral();
   }
 
 
@@ -35,17 +40,18 @@ export class MenuTpmComponent implements OnInit {
   private modalAbierto: boolean = false;
   private informeService = inject(InformeService);
   public informes: any[] = [];
-  private router = inject(Router);
+  public mostrarEditar = false;
+  public informeSeleccionado!: Informe;
+  private dialogo = inject(MatDialog);
+  private dialogoRef: any;
 
   cargarInformacionGeneral(): void {
+    this.informes = [];
     this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
     const subestacionId = this.usuarioIngresado.subestacionId || 0;
-
-
     this.informeService.obtenerInformesPendientesPorSubestacion(subestacionId).subscribe(informes => {
-      this.informes = informes;
+      this.informes = [...informes];
       this.informes.forEach(informe => {
-
         this.informeService.obtenerReportePorInformeId(informe.id).subscribe(reporte => {
           informe.reporteAsociado = reporte;
           informe.reporteAsociado.fechaHora = formatearFechaHora(informe.reporteAsociado.fechaHora);
@@ -56,7 +62,6 @@ export class MenuTpmComponent implements OnInit {
 
   abrirCuadroDialogo(): void {
 
-
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(DialogoConfirmacionComponent, {
@@ -66,16 +71,38 @@ export class MenuTpmComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         this.modalAbierto = false;
-        if(result === 'Confirmacion'){
+        if (result === 'Confirmacion') {
           this.cargarInformacionGeneral();
         }
       });
     }
   }
 
+
   abrirEditarInforme(informe: Informe): void {
-    this.router.navigate(['/editar-reporte-tpm'], { state: { informe: informe } });
-    return;
+    this.mostrarEditar = true;
+    this.informeSeleccionado = informe;
+  }
+
+  cerrarEditar(): void {
+    this.cargarInformacionGeneral();
+    this.mostrarEditar = false;
+  }
+
+
+  abrirDialogoInformativo() {
+    this.dialogoRef = this.dialogo.open(DialogoInformativoComponent, {
+      position: { top: '10%', left: '10%' },
+      data : datosInforme,
+      disableClose: true,
+      hasBackdrop: false,
+    });
+  }
+
+  cerrarDialogoInformativo() {
+    if (this.dialogoRef) {
+      this.dialogoRef.close();
+    }
   }
 
 

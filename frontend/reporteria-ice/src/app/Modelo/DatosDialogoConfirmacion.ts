@@ -25,5 +25,5 @@ export const datosConfirmacionSesionSinGuardar : DatosConfirmacion = {
 export const datosConfirmacionIrreversible : DatosConfirmacion = {
     titulo: 'Editar informe',
     descripcion: 'Los cambios serán irreversibles y no podrá volver a editar el formulario',
-    tipo: 'formularioInforme'
+    tipo: ''
 }

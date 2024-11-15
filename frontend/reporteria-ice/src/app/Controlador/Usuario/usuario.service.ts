@@ -48,4 +48,8 @@ export class UsuarioService {
     return this.http.put(`${this.urlBase}/${usuario.id}`, usuario);
   }
 
+  public obtenerUsuarioPorId(idUsuario : number) : Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.urlBase}/${idUsuario}`);
+
+  }
 }

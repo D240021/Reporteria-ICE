@@ -8,6 +8,8 @@ import { ReporteService } from '../../../../Controlador/Reporte/reporte.service'
 import { DialogoConfirmacionComponent } from '../../../componentes/dialogoConfirmacion/dialogo-confirmacion/dialogo-confirmacion.component';
 import { datosCerrarSesion } from '../../../../Modelo/DatosDialogoConfirmacion';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
+import { formatearFechaHora } from '../../../../Util/Formatos/fechas';
+import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service';
 
 @Component({
   selector: 'menu-tlt',
@@ -16,15 +18,16 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
   templateUrl: './menu-tlt.component.html',
   styleUrl: './menu-tlt.component.css'
 })
-export class MenuTltComponent implements OnInit{
+export class MenuTltComponent implements OnInit {
+
+  constructor() {
+    this.reporteService.reporteGuardado.subscribe(() => {
+      this.cargarInformacionGeneral();
+    });
+  }
 
   ngOnInit(): void {
-    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
-    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
-      this.reportesTodos = respuesta;
-      this.obtenerReportesPendientes();
-    });
-
+    this.cargarInformacionGeneral();
   }
 
 
@@ -36,6 +39,7 @@ export class MenuTltComponent implements OnInit{
   public reportesTodos: Reporte[] = [];
   public reportesPendientes: Reporte[] = [];
   private reporteService = inject(ReporteService);
+  private usuarioService = inject(UsuarioService);
 
 
   abrirCuadroDialogo(): void {
@@ -55,15 +59,40 @@ export class MenuTltComponent implements OnInit{
 
   }
 
-  redirigirEdicionReporte(reporte : Reporte): void {
+  redirigirEdicionReporte(reporte: Reporte): void {
     this.router.navigate(['/editar-reporte-tlt'], { state: { reporte: reporte } });
   }
 
   obtenerReportesPendientes(): void {
+    this.reportesPendientes = [];
     this.reportesTodos.forEach(reporte => {
       if (reporte.estado === 3 && this.usuarioIngresado.id === reporte.tecnicoLineaId) {
         this.reportesPendientes.push(reporte);
       }
     });
+  }
+
+  cargarInformacionGeneral(): void {
+    this.reportesTodos = [];
+    this.usuarioIngresado = this.seguridadService.obtenerInformacionUsuarioLogeado();
+    this.reporteService.obtenerTodosReportes().subscribe(respuesta => {
+      this.reportesTodos = respuesta;
+      this.reportesTodos.forEach(reporte => {
+        if (reporte.fechaHora) {
+          reporte.fechaFormateada = formatearFechaHora(reporte.fechaHora.toString());
+        }
+        this.usuarioService.obtenerUsuarioPorId(reporte.tecnicoLineaId).subscribe(respuesta => {
+          const usuarioTecnicoLinea = respuesta as Usuario;
+          reporte.nombreTecnicoLinea = usuarioTecnicoLinea.nombre + ' ' + usuarioTecnicoLinea.apellido;
+        });
+
+      });
+      this.obtenerReportesPendientes();
+    });
+  }
+
+  abrirConsultarReporte(reportes: Reporte[], tipo: string): void {
+
+    this.router.navigate(['/consultar-reporte'], { state: { reportes: reportes, tipo: tipo } });
   }
 }
