@@ -16,13 +16,13 @@
                     [formControl]='contenedorFormulario.controls.contrasenia'>
             </mat-form-field>
             <span *ngIf="mensajeCredenciales" class="mensajeError">{{ mensajeCredenciales }}</span>
-            <button mat-stroked-button (click)="verificarCredencialesUsuario()" type="button"
-                [disabled]="contenedorFormulario.invalid">INGRESAR</button>
+            <button mat-flat-button (click)="verificarCredencialesUsuario()"
+                [disabled]="contenedorFormulario.invalid" id="idSesion">INGRESAR</button>
 
-                @if (habilitarCarga) {
-                    <animacion-carga></animacion-carga>
-                }
-                
+            @if (habilitarCarga) {
+            <animacion-carga></animacion-carga>
+            }
+
         </form>
 
     </section>

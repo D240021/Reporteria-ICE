@@ -1,3 +1,17 @@
+#idSesion {
+    background-color: #ffde59;
+    color: #545454;
+    border-radius: 10px;
+    margin: 2% 0;
+}
+
+button:disabled {
+    background-color: #ffd84d; 
+    color: #cfcfcf; 
+    cursor: not-allowed;
+    opacity: 0.7; 
+}
+
 header {
     height: 40%;
     width: 100%;
@@ -29,8 +43,6 @@ div {
 form {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     gap: 1.3rem 0;
 }
 
@@ -43,9 +55,4 @@ p {
 .mensajeError {
     color: red;
     white-space: pre-wrap;
-}
-
-button {
-    background-color: #ffd700;
-    color: white;
 }

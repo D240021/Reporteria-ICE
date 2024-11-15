@@ -16,7 +16,7 @@ import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/ani
   selector: 'consultar-operario',
   standalone: true,
   imports: [MatTableModule, MatInputModule,
-    ReactiveFormsModule, MatButtonModule, MatIconModule, EditarOperarioComponent,
+    ReactiveFormsModule, MatButtonModule, MatIconModule,
     MatDialogModule, AnimacionCargaComponent, RouterLink],
   templateUrl: './consultar-operario.component.html',
   styleUrl: './consultar-operario.component.css'
