@@ -9,7 +9,9 @@ export interface Usuario {
     rol: string,
     subestacionId: number | null,
     unidadRegionalId: number | null,
-    nombreUnidadRegional?: string
+    nombreUnidadRegional?: string,
+    nombreRol?: string
+
 }
 
 export interface AutenticacionUsuario {

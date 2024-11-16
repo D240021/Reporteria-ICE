@@ -120,15 +120,14 @@ export class ConsultarOperarioComponent implements OnInit {
   construirNombresRoles(): void {
 
     this.usuarios.forEach(usuario => {
-      console.log(usuario.rol)
       if (usuario.rol === usuarioRoles.TPM) {
-        usuario.rol = 'Técnico Protección';
+        usuario.nombreRol = 'Técnico Protección';
       } else if (usuario.rol === usuarioRoles.SPRV) {
-        usuario.rol = 'Supervisor';
+        usuario.nombreRol = 'Supervisor';
       } else if (usuario.rol === usuarioRoles.TLT) {
-        usuario.rol = 'Técnico Línea';
+        usuario.nombreRol = 'Técnico Línea';
       } else {
-        usuario.rol = 'Administrador';
+        usuario.nombreRol = 'Administrador';
       }
 
     })
