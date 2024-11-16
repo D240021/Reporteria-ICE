@@ -108,7 +108,7 @@ public class PDFGeneratorService : IPDFGeneratorService
             var subestacion = await _gestionarSubestacionDA.ObtenerSubestacion(informe.SubestacionId);
             nombreSubestacion = subestacion.NombreUbicacion;
             identificadorSubestacion = subestacion.Identificador;
-            tipoInforme = ObtenerTipoInforme(informe.Tipo)
+            tipoInforme = ObtenerTipoInforme(informe.Tipo);
             var lineaTransmision = await _gestionarLineasTransmisionDA.ObtenerLineaTransmision(informe.LineaTransmisionId);
             nombreLineaTransmision = lineaTransmision.NombreUbicacion;
         }
