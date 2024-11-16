@@ -90,3 +90,7 @@ button {
     width: 50%;
   }
 }
+
+h2, span {
+  text-align: center;
+}

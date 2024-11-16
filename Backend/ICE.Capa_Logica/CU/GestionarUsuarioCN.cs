@@ -72,10 +72,19 @@ namespace ICE.Capa_Negocios.CU
             var validacionUsuario = ReglasUsuario.EsUsuarioValido(usuario);
             if (!validacionUsuario.esValido)
             {
-                return false;
+                return false; 
             }
-            return await _gestionarUsuarioDA.ActualizarUsuario(id, usuario);
+
+            try
+            {
+                return await _gestionarUsuarioDA.ActualizarUsuario(id, usuario);
+            }
+            catch (ConflictException ex)
+            {
+                throw;
+            }
         }
+
 
         public async Task<bool> EliminarUsuario(int id)
         {

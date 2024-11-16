@@ -15,9 +15,6 @@ import { UsuarioService } from '../../../../Controlador/Usuario/usuario.service'
 })
 export class EditarOperarioComponent{
 
-  
-
-
   operario: any;
 
   public mensajeResultado: string = '';
@@ -45,6 +42,7 @@ export class EditarOperarioComponent{
   ) {
     this.operario = datos;
     this.contenedorFormulario.patchValue(this.operario);
+    console.log(this.operario);
   }
 
 
@@ -69,15 +67,17 @@ export class EditarOperarioComponent{
   }
 
   esFormularioModificado(): boolean {
-
     const valoresFormulario = this.contenedorFormulario.value;
     for (const key in valoresFormulario) {
       if (valoresFormulario.hasOwnProperty(key) && key in this.operario) {
-        if (valoresFormulario[key as keyof typeof valoresFormulario] !== this.operario[key as keyof Usuario]) {
-          return true; 
+        const valorFormulario = valoresFormulario[key as keyof typeof valoresFormulario];
+        const valorOriginal = this.operario[key as keyof Usuario];
+  
+        if (valorFormulario !== valorOriginal && (valorFormulario || valorOriginal)) {
+          return true;
         }
       }
     }
-    return false; 
+    return false;
   }
 }

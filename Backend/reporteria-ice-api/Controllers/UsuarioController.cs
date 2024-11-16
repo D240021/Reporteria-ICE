@@ -134,7 +134,7 @@ namespace reporteria_ice_api.Controllers
             }
         }
 
-        // Método para editar un usuario existente
+        // Método para editar un usuario existente en UsuarioController
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarUsuario(int id, UsuarioDTO usuarioDTO)
         {
@@ -150,11 +150,16 @@ namespace reporteria_ice_api.Controllers
 
                 return Ok(respuesta);
             }
+            catch (ConflictException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
 
         // Método para eliminar un usuario por ID
         [HttpDelete("{id}")]
