@@ -69,12 +69,18 @@ namespace ICE.Capa_Datos.Acciones
             var usuarioBD = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
             if (usuarioBD != null)
             {
-                var existeUsuario = await _context.Usuarios.AnyAsync(u => (u.NombreUsuario == usuario.NombreUsuario || u.Identificador == usuario.Identificador) && u.Id != id);
-                if (existeUsuario)
+                var usuarioConNombreDuplicado = await _context.Usuarios.AnyAsync(u => u.NombreUsuario == usuario.NombreUsuario && u.Id != id);
+                var usuarioConIdentificadorDuplicado = await _context.Usuarios.AnyAsync(u => u.Identificador == usuario.Identificador && u.Id != id);
+
+                if (usuarioConNombreDuplicado)
                 {
-                    throw new Exception("El nombre de usuario o el identificador ya están en uso por otro usuario.");
+                    throw new ConflictException("El nombre de usuario ya está en uso por otro usuario.");
                 }
 
+                if (usuarioConIdentificadorDuplicado)
+                {
+                    throw new ConflictException("El identificador ya está en uso por otro usuario.");
+                }
 
                 usuarioBD.NombreUsuario = usuario.NombreUsuario;
                 usuarioBD.Correo = usuario.Correo;
@@ -85,11 +91,18 @@ namespace ICE.Capa_Datos.Acciones
                 usuarioBD.SubestacionId = usuario.SubestacionId == 0 ? (int?)null : usuario.SubestacionId;
                 usuarioBD.UnidadRegionalId = usuario.UnidadRegionalId == 0 ? (int?)null : usuario.UnidadRegionalId;
 
+                if (!string.IsNullOrEmpty(usuario.Contrasenia))
+                {
+                    usuarioBD.Contrasenia = EncriptarAES(usuario.Contrasenia);
+                }
+
                 var resultado = await _context.SaveChangesAsync();
                 return resultado > 0;
             }
             return false;
         }
+
+
 
 
         public async Task<Usuario> ObtenerUsuarioPorId(int id)
