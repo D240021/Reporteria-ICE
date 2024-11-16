@@ -12,6 +12,7 @@ import { UnidadRegional } from '../../../../Modelo/unidadRegional';
 import { EditarOperarioComponent } from "../../editarOperario/editar-operario/editar-operario.component";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnimacionCargaComponent } from '../../../componentes/animacionCarga/animacion-carga/animacion-carga.component';
+import { usuarioRoles } from '../../../../Util/Enum/Roles';
 @Component({
   selector: 'consultar-operario',
   standalone: true,
@@ -41,9 +42,7 @@ export class ConsultarOperarioComponent implements OnInit {
     'UNIDAD REGIONAL', 'OCUPACIÓN', 'GESTIÓN'];
 
   ngOnInit(): void {
-
     this.cargarDatos();
-
     this.contenedorFormulario.valueChanges.subscribe(() => {
       this.filtrarValores();
     });
@@ -55,7 +54,7 @@ export class ConsultarOperarioComponent implements OnInit {
     this.usuarioService.obtenerUsuarios().subscribe(usuarios => {
       this.usuariosOriginales = usuarios;
       this.usuarios = usuarios;
-      
+      this.construirNombresRoles();
     });
 
     return;
@@ -64,16 +63,16 @@ export class ConsultarOperarioComponent implements OnInit {
 
   filtrarValores(): void {
     const { valor, filtro } = this.contenedorFormulario.value;
-  
+
     if (!valor) {
-      
+
       this.usuarios = this.usuariosOriginales;
       return;
     }
-  
+
     const valorNormalizado = valor.toLowerCase();
     this.usuarios = this.usuariosOriginales.filter(usuario => {
-      
+
       if (!filtro) {
         return [
           usuario.identificador,
@@ -85,8 +84,8 @@ export class ConsultarOperarioComponent implements OnInit {
           usuario.rol
         ].some(campo => campo?.toLowerCase().includes(valorNormalizado));
       }
-  
-      
+
+
       const campoFiltrado = {
         'identificador': usuario.identificador,
         'nombre': usuario.nombre,
@@ -96,13 +95,13 @@ export class ConsultarOperarioComponent implements OnInit {
         'unidadRegional': usuario.nombreUnidadRegional,
         'rol': usuario.rol
       }[filtro] || '';
-  
+
       return campoFiltrado.toLowerCase().includes(valorNormalizado);
     });
   }
 
   abrirEditarOperario(operario: Usuario): void {
-    
+
     if (!this.modalAbierto) {
       this.modalAbierto = true;
       const dialogRef = this.cuadroDialogo.open(EditarOperarioComponent, {
@@ -118,5 +117,21 @@ export class ConsultarOperarioComponent implements OnInit {
 
   }
 
+  construirNombresRoles(): void {
+
+    this.usuarios.forEach(usuario => {
+      console.log(usuario.rol)
+      if (usuario.rol === usuarioRoles.TPM) {
+        usuario.rol = 'Técnico Protección';
+      } else if (usuario.rol === usuarioRoles.SPRV) {
+        usuario.rol = 'Supervisor';
+      } else if (usuario.rol === usuarioRoles.TLT) {
+        usuario.rol = 'Técnico Línea';
+      } else {
+        usuario.rol = 'Administrador';
+      }
+
+    })
+  }
 
 }
