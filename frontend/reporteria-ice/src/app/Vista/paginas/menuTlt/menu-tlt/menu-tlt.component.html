@@ -21,8 +21,8 @@
               @for (reportePendiente of reportesPendientes; track $index) {
               @if ($index <= 1) {
               <div class="reporte-item mb-3" (click)="redirigirEdicionReporte(reportePendiente)">
-                <p><strong>{{reportePendiente.usuarioSupervisorId}}</strong></p>
-                <p class="text-muted">ID Reporte: {{reportePendiente.id}}</p>
+                <p><strong>Supervisor : {{reportePendiente.nombreSupervisor}}</strong></p>
+                <p class="text-muted">Fecha y hora emisión: {{reportePendiente.fechaFormateada}}</p>
               </div>
               }
               }

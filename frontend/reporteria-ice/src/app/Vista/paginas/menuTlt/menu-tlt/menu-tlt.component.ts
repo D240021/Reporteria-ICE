@@ -81,9 +81,9 @@ export class MenuTltComponent implements OnInit {
         if (reporte.fechaHora) {
           reporte.fechaFormateada = formatearFechaHora(reporte.fechaHora.toString());
         }
-        this.usuarioService.obtenerUsuarioPorId(reporte.tecnicoLineaId).subscribe(respuesta => {
-          const usuarioTecnicoLinea = respuesta as Usuario;
-          reporte.nombreTecnicoLinea = usuarioTecnicoLinea.nombre + ' ' + usuarioTecnicoLinea.apellido;
+        this.usuarioService.obtenerUsuarioPorId(reporte.usuarioSupervisorId).subscribe(respuesta => {
+          const usuarioSupervisor = respuesta as Usuario;
+          reporte.nombreSupervisor = usuarioSupervisor.nombre + ' ' + usuarioSupervisor.apellido;
         });
 
       });
