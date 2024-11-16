@@ -57,8 +57,8 @@ public class PDFGeneratorService : IPDFGeneratorService
 
             // Obtener la lista de informes asociados usando el servicio
             var informesDeReporte = await _gestionarReporteConInformesService.ObtenerReporteConInformesPDF(reporte.Id);
-            AgregarInformesAlPDF(document,informesDeReporte);
-            
+            AgregarInformesAlPDF(document, informesDeReporte);
+
 
             document.Close();
             return stream.ToArray();
@@ -167,7 +167,7 @@ public class PDFGeneratorService : IPDFGeneratorService
             document.Add(pdfImage);
         }
     }
-    
+
     private void AgregarCausasAlPDF(Document document, string causas)
     {
         if (!string.IsNullOrEmpty(causas))
