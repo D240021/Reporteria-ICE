@@ -100,6 +100,7 @@ public class PDFGeneratorService : IPDFGeneratorService
         string nombreSubestacion = "No disponible";
         string nombreLineaTransmision = "No disponible";
         var identificadorSubestacion = "No disponible";
+        var tipoInforme = "No disponible";
 
         try
         {
@@ -107,7 +108,7 @@ public class PDFGeneratorService : IPDFGeneratorService
             var subestacion = await _gestionarSubestacionDA.ObtenerSubestacion(informe.SubestacionId);
             nombreSubestacion = subestacion.NombreUbicacion;
             identificadorSubestacion = subestacion.Identificador;
-
+            tipoInforme = ObtenerTipoInforme(informe.Tipo)
             var lineaTransmision = await _gestionarLineasTransmisionDA.ObtenerLineaTransmision(informe.LineaTransmisionId);
             nombreLineaTransmision = lineaTransmision.NombreUbicacion;
         }
@@ -120,6 +121,7 @@ public class PDFGeneratorService : IPDFGeneratorService
         // Agregar datos al PDF
         document.Add(new Paragraph(tituloInforme).SetBold().SetFontSize(16));
         document.Add(new Paragraph($"Informe ID: {informe.Id}"));
+        document.Add(new Paragraph($"Tipo de Informe: {tipoInforme}"));
         document.Add(new Paragraph($"Subestación: {nombreSubestacion} (Identificador: {identificadorSubestacion})"));
         document.Add(new Paragraph($"Línea de Transmisión: {nombreLineaTransmision}"));
         string descripcionEstadoInforme = ObtenerDescripcionEstadoReporte(informe.Estado);
@@ -244,6 +246,19 @@ public class PDFGeneratorService : IPDFGeneratorService
                 return "Pendiente";
             case 1:
                 return "Finalizado";
+            default:
+                return "Estado desconocido";
+        }
+    }
+
+    private string ObtenerTipoInforme(int estado)
+    {
+        switch (estado)
+        {
+            case 1:
+                return "Impedancia";
+            case 2:
+                return "Diferencial";
             default:
                 return "Estado desconocido";
         }
