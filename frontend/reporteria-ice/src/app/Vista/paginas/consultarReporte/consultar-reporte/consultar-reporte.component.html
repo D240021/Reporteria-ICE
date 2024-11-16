@@ -45,9 +45,9 @@
             @if (tipoReporte === 'Pasados') {
             <mat-icon (click)="reporteService.descargarPDF(reporte.id)">download</mat-icon>
             } @else {
-              No finalizado
+            No finalizado
             }
-            
+
           </td>
 
         </ng-container>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="col-md-6">
-      <button class="btn btn-volver" routerLink="/menu-supervisor">Volver</button>
+      <button class="btn btn-volver" onclick="window.history.back()">Volver</button>
     </div>
   </div>
 </div>

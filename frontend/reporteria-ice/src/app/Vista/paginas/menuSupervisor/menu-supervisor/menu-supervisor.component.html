@@ -2,24 +2,25 @@
   <div id="content-wrap">
     <div class="container-fluid">
       <header class="text-center my-4">
-        <h1>BIENVENIDO&#64;, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
-        <button class="btn btn-warning float-end me-4" (click)="abrirCuadroDialogo()">SALIR</button>
+        <h1>BIENVENIDO, {{usuarioIngresado.nombre.toLocaleUpperCase()}}</h1>
       </header>
 
-      <h4 class="text-center mb-4">Reportes</h4>
+      <!-- Mueve el botón SALIR aquí y céntralo -->
+      <div class="text-center mb-4">
+        <button class="btn btn-warning" (click)="abrirCuadroDialogo()">SALIR</button>
+      </div>
 
       <section class="row justify-content-center">
-
         <div class="col-md-4">
           <div class="card text-center shadow-sm mb-4">
             <div class="card-header bg-light">
-              <p class="mb-0">PENDIENTES</p>
+              <p class="mb-0">REPORTES PENDIENTES</p>
             </div>
             <div class="card-body">
               @if (reportesPendientes) {
               @if (reportesPendientes.length> 0) {
               @for (reportePendiente of reportesPendientes; track $index) {
-              @if ($index <= 2 ) { 
+              @if ($index <= 2) {
                 <div class="reporte-item mb-3" (click)="redirigirEdicionReporte(reportePendiente)">
                   <p><strong>Técnico de línea : {{reportePendiente.nombreTecnicoLinea}}</strong></p>
                   <p class="text-muted">Fecha y hora creación: {{reportePendiente.fechaFormateada}}</p>
@@ -34,12 +35,10 @@
             @else {
             <animacion-carga></animacion-carga>
             }
-
           </div>
           @if (reportesPendientes.length > 2) {
           <div class="card-footer">
-            <button class="btn btn-warning" (click)="abrirConsultarReporte(reportesPendientes, 'Pendientes')">VER
-              MÁS</button>
+            <button class="btn btn-warning" (click)="abrirConsultarReporte(reportesPendientes, 'Pendientes')">VER MÁS</button>
           </div>
           }
         </div>
@@ -48,18 +47,19 @@
     <div class="col-md-4">
       <div class="card text-center shadow-sm mb-4">
         <div class="card-header bg-light">
-          <p class="mb-0">PASADOS</p>
+          <p class="mb-0">REPORTES PASADOS</p>
         </div>
         <div class="card-body">
           @if (reportesPasados) {
           @if (reportesPasados.length> 0) {
           @for (reportePasado of reportesPasados; track $index) {
-          @if ($index <= 1 ) { <div class="reporte-item mb-3">
-            <p><strong>Técnico de línea : {{reportePasado.nombreTecnicoLinea}}</strong></p>
-            <p class="text-muted">Fecha y hora creación: {{reportePasado.fechaFormateada}}</p>
-            <mat-icon (click)="reporteService.descargarPDF(reportePasado.id)">download</mat-icon>
-        </div>
-        }
+          @if ($index <= 1) {
+            <div class="reporte-item mb-3">
+              <p><strong>Técnico de línea : {{reportePasado.nombreTecnicoLinea}}</strong></p>
+              <p class="text-muted">Fecha y hora creación: {{reportePasado.fechaFormateada}}</p>
+              <mat-icon (click)="reporteService.descargarPDF(reportePasado.id)">download</mat-icon>
+            </div>
+          }
         }
         }
         @else {
@@ -69,7 +69,6 @@
         @else {
         <animacion-carga></animacion-carga>
         }
-
       </div>
       @if (reportesPasados.length > 2) {
       <div class="card-footer">

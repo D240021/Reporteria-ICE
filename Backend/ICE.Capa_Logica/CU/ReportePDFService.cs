@@ -325,19 +325,24 @@ using iText.Layout.Element;
 using iText.Kernel.Colors;
 using System.IO;
 using ICE.Capa_Dominio.Modelos;
+using ICE.Capa_Negocios.Interfaces.Capa_Datos;
 
 public class PDFGeneratorService : IPDFGeneratorService
 {
 
     private readonly IGestionarReporteConInformesService _gestionarReporteConInformesService;
-    //private readonly IGestionarLineasTransmisionDA _gestionarLineasTransmisionDA;
-    //private readonly IGestionarSubestacionDA _gestionarSubestacionDA;
+    private readonly IGestionarLineasTransmisionDA _gestionarLineasTransmisionDA;
+    private readonly IGestionarSubestacionDA _gestionarSubestacionDA;
 
-    public PDFGeneratorService(IGestionarReporteConInformesService gestionarReporteConInformesService)
+    public PDFGeneratorService(
+        IGestionarReporteConInformesService gestionarReporteConInformesService,
+        IGestionarLineasTransmisionDA gestionarLineasTransmisionDA,
+        IGestionarSubestacionDA gestionarSubestacionDA
+        )
     {
         _gestionarReporteConInformesService = gestionarReporteConInformesService;
-        //_gestionarLineasTransmisionDA
-        //_gestionarSubestacionDA
+        _gestionarLineasTransmisionDA = gestionarLineasTransmisionDA;
+        _gestionarSubestacionDA = gestionarSubestacionDA;
     }
 
 
@@ -358,7 +363,11 @@ public class PDFGeneratorService : IPDFGeneratorService
             // Información del reporte
             document.Add(new Paragraph($"Reporte ID: {reporte.Id}"));
             document.Add(new Paragraph($"Observaciones: {reporte.Observaciones ?? "Sin observaciones"}"));
-            document.Add(new Paragraph($"Estado: {reporte.Estado}"));
+
+
+            // Obtener descripción del estado del reporte
+            string descripcionEstado = ObtenerDescripcionEstadoReporte(reporte.Estado);
+            document.Add(new Paragraph($"Estado: {descripcionEstado}"));
 
             // Mapa de Descargas
             AgregarImagenAlPDF(document, reporte.MapaDeDescargas, "Mapa de Descargas");
@@ -376,25 +385,25 @@ public class PDFGeneratorService : IPDFGeneratorService
 
             // Obtener la lista de informes asociados usando el servicio
             var informesDeReporte = await _gestionarReporteConInformesService.ObtenerReporteConInformesPDF(reporte.Id);
-            AgregarInformesAlPDF(document,informesDeReporte);
-            
+            await AgregarInformesAlPDF(document, informesDeReporte);
+
 
             document.Close();
             return stream.ToArray();
         }
     }
 
-    private void AgregarInformesAlPDF(Document document, List<Informe> informes)
+    private async Task AgregarInformesAlPDF(Document document, List<Informe> informes)
     {
         // Agrega información de cada informe relacionado
         for (int i = 0; i < informes.Count; i++)
         {
-            AgregarInforme(document, $"Informe V{i + 1}", informes[i]);
+            await AgregarInforme(document, $"Informe V{i + 1}", informes[i]);
         }
     }
 
 
-    private void AgregarInforme(Document document, string tituloInforme, Informe informe)
+    private async Task AgregarInforme(Document document, string tituloInforme, Informe informe)
     {
         if (informe == null)
         {
@@ -402,11 +411,34 @@ public class PDFGeneratorService : IPDFGeneratorService
             return;
         }
 
+        // Obtener nombres de la Subestación y Línea de Transmisión
+        string nombreSubestacion = "No disponible";
+        string nombreLineaTransmision = "No disponible";
+        var identificadorSubestacion = "No disponible";
+
+        try
+        {
+            // Llamar a la base de datos para obtener los nombres
+            var subestacion = await _gestionarSubestacionDA.ObtenerSubestacion(informe.SubestacionId);
+            nombreSubestacion = subestacion.NombreUbicacion;
+            identificadorSubestacion = subestacion.Identificador;
+
+            var lineaTransmision = await _gestionarLineasTransmisionDA.ObtenerLineaTransmision(informe.LineaTransmisionId);
+            nombreLineaTransmision = lineaTransmision.NombreUbicacion;
+        }
+        catch (Exception ex)
+        {
+            // Manejar errores al obtener datos
+            document.Add(new Paragraph($"Error al obtener datos: {ex.Message}").SetFontColor(ColorConstants.RED));
+        }
+
+        // Agregar datos al PDF
         document.Add(new Paragraph(tituloInforme).SetBold().SetFontSize(16));
         document.Add(new Paragraph($"Informe ID: {informe.Id}"));
-        document.Add(new Paragraph($"Subestación ID: {informe.SubestacionId}"));
-        document.Add(new Paragraph($"Línea de Transmisión ID: {informe.LineaTransmisionId}"));
-        document.Add(new Paragraph($"Estado: {informe.Estado}"));
+        document.Add(new Paragraph($"Subestación: {nombreSubestacion} (Identificador: {identificadorSubestacion})"));
+        document.Add(new Paragraph($"Línea de Transmisión: {nombreLineaTransmision}"));
+        string descripcionEstadoInforme = ObtenerDescripcionEstadoReporte(informe.Estado);
+        document.Add(new Paragraph($"Estado: {descripcionEstadoInforme}"));
 
         // Información de Corrientes de Falla
         if (informe.CorrientesDeFalla != null)
@@ -486,7 +518,7 @@ public class PDFGeneratorService : IPDFGeneratorService
             document.Add(pdfImage);
         }
     }
-    
+
     private void AgregarCausasAlPDF(Document document, string causas)
     {
         if (!string.IsNullOrEmpty(causas))
@@ -497,6 +529,38 @@ public class PDFGeneratorService : IPDFGeneratorService
             {
                 document.Add(new Paragraph($"- {causa.Trim()}"));
             }
+        }
+    }
+
+    private string ObtenerDescripcionEstadoReporte(int estado)
+    {
+        switch (estado)
+        {
+            case 0:
+                return "Recien creado";
+            case 1:
+                return "Informes en proceso";
+            case 2:
+                return "Supervisor editando";
+            case 3:
+                return "Técnico de campo editando";
+            case 4:
+                return "Finalizado";
+            default:
+                return "Estado desconocido";
+        }
+    }
+
+    private string ObtenerDescripcionEstadoInforme(int estado)
+    {
+        switch (estado)
+        {
+            case 0:
+                return "Pendiente";
+            case 1:
+                return "Finalizado";
+            default:
+                return "Estado desconocido";
         }
     }
 }

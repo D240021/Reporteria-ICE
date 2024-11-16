@@ -5,6 +5,10 @@ body {
   
 }
 
+h1{
+  color: var(--color-principal);
+}
+
 #page-container {
   position: relative;
   min-height: 100vh;

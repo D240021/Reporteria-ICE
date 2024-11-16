@@ -1,12 +1,12 @@
 .errores,
-.mensaje-error{
-    color: red;
-    font-size: 75%;
+.mensaje-error {
+  color: red;
+  font-size: 75%;
 }
 
 .mensaje-exito {
-    color: green;
-    font-size: 75%;
+  color: green;
+  font-size: 75%;
 }
 
 
@@ -39,13 +39,13 @@ form {
   margin: 0 auto;
 }
 
-  form section {
-    margin: 50px 0
-  }
+form section {
+  margin: 50px 0
+}
 
-  form .contenedor-botones {
-    margin: 50px 0
-  }
+form .contenedor-botones {
+  margin: 50px 0
+}
 
 
 h2 {
@@ -128,3 +128,10 @@ button {
   }
 }
 
+
+.hover-target {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+}

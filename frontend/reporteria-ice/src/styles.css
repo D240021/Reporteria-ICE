@@ -47,7 +47,8 @@ button:hover {
 }
 
 .mensaje-error,
-.mensaje-exito {
+.mensaje-exito,
+.errores {
     display: grid;
     place-content: center;
 }
