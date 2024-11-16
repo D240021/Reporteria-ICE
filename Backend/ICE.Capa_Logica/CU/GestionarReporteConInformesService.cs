@@ -331,7 +331,7 @@ namespace ICE.Capa_Negocios.CU
 
         public async Task<List<Informe>> ObtenerReporteConInformesPDF(int reporteId)
         {
-            return await ObtenerInformesAsociados(reporteId);            
+            return await ObtenerInformesAsociadosDeReportePorId(reporteId);            
         }
     }
 }

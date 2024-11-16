@@ -43,7 +43,6 @@ export class ReporteService {
   public descargarPDF(reporteId: number): void {
     this.obtenerPDFPorReporte(reporteId).subscribe(
       respuesta => {
-        console.log(respuesta);
         const blob = new Blob([respuesta], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
