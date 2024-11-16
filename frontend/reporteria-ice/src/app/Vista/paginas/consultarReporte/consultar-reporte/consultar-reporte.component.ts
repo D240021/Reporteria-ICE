@@ -10,7 +10,7 @@ import { ReporteService } from '../../../../Controlador/Reporte/reporte.service'
 @Component({
   selector: 'consultar-reporte',
   standalone: true,
-  imports: [MatTableModule, MatInputModule, RouterLink, ReactiveFormsModule, MatIconModule],
+  imports: [MatTableModule, MatInputModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './consultar-reporte.component.html',
   styleUrls: ['./consultar-reporte.component.css']
 })
@@ -58,5 +58,7 @@ export class ConsultarReporteComponent implements OnInit {
       return false;
     });
   }
+
+ 
 
 }
