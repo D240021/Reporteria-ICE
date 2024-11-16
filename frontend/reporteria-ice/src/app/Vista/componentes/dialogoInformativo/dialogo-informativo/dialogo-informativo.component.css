@@ -10,22 +10,23 @@
     z-index: 1000;
 }
 
-.manto>div {
-    background-color: #fff;
+.manto > div {
+    background-color: #ffde59; 
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
     max-width: 400px;
     text-align: center;
+    border: 2px solid #f4c100; 
 }
 
 h2[mat-dialog-title] {
-    color: var(--color-principal);
+    color: #333; 
     margin-bottom: 1rem;
 }
 
 mat-dialog-content p {
-    color: #333;
+    color: #333; 
     font-size: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -42,8 +43,16 @@ button {
     border-radius: 10px;
     padding: 8px 16px;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
     border: none;
+    background-color: #f4c100;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #e0b200;
+    transform: translateY(-2px); 
+    opacity: 0.95;
 }
 
 .btn-limpiar {
@@ -52,14 +61,9 @@ button {
 }
 
 .btn-agregar {
-    background-color: #ffeb3b;
+    background-color: #ffde59;
     color: black;
 }
-
-button:hover {
-    opacity: 0.9;
-}
-
 
 @media (max-width: 432px) {
     mat-dialog-actions {
