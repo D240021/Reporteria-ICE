@@ -1,0 +1,14 @@
+Backend/**/bin/
+Backend/**/obj/
+**/bin/
+**/obj/
+**/.vs/
+*.suo
+.vs/
+
+# Ignora las carpetas de Visual Studio
+.vs/
+
+# Ignora las carpetas de compilación
+obj/
+bin/
