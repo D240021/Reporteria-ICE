@@ -76,7 +76,7 @@ builder.Services.AddTransient<IGestionarCausaDA, GestionarCausaDA>();
 // Conexión a BD
 builder.Services.AddDbContext<ICE_Context>(options =>
 {
-    var connectionString = "Server=(localdb)\\LosPanchos; Database=ICE_Reporteria; Trusted_Connection=True;TrustServerCertificate=True;";
+    var connectionString = "Server=reporteriaICE.mssql.somee.com;Database=reporteriaICE;User=DanielInfo24_SQLLogin_1;Password=ixm5yvjmrv;TrustServerCertificate=True;";
     options.UseSqlServer(connectionString);
 });
 
