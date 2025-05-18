@@ -27,9 +27,6 @@ To log in as administrator:
 - **Usuario / Username:** `Admin`  
 - **Contraseña / Password:** `Admin12345678`
 
-> ⚠️ Se recomienda cambiar estas credenciales en un entorno de producción.  
-> ⚠️ It is strongly recommended to change these credentials in a production environment.
-
 ## 🛠️ Tecnologías utilizadas | Technologies Used
 
 - **Frontend:** Angular  
